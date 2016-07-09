@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate,  MFMailComposeViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+- (IBAction)photo:(id)sender;
 
 @end
 
