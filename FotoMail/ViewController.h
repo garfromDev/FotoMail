@@ -11,6 +11,7 @@
 
 @interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate,  MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *message;
 - (IBAction)photo:(id)sender;
 
 @end

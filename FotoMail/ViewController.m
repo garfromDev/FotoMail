@@ -6,6 +6,7 @@
 //  Copyright © 2016 garfromDev. All rights reserved.
 //
 
+// utile: pouvoir choisir le nom fichier de base
 
 // en version serial queue, 6 secondes entre cancel et présentation controleur pour conversion de 2 images prises rapidement, 4 s si prises lentement
 #import "ViewController.h"
@@ -18,37 +19,60 @@
 {
     NSMutableArray *images;
     NSString *toName;
+    NSString *subject;
     int imgNumber;
     UIImagePickerController *picker;
     dispatch_queue_t serialQueue;
     int nbImages;
+    dispatch_group_t mailGroup, imgGroup;
+    MFMailComposeViewController *mailPicker;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     images = [[NSMutableArray alloc] init];
     serialQueue = dispatch_queue_create("GFD.FotoMail.queue", DISPATCH_QUEUE_SERIAL);
-    toName = @"stephane.fromont@valeo.com";
-    // Do any additional setup after loading the view, typically from a nib.
+    toName = @"alistef@laposte.net";
+    subject = @"FotoMail";
+    imgGroup = dispatch_group_create();
+    mailGroup = dispatch_group_create();
+    [self preparePhoto];
+//    toName = @"stephane.fromont@valeo.com";
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if(![[self activityIndicator] isAnimating]) {
+        [self photo:self];
+    };
 }
+
 
 - (IBAction)photo:(id)sender {
+    [[self message] setText:@""];
     [self startCameraControllerFromViewController:self usingDelegate:self];
 }
 
 
 //--------------------------------------
 #pragma mark Picture_Taking_part
-//V2
-- (void)prendPhoto
-{
 
-    [self startCameraControllerFromViewController:self usingDelegate:self];
+- (void)preparePhoto
+{
+    nbImages = 0;
+    // on fait la préparation du controleur de mail en tache de fond pour afficher le plus vite possible l'appareil photo
+    // on utilise le groupe mailGroup pour ne pas lancer d'attachement d'image avant que le controlleur ne soit crée
+    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0),
+    ^{ //on prépare le composeur de mail
+        NSLog(@"allocate Mail controller %@", [NSDate date]);
+        mailPicker = [[MFMailComposeViewController alloc] init];
+        mailPicker.mailComposeDelegate = self;
+        [mailPicker setSubject:subject];
+        // Set up recipients
+        NSArray *toRecipients = [NSArray arrayWithObject:toName];
+        [mailPicker setToRecipients:toRecipients];
+    } );
 }
 
 
@@ -84,22 +108,33 @@
 
 //--------------------------------------
 #pragma mark  Photo_Picker_Delegate
-// OK V2
+// Une image a été choisie, on l'ajoute en pièce jointe au mail, on dismiss l'appareil photo pour le rafficher aussitot
 - (void)imagePickerController:(UIImagePickerController *) Picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     nbImages++;
-    NSLog(@"récupération image %ul - %@", nbImages, [NSDate date]);
+    NSLog(@"récupération image %u - %@", nbImages, [NSDate date]);
     __block UIImage *img;
-    // 2 possibilités 1)dismisser et reafficher le controleur ou 2)ne pas dismisser le controleur et juste sauver l'image -> marche pas, les contrôles ne sont pas réaffiché
+
+    [[self message] setText:@"sauvegarde de l'image"];
     img = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    dispatch_async( serialQueue,
-                   ^{
-                       NSLog(@"conversion asynchrone image %ul - %@",nbImages, [NSDate date]);
-                      [images addObject: UIImagePNGRepresentation(img)];
-                      NSLog(@"récup image finie %ul - %@",nbImages,[NSDate date]);
-                  });
-    [self dismissViewControllerAnimated:YES completion: ^{ [self prendPhoto]; } ];
+    // on effectue en tache de fond la transformation et l'attachement de l'image
+    // le imgGroup permet d'attendre la fin de tous les attachements avant d'afficher le mail composer
+    dispatch_group_notify(mailGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
+                          ^{
+                              dispatch_group_async(imgGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
+                                                   ^{
+                                                       NSLog(@"conversion asynchrone image %u - %@",nbImages, [NSDate date]);
+//                                                       NSData * myData = UIImagePNGRepresentation(img);
+                                                       NSData * myData = UIImageJPEGRepresentation(img, 1.0);
+                                                       NSLog(@"conversion image finie %u - %@",nbImages,[NSDate date]);
+                                                       NSLog(@"attachement de l'image %u ... %@", nbImages, [NSDate date]);
+//                                                       [mailPicker addAttachmentData:myData mimeType:@"image/png" fileName:[NSString stringWithFormat:@"Foto%u.png",imgNumber++]];
+                                                       [mailPicker addAttachmentData:myData mimeType:@"image/jpg" fileName:[NSString stringWithFormat:@"Foto%u.jpg",imgNumber++]];
+
+                                                   });
+                          });
+    // il faut dismisser le controleur, sinon les contrôles ne se réaffichent pas correctement pour la prochaine photo
+    [self dismissViewControllerAnimated:YES completion: ^{ [self photo:self]; } ];
     
     // ajouter un son ou une alerte pour confirmer enregistrement image?
 }
@@ -113,6 +148,7 @@
         NSLog(@"pas d'images, on fait rien");
         return;
     }
+    [[self message] setText:@"Préparation du mail..."];
     [self displayComposerSheet];
 }
 
@@ -126,35 +162,15 @@
         NSLog(@"Mail services are not available.");
         return;
     }
-    //on prépare le composeur de mail
-    NSLog(@"allocate Mail controller %@", [NSDate date]);
-    MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
-    NSLog(@"lancement tache attachement image jointe %@", [NSDate date]);
     
-    // on effectue l'ajout de l'image jointe sur un autre thread pour ne pas
-    //bloquer l'interface utilisateur car la tache est longue
-    // mais en synchro car il ne faut pas afficher le mail avant que l'image soit prête
-    __block NSData *myData;
-    dispatch_sync( serialQueue,
-                  ^{
-                      NSLog(@"début tache attachement des image %u ... %@", [images count], [NSDate date]);
-                      for( int i = 0; i < [images count]; i++){
-                          myData = UIImagePNGRepresentation(images[i]);
-                          NSLog(@"attachement de l'image %u ... %@", i, [NSDate date]);
-                          [mailPicker addAttachmentData:myData mimeType:@"image/png" fileName:[NSString stringWithFormat:@"Foto%u.png",imgNumber++]];
-                      }
-                      mailPicker.mailComposeDelegate = self;
-                      [mailPicker setSubject:@"Fotomail:"];
-                      
-                      // Set up recipients
-                      NSArray *toRecipients = [NSArray arrayWithObject:toName];
-                      [mailPicker setToRecipients:toRecipients];
-                      NSLog(@"fin de la tache d'attachement  %@",  [NSDate date]);
-                  }
-                  );
-    // quand tout est prêt on affiche le mail
-    NSLog(@"présente mail controller %@", [NSDate date]);
-    [self presentViewController:mailPicker animated:YES completion:nil];
+    //on attend que toutes les images ait été ajoutées avant d'afficher
+    dispatch_group_notify(imgGroup, dispatch_get_main_queue(),
+                          ^{
+                              // quand tout est prêt on affiche le mail
+                              NSLog(@"présente mail controller %@", [NSDate date]);
+                              [self presentViewController:mailPicker animated:YES completion:nil];
+                          }
+                          );
 }
 
 
@@ -168,25 +184,29 @@
     {
         case MFMailComposeResultCancelled:
             NSLog(@"Result: canceled");
+            [[self message] setText:@"mail non envoyé"];
             break;
         case MFMailComposeResultSaved:
             NSLog(@"Result: saved");
             break;
         case MFMailComposeResultSent:
+            [[self message] setText:@"mail envoyé"];
             NSLog(@"Result: sent");
             break;
         case MFMailComposeResultFailed:
+            [[self message] setText:@"mail non envoyé"];
             NSLog(@"Result: failed");
             break;
         default:
+            [[self message] setText:@"mail non envoyé"];
             NSLog(@"Result: not sent");
             break;
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+
     [self.activityIndicator stopAnimating];
-    images = [[NSMutableArray alloc] init]; //on réinitialise le tableau d'images
-    nbImages = 0;
-    [self prendPhoto];
+//    images = [[NSMutableArray alloc] init]; //on réinitialise le tableau d'images
+    [self preparePhoto];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

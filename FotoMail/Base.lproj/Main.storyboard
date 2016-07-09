@@ -17,27 +17,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2S-5c-gSq">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2S-5c-gSq">
                                 <rect key="frame" x="277" y="285" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="photo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D9I-Fx-iYb"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sHQ-sK-t7O">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HlR-fB-PyW" userLabel="Message">
+                                <rect key="frame" x="279" y="239" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sHQ-sK-t7O">
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="HlR-fB-PyW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4QT-Z8-Xdk"/>
                             <constraint firstItem="sHQ-sK-t7O" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="COM-VS-uwJ"/>
                             <constraint firstItem="z2S-5c-gSq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dyk-Ni-lcM"/>
                             <constraint firstItem="z2S-5c-gSq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="hee-PB-O6t"/>
+                            <constraint firstItem="sHQ-sK-t7O" firstAttribute="top" secondItem="HlR-fB-PyW" secondAttribute="bottom" constant="30" id="o1n-bU-zNt"/>
                             <constraint firstItem="sHQ-sK-t7O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yry-7y-g5t"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="sHQ-sK-t7O" id="uUG-cC-hCO"/>
+                        <outlet property="message" destination="HlR-fB-PyW" id="gaJ-KH-m1l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
