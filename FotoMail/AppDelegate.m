@@ -7,16 +7,28 @@
 //
 
 #import "AppDelegate.h"
+#import "defines.h"
 
 @interface AppDelegate ()
 
 @end
 
+
+
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    
+    NSDictionary *defaultDict = @{ TIMESTAMP : @YES,
+                                   STAMPSIZE : @MEDIUM,
+                                   PREVIEW : @YES,
+                                   RECIPIENTS : @[ @"" ],
+                                   IMGNUMBER : @0 };
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultDict];
+
+    
     return YES;
 }
 

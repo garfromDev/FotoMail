@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300D8A061D361B18003EE973 /* Overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300D8A051D361B18003EE973 /* Overlay.xib */; };
+		301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */; };
+		3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */; };
+		3019271D1D46363F00C8E3CF /* editingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3019271C1D46363E00C8E3CF /* editingImageView.m */; };
+		302059C31D66ECD700B47988 /* ColoredPlaceHolderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */; };
+		302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
+		302662B71E087343003D80E9 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302662B61E087343003D80E9 /* Settings.storyboard */; };
+		302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */; };
+		302FC3021D6605FE00793A11 /* Graphe etats.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 302FC3011D6605FE00793A11 /* Graphe etats.pdf */; };
+		302FC3041D6606EA00793A11 /* Concept des transformations ecran.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 302FC3031D6606EA00793A11 /* Concept des transformations ecran.pdf */; };
+		3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */; };
 		3036FBDC1D29351F004036D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBDB1D29351F004036D6 /* main.m */; };
 		3036FBDF1D29351F004036D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBDE1D29351F004036D6 /* AppDelegate.m */; };
 		3036FBE21D29351F004036D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBE11D29351F004036D6 /* ViewController.m */; };
@@ -14,7 +25,30 @@
 		3036FBE71D29351F004036D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3036FBE61D29351F004036D6 /* Assets.xcassets */; };
 		3036FBEA1D29351F004036D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3036FBE81D29351F004036D6 /* LaunchScreen.storyboard */; };
 		3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBF41D29351F004036D6 /* FotoMailTests.m */; };
-		3036FC001D29351F004036D6 /* FotoMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBFF1D29351F004036D6 /* FotoMailUITests.m */; };
+		3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */; };
+		305F5B291E09AA5D00421A73 /* RecipientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */; };
+		306F07631E1D852F00D3DD2C /* RoundImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */; };
+		306F78B51D610A7700634C5B /* TitleUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 306F78B41D610A7700634C5B /* TitleUITextField.m */; };
+		306F78BE1D6365D600634C5B /* ExtensionVC EditingImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F78BD1D6365D600634C5B /* ExtensionVC EditingImageController.swift */; };
+		307182EB1E0730580032BBDB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307182EA1E0730580032BBDB /* SettingsViewController.swift */; };
+		307E7DC01E3CE28900CAA001 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
+		308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */; };
+		308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */; };
+		30905F1C1D3BFA2F00BC37D3 /* Preview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30905F1B1D3BFA2F00BC37D3 /* Preview.xib */; };
+		3092C5101E17AEAD0031BC20 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
+		3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */; };
+		3093CC1C1E41291E00FFEEFA /* FotoMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBFF1D29351F004036D6 /* FotoMailUITests.m */; };
+		30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */; };
+		30B16F631E0B2FE000980161 /* Recipients_TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */; };
+		30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */; };
+		30B16F671E0B320900980161 /* Recipients_CNContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F661E0B320900980161 /* Recipients_CNContactPickerDelegate.swift */; };
+		30C084F41E74A29C004BA873 /* UIImage + createImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */; };
+		30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */; };
+		30E2A2D11E2023BF00A18AD4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2D01E2023BF00A18AD4 /* Reachability.m */; };
+		30E2A2D31E20246800A18AD4 /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2D21E20246800A18AD4 /* ReachabilityExtension.swift */; };
+		30E2A2D51E2034CC00A18AD4 /* Extension_NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2D41E2034CC00A18AD4 /* Extension_NSBundle.swift */; };
+		30EFF5121DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EFF5111DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift */; };
+		30EFF5141DF15336005E23C2 /* DisplayEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EFF5131DF15336005E23C2 /* DisplayEditingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +69,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		300D8A051D361B18003EE973 /* Overlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Overlay.xib; sourceTree = "<group>"; };
+		301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extensionVC UIScrollViewdelegate.swift"; sourceTree = "<group>"; };
+		301927181D42BCE500C8E3CF /* UIImage+timeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+timeStamp.h"; sourceTree = "<group>"; };
+		301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+timeStamp.m"; sourceTree = "<group>"; };
+		3019271B1D46363E00C8E3CF /* editingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editingImageView.h; sourceTree = "<group>"; };
+		3019271C1D46363E00C8E3CF /* editingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editingImageView.m; sourceTree = "<group>"; };
+		302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredPlaceHolderTextField.swift; sourceTree = "<group>"; };
+		302059C41D6786F900B47988 /* UIVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIVIewExtension.swift; path = ../../maxouf14/maxouf14/UIVIewExtension.swift; sourceTree = "<group>"; };
+		302662B61E087343003D80E9 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		302FC3011D6605FE00793A11 /* Graphe etats.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Graphe etats.pdf"; sourceTree = SOURCE_ROOT; };
+		302FC3031D6606EA00793A11 /* Concept des transformations ecran.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Concept des transformations ecran.pdf"; sourceTree = SOURCE_ROOT; };
+		3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotomailUserDefaultTests.m; sourceTree = "<group>"; };
 		3036FBD71D29351F004036D6 /* FotoMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FotoMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3036FBDB1D29351F004036D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3036FBDD1D29351F004036D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,8 +96,38 @@
 		3036FBF41D29351F004036D6 /* FotoMailTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FotoMailTests.m; sourceTree = "<group>"; };
 		3036FBF61D29351F004036D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3036FBFB1D29351F004036D6 /* FotoMailUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FotoMailUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3036FBFF1D29351F004036D6 /* FotoMailUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FotoMailUITests.m; sourceTree = "<group>"; };
+		3036FBFF1D29351F004036D6 /* FotoMailUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FotoMailUITests.m; path = FotoMailUITests/FotoMailUITests.m; sourceTree = SOURCE_ROOT; };
 		3036FC011D29351F004036D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		303E6B171D6EC9150008CC51 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
+		3052474A1D48D739003FB600 /* TitleTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleTextFieldDelegate.h; sourceTree = "<group>"; };
+		3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTextFieldDelegate.m; sourceTree = "<group>"; };
+		305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipientsTableViewController.swift; sourceTree = "<group>"; };
+		306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageTableViewCell.swift; sourceTree = "<group>"; };
+		306F78B31D610A7700634C5B /* TitleUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleUITextField.h; sourceTree = "<group>"; };
+		306F78B41D610A7700634C5B /* TitleUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleUITextField.m; sourceTree = "<group>"; };
+		306F78BD1D6365D600634C5B /* ExtensionVC EditingImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtensionVC EditingImageController.swift"; sourceTree = "<group>"; };
+		307182EA1E0730580032BBDB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		308F7EBE1E4F461C007BCD5B /* AVCaptureDevice+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVCaptureDevice+Extension.h"; sourceTree = "<group>"; };
+		308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+Extension.m"; sourceTree = "<group>"; };
+		308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+ExtensionTests.m"; sourceTree = "<group>"; };
+		30905F151D3BE4F400BC37D3 /* FotoMail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FotoMail-Bridging-Header.h"; sourceTree = "<group>"; };
+		30905F1B1D3BFA2F00BC37D3 /* Preview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preview.xib; sourceTree = "<group>"; };
+		3092C50E1E17AEAD0031BC20 /* FotomailUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FotomailUserDefault.h; sourceTree = "<group>"; };
+		3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotomailUserDefault.m; sourceTree = "<group>"; };
+		3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
+		30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_DataSource.swift; sourceTree = "<group>"; };
+		30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_TextFieldDelegate.swift; sourceTree = "<group>"; };
+		30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailEditableTableViewCell.swift; sourceTree = "<group>"; };
+		30B16F661E0B320900980161 /* Recipients_CNContactPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_CNContactPickerDelegate.swift; sourceTree = "<group>"; };
+		30C084F21E74A29C004BA873 /* UIImage + createImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage + createImageWithColor.h"; sourceTree = "<group>"; };
+		30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage + createImageWithColor.m"; sourceTree = "<group>"; };
+		30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		30E2A2CF1E2023BF00A18AD4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		30E2A2D01E2023BF00A18AD4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		30E2A2D21E20246800A18AD4 /* ReachabilityExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
+		30E2A2D41E2034CC00A18AD4 /* Extension_NSBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension_NSBundle.swift; sourceTree = "<group>"; };
+		30EFF5111DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension AVCaptureVideoOrientation.swift"; sourceTree = "<group>"; };
+		30EFF5131DF15336005E23C2 /* DisplayEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayEditingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +155,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		302FC3001D66053600793A11 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				302FC3031D6606EA00793A11 /* Concept des transformations ecran.pdf */,
+				302FC3011D6605FE00793A11 /* Graphe etats.pdf */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
 		3036FBCE1D29351F004036D6 = {
 			isa = PBXGroup;
 			children = (
@@ -103,13 +189,16 @@
 			children = (
 				3036FBDD1D29351F004036D6 /* AppDelegate.h */,
 				3036FBDE1D29351F004036D6 /* AppDelegate.m */,
-				3036FBE01D29351F004036D6 /* ViewController.h */,
-				3036FBE11D29351F004036D6 /* ViewController.m */,
-				3036FBE31D29351F004036D6 /* Main.storyboard */,
+				30EB14211D6B7F44002BBFFD /* Model */,
+				306F78B61D61F5D100634C5B /* View Controllers */,
+				306F78B71D61F60200634C5B /* Views */,
+				306F78B81D61FBBD00634C5B /* Usefull Code */,
 				3036FBE61D29351F004036D6 /* Assets.xcassets */,
 				3036FBE81D29351F004036D6 /* LaunchScreen.storyboard */,
 				3036FBEB1D29351F004036D6 /* Info.plist */,
 				3036FBDA1D29351F004036D6 /* Supporting Files */,
+				30905F151D3BE4F400BC37D3 /* FotoMail-Bridging-Header.h */,
+				302FC3001D66053600793A11 /* Documentation */,
 			);
 			path = FotoMail;
 			sourceTree = "<group>";
@@ -125,7 +214,9 @@
 		3036FBF31D29351F004036D6 /* FotoMailTests */ = {
 			isa = PBXGroup;
 			children = (
+				308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */,
 				3036FBF41D29351F004036D6 /* FotoMailTests.m */,
+				3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */,
 				3036FBF61D29351F004036D6 /* Info.plist */,
 			);
 			path = FotoMailTests;
@@ -138,6 +229,91 @@
 				3036FC011D29351F004036D6 /* Info.plist */,
 			);
 			path = FotoMailUITests;
+			sourceTree = "<group>";
+		};
+		306F78B61D61F5D100634C5B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				307182E91E07301E0032BBDB /* Main */,
+				30C28CF51E090E4900A0AB04 /* Settings */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		306F78B71D61F60200634C5B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3036FBE31D29351F004036D6 /* Main.storyboard */,
+				300D8A051D361B18003EE973 /* Overlay.xib */,
+				30905F1B1D3BFA2F00BC37D3 /* Preview.xib */,
+				302662B61E087343003D80E9 /* Settings.storyboard */,
+				30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */,
+				302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */,
+				3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */,
+				30EFF5131DF15336005E23C2 /* DisplayEditingView.swift */,
+				306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */,
+				3019271B1D46363E00C8E3CF /* editingImageView.h */,
+				3019271C1D46363E00C8E3CF /* editingImageView.m */,
+				3052474A1D48D739003FB600 /* TitleTextFieldDelegate.h */,
+				3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */,
+				306F78B31D610A7700634C5B /* TitleUITextField.h */,
+				306F78B41D610A7700634C5B /* TitleUITextField.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		306F78B81D61FBBD00634C5B /* Usefull Code */ = {
+			isa = PBXGroup;
+			children = (
+				30E2A2D21E20246800A18AD4 /* ReachabilityExtension.swift */,
+				30E2A2CF1E2023BF00A18AD4 /* Reachability.h */,
+				30E2A2D01E2023BF00A18AD4 /* Reachability.m */,
+				30EFF5111DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift */,
+				302059C41D6786F900B47988 /* UIVIewExtension.swift */,
+				301927181D42BCE500C8E3CF /* UIImage+timeStamp.h */,
+				301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */,
+				302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */,
+				30E2A2D41E2034CC00A18AD4 /* Extension_NSBundle.swift */,
+				308F7EBE1E4F461C007BCD5B /* AVCaptureDevice+Extension.h */,
+				308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */,
+				30C084F21E74A29C004BA873 /* UIImage + createImageWithColor.h */,
+				30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */,
+			);
+			name = "Usefull Code";
+			sourceTree = "<group>";
+		};
+		307182E91E07301E0032BBDB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3036FBE01D29351F004036D6 /* ViewController.h */,
+				3036FBE11D29351F004036D6 /* ViewController.m */,
+				301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */,
+				306F78BD1D6365D600634C5B /* ExtensionVC EditingImageController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		30C28CF51E090E4900A0AB04 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				307182EA1E0730580032BBDB /* SettingsViewController.swift */,
+				305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */,
+				30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */,
+				30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */,
+				30B16F661E0B320900980161 /* Recipients_CNContactPickerDelegate.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		30EB14211D6B7F44002BBFFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				303E6B171D6EC9150008CC51 /* defines.h */,
+				3092C50E1E17AEAD0031BC20 /* FotomailUserDefault.h */,
+				3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */,
+				30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,11 +378,14 @@
 		3036FBCF1D29351F004036D6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = garfromDev;
 				TargetAttributes = {
 					3036FBD61D29351F004036D6 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = QXYQ94XRJK;
+						DevelopmentTeamName = "Stephane Fromont";
+						LastSwiftMigration = 0800;
 					};
 					3036FBEF1D29351F004036D6 = {
 						CreatedOnToolsVersion = 7.2;
@@ -243,8 +422,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				302FC3041D6606EA00793A11 /* Concept des transformations ecran.pdf in Resources */,
 				3036FBEA1D29351F004036D6 /* LaunchScreen.storyboard in Resources */,
+				302FC3021D6605FE00793A11 /* Graphe etats.pdf in Resources */,
 				3036FBE71D29351F004036D6 /* Assets.xcassets in Resources */,
+				300D8A061D361B18003EE973 /* Overlay.xib in Resources */,
+				30905F1C1D3BFA2F00BC37D3 /* Preview.xib in Resources */,
+				302662B71E087343003D80E9 /* Settings.storyboard in Resources */,
 				3036FBE51D29351F004036D6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,9 +454,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30E2A2D11E2023BF00A18AD4 /* Reachability.m in Sources */,
+				306F78B51D610A7700634C5B /* TitleUITextField.m in Sources */,
+				30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */,
+				3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */,
 				3036FBE21D29351F004036D6 /* ViewController.m in Sources */,
+				302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */,
+				307182EB1E0730580032BBDB /* SettingsViewController.swift in Sources */,
+				3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */,
+				30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */,
 				3036FBDF1D29351F004036D6 /* AppDelegate.m in Sources */,
+				308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */,
+				306F78BE1D6365D600634C5B /* ExtensionVC EditingImageController.swift in Sources */,
+				301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */,
+				30B16F631E0B2FE000980161 /* Recipients_TextFieldDelegate.swift in Sources */,
+				30B16F671E0B320900980161 /* Recipients_CNContactPickerDelegate.swift in Sources */,
+				302059C31D66ECD700B47988 /* ColoredPlaceHolderTextField.swift in Sources */,
+				305F5B291E09AA5D00421A73 /* RecipientsTableViewController.swift in Sources */,
+				306F07631E1D852F00D3DD2C /* RoundImageTableViewCell.swift in Sources */,
+				30E2A2D51E2034CC00A18AD4 /* Extension_NSBundle.swift in Sources */,
+				3092C5101E17AEAD0031BC20 /* FotomailUserDefault.m in Sources */,
+				3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */,
+				30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */,
+				30EFF5141DF15336005E23C2 /* DisplayEditingView.swift in Sources */,
 				3036FBDC1D29351F004036D6 /* main.m in Sources */,
+				302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */,
+				30E2A2D31E20246800A18AD4 /* ReachabilityExtension.swift in Sources */,
+				3019271D1D46363F00C8E3CF /* editingImageView.m in Sources */,
+				30EFF5121DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift in Sources */,
+				30C084F41E74A29C004BA873 /* UIImage + createImageWithColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +491,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */,
+				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
+				308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +500,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3036FC001D29351F004036D6 /* FotoMailUITests.m in Sources */,
+				3093CC1C1E41291E00FFEEFA /* FotoMailUITests.m in Sources */,
+				307E7DC01E3CE28900CAA001 /* FotomailUserDefault.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,8 +553,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -383,8 +598,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -403,6 +620,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -411,11 +629,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = FotoMail/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.GarfromDev.FotoMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FotoMail/FotoMail-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -423,11 +647,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = FotoMail/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.GarfromDev.FotoMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FotoMail/FotoMail-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -498,6 +728,7 @@
 				3036FC061D29351F004036D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3036FC071D29351F004036D6 /* Build configuration list for PBXNativeTarget "FotoMailTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +737,7 @@
 				3036FC091D29351F004036D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3036FC0A1D29351F004036D6 /* Build configuration list for PBXNativeTarget "FotoMailUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +746,7 @@
 				3036FC0C1D29351F004036D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
