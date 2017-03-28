@@ -129,6 +129,8 @@ cycle de prise de vue
     // charge l'écran de prévisualisation / edition et le met en subview de l'écran de prise photo
     [[NSBundle mainBundle] loadNibNamed:@"Preview" owner:self options:nil];
     self.previewView.frame = self.view.bounds;
+    // configure the scrollView to avoid scrolling when drawing
+    [self.scrollView configureFor2FingersScroll];
     [self.view addSubview:self.previewView];
     self.imageView.delegate = self;
     

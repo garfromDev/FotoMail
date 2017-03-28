@@ -15,8 +15,6 @@
 		302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
 		302662B71E087343003D80E9 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302662B61E087343003D80E9 /* Settings.storyboard */; };
 		302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */; };
-		302FC3021D6605FE00793A11 /* Graphe etats.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 302FC3011D6605FE00793A11 /* Graphe etats.pdf */; };
-		302FC3041D6606EA00793A11 /* Concept des transformations ecran.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 302FC3031D6606EA00793A11 /* Concept des transformations ecran.pdf */; };
 		3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */; };
 		3036FBDC1D29351F004036D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBDB1D29351F004036D6 /* main.m */; };
 		3036FBDF1D29351F004036D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBDE1D29351F004036D6 /* AppDelegate.m */; };
@@ -35,6 +33,7 @@
 		308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */; };
 		308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */; };
 		30905F1C1D3BFA2F00BC37D3 /* Preview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30905F1B1D3BFA2F00BC37D3 /* Preview.xib */; };
+		3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
 		3092C5101E17AEAD0031BC20 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */; };
 		3093CC1C1E41291E00FFEEFA /* FotoMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBFF1D29351F004036D6 /* FotoMailUITests.m */; };
@@ -79,8 +78,6 @@
 		302059C41D6786F900B47988 /* UIVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIVIewExtension.swift; path = ../../maxouf14/maxouf14/UIVIewExtension.swift; sourceTree = "<group>"; };
 		302662B61E087343003D80E9 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
-		302FC3011D6605FE00793A11 /* Graphe etats.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Graphe etats.pdf"; sourceTree = SOURCE_ROOT; };
-		302FC3031D6606EA00793A11 /* Concept des transformations ecran.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Concept des transformations ecran.pdf"; sourceTree = SOURCE_ROOT; };
 		3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotomailUserDefaultTests.m; sourceTree = "<group>"; };
 		3036FBD71D29351F004036D6 /* FotoMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FotoMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3036FBDB1D29351F004036D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -112,6 +109,7 @@
 		308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+ExtensionTests.m"; sourceTree = "<group>"; };
 		30905F151D3BE4F400BC37D3 /* FotoMail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FotoMail-Bridging-Header.h"; sourceTree = "<group>"; };
 		30905F1B1D3BFA2F00BC37D3 /* Preview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preview.xib; sourceTree = "<group>"; };
+		3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView + configureFor2FingersScroll.swift"; sourceTree = "<group>"; };
 		3092C50E1E17AEAD0031BC20 /* FotomailUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FotomailUserDefault.h; sourceTree = "<group>"; };
 		3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotomailUserDefault.m; sourceTree = "<group>"; };
 		3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
@@ -158,8 +156,6 @@
 		302FC3001D66053600793A11 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				302FC3031D6606EA00793A11 /* Concept des transformations ecran.pdf */,
-				302FC3011D6605FE00793A11 /* Graphe etats.pdf */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";
@@ -265,6 +261,7 @@
 		306F78B81D61FBBD00634C5B /* Usefull Code */ = {
 			isa = PBXGroup;
 			children = (
+				3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */,
 				30E2A2D21E20246800A18AD4 /* ReachabilityExtension.swift */,
 				30E2A2CF1E2023BF00A18AD4 /* Reachability.h */,
 				30E2A2D01E2023BF00A18AD4 /* Reachability.m */,
@@ -422,9 +419,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				302FC3041D6606EA00793A11 /* Concept des transformations ecran.pdf in Resources */,
 				3036FBEA1D29351F004036D6 /* LaunchScreen.storyboard in Resources */,
-				302FC3021D6605FE00793A11 /* Graphe etats.pdf in Resources */,
 				3036FBE71D29351F004036D6 /* Assets.xcassets in Resources */,
 				300D8A061D361B18003EE973 /* Overlay.xib in Resources */,
 				30905F1C1D3BFA2F00BC37D3 /* Preview.xib in Resources */,
@@ -463,6 +458,7 @@
 				307182EB1E0730580032BBDB /* SettingsViewController.swift in Sources */,
 				3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */,
 				30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */,
+				3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,
 				3036FBDF1D29351F004036D6 /* AppDelegate.m in Sources */,
 				308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */,
 				306F78BE1D6365D600634C5B /* ExtensionVC EditingImageController.swift in Sources */,

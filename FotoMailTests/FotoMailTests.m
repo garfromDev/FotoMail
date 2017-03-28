@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "FotomailUserDefault.h"
 
 @interface FotoMailTests : XCTestCase
 
@@ -16,6 +17,8 @@
 
 - (void)setUp {
     [super setUp];
+    [FotomailUserDefault.defaults setImgNumber:0];
+    
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -23,6 +26,7 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
+
 
 - (void)testExample {
     // This is an example of a functional test case.
