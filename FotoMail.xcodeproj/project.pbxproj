@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */; };
 		300D8A061D361B18003EE973 /* Overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300D8A051D361B18003EE973 /* Overlay.xib */; };
 		301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */; };
 		3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */; };
@@ -41,6 +42,7 @@
 		30B16F631E0B2FE000980161 /* Recipients_TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */; };
 		30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */; };
 		30B16F671E0B320900980161 /* Recipients_CNContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F661E0B320900980161 /* Recipients_CNContactPickerDelegate.swift */; };
+		30B3F4731E8C465800881E82 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
 		30C084F41E74A29C004BA873 /* UIImage + createImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */; };
 		30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */; };
 		30E2A2D11E2023BF00A18AD4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2D01E2023BF00A18AD4 /* Reachability.m */; };
@@ -68,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3007F8461E8C40AD00C26109 /* FotoMailTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FotoMailTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIScrollViewExtensionTests.swift; path = ../UIScrollViewExtensionTests.swift; sourceTree = "<group>"; };
 		300D8A051D361B18003EE973 /* Overlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Overlay.xib; sourceTree = "<group>"; };
 		301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extensionVC UIScrollViewdelegate.swift"; sourceTree = "<group>"; };
 		301927181D42BCE500C8E3CF /* UIImage+timeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+timeStamp.h"; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				3036FBF31D29351F004036D6 /* FotoMailTests */,
 				3036FBFE1D29351F004036D6 /* FotoMailUITests */,
 				3036FBD81D29351F004036D6 /* Products */,
+				3007F8461E8C40AD00C26109 /* FotoMailTests-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +219,7 @@
 				3036FBF41D29351F004036D6 /* FotoMailTests.m */,
 				3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */,
 				3036FBF61D29351F004036D6 /* Info.plist */,
+				3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */,
 			);
 			path = FotoMailTests;
 			sourceTree = "<group>";
@@ -386,6 +392,7 @@
 					};
 					3036FBEF1D29351F004036D6 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = 3036FBD61D29351F004036D6;
 					};
 					3036FBFA1D29351F004036D6 = {
@@ -488,7 +495,9 @@
 			files = (
 				3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
+				3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */,
 				308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */,
+				30B3F4731E8C465800881E82 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,10 +670,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FotoMailTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.GarfromDev.FotoMailTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FotoMailTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FotoMail.app/FotoMail";
 			};
 			name = Debug;
@@ -673,10 +687,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FotoMailTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.GarfromDev.FotoMailTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FotoMailTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FotoMail.app/FotoMail";
 			};
 			name = Release;
@@ -685,6 +703,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = FotoMailUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.GarfromDev.FotoMailUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -697,6 +716,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = FotoMailUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.GarfromDev.FotoMailUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
