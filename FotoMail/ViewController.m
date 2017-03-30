@@ -19,20 +19,28 @@
  1.0 build 2 : pour release AppStore
  
  SORTIE APPSTORE
+ 
+ A faire après :
+ corriger bug de la torche système non disponible quand Fotomail est lancée
+ ajouter du unittest du ViewController pour compléter le test coverage
+ ajouter gomme
+ ajouter choix couleur pinceaux
+ ajouter loupe de réglage mise au point
  ajouter localization textes
  ajouter contact editeur
  ajouter aide avec surimpression légendes sur image
  Ajouter message explicatif tri automatique dans gmail
+ajouter largeur variable avec pression
+ voir possibilité de passer en tache de fond la préparation du dessin pour améliorer fluidité
 */
 
 // NICETOHAVE : ajouter un encadré jaune quand on fait le focus à un endroit?
 // NICETOHAVE : réglage puissance torche en macro avec un slider
 // NICETOHAVE : réglage correction lumière comme photo système
-// NICETOHAVE : undo incrémental (avoir un tableau d'image originales, on redescend à chaque shake,
-//              on ajoute à la fin du tableau à chaque editingBegin
 // NICETOHAVE : mode zoom numérique en macro
 // NICETOHAVE : voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
 // NICETOHAVE : voir possibilité HDR
+// NICETOHAVE : version appli message
 
 #import "ViewController.h"
 #import "UIImage+timeStamp.h"
