@@ -21,13 +21,19 @@
  a lieu dans une autre vue . C'est le délégué qui gère ces aspects
  
  cycle :
- waiting
- prepareEditing
- isDrawingPrepared
- TouchBegan
- isDrawing
-stopEditing
- waiting
+ 1) Idle
+    prepareDisplay()
+ 2)preparingBig
+    bloc completed on prepareBigQueue
+ 3) bigPrepared
+    TouchBegan:
+ 4) preparingEdit
+    prepareDrawing completed on prepareBigQueue
+ 5) editprepared
+ 6) isDrawing
+        TouchEnded: || TouchCancelled:
+ 7) saving
+
  */
 
 
@@ -38,7 +44,7 @@ stopEditing
 
 BOOL delegateRequested; //mémorize le fait d'avoir envoyé editingRequested au delegate, pour éviter les appels multiples
 BOOL  isDrawing;        // mode dessin activé, permet d'éliminer la première touche pour éviter un grand trait au début
-BOOL isDrawingPrepared; //la préparation des images pour le dessin est faite
+
 NSTimeInterval finishPreparing; //the time (startupTime) at which the drawing preparation is finished
 
 dispatch_queue_t prepareBigQueue;
@@ -55,27 +61,12 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
 // sauvegarde de l'image originale pour le undo
 UIImage *originaleImg;
 
+/// la layer utilisée pour le dessin à l'échelle 1 de la big image
 CGLayerRef drawLayer;
 
-/// chaque fois qu'une nouvelle image est affectée, on prépare
-/*2
--(void)setImage:(UIImage *)newimage{
-    LOG
-    [super setImage:newimage];
-    [self prepareBigImage];
-}
-*/
 
-#pragma mark gestion des touches utilisateurs
-/* pourrais être utilisé pour anticiper la préparation
--(void) prepareEditing{
-    LOG
-    if(isDrawing)  { return; }
-    if(isDrawingPrepared) { [self stopEditing]; }
-    //[self prepareDrawing];
-}
-*/
-
+#pragma mark interaction avec le vue controleur
+// 1->2
 -(void) prepareDisplay{
     
     // création des queues et des groupes
@@ -87,44 +78,55 @@ CGLayerRef drawLayer;
         drawBigGroup = dispatch_group_create();
     });
     
+    // préparation de la layer pour le dessin à l'échelle 1
     dispatch_group_async(prepareGroup, prepareBigQueue, ^{
         // création du contexte big
         UIGraphicsBeginImageContext(self.bounds.size);
         CGContextRef myContext = UIGraphicsGetCurrentContext();
-        //2 création de la couche (mémorisée dans la variable d'instance)
-        drawLayer = CGLayerCreateWithContext(myContext, self.bounds.size, NULL);
+        // création de la couche (mémorisée dans la variable d'instance)
+        //on commence par relaese pour le cas où elle existe déjà (undo)
         
-        //2 libération du contexte
+        drawLayer = CGLayerCreateWithContext(myContext, self.bounds.size, NULL);
+        // libération du contexte
         UIGraphicsEndImageContext();
         
-        //2 dessin de la grande image dans la couche (pourrais être mis en tache de fond)
+        // dessin de la grande image dans la couche
         bigContext = CGLayerGetContext(drawLayer);
         UIGraphicsPushContext(bigContext);
         [self.image drawAtPoint:CGPointZero];
         UIGraphicsPopContext();
-
+        
+        //mémorisation de l'image pour le undo
+        originaleImg = [UIImage imageWithCGImage:self.image.CGImage];
     });
     
 }
 
 
 -(void)endDisplay{
+    LOG
+    //on release la layer, qui sera recréee par prepareDisplay
+    // avec éventuellement des paramètres différents
     CGLayerRelease(drawLayer);
-    self.image = nil;
-    
+    //note : on ne peut pas libérer self.image, car il va être lu par le controleur pour utiliser l'image
+    originaleImg = nil; //par contre on libère la copie
 }
+
+
+#pragma mark gestion des touches utilisateurs
 // on de démarre le mode drawing que si la vue n'a pas commencé un mouvement de scroll, donc après un délai
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     NSLog(@"Touch Began  ");
-    // on évite les double préparations
-    //2 if(isDrawingPrepared){ return; };
-    [self prepareDrawing]; //prépare la petite image d'affichage rapide
-    NSLog(@"Touch Began : drawing prepared at %@ ",[NSDate date]);
+    finishPreparing = DBL_MAX; //sera remisà l'heure par prepareDrawing
+    dispatch_group_notify(prepareGroup, prepareBigQueue, ^{
+        [self prepareDrawing]; //prépare la petite image d'affichage rapide
+        NSLog(@"Touch Began : drawing prepared at %@ ",[NSDate date]);
+    });
+
 }
 
 /** déplacement du doigt
- on ne prend en compte
- après une tempo de TIMETODRAW sec pour éviter les traits involontaires */
+*/
 -(void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     LOG
@@ -139,20 +141,21 @@ CGLayerRef drawLayer;
         delegateRequested = true; //pour éviter un deuxième appel car plusieurs évènement de touches sont transmis
         [self.delegate editingRequested:self withLayer:drawLayer]; //va afficher l'image petite au lieu du scroll view
     }
-    
+    isDrawing = true;
+    /*
     if(!isDrawing) { //pour éviter un grand trait si le doigt bougeait avant expiration du délai, la 1ere touche est supprimée
         isDrawing = true;
         return;
     }
-    
+    */
     //on met à jour la grande image en tache de fond
-    //2 dispatch_async(bigImgQueue, ^{
-        CGPoint point1 = [touch previousLocationInView:self];
-        CGPoint point2 = [touch locationInView:self];
-        
-        //on dessine dans la scroll view, donc les coordonnées sont bonnes pour la bigImage
+    CGPoint point1 = [touch previousLocationInView:self];
+    CGPoint point2 = [touch locationInView:self];
+    
+    //on dessine dans la scroll view, donc les coordonnées sont bonnes pour la bigImage
+    dispatch_group_async(drawBigGroup, drawBigQueue, ^{
         [EditingImageView drawLineFrom:point1 to:point2 thickness:DEFAULT_THICKNESS  inContext:bigContext];
-    //2 });
+    });
     
     //2 on indique au délégué de metre à jour l'affichage de la vue réduite
     [self.delegate updateDisplayWithTouch: touch];
@@ -178,134 +181,96 @@ CGLayerRef drawLayer;
 #pragma mark cycle de vie
 
 /* appellé par TouchBegan
-   mémorize les informations de la scroll view et crée les contextes graphiques
- initialise la zone d'affichage
+ initialise la zone d'affichage pour le dessin à l'écran
  */
--(void) prepareDrawing //attention en cours de transformation
+-(void) prepareDrawing
 {
     NSLog(@"preparing drawing");
-    finishPreparing = DBL_MAX; //poue être sur que la valeur sera considérée comme non dépassée, tant qu'on ne l'a pas mis à la date de fin
-   isDrawingPrepared = false;
-/*
-    //on crée le contexte qui va servir au réaffichage rapide de la partie visible
-    NSLog(@"preparing context %f by %f", self.bounds.size.width, self.bounds.size.height);
-        displaySize = [self.delegate getDisplaySize];
-    UIGraphicsBeginImageContext(displaySize);
-    smallContext = UIGraphicsGetCurrentContext();
-    //TODO: voir à remplacer par un draw de CGLayer avec scale et translate
-    //on récupère la partie visible de l'image au niveau de zoom actuel, elle est plus grande que l'écran en fonction du zoom
-    NSLog(@"getting visible image");
-    scrollView = [self.delegate getScrollView];
-    scale = scrollView.zoomScale;
-    contentOffset = scrollView.contentOffset;
-    UIImage *smallImageContent = [self visibleImage];
 
-    // on la dessinne dans le smallContext en la mettant à l'échelle
-    NSLog(@"drawing to small context width %f height %f scale %f", displaySize.width, displaySize.height, scale);
-    //CGContextSaveGState(smallContext);
-    CGContextScaleCTM(smallContext, scale, scale);
-    [smallImageContent drawAtPoint:CGPointZero];
-    NSLog(@"getting image from small context");
-    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
-   
-    //CGContextRestoreGState(smallContext);
-    UIGraphicsEndImageContext();
-    CGContextRelease(smallContext);
-    
-    /*2
-    //UIGraphicsBeginImageContextWithOptions(displaySize , YES, 0.0 );
-    UIGraphicsBeginImageContext(displaySize);
-    smallContext = UIGraphicsGetCurrentContext();
+    //préparation petite image
 
- 
-   
-    //2 création du contexte big
-    UIGraphicsBeginImageContext(self.bounds.size);
-    CGContextRef myContext = UIGraphicsGetCurrentContext();
-    //2 création de la couche (mémorisée dans la variable d'instance)
-    drawLayer = CGLayerCreateWithContext(myContext, self.bounds.size, NULL);
-    
-    //2 libération du contexte
-    UIGraphicsEndImageContext();
-    
-    //2 dessin de la grande image dans la couche (pourrais être mis en tache de fond)
-    bigContext = CGLayerGetContext(drawLayer);
-    UIGraphicsPushContext(bigContext);
-    [self.image drawAtPoint:CGPointZero];
-    UIGraphicsPopContext();
-    */
-    //préparation petite image V2
-    CGContextSaveGState(bigContext);
     displaySize = [self.delegate getDisplaySize];
+    //on crée le contexte qui va servir au réaffichage rapide de la partie visible
     UIGraphicsBeginImageContext(displaySize);
     smallContext = UIGraphicsGetCurrentContext();
     scrollView = [self.delegate getScrollView];
     scale = scrollView.zoomScale;
     contentOffset = scrollView.contentOffset;
-    //CGFloat iScale=1/scale;
-    //CGRect visibleRect = CGRectMake(contentOffset.x * iScale, contentOffset.y *iScale, displaySize.width * iScale, displaySize.height * iScale);
-    //CGContextScaleCTM(smallContext, scale, scale);
+    NSLog(@"drawing to small context width %f height %f scale %f", displaySize.width, displaySize.height, scale);
 
+    //on récupère la partie visible de l'image au niveau de zoom actuel, elle est plus grande que l'écran en fonction du zoom
+    // on la dessine dans le smallContext en la mettant à l'échelle
+    CGContextSaveGState(bigContext);
     CGContextTranslateCTM(smallContext, -contentOffset.x, -contentOffset.y);
     CGContextScaleCTM(smallContext, scale, scale);
-    //CGContextClipToRect(bigContext, visibleRect);
     CGContextDrawLayerAtPoint(smallContext, CGPointZero, drawLayer);
     UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
     CGContextRestoreGState(bigContext);
+    
+    //2 libération du contexte
     UIGraphicsEndImageContext();
     CGContextRelease(smallContext);
     
-    // autre possibilité : CG
     //on met à jour la vue d'affichage
     [self.delegate initViewWithImage:smallImage scale:scale offset:CGPointMake(self.frame.origin.x, self.frame.origin.y)];
     // quand l'image est plus petite dans un sens, l'editingImageView est plus petite que la scrollView (contraintes réglées dans upDateConstraintForSize() du UIScrollViewDelegate
     //l'origine de sa frame représente donc l'offset par rapport à la superVue = ScrollView
     
-    isDrawingPrepared = true;
+    //on note l'heure de fin, cela servira dans TouchMoved pour éliminer els touches effectuées pendant que le contexte n'est pas prêt
     finishPreparing = [[NSProcessInfo processInfo] systemUptime];
     NSLog(@"drawing prepared");
 }
-/*
--(void)prepareBigImage{
-    // on crée le contexte qui va servir à dessiner le trait rouge big Image
-    // ceci se fait dans la serial queue bigQueue pour assurer que le contexte est prêt avant de dessiner dedans
-   LOG
-    //on créee la queue si cela n'a pas déjà été fait
 
-    
-    dispatch_async(bigImgQueue, ^{
-        //on sauvegarde l'image
-        NSLog(@"preparing big image...");
-        originaleImg = [self.image copy];
-        CGContextRelease(bigContext);
-        UIGraphicsBeginImageContext(self.bounds.size);
-        bigContext = UIGraphicsGetCurrentContext();
-        CGContextSetLineCap(bigContext, kCGLineCapRound);
-        [self.image drawAtPoint:CGPointZero];
-        NSLog(@"big image prepared");
-    });
-    
-}
-*/
+
 
 /// quitte le mode edition, met fin au contexte graphique et rend la main à la scrollview
 -(void) stopEditing
 {
     LOG
-    //on remet la bigImage dans la scrollView si une édition a eu lieu, le saveEditedImage détruira le big context et en recréera un nouveau
+    //on remet la bigImage dans la scrollView si une édition a eu lieu, le  big layer est conservé intact
     if(isDrawing){
-        [self saveEditedImage];
+        [self saveEditedImage: ^{ [self.delegate editingFinished:self];} ];
+    } else {
+        [self.delegate editingFinished:self];
     }
-    //sinon le big context reste présent
     
     isDrawing = false;
-    isDrawingPrepared = false;
     delegateRequested = false;
-
-    [self.delegate editingFinished:self];
-    
-    //[self prepareDrawing]; abondonné, le temps de préparation rend moins fluide les scrolls
+  
 }
+
+
+/// créee une image à partir du bigContext et la met dans self.image (la scroolView), completion est appellée sur la main queue
+- (void) saveEditedImage: (dispatch_block_t) completion
+{
+    LOG
+    // fait dans la mainQueue sinon l'affectation de self.image n'ets pas rendu
+    // le group_notify permet d'être sur que toutes les taches de dessins sont terminées sur la drawBigQueue
+    dispatch_group_notify(drawBigGroup, dispatch_get_main_queue(), ^{
+        UIGraphicsBeginImageContext(self.bounds.size);
+        CGContextRef currentContext = UIGraphicsGetCurrentContext();
+        CGContextDrawLayerAtPoint(currentContext, CGPointZero, drawLayer);
+        self.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        completion();
+        NSLog(@"saving finished");
+    });
+}
+
+
+-(void) undoEditing{
+    NSLog(@"undo Editing...");
+    if(delegateRequested){
+        isDrawing = false;
+        delegateRequested = false;
+        [self.delegate editingFinished:self];
+    }
+    // on n'appelle pas endDisplay, car sinon il efface originaleImg
+    self.image = originaleImg;
+    CGLayerRelease(drawLayer);
+    [self prepareDisplay]; //reconstruit la CGLayer pour nouveau cycle
+}
+
 
 
 #pragma mark fonctions utiles
@@ -325,36 +290,6 @@ CGLayerRef drawLayer;
 
 }
 
-// créee une image à partir du bigContext et la met dans self.image (la scroolView)
-- (void) saveEditedImage
-{
-    LOG
- 
-    UIGraphicsBeginImageContext(self.bounds.size);
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    //CGContextScaleCTM(currentContext, 1.0, -1.0);
-    CGContextDrawLayerAtPoint(currentContext, CGPointZero, drawLayer);
-    self.image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    //CGLayerRelease(drawLayer);
-        /*2 UIGraphicsEndImageContext();
-        self.image = [UIImage imageWithCGImage:imgCG]; //2 setImage va recréer un nouveau grand contexte
-        CGImageRelease(imgCG);
-
-
-*/
-}
-
-
-/*-(void) drawRect:(CGRect)rect{
-    NSLog(@"draw rect (%f - %f) w: %f  h:%f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(bigContext);
-    CGContextClipToRect(bigContext, rect);
-    CGContextDrawLayerInRect(currentContext, rect, drawLayer);
-    CGContextRestoreGState(bigContext);
-}
-*/
 
 // extrait une zone donnée d'une image
 +(UIImage *)imageFromImage: (UIImage *)srcImage inRect: (CGRect) rect
@@ -373,16 +308,6 @@ CGLayerRef drawLayer;
     return [EditingImageView imageFromImage:self.image inRect: visibleRect];
 }
 
--(void) undoEditing{
-    NSLog(@"undo Editing...");
-    if(delegateRequested){
-        isDrawing = false;
-        delegateRequested = false;
-        UIGraphicsEndImageContext();
-        [self.delegate editingFinished:self];
-    }
-    self.image = originaleImg;
-}
 
 
 @end

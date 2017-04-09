@@ -25,8 +25,8 @@ extension ViewController : EditingImageViewController {
         print("editingRequested()")
         self.previewStackView.isHidden = true
         self.diplayEditingView.isHidden = false
-        self.diplayEditingView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
         self.diplayEditingView.drawLayer = drawLayer
+        self.diplayEditingView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
         print("scollview replaced by drawingImage View : \(diplayEditingView.bounds)")
     }
     

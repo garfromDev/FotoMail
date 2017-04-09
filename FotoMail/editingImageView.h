@@ -41,14 +41,16 @@
 
 @property( weak) id<EditingImageViewController> delegate;
 
-/// Prepare the copy of the image and the context
--(void)prepareBigImage;
-/// ask EditingImageView to actualize self.image with memorized drawings
-- (void) saveEditedImage;
-- (void) undoEditing;
+/// Prepare the copy of the image and the context, must be called before the user interact with the view
 - (void) prepareDisplay;
+/// ask EditingImageView to actualize self.image with memorized drawings and call completion on mainQueue
+- (void) saveEditedImage: (dispatch_block_t) completion;
+/// forgot drawing and switch back to originale image (at the time of prepareDisplay)
+- (void) undoEditing;
+/// release the ressource used for editing, must be called symetrcial to prepareDisplay
+- (void) endDisplay;
 
-// non utilisé, en réserve -(void) prepareEditing;
+/// 
 + (UIImage *)imageFromImage: (UIImage *)srcImage inRect: (CGRect) rect;
 + (void) drawLineFrom: (CGPoint) point1 to: (CGPoint) point2 thickness: (CGFloat) t inContext: (CGContextRef)context;
 

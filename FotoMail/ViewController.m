@@ -422,7 +422,7 @@ cycle de prise de vue
 */
 - (void)imagePickerController:(nullable UIImagePickerController *) Picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-
+    LOG
     UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
 
     // affiche le controleur de Preview si option activée
@@ -443,6 +443,7 @@ cycle de prise de vue
                 [self updateMinZoomScaleForSize:self.previewView.frame.size];
                 [self scrollViewDidZoom:self.scrollView];
                 [[self imageView] prepareDisplay];
+                NSLog(@"preview displayed");
             }];
 
     }else{
@@ -457,6 +458,7 @@ cycle de prise de vue
 {   // l'utilisateur a annulé la prise de photo, on masque l'aperçu et on réaffiche l'appareil photo
     NSLog(@"cancel appuyé dans imagePicker");
     [FotomailUserDefault.defaults commitUndo]; //restaure le titre avant preview
+    [self.imageView endDisplay];
     self.previewView.hidden = true;
     showPreview = false;
     [self photo:self];
@@ -522,6 +524,7 @@ cycle de prise de vue
     LOG
     // on masque l'écran de preview
     if(!self.previewView.hidden){
+        [self.imageView endDisplay];
         showPreview = false;
         [self.previewView slideToBottomWithDuration:0.2 completion:^(BOOL finished){}];
     }
