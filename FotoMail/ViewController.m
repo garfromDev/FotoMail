@@ -24,22 +24,28 @@
  corriger bug de la torche système non disponible quand Fotomail est lancée
  ajouter du unittest du ViewController pour compléter le test coverage
  ajouter gomme
+ V1.2
  ajouter choix couleur pinceaux
+ V1.3
  ajouter loupe de réglage mise au point
+ V1.4
  ajouter localization textes
+ v1.5
  ajouter contact editeur
- ajouter aide avec surimpression légendes sur image
  Ajouter message explicatif tri automatique dans gmail
-ajouter largeur variable avec pression
+ V1.6
+ ajouter largeur variable avec pression
+ V1.7
  voir possibilité de passer en tache de fond la préparation du dessin pour améliorer fluidité
+ V1.8
 */
 
 // NICETOHAVE : ajouter un encadré jaune quand on fait le focus à un endroit?
 // NICETOHAVE : réglage puissance torche en macro avec un slider
-// NICETOHAVE : réglage correction lumière comme photo système
 // NICETOHAVE : mode zoom numérique en macro
+// NICETOHAVE : ajouter aide avec surimpression légendes sur image
+// NICETOHAVE : réglage correction lumière comme photo système
 // NICETOHAVE : voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
-// NICETOHAVE : voir possibilité HDR
 // NICETOHAVE : version appli message
 
 #import "ViewController.h"
@@ -418,17 +424,16 @@ cycle de prise de vue
 {
 
     UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    // on met l'image dans imageView quel que soit le mode car utilisePhoto récupère l'image dans imageView
-    [self.scrollView setZoomScale:1.0];
-    [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-    self.imageView.image = img;
 
     // affiche le controleur de Preview si option activée
     if(preview){
-        
+        // on met l'image dans imageView
+        [self.scrollView setZoomScale:1.0];
+        [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+        self.imageView.image = img;
+
         [FotomailUserDefault.defaults prepareUndo];
-        
+
         //on cache l'appareil photo
         showPreview = true;
 
@@ -437,11 +442,12 @@ cycle de prise de vue
                 //on règle le niveau de zoom pour afficher l'image en entier
                 [self updateMinZoomScaleForSize:self.previewView.frame.size];
                 [self scrollViewDidZoom:self.scrollView];
+                [[self imageView] prepareDisplay];
             }];
 
     }else{
         //option non activé, on joint directement la photo au mail et on laisse l'appareil photo affiché
-        [self utilisePhoto:nil ];
+        [self envoiPhoto:img ];
      }
 }
 
@@ -522,6 +528,17 @@ cycle de prise de vue
 
     // on récupère l'image éventuellement éditée dans l'UIImageView
     __block  UIImage *imgDef = self.imageView.image;
+    [self envoiPhoto:imgDef];
+
+    if(preview) { // on  réaffiche l'appareil photo
+        [self photo:self];
+    }
+}
+
+
+-(void) envoiPhoto: (UIImage *)photo
+{
+    __block  UIImage *imgDef = photo;
     __block NSString *fileName = [FotomailUserDefault.defaults nomImg];
     [FotomailUserDefault.defaults nextName];
     FotomailUserDefault.defaults.nbImages++; //doit être fait après le nextName sinon le nom modifié n'ets pas réaffiché par l'observation de nbImage
@@ -535,14 +552,15 @@ cycle de prise de vue
                              NSLog(@"conversion image finie %lu - %@",(unsigned long)FotomailUserDefault.defaults.nbImages,[NSDate date]);
                              
                              dispatch_group_notify(mailGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
-                                    ^{
-                                        NSLog(@"attachement de l'image %@", fileName);
-                                        [mailPicker addAttachmentData:myData mimeType:@"image/jpg" fileName:fileName];
-                                    });
+                                                   ^{
+                                                       NSLog(@"attachement de l'image %@", fileName);
+                                                       [mailPicker addAttachmentData:myData mimeType:@"image/jpg" fileName:fileName];
+                                                   });
                          });
     if(preview) { // on le réaffiche
         [self photo:self];
     }
+
 }
 
 
