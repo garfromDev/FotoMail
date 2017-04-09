@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
+            <connections>
+                <outlet property="diplayEditingView" destination="Zwf-P7-NnO" id="X8K-Bf-yNe"/>
+                <outlet property="drawingImageView" destination="tsI-2d-IvT" id="xAC-O8-xl4"/>
+                <outlet property="drawingViewBottomConstraint" destination="07f-bZ-JtK" id="NtB-TG-TXv"/>
+                <outlet property="drawingViewLeadingContraint" destination="lYl-ee-AwH" id="AjM-md-fvv"/>
+                <outlet property="drawingViewTopConstraint" destination="lRN-Jd-Wib" id="Yqs-nh-YaU"/>
+                <outlet property="drawingViewTrailingConstraint" destination="LW5-zW-hXx" id="j2T-xB-WtR"/>
+                <outlet property="imageView" destination="ysT-Nw-JqI" id="MQg-eg-aYt"/>
+                <outlet property="imageViewBottomConstraint" destination="pwN-vd-czY" id="u1I-9L-sAe"/>
+                <outlet property="imageViewLeadingConstraint" destination="d3S-Do-bfx" id="AVM-Xb-5Ev"/>
+                <outlet property="imageViewTopConstraint" destination="saW-cv-iPq" id="79t-zo-NeI"/>
+                <outlet property="imageViewTrailingConstraint" destination="iwf-tj-NbD" id="pXr-Q6-gou"/>
+                <outlet property="previewStackView" destination="DmX-co-DyW" id="1b4-wh-VFd"/>
+                <outlet property="previewTitreTextField" destination="bLW-bX-8Xg" id="maB-bi-DKe"/>
+                <outlet property="previewToolbar" destination="5Pb-4m-kv4" id="Lau-ig-iKv"/>
+                <outlet property="previewView" destination="iN0-l3-epB" id="aaw-gn-GpB"/>
+                <outlet property="scrollView" destination="Pj9-Vj-3KM" id="YQP-iE-yaO"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Preview">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfl-n9-AWR" userLabel="Black">
+                    <rect key="frame" x="4" y="8" width="367" height="655"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LoE-t8-XGf" userLabel="Gray">
+                    <rect key="frame" x="8" y="12" width="359" height="647"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-kw-tTM" userLabel="ContainerForDrawingView">
+                    <rect key="frame" x="8" y="42" width="359" height="506"/>
+                    <subviews>
+                        <imageView hidden="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-2d-IvT" userLabel="DrawingView">
+                            <rect key="frame" x="0.0" y="0.0" width="359" height="506"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                            </accessibility>
+                        </imageView>
+                        <view hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwf-P7-NnO" customClass="DisplayEditingView" customModule="FotoMail" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="359" height="506"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="tsI-2d-IvT" firstAttribute="bottom" secondItem="Ecs-kw-tTM" secondAttribute="bottom" id="07f-bZ-JtK"/>
+                        <constraint firstItem="Zwf-P7-NnO" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="1H4-xj-NRl"/>
+                        <constraint firstAttribute="trailing" secondItem="Zwf-P7-NnO" secondAttribute="trailing" id="87O-yo-fGe"/>
+                        <constraint firstItem="tsI-2d-IvT" firstAttribute="trailing" secondItem="Ecs-kw-tTM" secondAttribute="trailing" id="LW5-zW-hXx"/>
+                        <constraint firstItem="Zwf-P7-NnO" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="cx8-Cy-jQa"/>
+                        <constraint firstAttribute="bottom" secondItem="Zwf-P7-NnO" secondAttribute="bottom" id="i0Y-FS-6Hw"/>
+                        <constraint firstItem="tsI-2d-IvT" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="lRN-Jd-Wib"/>
+                        <constraint firstItem="tsI-2d-IvT" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="lYl-ee-AwH"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DmX-co-DyW">
+                    <rect key="frame" x="8" y="12" width="359" height="647"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titre" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-bX-8Xg" customClass="TintTextField" customModule="FotoMail" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                    <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" minimumZoomScale="0.10000000000000001" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-Vj-3KM">
+                            <rect key="frame" x="0.0" y="30" width="359" height="506"/>
+                            <subviews>
+                                <imageView tag="22" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="2400" placeholderIntrinsicHeight="2400" translatesAutoresizingMaskIntoConstraints="NO" id="ysT-Nw-JqI" userLabel="previewImgView" customClass="EditingImageView">
+                                    <rect key="frame" x="0.0" y="0.0" width="2400" height="2400"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="ysT-Nw-JqI" firstAttribute="leading" secondItem="Pj9-Vj-3KM" secondAttribute="leading" id="d3S-Do-bfx"/>
+                                <constraint firstItem="ysT-Nw-JqI" firstAttribute="trailing" secondItem="Pj9-Vj-3KM" secondAttribute="trailing" id="iwf-tj-NbD"/>
+                                <constraint firstItem="ysT-Nw-JqI" firstAttribute="bottom" secondItem="Pj9-Vj-3KM" secondAttribute="bottom" id="pwN-vd-czY"/>
+                                <constraint firstItem="ysT-Nw-JqI" firstAttribute="top" secondItem="Pj9-Vj-3KM" secondAttribute="top" id="saW-cv-iPq"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="5vX-Rd-5F0"/>
+                            </connections>
+                        </scrollView>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Pb-4m-kv4">
+                            <rect key="frame" x="0.0" y="536" width="359" height="111"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <items>
+                                <barButtonItem image="use" id="dyd-yi-QUy">
+                                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="utilisePhoto:" destination="-1" id="bcv-jk-GeD"/>
+                                    </connections>
+                                </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="Dje-S4-Eba"/>
+                                <barButtonItem image="retake" id="xv7-Ae-PQf">
+                                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="imagePickerControllerDidCancel" destination="-1" id="YY7-xv-pHO"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                        </toolbar>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="5Pb-4m-kv4" firstAttribute="width" secondItem="DmX-co-DyW" secondAttribute="width" id="GSo-M9-Csr"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="Ecs-kw-tTM" firstAttribute="width" secondItem="Pj9-Vj-3KM" secondAttribute="width" id="1FH-0i-62C"/>
+                <constraint firstItem="LoE-t8-XGf" firstAttribute="trailing" secondItem="Qfl-n9-AWR" secondAttribute="trailing" constant="-4" id="2c6-bT-1ZC"/>
+                <constraint firstAttribute="bottom" secondItem="Qfl-n9-AWR" secondAttribute="bottom" constant="4" id="988-pn-xqC"/>
+                <constraint firstItem="LoE-t8-XGf" firstAttribute="bottom" secondItem="Qfl-n9-AWR" secondAttribute="bottom" constant="-4" id="BCo-je-Nnp"/>
+                <constraint firstItem="Qfl-n9-AWR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="CGp-IQ-oEs">
+                    <variation key="heightClass=compact" constant="4"/>
+                </constraint>
+                <constraint firstItem="Ecs-kw-tTM" firstAttribute="centerY" secondItem="Pj9-Vj-3KM" secondAttribute="centerY" id="E7o-oE-tf1"/>
+                <constraint firstItem="Ecs-kw-tTM" firstAttribute="centerX" secondItem="Pj9-Vj-3KM" secondAttribute="centerX" id="GIC-2N-put"/>
+                <constraint firstAttribute="trailing" secondItem="Qfl-n9-AWR" secondAttribute="trailing" constant="4" id="IKH-7L-Wum"/>
+                <constraint firstItem="DmX-co-DyW" firstAttribute="width" secondItem="Qfl-n9-AWR" secondAttribute="width" constant="-8" id="MLk-1p-vbE"/>
+                <constraint firstItem="DmX-co-DyW" firstAttribute="centerX" secondItem="Qfl-n9-AWR" secondAttribute="centerX" id="eS9-iQ-0gN"/>
+                <constraint firstItem="Qfl-n9-AWR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="kxu-kD-gyt"/>
+                <constraint firstItem="Ecs-kw-tTM" firstAttribute="height" secondItem="Pj9-Vj-3KM" secondAttribute="height" id="qdW-KT-AV3"/>
+                <constraint firstItem="DmX-co-DyW" firstAttribute="height" secondItem="Qfl-n9-AWR" secondAttribute="height" constant="-8" id="rRV-fc-VZm"/>
+                <constraint firstItem="LoE-t8-XGf" firstAttribute="top" secondItem="Qfl-n9-AWR" secondAttribute="top" constant="4" id="usL-0s-2gF"/>
+                <constraint firstItem="DmX-co-DyW" firstAttribute="centerY" secondItem="Qfl-n9-AWR" secondAttribute="centerY" id="wWI-ef-h0F"/>
+                <constraint firstItem="LoE-t8-XGf" firstAttribute="leading" secondItem="Qfl-n9-AWR" secondAttribute="leading" constant="4" id="wdG-Ok-aHE"/>
+            </constraints>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="Rgt-PY-wWa" appends="YES" id="xDa-SY-Sfw"/>
+            </connections>
+            <point key="canvasLocation" x="35.5" y="93.5"/>
+        </view>
+        <tapGestureRecognizer id="Rgt-PY-wWa">
+            <connections>
+                <action selector="tapOutsidePreviewTextField:" destination="-1" id="x4E-MT-YDt"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="retake" width="25" height="25"/>
+        <image name="use" width="25" height="25"/>
+    </resources>
+</document>

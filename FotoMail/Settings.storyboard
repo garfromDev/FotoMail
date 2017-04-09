@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings-->
+        <scene sceneID="2Um-nq-DfR">
+            <objects>
+                <tableViewController id="g3Z-tt-s8M" customClass="SettingsViewController" customModule="FotoMail" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="dYc-Wq-yZb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection id="8Rk-Gn-rYP">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="MJb-0R-YZB" detailTextLabel="lHu-sg-Hwz" imageView="XYe-Iu-zOh" style="IBUITableViewCellStyleSubtitle" id="kgl-BI-eNs" customClass="RoundImageTableViewCell" customModule="FotoMail" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kgl-BI-eNs" id="IEx-BS-std">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Recipients" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MJb-0R-YZB">
+                                                    <rect key="frame" x="55" y="4" width="80" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Pictures will be sent to these e-mail adresses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lHu-sg-Hwz">
+                                                    <rect key="frame" x="55" y="25" width="257" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="enveloppe" id="XYe-Iu-zOh">
+                                                    <rect key="frame" x="15" y="9" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="fdd-18-hf1" kind="show" trigger="accessoryAction" id="urx-js-rk2"/>
+                                            <segue destination="fdd-18-hf1" kind="show" id="Cls-fw-Iw5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="Rfv-Pj-X6c">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SwitchTableViewCell" textLabel="HfG-68-UDR" detailTextLabel="qcW-PO-BBc" imageView="JVZ-IJ-kNq" style="IBUITableViewCellStyleSubtitle" id="t40-75-9bJ" customClass="SwitchTableViewCell" customModule="FotoMail" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="115" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t40-75-9bJ" id="AJx-2l-vfW">
+                                            <rect key="frame" x="0.0" y="0.0" width="309" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HfG-68-UDR">
+                                                    <rect key="frame" x="55" y="5" width="85.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add date &amp; time to the picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qcW-PO-BBc">
+                                                    <rect key="frame" x="55" y="25.5" width="170.5" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="timeStamp" id="JVZ-IJ-kNq">
+                                                    <rect key="frame" x="15" y="9" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="1wj-BB-jxw" detailTextLabel="Fim-Q2-19l" imageView="aBN-iG-GsD" style="IBUITableViewCellStyleSubtitle" id="Cnv-v0-MVH" customClass="SegmentedTableViewCell" customModule="FotoMail" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="159" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cnv-v0-MVH" id="DZo-Mo-Pa0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Stamp size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1wj-BB-jxw">
+                                                    <rect key="frame" x="55" y="4" width="85" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Size of the time incrustation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fim-Q2-19l">
+                                                    <rect key="frame" x="55" y="25" width="159" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="sizeTimeStamp" id="aBN-iG-GsD">
+                                                    <rect key="frame" x="15" y="9" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="I4z-hr-6dc">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="T51-AC-0Nf" style="IBUITableViewCellStyleDefault" id="Eng-Lh-WSL" customClass="RoundImageTableViewCell" customModule="FotoMail" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="239" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eng-Lh-WSL" id="SCG-qP-QrO">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Legal notice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T51-AC-0Nf">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="wMr-gn-ZNv" kind="show" id="KbD-1B-8Cv"/>
+                                            <segue destination="wMr-gn-ZNv" kind="show" trigger="accessoryAction" id="ouH-AS-Dwr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="3pc-Bp-Xya" detailTextLabel="UaI-1o-sh3" imageView="mEj-90-Qba" style="IBUITableViewCellStyleSubtitle" id="0el-qv-xXS" customClass="RoundImageTableViewCell" customModule="FotoMail" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="283" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0el-qv-xXS" id="Bk9-dy-fnY">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Review Fotomail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3pc-Bp-Xya">
+                                                    <rect key="frame" x="134" y="4" width="125" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Give a feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UaI-1o-sh3">
+                                                    <rect key="frame" x="134" y="25" width="91" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="stars0" id="mEj-90-Qba" userLabel="starImage">
+                                                    <rect key="frame" x="15" y="5" width="104" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="g3Z-tt-s8M" id="3xY-lh-Jof"/>
+                            <outlet property="delegate" destination="g3Z-tt-s8M" id="S1b-Aw-rxE"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="TdQ-0M-9cp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="eiw-lj-Rcr">
+                            <connections>
+                                <action selector="exitSettings:" destination="g3Z-tt-s8M" id="Vao-Nu-EnJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="reviewAppCell" destination="0el-qv-xXS" id="s44-rq-nmH"/>
+                        <outlet property="sizeTimeStampCell" destination="Cnv-v0-MVH" id="o1z-NC-2rD"/>
+                        <outlet property="starImage" destination="mEj-90-Qba" id="RSN-yx-GvH"/>
+                        <outlet property="timeStampSwitchCell" destination="t40-75-9bJ" id="YXx-gv-Boo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KHV-B0-TbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1378.4000000000001" y="127.28635682158921"/>
+        </scene>
+        <!--Recipients-->
+        <scene sceneID="Av3-Cc-Jcl">
+            <objects>
+                <tableViewController title="Recipients" id="fdd-18-hf1" customClass="RecipientsTableViewController" customModule="FotoMail" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bMW-Y1-ZfR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="email" id="dVZ-qG-JMJ" customClass="EmailEditableTableViewCell" customModule="FotoMail" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dVZ-qG-JMJ" id="iPS-NM-wWc">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ze3-Hf-H6V" userLabel="AddContact">
+                                            <rect key="frame" x="12" y="11" width="22" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="ffR-l6-iUa"/>
+                                            </constraints>
+                                        </button>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="wUq-N3-hQd">
+                                            <rect key="frame" x="38" y="7" width="333" height="30"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="wUq-N3-hQd" firstAttribute="centerY" secondItem="iPS-NM-wWc" secondAttribute="centerY" id="4j7-28-Obv"/>
+                                        <constraint firstItem="wUq-N3-hQd" firstAttribute="leading" secondItem="Ze3-Hf-H6V" secondAttribute="trailing" constant="4" id="DFB-R9-PJg"/>
+                                        <constraint firstItem="Ze3-Hf-H6V" firstAttribute="leading" secondItem="iPS-NM-wWc" secondAttribute="leadingMargin" constant="4" id="e18-Pj-K6z"/>
+                                        <constraint firstItem="Ze3-Hf-H6V" firstAttribute="centerY" secondItem="iPS-NM-wWc" secondAttribute="centerY" id="rTh-ox-3pY"/>
+                                        <constraint firstAttribute="trailing" secondItem="wUq-N3-hQd" secondAttribute="trailing" constant="4" id="zcZ-Wz-anM"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="contactButton" destination="Ze3-Hf-H6V" id="i9w-KO-XIt"/>
+                                    <outlet property="textField" destination="wUq-N3-hQd" id="bxy-Zd-HkH"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fdd-18-hf1" id="37k-DT-0Df"/>
+                            <outlet property="delegate" destination="fdd-18-hf1" id="ZVZ-q8-oIi"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4F4-yz-z73" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2231" y="-478"/>
+        </scene>
+        <!--LegalNotice-->
+        <scene sceneID="MMZ-Zv-w1g">
+            <objects>
+                <viewController storyboardIdentifier="LegalNotice" id="wMr-gn-ZNv" userLabel="LegalNotice" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="POQ-8A-HsV"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Vz-0F-JCT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ArI-3T-sRl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usn-xM-X18">
+                                <rect key="frame" x="16" y="72" width="343" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Fotomail, by GarfromDev
+
+Thanks to Matteo Caldari for his tutorial on AVFoundation camera
+
+This application contains code fragment  under licence Creative Common BY NC SA from the MOOC "Programmation sur IPAD" of UPMC.
+Thanks to Fabrice Kordon and the team for this excellent MOOC.
+
+Confidentiality : this app doesn't send any information to outside. Defaults e-mail adress recorded in settings are stored in this app on your device, everything is erased when Fotomail is uninstalled.</string>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Usn-xM-X18" firstAttribute="top" secondItem="POQ-8A-HsV" secondAttribute="bottom" constant="8" symbolic="YES" id="5eI-iW-E2F"/>
+                            <constraint firstItem="Usn-xM-X18" firstAttribute="trailing" secondItem="ArI-3T-sRl" secondAttribute="trailingMargin" id="PFr-Fv-2xl"/>
+                            <constraint firstItem="Usn-xM-X18" firstAttribute="leading" secondItem="ArI-3T-sRl" secondAttribute="leadingMargin" id="YVW-LL-yQo"/>
+                            <constraint firstItem="Usn-xM-X18" firstAttribute="bottom" secondItem="8Vz-0F-JCT" secondAttribute="top" constant="8" symbolic="YES" id="qjH-bp-UTw"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dqq-H9-YcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2229.5999999999999" y="200.14992503748127"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VNo-dz-z3i">
+            <objects>
+                <navigationController storyboardIdentifier="Settings" automaticallyAdjustsScrollViewInsets="NO" id="PBu-1D-Az4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mmB-wB-He8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="g3Z-tt-s8M" kind="relationship" relationship="rootViewController" id="9VJ-RK-4Mc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NgK-Mk-kwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="439.19999999999999" y="127.28635682158921"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="enveloppe" width="25" height="25"/>
+        <image name="sizeTimeStamp" width="25" height="25"/>
+        <image name="stars0" width="104" height="33"/>
+        <image name="timeStamp" width="25" height="25"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="urx-js-rk2"/>
+        <segue reference="ouH-AS-Dwr"/>
+    </inferredMetricsTieBreakers>
+</document>
