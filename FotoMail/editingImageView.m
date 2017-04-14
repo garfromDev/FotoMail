@@ -188,7 +188,6 @@ CGLayerRef drawLayer;
     NSLog(@"preparing drawing");
 
     //préparation petite image
-
     displaySize = [self.delegate getDisplaySize];
     //on crée le contexte qui va servir au réaffichage rapide de la partie visible
     UIGraphicsBeginImageContext(displaySize);
@@ -209,7 +208,6 @@ CGLayerRef drawLayer;
     
     //2 libération du contexte
     UIGraphicsEndImageContext();
-    CGContextRelease(smallContext);
     
     //on met à jour la vue d'affichage
     [self.delegate initViewWithImage:smallImage scale:scale offset:CGPointMake(self.frame.origin.x, self.frame.origin.y)];

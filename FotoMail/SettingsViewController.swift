@@ -77,5 +77,23 @@ class SettingsViewController: UITableViewController {
     override var prefersStatusBarHidden: Bool {
         return false
     }
+    
 
+}
+
+
+
+class LegalNoticeViewController: UIViewController {
+    @IBOutlet weak var notice: UITextView!
+    var appVersion : String!
+    
+    /// met à jour la version de l'appli dans le message
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        guard let noticeXXX = self.notice.text else {
+            return
+        }
+        let versioned = noticeXXX.replacingOccurrences(of: "vXXX", with: Reviewmanager.appVersion() )
+        self.notice.text = versioned
+    }
 }

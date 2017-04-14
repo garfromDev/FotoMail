@@ -356,6 +356,9 @@ let appId = 1210869548
     }
     
     
+    class func appVersion()->String {
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+    }
     
     // MARK: ReviewDisplayDelegate
     
