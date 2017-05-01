@@ -61,9 +61,9 @@
 
 @interface ViewController ()
 // les controles de l'appareil photo en overlay sur le UIImagePicker
-    @property (nonatomic) IBOutlet UIView *overlayView;
+@property (nonatomic) IBOutlet UIView *overlayView;
 // L'écran d'affichage de l'appareil photo
-    @property (weak, nonatomic) IBOutlet UIView *cameraPreviewView;
+@property (weak, nonatomic) IBOutlet UIView *cameraPreviewView;
 
 @end
 
@@ -111,7 +111,8 @@ cycle de prise de vue
     
     /// indique que l'écran de prévisualisation devra être affiché
     BOOL preview;
-
+    /// le mode gomme
+    BOOL rubberMode;
 }
 
 
@@ -512,6 +513,12 @@ cycle de prise de vue
     if(!self.previewView.hidden){
         [self scrollViewDidZoom:self.scrollView];
     }
+}
+
+-(IBAction)rubberModeChange:(id)sender{
+    UIButton *bouton = (UIButton *)sender;
+    rubberMode = !rubberMode;
+    bouton.selected = rubberMode;
 }
 
 

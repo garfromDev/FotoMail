@@ -38,6 +38,7 @@
 		3092C5101E17AEAD0031BC20 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */; };
 		3093CC1C1E41291E00FFEEFA /* FotoMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBFF1D29351F004036D6 /* FotoMailUITests.m */; };
+		30A836AF1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */; };
 		30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */; };
 		30B16F631E0B2FE000980161 /* Recipients_TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */; };
 		30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */; };
@@ -117,6 +118,7 @@
 		3092C50E1E17AEAD0031BC20 /* FotomailUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FotomailUserDefault.h; sourceTree = "<group>"; };
 		3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotomailUserDefault.m; sourceTree = "<group>"; };
 		3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
+		30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController + YesNoAlertViewController.swift"; sourceTree = "<group>"; };
 		30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_DataSource.swift; sourceTree = "<group>"; };
 		30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_TextFieldDelegate.swift; sourceTree = "<group>"; };
 		30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailEditableTableViewCell.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */,
 				30C084F21E74A29C004BA873 /* UIImage + createImageWithColor.h */,
 				30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */,
+				30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */,
 			);
 			name = "Usefull Code";
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				3036FBE21D29351F004036D6 /* ViewController.m in Sources */,
 				302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */,
 				307182EB1E0730580032BBDB /* SettingsViewController.swift in Sources */,
+				30A836AF1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift in Sources */,
 				3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */,
 				30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */,
 				3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,

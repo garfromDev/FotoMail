@@ -77,6 +77,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *previewTitreTextField;
 @property (weak, nonatomic) IBOutlet UIToolbar *previewToolbar;
+@property (weak, nonatomic) IBOutlet UIButton *rubberButton;
 @property (weak, nonatomic) IBOutlet UIStackView *previewStackView;
 
 

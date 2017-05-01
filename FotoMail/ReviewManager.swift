@@ -355,7 +355,7 @@ let appId = 1210869548
         return NSDate().timeIntervalSince(date! as Date) / 3600 / 24
     }
     
-    
+    /// retourne la version de l'app (like "1.2")
     class func appVersion()->String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
     }
@@ -365,6 +365,7 @@ let appId = 1210869548
     
     func displayMessage(msg: String, negatifChoice neg : String?) {
         let name = Bundle.main.appName
+        // -- partie à remplacer à cause de déprécation --
         let alrt = UIAlertView(
             title: name,
             message: msg,
@@ -372,9 +373,20 @@ let appId = 1210869548
             cancelButtonTitle: "Oui",
             otherButtonTitles:   neg ?? "Non")
         alrt.show()
+        
+        //--- partie en cours d'écriture utilisant l'AlertViewCOntroller ------
+//        let alrt = UIAlertController.yesNoAlert(title   :name,
+//                                                message :msg,
+//                                                yesAction:{},
+//                                                noAction:{}
+//        )
+//        //TODO: mettre les actions ici
+//        //comment trouver le viewController?
+//        UIApplication.shared.keyWindow?.rootViewController?.present(alrt, animated:true)
+ 
     }
     
-    
+ 
     @discardableResult func performReview() -> Bool {
         
 //        let name = Bundle.main.appName
@@ -425,6 +437,7 @@ let appId = 1210869548
     
 
     // MARK: UIALertviewdelegate
+
     func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         switch displayStatus {
         case .question1:
