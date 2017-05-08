@@ -26,6 +26,7 @@
  ajouter gomme
  V1.2
  ajouter choix couleur pinceaux
+ faire passer la vue en edition sous la barre d'outil et le titre (translucide)
  V1.3
  ajouter loupe de réglage mise au point
  V1.4
@@ -34,10 +35,8 @@
  ajouter contact editeur
  Ajouter message explicatif tri automatique dans gmail
  V1.6
- ajouter largeur variable avec pression
- V1.7
- voir possibilité de passer en tache de fond la préparation du dessin pour améliorer fluidité
- V1.8
+ ajouter largeur variable avec pression?? ou vitesse
+ v1.7
 */
 
 // NICETOHAVE : ajouter un encadré jaune quand on fait le focus à un endroit?
@@ -519,6 +518,7 @@ cycle de prise de vue
     UIButton *bouton = (UIButton *)sender;
     rubberMode = !rubberMode;
     bouton.selected = rubberMode;
+    self.imageView.rubberON = rubberMode;
 }
 
 
@@ -692,7 +692,7 @@ cycle de prise de vue
     self.mailButton.hidden = (FotomailUserDefault.defaults.nbImages == 0);
     
     //on tente une remise à jour de displayEditingView pour forcer un réaffichage à l'endroit
-    [self.diplayEditingView setNeedsDisplay];
+    [self.displayEditingView setNeedsDisplay];
 }
 
 

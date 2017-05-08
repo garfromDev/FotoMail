@@ -97,7 +97,7 @@ CGLayerRef drawLayer;
         UIGraphicsPopContext();
         
         //mémorisation de l'image pour le undo
-        originaleImg = [UIImage imageWithCGImage:self.image.CGImage];
+        originaleImg = [self.image copy]; //l'image est à l'envers
     });
     
 }
@@ -131,37 +131,37 @@ CGLayerRef drawLayer;
 {
     LOG
     __block UITouch *touch = [touches anyObject];
-
+    __block UIImage *rubberImg = originaleImg; //on mémorise la référence sur l'image originelle pour les appels de bloc en dispatch queue
+    
     // on ne prend pas en compte les touches datant d'avant la fin de la préparation, pour éviter le grand trait droit à cause du gel de l'UI
     if(touch.timestamp < finishPreparing) { return; };
 
     // transmet l'info au délégué, une seule fois
-    
     if(!delegateRequested){
         delegateRequested = true; //pour éviter un deuxième appel car plusieurs évènement de touches sont transmis
         [self.delegate editingRequested:self withLayer:drawLayer]; //va afficher l'image petite au lieu du scroll view
     }
     isDrawing = true;
-    /*
-    if(!isDrawing) { //pour éviter un grand trait si le doigt bougeait avant expiration du délai, la 1ere touche est supprimée
-        isDrawing = true;
-        return;
-    }
-    */
+
     //on met à jour la grande image en tache de fond
     CGPoint point1 = [touch previousLocationInView:self];
     CGPoint point2 = [touch locationInView:self];
     
     //on dessine dans la scroll view, donc les coordonnées sont bonnes pour la bigImage
-    dispatch_group_async(drawBigGroup, drawBigQueue, ^{
-        [EditingImageView drawLineFrom:point1 to:point2 thickness:DEFAULT_THICKNESS  inContext:bigContext];
-    });
+    if(!self.rubberON){ //mode dessin
+        dispatch_group_async(drawBigGroup, drawBigQueue, ^{
+            [EditingImageView drawLineFrom:point1 to:point2 thickness:DEFAULT_THICKNESS  inContext:bigContext];
+        });
+    }else{ //mode gomme
+        // on dessine l'image à l'origine, avec un clipage
+        dispatch_group_async(drawBigGroup, drawBigQueue, ^{
+            [UIView eraseFrom:point1 to:point2 thickness:(CGFloat) DEFAULT_RUBBER_THICKNESS context:bigContext rubberImg:rubberImg];
+        });
+    }
     
     //2 on indique au délégué de metre à jour l'affichage de la vue réduite
-    [self.delegate updateDisplayWithTouch: touch];
-    //on indique à la vue de se remttre à jour
-    //CGRect drawRect = CGRectMake(point1.x, point1.y, fabs(point2.x-point1.x), fabsf(point2.y-point1.y));
-    //[self setNeedsDisplayInRect:CGRectInset(drawRect, -DEFAULT_THICKNESS, -DEFAULT_THICKNESS)]; //NOTE : si l'épaisseur devient variable, il faudra en tenir compte
+    [self.delegate updateDisplayWithTouch: touch withRubberOn:self.rubberON];
+
 }
 
 

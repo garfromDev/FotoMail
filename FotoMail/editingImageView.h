@@ -29,7 +29,7 @@
 - (UIScrollView *) getScrollView;
 
 // ask delegate to update display aera with line information
--(void) updateDisplayWithTouch: (UITouch *)touch;
+-(void) updateDisplayWithTouch: (UITouch *)touch withRubberOn: (BOOL) rubberOn;
 
 //ask delegate to initialize of drawing view with initial image
 -(void) initViewWithImage: (UIImage *)image scale: (CGFloat)scale offset: (CGPoint)offset;
@@ -40,6 +40,9 @@
 
 
 @property( weak) id<EditingImageViewController> delegate;
+
+/// choix du mode dessin (False) ou gomme (True)
+@property (nonatomic) BOOL rubberON;
 
 /// Prepare the copy of the image and the context, must be called before the user interact with the view
 - (void) prepareDisplay;

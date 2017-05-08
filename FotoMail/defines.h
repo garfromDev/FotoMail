@@ -26,6 +26,9 @@
 //predefined line thickness for edition
 #define DEFAULT_THICKNESS 30.0
 
+//predefined rubber thickness for edition
+#define DEFAULT_RUBBER_THICKNESS 40.0
+
 //corner radius of icons in setting
 #define CORNER_RADIUS 7.0
 

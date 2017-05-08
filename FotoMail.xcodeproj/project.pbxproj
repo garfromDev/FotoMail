@@ -34,10 +34,18 @@
 		308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */; };
 		308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */; };
 		30905F1C1D3BFA2F00BC37D3 /* Preview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30905F1B1D3BFA2F00BC37D3 /* Preview.xib */; };
+		309176191EBE6D40002438D4 /* EditingImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309176181EBE6D40002438D4 /* EditingImageViewTests.swift */; };
 		3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
 		3092C5101E17AEAD0031BC20 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */; };
+		3092D8C61EBBBF75004F93D3 /* UIImageEraseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */; };
+		3092D8C91EBBCD5E004F93D3 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
+		3092D8CB1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */; };
+		3092D8CD1EBCF832004F93D3 /* UIImage+isEqualToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */; };
+		3092D8CF1EBE61A2004F93D3 /* CGrect+initWith2Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */; };
 		3093CC1C1E41291E00FFEEFA /* FotoMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBFF1D29351F004036D6 /* FotoMailUITests.m */; };
+		30964AF71EC0BF8400FCE165 /* BackgroundDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30964AF61EC0BF8400FCE165 /* BackgroundDrawingView.swift */; };
+		309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */; };
 		30A836AF1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */; };
 		30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */; };
 		30B16F631E0B2FE000980161 /* Recipients_TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */; };
@@ -114,10 +122,15 @@
 		308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+ExtensionTests.m"; sourceTree = "<group>"; };
 		30905F151D3BE4F400BC37D3 /* FotoMail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FotoMail-Bridging-Header.h"; sourceTree = "<group>"; };
 		30905F1B1D3BFA2F00BC37D3 /* Preview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preview.xib; sourceTree = "<group>"; };
+		309176181EBE6D40002438D4 /* EditingImageViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingImageViewTests.swift; sourceTree = "<group>"; };
 		3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView + configureFor2FingersScroll.swift"; sourceTree = "<group>"; };
 		3092C50E1E17AEAD0031BC20 /* FotomailUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FotomailUserDefault.h; sourceTree = "<group>"; };
 		3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotomailUserDefault.m; sourceTree = "<group>"; };
 		3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
+		3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageEraseTests.swift; path = ../UIImageEraseTests.swift; sourceTree = "<group>"; };
+		3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+isEqualToImage.swift"; sourceTree = "<group>"; };
+		3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGrect+initWith2Points.swift"; sourceTree = "<group>"; };
+		30964AF61EC0BF8400FCE165 /* BackgroundDrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundDrawingView.swift; sourceTree = "<group>"; };
 		30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController + YesNoAlertViewController.swift"; sourceTree = "<group>"; };
 		30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_DataSource.swift; sourceTree = "<group>"; };
 		30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_TextFieldDelegate.swift; sourceTree = "<group>"; };
@@ -222,6 +235,8 @@
 				3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */,
 				3036FBF61D29351F004036D6 /* Info.plist */,
 				3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */,
+				3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */,
+				309176181EBE6D40002438D4 /* EditingImageViewTests.swift */,
 			);
 			path = FotoMailTests;
 			sourceTree = "<group>";
@@ -255,6 +270,7 @@
 				302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */,
 				3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */,
 				30EFF5131DF15336005E23C2 /* DisplayEditingView.swift */,
+				30964AF61EC0BF8400FCE165 /* BackgroundDrawingView.swift */,
 				306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */,
 				3019271B1D46363E00C8E3CF /* editingImageView.h */,
 				3019271C1D46363E00C8E3CF /* editingImageView.m */,
@@ -284,6 +300,8 @@
 				30C084F21E74A29C004BA873 /* UIImage + createImageWithColor.h */,
 				30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */,
 				30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */,
+				3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */,
+				3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */,
 			);
 			name = "Usefull Code";
 			sourceTree = "<group>";
@@ -466,6 +484,8 @@
 				3036FBE21D29351F004036D6 /* ViewController.m in Sources */,
 				302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */,
 				307182EB1E0730580032BBDB /* SettingsViewController.swift in Sources */,
+				30964AF71EC0BF8400FCE165 /* BackgroundDrawingView.swift in Sources */,
+				3092D8CF1EBE61A2004F93D3 /* CGrect+initWith2Points.swift in Sources */,
 				30A836AF1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift in Sources */,
 				3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */,
 				30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */,
@@ -488,6 +508,7 @@
 				302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */,
 				30E2A2D31E20246800A18AD4 /* ReachabilityExtension.swift in Sources */,
 				3019271D1D46363F00C8E3CF /* editingImageView.m in Sources */,
+				3092D8CB1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift in Sources */,
 				30EFF5121DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift in Sources */,
 				30C084F41E74A29C004BA873 /* UIImage + createImageWithColor.m in Sources */,
 			);
@@ -497,10 +518,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3092D8C91EBBCD5E004F93D3 /* UIVIewExtension.swift in Sources */,
 				3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
 				3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */,
+				309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */,
+				309176191EBE6D40002438D4 /* EditingImageViewTests.swift in Sources */,
 				308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */,
+				3092D8CD1EBCF832004F93D3 /* UIImage+isEqualToImage.swift in Sources */,
+				3092D8C61EBBBF75004F93D3 /* UIImageEraseTests.swift in Sources */,
 				30B3F4731E8C465800881E82 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

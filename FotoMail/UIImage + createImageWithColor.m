@@ -20,4 +20,22 @@
     return image;
 }
 
+
++(UIImage *)createImageWithGradient: (UIColor *)color1 color2: (UIColor *)color2 size: (CGSize) imgSize
+{
+    
+    
+    CAGradientLayer *layer = [CAGradientLayer layer];
+    layer.frame = CGRectMake(0, 0, imgSize.width, imgSize.height);
+    layer.colors = @[(__bridge id)color1.CGColor,   // start color
+                     (__bridge id)color2.CGColor]; // end color
+    
+    UIGraphicsBeginImageContext(imgSize);
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 @end

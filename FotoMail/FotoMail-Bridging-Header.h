@@ -11,3 +11,4 @@
 #import "FotomailUserDefault.h"
 #import "Reachability.h"
 #import "AppDelegate.h"
+#import "UIImage + createImageWithColor.h"

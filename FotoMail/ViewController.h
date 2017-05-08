@@ -57,7 +57,7 @@
 // l'image affichée dans la scroll View
 @property (weak, nonatomic) IBOutlet EditingImageView *imageView;
 // l'image qui s'affiche pendant l'édition (sous partie de l'image totale)
-@property (weak, nonatomic) IBOutlet DisplayEditingView *diplayEditingView;
+@property (weak, nonatomic) IBOutlet DisplayEditingView *displayEditingView;
 
 //inutilisée
 @property (weak, nonatomic) IBOutlet EditingImageView *drawingImageView;

@@ -13,9 +13,12 @@ extension ViewController : EditingImageViewController {
     
     public func initView(with image: UIImage!, scale : CGFloat, offset : CGPoint) {
         print("init view with image \(image) at scale \(image.scale)")
-        self.diplayEditingView.backupImage = image
-        self.diplayEditingView.scale = scale
-        self.diplayEditingView.offset = offset
+        self.displayEditingView.backupImage = image
+        //il faut faire une copie car back-up image sera modifiée
+        self.displayEditingView.initialImage = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: image.imageOrientation)
+//        self.displayEditingView.initialImage = UIImage.createImage(with: UIColor.green, size:image.size)!
+        self.displayEditingView.scale = scale
+        self.displayEditingView.offset = offset
         //    ne pas faire de setNeddDisplay() ici sinon on obtient un carrée noir
     }
 
@@ -24,10 +27,10 @@ extension ViewController : EditingImageViewController {
     public func editingRequested(_ fromView:EditingImageView , with drawLayer:CGLayer) {
         print("editingRequested()")
         self.previewStackView.isHidden = true
-        self.diplayEditingView.isHidden = false
-        self.diplayEditingView.drawLayer = drawLayer
-        self.diplayEditingView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
-        print("scollview replaced by drawingImage View : \(diplayEditingView.bounds)")
+        self.displayEditingView.isHidden = false
+        //self.displayEditingView.drawLayer = drawLayer
+        self.displayEditingView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
+        print("scollview replaced by drawingImage View : \(displayEditingView.bounds)")
     }
     
     
@@ -35,33 +38,33 @@ extension ViewController : EditingImageViewController {
     public func editingFinished(_ fromView:EditingImageView) {
         print("editingFinished() by view \(fromView.tag)")
         self.previewStackView.isHidden = false
-        self.diplayEditingView.isHidden = true
+        self.displayEditingView.isHidden = true
     }
     
 
     
     public func getDisplaySize() -> CGSize {
-        return self.diplayEditingView.bounds.size
+        return self.displayEditingView.bounds.size
     }
 
     public func getScrollView() -> UIScrollView! {
         return self.scrollView
     }
     
-    public func updateDisplay( with touch : UITouch) {
-        print("updateDisplay(with image:")
+    public func updateDisplay( with touch : UITouch, withRubberOn:Bool) {
+        //print("updateDisplay(with image:")
         // l'utilisation d'une UIimageView avec self.drawingImageView.image = image provoque des carrés noir dans les marges
         //        image.draw(at: CGPoint(x: 0, y: 0)) //-> marche pas, image non affiché,  pas le bon contexte, il faut être dans drawRect:
-        let fromPoint = touch.previousLocation(in: self.diplayEditingView)
-        let endPoint = touch.location(in: self.diplayEditingView)
-        self.diplayEditingView.drawRequest.append((fromPoint,endPoint))
-        let thick = max(CGFloat(DEFAULT_THICKNESS) * self.diplayEditingView.scale, 10.0)
+        let fromPoint = touch.previousLocation(in: self.displayEditingView)
+        let endPoint = touch.location(in: self.displayEditingView)
+        self.displayEditingView.drawRequest.append((fromPoint,endPoint, withRubberOn))
+        let thick = max(CGFloat(DEFAULT_THICKNESS) * self.displayEditingView.scale, 10.0)
         let rect = CGRect( x:min(fromPoint.x, endPoint.x),
                            y:min(fromPoint.y, endPoint.y),
                            width:fabs(fromPoint.x - endPoint.x),
                            height:fabs(fromPoint.y - endPoint.y)).insetBy(dx: -thick, dy: -thick)
         // il faut agrandir le rectangle, sinon le dessin de la ligne sera clippé
 
-        self.diplayEditingView.setNeedsDisplay(rect)
+        self.displayEditingView.setNeedsDisplay(rect)
     }
 }
