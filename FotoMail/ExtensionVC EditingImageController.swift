@@ -13,12 +13,14 @@ extension ViewController : EditingImageViewController {
     
     public func initView(with image: UIImage!, scale : CGFloat, offset : CGPoint) {
         print("init view with image \(image) at scale \(image.scale)")
-        self.displayEditingView.backupImage = image
+        self.backgroundImageView.image = image
+        self.backgroundImageView.sizeToFit()
         //il faut faire une copie car back-up image sera modifiée
         self.displayEditingView.initialImage = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: image.imageOrientation)
 //        self.displayEditingView.initialImage = UIImage.createImage(with: UIColor.green, size:image.size)!
         self.displayEditingView.scale = scale
         self.displayEditingView.offset = offset
+        
         //    ne pas faire de setNeddDisplay() ici sinon on obtient un carrée noir
     }
 
@@ -27,9 +29,12 @@ extension ViewController : EditingImageViewController {
     public func editingRequested(_ fromView:EditingImageView , with drawLayer:CGLayer) {
         print("editingRequested()")
         self.previewStackView.isHidden = true
-        self.displayEditingView.isHidden = false
+        self.backgroundImageView.isHidden = false
         //self.displayEditingView.drawLayer = drawLayer
-        self.displayEditingView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
+        self.backgroundImageView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
+        self.displayEditingView.initImage()
+        //self.displayEditingView.isHidden = false
+        
         print("scollview replaced by drawingImage View : \(displayEditingView.bounds)")
     }
     
@@ -39,6 +44,7 @@ extension ViewController : EditingImageViewController {
         print("editingFinished() by view \(fromView.tag)")
         self.previewStackView.isHidden = false
         self.displayEditingView.isHidden = true
+        self.backgroundImageView.isHidden = true
     }
     
 

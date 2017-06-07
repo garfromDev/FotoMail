@@ -692,7 +692,10 @@ cycle de prise de vue
     self.mailButton.hidden = (FotomailUserDefault.defaults.nbImages == 0);
     
     //on tente une remise à jour de displayEditingView pour forcer un réaffichage à l'endroit
-    [self.displayEditingView setNeedsDisplay];
+    //[self.displayEditingView setNeedsDisplay];
+    /*[self scrollViewDidZoom:self.scrollView];
+    [self.imageView setNeedsUpdateConstraints];
+    [self.scrollView setNeedsUpdateConstraints];*/
 }
 
 

@@ -250,7 +250,10 @@ CGLayerRef drawLayer;
         CGContextDrawLayerAtPoint(currentContext, CGPointZero, drawLayer);
         self.image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        completion();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion();
+        });
+        
         NSLog(@"saving finished");
     });
 }

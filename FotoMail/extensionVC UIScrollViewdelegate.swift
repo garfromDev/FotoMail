@@ -15,7 +15,8 @@ extension ViewController : UIScrollViewDelegate {
     }
     
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        updateConstraintsForSize(size: scrollView.bounds.size)
+        print("scrollViewDidZoom newSize (w/h) \(scrollView.bounds.size)")
+        updateConstraintsForSize(size: self.view.bounds.size)
     }
 
     /*
@@ -38,6 +39,7 @@ extension ViewController : UIScrollViewDelegate {
     
     func updateMinZoomScaleForSize(_ size: CGSize)
     {
+        print("updateMinZoomScaleForSize")
         let widthScale : CGFloat = size.width / imageView.bounds.width
         let heightScale : CGFloat = size.height / imageView.bounds.height
         let minScale = min(widthScale, heightScale)        
@@ -47,15 +49,20 @@ extension ViewController : UIScrollViewDelegate {
     
     
     // to center correctlythe image when zoomed with one dimension less that scrollView size
-    private func updateConstraintsForSize(size: CGSize)
+     func updateConstraintsForSize(size: CGSize)
     {
-        let yOffset = max(0, (size.height - imageView.frame.height) / 2)
+        print("update constraint imageView.frame : \(imageView.frame.size) scrollview.bounds \(scrollView.bounds.size)")
+        let yOffset = max(0, (size.height
+            - previewTitreTextField.bounds.size.height
+            - previewToolbar.bounds.size.height
+            - 16
+            - imageView.frame.height) / 2)
         imageViewTopConstraint.constant = yOffset
         imageViewBottomConstraint.constant = yOffset
         drawingViewTopConstraint.constant = yOffset
         drawingViewBottomConstraint.constant = yOffset
         
-        let xOffset = max(0, (size.width - imageView.frame.width) / 2)
+        let xOffset = max(0, (size.width - 16 - imageView.frame.width) / 2)
         imageViewLeadingConstraint.constant = xOffset
         imageViewTrailingConstraint.constant = xOffset
         drawingViewLeadingContraint.constant = xOffset
@@ -63,5 +70,10 @@ extension ViewController : UIScrollViewDelegate {
         view.layoutIfNeeded()
     }
     
-
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        print("viewWillTransition(to size: \(size)")
+        updateConstraintsForSize(size: size)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
     }

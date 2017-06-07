@@ -46,7 +46,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
 
 
 + (AVCaptureDevice *) initCameraOnView: (UIView *)view error:(NSError **)outError{
-    
+    LOG
     AVCaptureSession *captureSesion = [[AVCaptureSession alloc] init];
     if (![captureSesion canSetSessionPreset:AVCaptureSessionPresetPhoto]) {
         if(outError!=nil){
@@ -248,7 +248,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
 }
 
 +(void) checkCameraAuthorizationWithCompletion: (void(^)(BOOL granted))completionHandler
-{
+{ LOG
     AVAuthorizationStatus auth = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     
     //on crée un bloc local pour faire le callback sur le main queue

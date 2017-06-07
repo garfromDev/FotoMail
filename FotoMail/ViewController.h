@@ -58,9 +58,10 @@
 @property (weak, nonatomic) IBOutlet EditingImageView *imageView;
 // l'image qui s'affiche pendant l'édition (sous partie de l'image totale)
 @property (weak, nonatomic) IBOutlet DisplayEditingView *displayEditingView;
+/// l'image de fond pendent l'édition
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
-//inutilisée
-@property (weak, nonatomic) IBOutlet EditingImageView *drawingImageView;
+
 
 //les contraintes de imageView à l'intérieur de la scrollView
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewBottomConstraint;

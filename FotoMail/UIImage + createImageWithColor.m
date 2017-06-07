@@ -38,4 +38,15 @@
     return image;
 }
 
+
++(UIImage *)createTransparentImageWithSize:   (CGSize) imgSize
+{
+    UIGraphicsBeginImageContextWithOptions(imgSize, NO, 0);
+    [UIColor.clearColor setFill];
+    UIRectFill(CGRectMake(0, 0, imgSize.width, imgSize.height));
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 @end

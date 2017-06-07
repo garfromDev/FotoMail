@@ -28,50 +28,81 @@ import UIKit
     var offset = CGPoint(x:0,y:0)
     /// la couleur du fond, qui s'affiche autour de l'image si nécessaire
     var bckgrndColor = UIColor.groupTableViewBackground
-    
+    /// signale que la vue doit être mise à transparente
+    var initToBeDone : Bool = false
     //var drawLayer : CGLayer!
+    
+    var drawColor = UIColor.red
+    
+    private var drawing : Bool = false
+    private var erasing = false
+    private var path = UIBezierPath()
+    private var strokeColor  = UIColor.clear
+    
     /*
  le délégué met la ligne dans une propriété de la vue et fait setNeedDisplayInRect
  la vue dessine l'image back-up , la ligne par dessus son image, puis sauve le tout dans une back-up image
  */
+    
     override func draw(_ rect: CGRect) {
+        
+        if(initToBeDone){
+            UIColor.clear.setFill()
+            UIRectFill(self.bounds)
+            initToBeDone = false
+            return
 
-        // on récupère l'ancienne image
-        guard let img = self.backupImage else {return}
-       
-        let frm = self.frame
-        //on remet le fond gris si il y a besoin d'un fond (quand l'image est plus petite avec un offset)
-        if offset.x > 0 || offset.y > 0 {
-            let r = UIBezierPath(rect: frm)
-            bckgrndColor.setFill()
-            r.fill()
         }
+        
+        while drawRequest.count > 0 {
+            let dr = drawRequest[0]
+            print("line from \(dr.from) to \(dr.to) rubber : \(dr.rubber)")
+            if(!drawing){
+                path.move(to: dr.from)
+                drawing = true
+            }
+            path.addLine(to: dr.to)
+            erasing = dr.rubber
+            drawRequest.remove(at: 0)
+        }
+        strokeColor = erasing ? UIColor.clear : drawColor
+        strokeColor.setStroke()
+        path.lineWidth = CGFloat(DEFAULT_THICKNESS) * scale
+        path.lineJoinStyle = .round
+        path.lineCapStyle = .round
+        path.stroke()
+    }
+   
+    /*override func draw(_ rect: CGRect) {
 
-        // on réaffiche l'image dans le rectangle
-        let oldImg = EditingImageView.image(from: img, in: rect)
-        // dans le cas ou l'image est plus petite que l'écran, il faut la centrer
-        let org = CGPoint(x: offset.x + rect.origin.x, y: offset.y + rect.origin.y)
-        oldImg?.draw(at: org)
+       let frm = self.frame
         
-         //on affiche la ou les lignes
+        //initialisation : on met la vue à transparente
+        if initToBeDone{
+                UIColor.clear.setFill()
+                UIRectFill(rect)
+                initToBeDone = false
+                return
+        }
+        
+        //on affiche la ou les lignes
         //print("handling \(drawRequest.count) draw requests , thick \(30.0*scale)")
-        
         while drawRequest.count > 0 {
             let dr = drawRequest[0]
             print("line from \(dr.from) to \(dr.to) rubber : \(dr.rubber)")
             if(!dr.rubber){ // mode dessin
                 self.drawLine(from: dr.from, to: dr.to, thickness: CGFloat(DEFAULT_THICKNESS) * scale)
             }else{ // mode gomme
-                let img = self.initialImage
+//                let img = self.initialImage
                 let drect = CGRect(origin: dr.from, to: dr.to)
-                let  oldImg = EditingImageView.image(from: img, in: drect)
-                print("erasing... \(oldImg)")
-                
+//                let  oldImg = EditingImageView.image(from: img, in: drect)
+//                print("erasing... \(oldImg)")
+//                
                 // dans le cas ou l'image est plus petite que l'écran, il faut la centrer
-                oldImg?.draw(at: drect.origin)
+//                oldImg?.draw(at: drect.origin)
                 let context = UIGraphicsGetCurrentContext()!
-                context.setStrokeColor(UIColor.blue.cgColor)
-                context.stroke(drect.insetBy(dx: 0, dy: 0))
+                context.setFillColor(UIColor.clear.cgColor)
+                context.fill(drect.insetBy(dx: 0, dy: 0))
                 //                self.erase(from: dr.from, to: dr.to,
                 //                           thickness: CGFloat(DEFAULT_RUBBER_THICKNESS)*scale,
                 //                           inRect: rect, atOrg: org)
@@ -99,9 +130,14 @@ import UIKit
         self.backupImage = self.getUIImage()
         //print("draw rect saving \(backupImage)")
     }
+    */
     
-    
-     
+    func initImage(){
+        drawing = false
+        path = UIBezierPath()
+        initToBeDone = true
+        self.setNeedsDisplay()
+    }
     /**
      Efface la portion d'image entre les 2 points en la recouvrant par initialImage
      - Parameter from: le point de départ

@@ -52,6 +52,7 @@
 		30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */; };
 		30B16F671E0B320900980161 /* Recipients_CNContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F661E0B320900980161 /* Recipients_CNContactPickerDelegate.swift */; };
 		30B3F4731E8C465800881E82 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
+		30BA40121EE88B8A00ED368F /* pseudoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BA40111EE88B8A00ED368F /* pseudoImageView.swift */; };
 		30C084F41E74A29C004BA873 /* UIImage + createImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */; };
 		30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */; };
 		30E2A2D11E2023BF00A18AD4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2D01E2023BF00A18AD4 /* Reachability.m */; };
@@ -136,6 +137,7 @@
 		30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_TextFieldDelegate.swift; sourceTree = "<group>"; };
 		30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailEditableTableViewCell.swift; sourceTree = "<group>"; };
 		30B16F661E0B320900980161 /* Recipients_CNContactPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_CNContactPickerDelegate.swift; sourceTree = "<group>"; };
+		30BA40111EE88B8A00ED368F /* pseudoImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pseudoImageView.swift; sourceTree = "<group>"; };
 		30C084F21E74A29C004BA873 /* UIImage + createImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage + createImageWithColor.h"; sourceTree = "<group>"; };
 		30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage + createImageWithColor.m"; sourceTree = "<group>"; };
 		30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */,
 				306F78B31D610A7700634C5B /* TitleUITextField.h */,
 				306F78B41D610A7700634C5B /* TitleUITextField.m */,
+				30BA40111EE88B8A00ED368F /* pseudoImageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				30E2A2D11E2023BF00A18AD4 /* Reachability.m in Sources */,
 				306F78B51D610A7700634C5B /* TitleUITextField.m in Sources */,
 				30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */,
+				30BA40121EE88B8A00ED368F /* pseudoImageView.swift in Sources */,
 				3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */,
 				3036FBE21D29351F004036D6 /* ViewController.m in Sources */,
 				302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */,

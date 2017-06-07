@@ -10,8 +10,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
+                <outlet property="backgroundImageView" destination="tsI-2d-IvT" id="gZ4-Ov-TMB"/>
                 <outlet property="displayEditingView" destination="Zwf-P7-NnO" id="qxt-Wi-oSY"/>
-                <outlet property="drawingImageView" destination="tsI-2d-IvT" id="xAC-O8-xl4"/>
+                <outlet property="drawingViewBottomConstraint" destination="C3G-xq-CoK" id="YV2-eP-Dhq"/>
+                <outlet property="drawingViewLeadingContraint" destination="WZu-aX-m7a" id="nxX-rx-0rg"/>
+                <outlet property="drawingViewTopConstraint" destination="pab-S7-hyx" id="xg0-MR-5WZ"/>
+                <outlet property="drawingViewTrailingConstraint" destination="6jC-po-D5g" id="dMr-XL-hcL"/>
                 <outlet property="imageView" destination="ysT-Nw-JqI" id="MQg-eg-aYt"/>
                 <outlet property="imageViewBottomConstraint" destination="pwN-vd-czY" id="u1I-9L-sAe"/>
                 <outlet property="imageViewLeadingConstraint" destination="d3S-Do-bfx" id="AVM-Xb-5Ev"/>
@@ -42,35 +46,35 @@
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </view>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-kw-tTM" userLabel="ContainerForDrawingView">
-                    <rect key="frame" x="8" y="42" width="359" height="506"/>
+                    <rect key="frame" x="8" y="42" width="359" height="573"/>
                     <subviews>
-                        <imageView hidden="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-2d-IvT" userLabel="BackgroundDrawingView">
-                            <rect key="frame" x="0.0" y="0.0" width="359" height="506"/>
+                        <imageView hidden="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-2d-IvT" userLabel="BackgroundDrawingView">
+                            <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
+                            <color key="backgroundColor" red="0.82318369859999996" green="1" blue="0.3309683792" alpha="1" colorSpace="calibratedRGB"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                             </accessibility>
                         </imageView>
                         <view hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwf-P7-NnO" customClass="DisplayEditingView" customModule="FotoMail" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="359" height="506"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="0.56323386659999997" blue="0.061179050659999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="Zwf-P7-NnO" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="1H4-xj-NRl"/>
+                        <constraint firstItem="tsI-2d-IvT" firstAttribute="trailing" secondItem="Ecs-kw-tTM" secondAttribute="trailing" id="6jC-po-D5g"/>
                         <constraint firstAttribute="trailing" secondItem="Zwf-P7-NnO" secondAttribute="trailing" id="87O-yo-fGe"/>
-                        <constraint firstItem="tsI-2d-IvT" firstAttribute="width" secondItem="Zwf-P7-NnO" secondAttribute="width" id="DSh-gq-Wkh"/>
-                        <constraint firstItem="tsI-2d-IvT" firstAttribute="height" secondItem="Zwf-P7-NnO" secondAttribute="height" id="NgW-pC-iyE"/>
-                        <constraint firstItem="tsI-2d-IvT" firstAttribute="top" secondItem="Zwf-P7-NnO" secondAttribute="top" id="Vpi-0t-xs9"/>
+                        <constraint firstItem="tsI-2d-IvT" firstAttribute="bottom" secondItem="Ecs-kw-tTM" secondAttribute="bottom" id="C3G-xq-CoK"/>
+                        <constraint firstItem="tsI-2d-IvT" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="WZu-aX-m7a"/>
                         <constraint firstItem="Zwf-P7-NnO" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="cx8-Cy-jQa"/>
                         <constraint firstAttribute="bottom" secondItem="Zwf-P7-NnO" secondAttribute="bottom" id="i0Y-FS-6Hw"/>
-                        <constraint firstItem="tsI-2d-IvT" firstAttribute="leading" secondItem="Zwf-P7-NnO" secondAttribute="leading" id="kO2-Py-u6N"/>
+                        <constraint firstItem="tsI-2d-IvT" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="pab-S7-hyx"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DmX-co-DyW">
                     <rect key="frame" x="8" y="12" width="359" height="647"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titre" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-bX-8Xg" customClass="TintTextField" customModule="FotoMail" customModuleProvider="target">
+                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titre" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-bX-8Xg" customClass="TintTextField" customModule="FotoMail" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <nil key="textColor"/>
@@ -83,7 +87,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" minimumZoomScale="0.10000000000000001" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-Vj-3KM">
-                            <rect key="frame" x="0.0" y="30" width="359" height="506"/>
+                            <rect key="frame" x="0.0" y="30" width="359" height="573"/>
                             <subviews>
                                 <imageView tag="22" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="2400" placeholderIntrinsicHeight="2400" translatesAutoresizingMaskIntoConstraints="NO" id="ysT-Nw-JqI" userLabel="previewImgView" customClass="EditingImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="2400" height="2400"/>
@@ -100,8 +104,8 @@
                                 <outlet property="delegate" destination="-1" id="5vX-Rd-5F0"/>
                             </connections>
                         </scrollView>
-                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Pb-4m-kv4">
-                            <rect key="frame" x="0.0" y="536" width="359" height="111"/>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="5Pb-4m-kv4">
+                            <rect key="frame" x="0.0" y="603" width="359" height="44"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <items>
                                 <barButtonItem image="use" id="dyd-yi-QUy" userLabel="Done">
@@ -113,7 +117,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="Dje-S4-Eba"/>
                                 <barButtonItem style="plain" id="06y-i6-hYB" userLabel="Rubber">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="4yA-e3-imV">
-                                        <rect key="frame" x="167" y="43" width="25" height="25"/>
+                                        <rect key="frame" x="167" y="9.5" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="gomme"/>
                                         <state key="selected" image="gommeHighlighted"/>
