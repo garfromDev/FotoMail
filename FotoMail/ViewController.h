@@ -16,13 +16,15 @@
  
  ========================================================================================= */
 
-//#import "FotoMail-Swift.h"
+
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "editingImageView.h"
 #import "FotoMail-Bridging-Header.h"
 
+
 @class DisplayEditingView;
+@class PseudoImageView; // on ne peut pas importer FotoMail-Swift.h dans un .h, seulement dans .m, voir https://stackoverflow.com/questions/26328034/importing-project-swift-h-into-a-objective-c-class-file-not-found
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,  MFMailComposeViewControllerDelegate>
 // écran de fond
@@ -60,6 +62,7 @@
 @property (weak, nonatomic) IBOutlet DisplayEditingView *displayEditingView;
 /// l'image de fond pendent l'édition
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet PseudoImageView *backgroundPseudoImageView;
 
 
 

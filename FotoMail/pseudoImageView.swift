@@ -8,7 +8,7 @@
 
 import UIKit
 
-class pseudoImageView: UIView {
+class PseudoImageView: UIView {
 
     var image : UIImage!
     /// l'offset de l'image à afficher par rapport à la frame
@@ -55,7 +55,7 @@ class pseudoImageView: UIView {
     }
     
     
-    }
+    
     
 
 }

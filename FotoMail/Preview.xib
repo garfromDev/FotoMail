@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
                 <outlet property="backgroundImageView" destination="tsI-2d-IvT" id="gZ4-Ov-TMB"/>
+                <outlet property="backgroundPseudoImageView" destination="XnR-Sd-YQk" id="7oL-cD-CeQ"/>
                 <outlet property="displayEditingView" destination="Zwf-P7-NnO" id="qxt-Wi-oSY"/>
                 <outlet property="drawingViewBottomConstraint" destination="C3G-xq-CoK" id="YV2-eP-Dhq"/>
                 <outlet property="drawingViewLeadingContraint" destination="WZu-aX-m7a" id="nxX-rx-0rg"/>
@@ -48,6 +49,10 @@
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-kw-tTM" userLabel="ContainerForDrawingView">
                     <rect key="frame" x="8" y="42" width="359" height="573"/>
                     <subviews>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XnR-Sd-YQk" customClass="PseudoImageView" customModule="FotoMail" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
+                            <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
                         <imageView hidden="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-2d-IvT" userLabel="BackgroundDrawingView">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
                             <color key="backgroundColor" red="0.82318369859999996" green="1" blue="0.3309683792" alpha="1" colorSpace="calibratedRGB"/>
@@ -65,9 +70,13 @@
                         <constraint firstItem="tsI-2d-IvT" firstAttribute="trailing" secondItem="Ecs-kw-tTM" secondAttribute="trailing" id="6jC-po-D5g"/>
                         <constraint firstAttribute="trailing" secondItem="Zwf-P7-NnO" secondAttribute="trailing" id="87O-yo-fGe"/>
                         <constraint firstItem="tsI-2d-IvT" firstAttribute="bottom" secondItem="Ecs-kw-tTM" secondAttribute="bottom" id="C3G-xq-CoK"/>
+                        <constraint firstItem="XnR-Sd-YQk" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="LQJ-Oh-ZSa"/>
                         <constraint firstItem="tsI-2d-IvT" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="WZu-aX-m7a"/>
+                        <constraint firstItem="XnR-Sd-YQk" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="bqU-cf-xot"/>
                         <constraint firstItem="Zwf-P7-NnO" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="cx8-Cy-jQa"/>
+                        <constraint firstAttribute="trailing" secondItem="XnR-Sd-YQk" secondAttribute="trailing" id="d16-a1-DwW"/>
                         <constraint firstAttribute="bottom" secondItem="Zwf-P7-NnO" secondAttribute="bottom" id="i0Y-FS-6Hw"/>
+                        <constraint firstAttribute="bottom" secondItem="XnR-Sd-YQk" secondAttribute="bottom" id="kgg-oO-hg4"/>
                         <constraint firstItem="tsI-2d-IvT" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="pab-S7-hyx"/>
                     </constraints>
                 </view>

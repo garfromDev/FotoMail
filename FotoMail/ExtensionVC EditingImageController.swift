@@ -13,14 +13,15 @@ extension ViewController : EditingImageViewController {
     
     public func initView(with image: UIImage!, scale : CGFloat, offset : CGPoint) {
         print("init view with image \(image) at scale \(image.scale)")
-        self.backgroundImageView.image = image
-        self.backgroundImageView.sizeToFit()
+//        self.backgroundImageView.image = image
+        self.backgroundPseudoImageView.image=image
+//        self.backgroundImageView.sizeToFit()
         //il faut faire une copie car back-up image sera modifiée
         self.displayEditingView.initialImage = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: image.imageOrientation)
 //        self.displayEditingView.initialImage = UIImage.createImage(with: UIColor.green, size:image.size)!
         self.displayEditingView.scale = scale
         self.displayEditingView.offset = offset
-        
+        backgroundPseudoImageView.offset = offset
         //    ne pas faire de setNeddDisplay() ici sinon on obtient un carrée noir
     }
 
@@ -29,9 +30,12 @@ extension ViewController : EditingImageViewController {
     public func editingRequested(_ fromView:EditingImageView , with drawLayer:CGLayer) {
         print("editingRequested()")
         self.previewStackView.isHidden = true
-        self.backgroundImageView.isHidden = false
+//        self.backgroundImageView.isHidden = false
+        backgroundPseudoImageView.isHidden = false
         //self.displayEditingView.drawLayer = drawLayer
-        self.backgroundImageView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
+//        self.backgroundImageView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
+        backgroundPseudoImageView.setNeedsDisplay()
+        displayEditingView.isHidden = false
         self.displayEditingView.initImage()
         //self.displayEditingView.isHidden = false
         
@@ -44,7 +48,8 @@ extension ViewController : EditingImageViewController {
         print("editingFinished() by view \(fromView.tag)")
         self.previewStackView.isHidden = false
         self.displayEditingView.isHidden = true
-        self.backgroundImageView.isHidden = true
+//        self.backgroundImageView.isHidden = true
+        backgroundPseudoImageView.isHidden = true
     }
     
 
