@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,7 +60,7 @@
                                 <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                             </accessibility>
                         </imageView>
-                        <view hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwf-P7-NnO" customClass="DisplayEditingView" customModule="FotoMail" customModuleProvider="target">
+                        <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwf-P7-NnO" customClass="DisplayEditingView" customModule="FotoMail" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
                         </view>
                     </subviews>
@@ -102,7 +102,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="2400" height="2400"/>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="ysT-Nw-JqI" firstAttribute="leading" secondItem="Pj9-Vj-3KM" secondAttribute="leading" id="d3S-Do-bfx"/>
                                 <constraint firstItem="ysT-Nw-JqI" firstAttribute="trailing" secondItem="Pj9-Vj-3KM" secondAttribute="trailing" id="iwf-tj-NbD"/>

@@ -158,6 +158,9 @@ cycle de prise de vue
     self.flashMode.hidden = ![ UIImagePickerController isFlashAvailableForCameraDevice:UIImagePickerControllerCameraDeviceRear];
 #endif
     
+    //TODO: voir comment faire proprement
+    self.imageView.drawingColor = UIColor.redColor;
+    
     // démarage du 1er cycle
     [self preparePhoto];
 
@@ -518,7 +521,8 @@ cycle de prise de vue
     UIButton *bouton = (UIButton *)sender;
     rubberMode = !rubberMode;
     bouton.selected = rubberMode;
-    self.imageView.rubberON = rubberMode;
+    self.imageView.rubberON = rubberMode; //TODO: à supprimer
+    self.imageView.drawingColor = rubberMode ? UIColor.clearColor : UIColor.redColor; //TODO: remplacer par choix couleur approprié
 }
 
 

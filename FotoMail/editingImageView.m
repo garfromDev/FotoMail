@@ -12,7 +12,21 @@
 #import "UIImage+timeStamp.h"
 #import "float.h"
 
-#define DEFAULT_THICKNESS 30.0
+
+@implementation OverPath
+-(id) initWithDrawColor: (UIColor *)color rubber: (BOOL)rubber
+{
+    self = [super init];
+    if(self){
+        self.path = [[UIBezierPath alloc] init];
+        self.drawColor = color;
+        self.rubber = rubber;
+    }
+    return self;
+}
+
+@end
+
 
 /**
  Cette classe implémente un UIImageView incorporé dans un UISCrollView (qui est sa supervue)
@@ -22,17 +36,17 @@
  
  cycle :
  1) Idle
-    prepareDisplay()
+    prepareDisplay()    apparition de la preview
  2)preparingBig
     bloc completed on prepareBigQueue
- 3) bigPrepared
+ 3) bigPrepared         l'image originelle + le tableau de path initialisé
     TouchBegan:
- 4) preparingEdit
+ 4) preparingEdit       on crée un path vierge ajouté au tableau
     prepareDrawing completed on prepareBigQueue
  5) editprepared
  6) isDrawing
         TouchEnded: || TouchCancelled:
- 7) saving
+ 7) saving              tous les path sont rendus dans l'image originelle
 
  */
 
@@ -98,6 +112,9 @@ CGLayerRef drawLayer;
         
         //mémorisation de l'image pour le undo
         originaleImg = [self.image copy]; //l'image est à l'envers
+        
+        //initialisation du tableau de paths (vide)
+        self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
     });
     
 }
@@ -147,20 +164,39 @@ CGLayerRef drawLayer;
     CGPoint point1 = [touch previousLocationInView:self];
     CGPoint point2 = [touch locationInView:self];
     
-    //on dessine dans la scroll view, donc les coordonnées sont bonnes pour la bigImage
-    if(!self.rubberON){ //mode dessin
-        dispatch_group_async(drawBigGroup, drawBigQueue, ^{
-            [EditingImageView drawLineFrom:point1 to:point2 thickness:DEFAULT_THICKNESS  inContext:bigContext];
-        });
-    }else{ //mode gomme
-        // on dessine l'image à l'origine, avec un clipage
-        dispatch_group_async(drawBigGroup, drawBigQueue, ^{
-            [UIView eraseFrom:point1 to:point2 thickness:(CGFloat) DEFAULT_RUBBER_THICKNESS context:bigContext rubberImg:rubberImg];
-        });
+    //TODO: à remplacer par dessin dans le path (la couleur est initialisée dans le prepareDrawing
+    OverPath *p = self.overPaths.lastObject;
+    if(p.path.isEmpty){
+        if(p.rubber){
+            CGContextRef context = UIGraphicsGetCurrentContext();
+            CGContextSetBlendMode(context, kCGBlendModeDestinationOut);
+            [UIColor.whiteColor setStroke];
+            p.path.lineWidth = DEFAULT_RUBBER_THICKNESS;
+        }else{
+            [p.drawColor setStroke];
+            p.path.lineWidth = DEFAULT_THICKNESS;
+        }
+        p.path.lineJoinStyle = kCGLineJoinRound;
+        p.path.lineCapStyle = kCGLineCapRound;
+        [ p.path moveToPoint:point1];
     }
     
+    [p.path addLineToPoint:point2];
+    
+    //on dessine dans la scroll view, donc les coordonnées sont bonnes pour la bigImage
+//    if(!self.rubberON){ //mode dessin
+//        dispatch_group_async(drawBigGroup, drawBigQueue, ^{
+//            [EditingImageView drawLineFrom:point1 to:point2 thickness:DEFAULT_THICKNESS  inContext:bigContext];
+//        });
+//    }else{ //mode gomme
+//        // on dessine l'image à l'origine, avec un clipage
+//        dispatch_group_async(drawBigGroup, drawBigQueue, ^{
+//            [UIView eraseFrom:point1 to:point2 thickness:(CGFloat) DEFAULT_RUBBER_THICKNESS context:bigContext rubberImg:rubberImg];
+//        });
+//    }
+//    
     //2 on indique au délégué de metre à jour l'affichage de la vue réduite
-    [self.delegate updateDisplayWithTouch: touch withRubberOn:self.rubberON];
+    [self.delegate updateDisplayWithTouch: touch withRubberOn:self.rubberON paths:self.overPaths];
 
 }
 
@@ -209,12 +245,20 @@ CGLayerRef drawLayer;
     //2 libération du contexte
     UIGraphicsEndImageContext();
     
+    // ajout d'un path pour stocker les ajouts
+    OverPath *newOverPath = [[OverPath alloc] initWithDrawColor:self.drawingColor rubber:self.rubberON];
+    [self.overPaths addObject:newOverPath];
+    
     //on met à jour la vue d'affichage
-    [self.delegate initViewWithImage:smallImage scale:scale offset:CGPointMake(self.frame.origin.x, self.frame.origin.y)];
+    [self.delegate initViewWithImage:smallImage
+                                scale:scale
+                                offset:CGPointMake(self.frame.origin.x, self.frame.origin.y)
+                                contentOffset: contentOffset
+                                overPaths: self.overPaths ];
     // quand l'image est plus petite dans un sens, l'editingImageView est plus petite que la scrollView (contraintes réglées dans upDateConstraintForSize() du UIScrollViewDelegate
     //l'origine de sa frame représente donc l'offset par rapport à la superVue = ScrollView
     
-    //on note l'heure de fin, cela servira dans TouchMoved pour éliminer els touches effectuées pendant que le contexte n'est pas prêt
+    //on note l'heure de fin, cela servira dans TouchMoved pour éliminer les touches effectuées pendant que le contexte n'est pas prêt
     finishPreparing = [[NSProcessInfo processInfo] systemUptime];
     NSLog(@"drawing prepared");
 }
@@ -247,7 +291,36 @@ CGLayerRef drawLayer;
     dispatch_group_notify(drawBigGroup, dispatch_get_main_queue(), ^{
         UIGraphicsBeginImageContext(self.bounds.size);
         CGContextRef currentContext = UIGraphicsGetCurrentContext();
-        CGContextDrawLayerAtPoint(currentContext, CGPointZero, drawLayer);
+        [UIColor.clearColor set];
+        CGContextFillRect(currentContext, self.bounds);
+        NSLog(@"background cleared...");
+//        CGContextDrawLayerAtPoint(currentContext, CGPointZero, drawLayer);
+//        [originaleImg drawAtPoint:CGPointZero];
+        //TODO: rendre les paths
+        for( OverPath *p in self.overPaths){
+            NSLog(@"drawing path with rubber %@", p.rubber ? @"ON" : @"OFF");
+            if(p.rubber){
+                CGContextSetBlendMode(currentContext, kCGBlendModeDestinationOut);
+                [UIColor.whiteColor set];
+            }else{
+                CGContextSetBlendMode(currentContext, kCGBlendModeNormal);
+                [p.drawColor setStroke];
+            }
+            [p.path stroke];
+        }
+        NSLog(@"getting path image...");
+        CGImageRef overpathImg = CGBitmapContextCreateImage(currentContext);
+        
+        CGContextScaleCTM(currentContext, -1, -1);
+        NSLog(@"drawing originale image...");
+//        CGContextSetBlendMode(currentContext, kCGBlendModeNormal);
+//        [originaleImg drawAtPoint:CGPointZero];
+        CGContextDrawImage(currentContext, self.bounds, originaleImg.CGImage);
+        
+        NSLog(@"drawing path image...");
+        CGContextDrawImage(currentContext, self.bounds, overpathImg);
+        
+        NSLog(@"getting composite image...");
         self.image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         dispatch_async(dispatch_get_main_queue(), ^{

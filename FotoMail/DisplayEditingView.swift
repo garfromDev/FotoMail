@@ -17,7 +17,7 @@ import UIKit
 */
 @objc  class DisplayEditingView: UIView {
     /// L'image à afficher
-    var backupImage : UIImage!
+    var drawingImage : UIImage!
     /// l'image avant édition pour la fonction gomme
     var initialImage : UIImage!
     /// les requêtes de dessin de la ligne
@@ -31,12 +31,14 @@ import UIKit
     /// signale que la vue doit être mise à transparente
     var initToBeDone : Bool = false
     //var drawLayer : CGLayer!
+    // le tableau des paths à dessiner, le dernier d'entre eux doit être complétété
+    var overPaths : [OverPath] = []
     
     var drawColor = UIColor.red
     
     private var drawing : Bool = false
     private var erasing = false
-    private var path = UIBezierPath()
+//    private var path = UIBezierPath()
     private var strokeColor  = UIColor.clear
     
     /*
@@ -46,31 +48,64 @@ import UIKit
     
     override func draw(_ rect: CGRect) {
         
-        if(initToBeDone){
-            UIColor.clear.setFill()
-            UIRectFill(self.bounds)
-            initToBeDone = false
-            return
-
+        let frm = self.frame
+        
+        
+        // on réaffiche l'image dans le rectangle
+//        if let oldImg = EditingImageView.image(from: drawingImage, in: rect)
+//         {
+////            oldImg.draw(at: rect.origin)
+//        }
+        
+        /*
+        // le img.draw provoque une bande noire à droite, on la recouvre par du gris
+        if offset.x > 0 {
+            let rectD = CGRect(x: frm.width - offset.x, y: 0, width: offset.x, height: frm.height)
+            self.drawRect(inRect:rectD, color:bckgrndColor)
         }
         
-        while drawRequest.count > 0 {
-            let dr = drawRequest[0]
-            print("line from \(dr.from) to \(dr.to) rubber : \(dr.rubber)")
-            if(!drawing){
-                path.move(to: dr.from)
-                drawing = true
-            }
-            path.addLine(to: dr.to)
-            erasing = dr.rubber
-            drawRequest.remove(at: 0)
+        // le img.draw provoque une bande noire en dessous, on la recouvre par du gris
+        if offset.y > 0 {
+            let rectB = CGRect(x: 0, y: frm.height - offset.y, width: frm.width, height: offset.y)
+            self.drawRect(inRect:rectB, color:bckgrndColor)
         }
-        strokeColor = erasing ? UIColor.clear : drawColor
-        strokeColor.setStroke()
-        path.lineWidth = CGFloat(DEFAULT_THICKNESS) * scale
-        path.lineJoinStyle = .round
-        path.lineCapStyle = .round
-        path.stroke()
+*/
+        
+//        while drawRequest.count > 0 {
+//            let dr = drawRequest[0]
+//            print("line from \(dr.from) to \(dr.to) rubber : \(dr.rubber)")
+//            if(!drawing){
+//                self.overPaths.last!.path.move(to: dr.from)
+//                drawing = true
+//            }
+//            self.overPaths.last!.path.addLine(to: dr.to)
+//            erasing = dr.rubber
+//            drawRequest.remove(at: 0)
+//        }
+        
+        let context = UIGraphicsGetCurrentContext()
+        context?.scaleBy(x: self.scale, y: self.scale)
+        context?.translateBy(x: -self.offset.x, y: -self.offset.y)
+        for p in self.overPaths {
+//            p.drawColor.setStroke()
+//            p.path.lineWidth = erasing ? CGFloat(DEFAULT_RUBBER_THICKNESS) * scale : CGFloat(DEFAULT_THICKNESS) * scale
+//            p.path.lineJoinStyle = .round
+//            p.path.lineCapStyle = .round
+            if p.rubber {
+                context?.setBlendMode(.destinationOut)
+                UIColor.white.set()
+            }else{
+                context?.setBlendMode(.normal)
+                p.drawColor.set()
+            }
+            p.path.stroke()
+        }
+        //il faut remetre offset à zéro puisqu'on va sauver l'image entière de la vue, y compris les zones grise au bord
+//        offset = CGPoint.zero
+        
+        //on sauve l'image
+//        self.drawingImage = self.getUIImage()
+        //print("draw rect saving \(backupImage)")
     }
    
     /*override func draw(_ rect: CGRect) {
@@ -134,8 +169,6 @@ import UIKit
     
     func initImage(){
         drawing = false
-        path = UIBezierPath()
-        initToBeDone = true
         self.setNeedsDisplay()
     }
     /**

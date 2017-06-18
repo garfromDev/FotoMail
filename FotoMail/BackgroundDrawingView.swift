@@ -19,9 +19,6 @@ import UIKit
     var bckgrndColor = UIColor.groupTableViewBackground
 
     
-    
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // on récupère l'ancienne image
         guard let img = self.backupImage else {return}

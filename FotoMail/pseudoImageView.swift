@@ -9,7 +9,7 @@
 import UIKit
 
 class PseudoImageView: UIView {
-
+    
     var image : UIImage!
     /// l'offset de l'image à afficher par rapport à la frame
     var offset = CGPoint(x:0,y:0)
@@ -31,8 +31,8 @@ class PseudoImageView: UIView {
         // dans le cas ou l'image est plus petite que l'écran, il faut la centrer
         let org = CGPoint(x: offset.x + rect.origin.x, y: offset.y + rect.origin.y)
         oldImg?.draw(at: org)
-
-
+        
+        
         // le img.draw provoque une bande noire à droite, on la recouvre par du gris
         if offset.x > 0 {
             let rectD = CGRect(x: frm.width - offset.x, y: 0, width: offset.x, height: frm.height)
@@ -44,18 +44,6 @@ class PseudoImageView: UIView {
             let rectB = CGRect(x: 0, y: frm.height - offset.y, width: frm.width, height: offset.y)
             self.drawRect(inRect:rectB, color:bckgrndColor)
         }
-      /*
-        //il faut remetre offset à zéro puisqu'on va sauver l'image entière de la vue, y compris les zones grise au bord
-        offset = CGPoint.zero
-        
-        //on sauve l'image
-        self.backupImage = self.getUIImage()
-        //print("draw rect saving \(backupImage)")
- */
     }
     
-    
-    
-    
-
 }
