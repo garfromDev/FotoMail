@@ -26,10 +26,10 @@
 @protocol EditingImageViewController
 
 //ask delegate to initialize of drawing view with initial image
--(void) initViewWithImage: (UIImage *)image scale: (CGFloat)scale offset: (CGPoint)offset contentOffset: (CGPoint)contentOffset overPaths: (NSArray<OverPath*> *)overPaths;
+-(void) initViewWithScale: (CGFloat)scale offset: (CGPoint)offset contentOffset: (CGPoint)contentOffset overPaths: (NSArray<OverPath*> *)overPaths;
 
 // will be called to inform the delegate that editing has been requested on  EditingImageView
-- (void) editingRequested: (EditingImageView *)fromView withLayer:(CGLayerRef)drawLayer;
+- (void) editingRequested: (EditingImageView *)fromView ;
 
 // ask delegate to update display aera with line information
 -(void) updateDisplayWithTouch: (UITouch *)touch withRubberOn: (BOOL) rubberOn paths: (NSArray<OverPath*> *) paths;
@@ -64,7 +64,7 @@
 - (void) saveEditedImage: (dispatch_block_t) completion;
 /// forgot drawing and switch back to originale image (at the time of prepareDisplay)
 - (void) undoEditing;
-/// release the ressource used for editing, must be called symetrical to prepareDisplay
+/// release the ressource used for editing, must be called a tthe end of review process
 - (void) endDisplay;
 
 /// 

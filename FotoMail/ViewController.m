@@ -433,7 +433,8 @@ cycle de prise de vue
         // on met l'image dans imageView
         [self.scrollView setZoomScale:1.0];
         [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-        self.imageView.image = img;
+        [self.backView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+        self.backView.image = img;
 
         [FotomailUserDefault.defaults prepareUndo];
 
@@ -446,6 +447,8 @@ cycle de prise de vue
                 [self updateMinZoomScaleForSize:self.previewView.frame.size];
                 [self scrollViewDidZoom:self.scrollView];
                 [[self imageView] prepareDisplay];
+//                [[self overPathView] setOffset:CGPointZero];
+//                [[self overPathView] setScale:1.0]; //TODO: vérifier si bon
                 NSLog(@"preview displayed");
             }];
 
@@ -462,7 +465,9 @@ cycle de prise de vue
     NSLog(@"cancel appuyé dans imagePicker");
     [FotomailUserDefault.defaults commitUndo]; //restaure le titre avant preview
     [self.imageView endDisplay];
+    self.imageView.image = nil; //libérer la mémoire de l'image
     self.previewView.hidden = true;
+
     showPreview = false;
     [self photo:self];
 }
@@ -521,7 +526,7 @@ cycle de prise de vue
     UIButton *bouton = (UIButton *)sender;
     rubberMode = !rubberMode;
     bouton.selected = rubberMode;
-    self.imageView.rubberON = rubberMode; //TODO: à supprimer
+    self.imageView.rubberON = rubberMode;
     self.imageView.drawingColor = rubberMode ? UIColor.clearColor : UIColor.redColor; //TODO: remplacer par choix couleur approprié
 }
 
@@ -535,17 +540,20 @@ cycle de prise de vue
     LOG
     // on masque l'écran de preview
     if(!self.previewView.hidden){
-        [self.imageView endDisplay];
+        
         showPreview = false;
         [self.previewView slideToBottomWithDuration:0.2 completion:^(BOOL finished){}];
-    }
+        
+        // on récupère l'image éventuellement éditée dans l'UIImageView
+        [self.imageView saveEditedImage:^{
+            [self envoiPhoto:self.imageView.image];
+            [self.imageView endDisplay];
+            [self photo:self];
+        }];
 
-    // on récupère l'image éventuellement éditée dans l'UIImageView
-    __block  UIImage *imgDef = self.imageView.image;
-    [self envoiPhoto:imgDef];
-
-    if(preview) { // on  réaffiche l'appareil photo
-        [self photo:self];
+    }else{
+        
+        [self envoiPhoto:self.imageView.image];
     }
 }
 

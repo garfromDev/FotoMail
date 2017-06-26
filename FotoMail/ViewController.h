@@ -55,9 +55,15 @@
 
 // écran preview
     @property ( nonatomic) IBOutlet UIView *previewView;
+/// la scrollview
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-// l'image affichée dans la scroll View
+/// l'image originelle en fond
+@property (weak, nonatomic) IBOutlet UIImageView *backView;
+/// l'image transparente avec les paths surimprimé dans la scroll View, c'est elle qui génère les chemins
 @property (weak, nonatomic) IBOutlet EditingImageView *imageView;
+
+
+
 // l'image qui s'affiche pendant l'édition (sous partie de l'image totale)
 @property (weak, nonatomic) IBOutlet DisplayEditingView *displayEditingView;
 /// l'image de fond pendent l'édition

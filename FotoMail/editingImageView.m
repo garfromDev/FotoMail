@@ -76,7 +76,7 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
 UIImage *originaleImg;
 
 /// la layer utilisée pour le dessin à l'échelle 1 de la big image
-CGLayerRef drawLayer;
+//CGLayerRef drawLayer;
 
 
 #pragma mark interaction avec le vue controleur
@@ -84,6 +84,7 @@ CGLayerRef drawLayer;
 -(void) prepareDisplay{
     
     // création des queues et des groupes
+    /*
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         prepareBigQueue = dispatch_queue_create("com.GarfromDev.Fotomail.prepareBigQueue", DISPATCH_QUEUE_SERIAL);
@@ -91,9 +92,9 @@ CGLayerRef drawLayer;
         prepareGroup = dispatch_group_create();
         drawBigGroup = dispatch_group_create();
     });
-    
+    */
     // préparation de la layer pour le dessin à l'échelle 1
-    dispatch_group_async(prepareGroup, prepareBigQueue, ^{
+//    dispatch_group_async(prepareGroup, prepareBigQueue, ^{
         // création du contexte big
         /*
         UIGraphicsBeginImageContext(self.bounds.size);
@@ -112,21 +113,28 @@ CGLayerRef drawLayer;
         UIGraphicsPopContext();
         */
         //mémorisation de l'image pour le undo
-        originaleImg = [self.image copy]; //l'image est à l'envers
+//        originaleImg = [self.image copy]; //l'image est à l'envers
         
-        //initialisation du tableau de paths (vide)
-        self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
-    });
+    //initialisation du tableau de paths (vide)
+    self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
+    
+    //réinitialiser l'image
+    self.image = nil;
+//    });
     
 }
 
 
+/* fin d'un cycle de preview :
+ - on 
+*/
 -(void)endDisplay{
     LOG
     //on release la layer, qui sera recréee par prepareDisplay
     // avec éventuellement des paramètres différents
-    CGLayerRelease(drawLayer);
+    //CGLayerRelease(drawLayer);
     //note : on ne peut pas libérer self.image, car il va être lu par le controleur pour utiliser l'image
+    self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
     originaleImg = nil; //par contre on libère la copie
 }
 
@@ -157,7 +165,7 @@ CGLayerRef drawLayer;
     // transmet l'info au délégué, une seule fois
     if(!delegateRequested){
         delegateRequested = true; //pour éviter un deuxième appel car plusieurs évènement de touches sont transmis
-        [self.delegate editingRequested:self withLayer:drawLayer]; //va afficher l'image petite au lieu du scroll view
+        [self.delegate editingRequested:self ]; //va afficher l'image petite au lieu du scroll view
     }
     isDrawing = true;
 
@@ -236,12 +244,14 @@ CGLayerRef drawLayer;
 
     //on récupère la partie visible de l'image au niveau de zoom actuel, elle est plus grande que l'écran en fonction du zoom
     // on la dessine dans le smallContext en la mettant à l'échelle
-    CGContextSaveGState(bigContext);
+    
+//    CGContextSaveGState(bigContext);
     CGContextTranslateCTM(smallContext, -contentOffset.x, -contentOffset.y);
     CGContextScaleCTM(smallContext, scale, scale);
-    CGContextDrawLayerAtPoint(smallContext, CGPointZero, drawLayer);
+//    CGContextDrawLayerAtPoint(smallContext, CGPointZero, drawLayer);
+    
     UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
-    CGContextRestoreGState(bigContext);
+//    CGContextRestoreGState(bigContext);
     
     //2 libération du contexte
     UIGraphicsEndImageContext();
@@ -251,8 +261,7 @@ CGLayerRef drawLayer;
     [self.overPaths addObject:newOverPath];
     
     //on met à jour la vue d'affichage
-    [self.delegate initViewWithImage:smallImage
-                                scale:scale
+    [self.delegate initViewWithScale:scale
                                 offset:CGPointMake(self.frame.origin.x, self.frame.origin.y)
                                 contentOffset: contentOffset
                                 overPaths: self.overPaths ];
@@ -283,7 +292,7 @@ CGLayerRef drawLayer;
 }
 
 
-/// créee une image à partir du bigContext et la met dans self.image (la scroolView), completion est appellée sur la main queue
+/// créee une image à partir de l'image originelle et des paths et la met dans self.image (la scroolView), completion est appellée sur la main queue
 - (void) saveEditedImage: (dispatch_block_t) completion
 {
     LOG
@@ -433,7 +442,7 @@ CGLayerRef drawLayer;
     }
     // on n'appelle pas endDisplay, car sinon il efface originaleImg
     self.image = originaleImg;
-    CGLayerRelease(drawLayer);
+//    CGLayerRelease(drawLayer);
     [self prepareDisplay]; //reconstruit la CGLayer pour nouveau cycle
 }
 

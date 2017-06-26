@@ -11,10 +11,10 @@ import Foundation
 // implentation of the protocol EditingImageViewController to work with the EditingImageView
 extension ViewController : EditingImageViewController {
     
-    public func initView(with image: UIImage!, scale : CGFloat, offset : CGPoint, contentOffset: CGPoint, overPaths : [OverPath]) {
-        print("init view with image \(image) at scale \(image.scale)")
+    public func initView(with scale : CGFloat, offset : CGPoint, contentOffset: CGPoint, overPaths : [OverPath]) {
+        print("init view  at scale \(image.scale)")
         // en arrière plan, la photo
-        self.backgroundPseudoImageView.image=image
+        self.backgroundPseudoImageView.image= 
         // devant, la couche transparente qui servira au dessin
         displayEditingView.overPaths = overPaths
 //        displayEditingView.drawingImage = UIImage.createTransparentImage(with: image.size)
@@ -29,7 +29,7 @@ extension ViewController : EditingImageViewController {
 
     
     // La vue de la scroll view signale une demande d'édition (l'utilisateur a posé le doigt)
-    public func editingRequested(_ fromView:EditingImageView , with drawLayer:CGLayer) {
+    public func editingRequested(_ fromView:EditingImageView ) {
         print("editingRequested()")
         self.previewStackView.isHidden = true
 //        self.backgroundImageView.isHidden = false

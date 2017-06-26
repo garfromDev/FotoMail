@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
+                <outlet property="backView" destination="6u5-vj-3SH" id="vrB-l2-jHG"/>
                 <outlet property="backgroundImageView" destination="tsI-2d-IvT" id="gZ4-Ov-TMB"/>
                 <outlet property="backgroundPseudoImageView" destination="XnR-Sd-YQk" id="7oL-cD-CeQ"/>
                 <outlet property="displayEditingView" destination="Zwf-P7-NnO" id="qxt-Wi-oSY"/>
@@ -98,12 +99,19 @@
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" minimumZoomScale="0.10000000000000001" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-Vj-3KM">
                             <rect key="frame" x="0.0" y="30" width="359" height="573"/>
                             <subviews>
-                                <imageView tag="22" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="2400" placeholderIntrinsicHeight="2400" translatesAutoresizingMaskIntoConstraints="NO" id="ysT-Nw-JqI" userLabel="previewImgView" customClass="EditingImageView">
+                                <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6u5-vj-3SH" userLabel="backView" customClass="UIImageView">
+                                    <rect key="frame" x="59" y="222" width="240" height="128"/>
+                                </view>
+                                <imageView tag="22" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="2400" placeholderIntrinsicHeight="2400" translatesAutoresizingMaskIntoConstraints="NO" id="ysT-Nw-JqI" userLabel="pathView" customClass="EditingImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="2400" height="2400"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="6u5-vj-3SH" firstAttribute="top" secondItem="ysT-Nw-JqI" secondAttribute="top" id="HPb-ON-Tpe"/>
+                                <constraint firstItem="6u5-vj-3SH" firstAttribute="height" secondItem="ysT-Nw-JqI" secondAttribute="height" id="SdO-nd-0tz"/>
+                                <constraint firstItem="6u5-vj-3SH" firstAttribute="width" secondItem="ysT-Nw-JqI" secondAttribute="width" id="TnG-CW-moU"/>
+                                <constraint firstItem="6u5-vj-3SH" firstAttribute="leading" secondItem="ysT-Nw-JqI" secondAttribute="leading" id="Twu-HF-2yx"/>
                                 <constraint firstItem="ysT-Nw-JqI" firstAttribute="leading" secondItem="Pj9-Vj-3KM" secondAttribute="leading" id="d3S-Do-bfx"/>
                                 <constraint firstItem="ysT-Nw-JqI" firstAttribute="trailing" secondItem="Pj9-Vj-3KM" secondAttribute="trailing" id="iwf-tj-NbD"/>
                                 <constraint firstItem="ysT-Nw-JqI" firstAttribute="bottom" secondItem="Pj9-Vj-3KM" secondAttribute="bottom" id="pwN-vd-czY"/>
