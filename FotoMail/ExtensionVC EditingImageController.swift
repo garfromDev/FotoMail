@@ -11,19 +11,17 @@ import Foundation
 // implentation of the protocol EditingImageViewController to work with the EditingImageView
 extension ViewController : EditingImageViewController {
     
-    public func initView(with scale : CGFloat, offset : CGPoint, contentOffset: CGPoint, overPaths : [OverPath]) {
-        print("init view  at scale \(image.scale)")
+    public func initView(with image: UIImage!, scale : CGFloat, offset : CGPoint, contentOffset: CGPoint, overPaths : [OverPath]) {
+        print("init view with image \(image) at scale \(image.scale)")
         // en arrière plan, la photo
-        self.backgroundPseudoImageView.image= 
+        self.backgroundPseudoImageView.image = image
+        self.backgroundPseudoImageView.offset = offset
+        
         // devant, la couche transparente qui servira au dessin
         displayEditingView.overPaths = overPaths
-//        displayEditingView.drawingImage = UIImage.createTransparentImage(with: image.size)
-//        self.displayEditingView.initialImage = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: image.imageOrientation)
-//        self.displayEditingView.initialImage = UIImage.createImage(with: UIColor.green, size:image.size)!
         self.displayEditingView.scale = scale
         self.displayEditingView.offset = contentOffset
         
-        backgroundPseudoImageView.offset = offset
         //    ne pas faire de setNeddDisplay() ici sinon on obtient un carrée noir
     }
 
@@ -32,14 +30,10 @@ extension ViewController : EditingImageViewController {
     public func editingRequested(_ fromView:EditingImageView ) {
         print("editingRequested()")
         self.previewStackView.isHidden = true
-//        self.backgroundImageView.isHidden = false
         backgroundPseudoImageView.isHidden = false
-        //self.displayEditingView.drawLayer = drawLayer
-//        self.backgroundImageView.setNeedsDisplay() //pour forcer l'affichage de l'image qui a été chargée lors du initView()
-        backgroundPseudoImageView.setNeedsDisplay()
+        backgroundPseudoImageView.setNeedsDisplay() //FIXME vérifier si vraiment nécessaire?
         displayEditingView.isHidden = false
-        self.displayEditingView.initImage()
-        //self.displayEditingView.isHidden = false
+        self.displayEditingView.setNeedsDisplay() //FIXME vérifier si vraiment nécessaire?
         
         print("scollview replaced by drawingImage View : \(displayEditingView.bounds)")
     }
@@ -49,9 +43,10 @@ extension ViewController : EditingImageViewController {
     public func editingFinished(_ fromView:EditingImageView) {
         print("editingFinished() by view \(fromView.tag)")
         self.previewStackView.isHidden = false
-        self.displayEditingView.isHidden = true
+        self.smallDrawingViews.isHidden = true
+//        self.displayEditingView.isHidden = true
 //        self.backgroundImageView.isHidden = true
-        backgroundPseudoImageView.isHidden = true
+//        backgroundPseudoImageView.isHidden = true
     }
     
 
@@ -65,13 +60,12 @@ extension ViewController : EditingImageViewController {
     }
     
 
-    public func updateDisplay( with touch : UITouch, withRubberOn:Bool, paths: [OverPath] ) {
+    public func updateDisplay( with touch : UITouch,  paths: [OverPath] ) {
         //print("updateDisplay(with image:")
         // l'utilisation d'une UIimageView avec self.drawingImageView.image = image provoque des carrés noir dans les marges
         //        image.draw(at: CGPoint(x: 0, y: 0)) //-> marche pas, image non affiché,  pas le bon contexte, il faut être dans drawRect:
         let fromPoint = touch.previousLocation(in: self.displayEditingView)
         let endPoint = touch.location(in: self.displayEditingView)
-//        self.displayEditingView.drawRequest.append((fromPoint,endPoint, withRubberOn))
         let thick = max(CGFloat(DEFAULT_THICKNESS) * self.displayEditingView.scale, 10.0)
         let rect = CGRect( x:min(fromPoint.x, endPoint.x),
                            y:min(fromPoint.y, endPoint.y),

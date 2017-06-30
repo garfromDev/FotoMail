@@ -160,7 +160,7 @@ cycle de prise de vue
     
     //TODO: voir comment faire proprement
     self.imageView.drawingColor = UIColor.redColor;
-    
+    self.imageView.backView = self.backView; //l'EditingImageView a besoin d'une référence weak sur la backView (image originale)
     // démarage du 1er cycle
     [self preparePhoto];
 
@@ -447,8 +447,7 @@ cycle de prise de vue
                 [self updateMinZoomScaleForSize:self.previewView.frame.size];
                 [self scrollViewDidZoom:self.scrollView];
                 [[self imageView] prepareDisplay];
-//                [[self overPathView] setOffset:CGPointZero];
-//                [[self overPathView] setScale:1.0]; //TODO: vérifier si bon
+
                 NSLog(@"preview displayed");
             }];
 
@@ -465,7 +464,7 @@ cycle de prise de vue
     NSLog(@"cancel appuyé dans imagePicker");
     [FotomailUserDefault.defaults commitUndo]; //restaure le titre avant preview
     [self.imageView endDisplay];
-    self.imageView.image = nil; //libérer la mémoire de l'image
+    self.backView.image = nil; //libérer la mémoire de l'image
     self.previewView.hidden = true;
 
     showPreview = false;
@@ -544,16 +543,17 @@ cycle de prise de vue
         showPreview = false;
         [self.previewView slideToBottomWithDuration:0.2 completion:^(BOOL finished){}];
         
-        // on récupère l'image éventuellement éditée dans l'UIImageView
-        [self.imageView saveEditedImage:^{
-            [self envoiPhoto:self.imageView.image];
+        // on récupère l'image éventuellement éditée dans l'UIImageView et on la transmet à envoiPhoto
+        [self.imageView saveEditedWithImage: self.backView.image completion : ^void(UIImage *finalImg){
+            [self envoiPhoto:finalImg];
             [self.imageView endDisplay];
+            self.backView.image = nil; //libération mémoire
             [self photo:self];
         }];
 
     }else{
         
-        [self envoiPhoto:self.imageView.image];
+        [self envoiPhoto:self.backView.image];
     }
 }
 

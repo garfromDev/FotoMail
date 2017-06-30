@@ -26,13 +26,13 @@
 @protocol EditingImageViewController
 
 //ask delegate to initialize of drawing view with initial image
--(void) initViewWithScale: (CGFloat)scale offset: (CGPoint)offset contentOffset: (CGPoint)contentOffset overPaths: (NSArray<OverPath*> *)overPaths;
+-(void) initViewWithImage: (UIImage *)image scale: (CGFloat)scale offset: (CGPoint)offset contentOffset: (CGPoint)contentOffset overPaths: (NSArray<OverPath*> *)overPaths;
 
 // will be called to inform the delegate that editing has been requested on  EditingImageView
 - (void) editingRequested: (EditingImageView *)fromView ;
 
 // ask delegate to update display aera with line information
--(void) updateDisplayWithTouch: (UITouch *)touch withRubberOn: (BOOL) rubberOn paths: (NSArray<OverPath*> *) paths;
+-(void) updateDisplayWithTouch: (UITouch *)touch paths: (NSArray<OverPath*> *) paths;
 
 // will be called to inform the delegetae that editing has been finished on  EditingImageView
 - (void) editingFinished: (EditingImageView *)fromView;
@@ -50,7 +50,7 @@
 @interface EditingImageView : UIImageView
 
 @property( weak) id<EditingImageViewController> delegate;
-
+@property( weak) UIImageView *backView;
 
 /// le tableau des ajouts dessinés à rajouter par dessus l'image
 @property(nonatomic) NSMutableArray<OverPath *> *overPaths;
@@ -60,10 +60,19 @@
 
 /// Prepare the copy of the image and the context, must be called before the user interact with the view
 - (void) prepareDisplay;
-/// ask EditingImageView to actualize self.image with memorized drawings and call completion on mainQueue
-- (void) saveEditedImage: (dispatch_block_t) completion;
+
+/*! called when review is closed with <Use>
+ Generate the final image with the path overimposed
+ @param fromImg the originale image
+ @param completion : the block that will be called with the final image in parameter
+ @return
+ @discussion completion is called on main queue
+ */
+- (void) saveEditedWithImage: (UIImage *)originaleImg completion:(void(^)(UIImage *finalImg)) completion;
+
 /// forgot drawing and switch back to originale image (at the time of prepareDisplay)
 - (void) undoEditing;
+
 /// release the ressource used for editing, must be called a tthe end of review process
 - (void) endDisplay;
 

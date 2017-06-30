@@ -11,13 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
                 <outlet property="backView" destination="6u5-vj-3SH" id="vrB-l2-jHG"/>
-                <outlet property="backgroundImageView" destination="tsI-2d-IvT" id="gZ4-Ov-TMB"/>
                 <outlet property="backgroundPseudoImageView" destination="XnR-Sd-YQk" id="7oL-cD-CeQ"/>
                 <outlet property="displayEditingView" destination="Zwf-P7-NnO" id="qxt-Wi-oSY"/>
-                <outlet property="drawingViewBottomConstraint" destination="C3G-xq-CoK" id="YV2-eP-Dhq"/>
-                <outlet property="drawingViewLeadingContraint" destination="WZu-aX-m7a" id="nxX-rx-0rg"/>
-                <outlet property="drawingViewTopConstraint" destination="pab-S7-hyx" id="xg0-MR-5WZ"/>
-                <outlet property="drawingViewTrailingConstraint" destination="6jC-po-D5g" id="dMr-XL-hcL"/>
                 <outlet property="imageView" destination="ysT-Nw-JqI" id="MQg-eg-aYt"/>
                 <outlet property="imageViewBottomConstraint" destination="pwN-vd-czY" id="u1I-9L-sAe"/>
                 <outlet property="imageViewLeadingConstraint" destination="d3S-Do-bfx" id="AVM-Xb-5Ev"/>
@@ -29,6 +24,7 @@
                 <outlet property="previewView" destination="iN0-l3-epB" id="aaw-gn-GpB"/>
                 <outlet property="rubberButton" destination="4yA-e3-imV" id="gQi-Ei-h0B"/>
                 <outlet property="scrollView" destination="Pj9-Vj-3KM" id="YQP-iE-yaO"/>
+                <outlet property="smallDrawingViews" destination="Ecs-kw-tTM" id="IxK-ha-HFn"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -47,20 +43,13 @@
                     <rect key="frame" x="8" y="12" width="359" height="647"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </view>
-                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-kw-tTM" userLabel="ContainerForDrawingView">
+                <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-kw-tTM" userLabel="ContainerForDrawingView">
                     <rect key="frame" x="8" y="42" width="359" height="573"/>
                     <subviews>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XnR-Sd-YQk" customClass="PseudoImageView" customModule="FotoMail" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
                             <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <imageView hidden="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-2d-IvT" userLabel="BackgroundDrawingView">
-                            <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
-                            <color key="backgroundColor" red="0.82318369859999996" green="1" blue="0.3309683792" alpha="1" colorSpace="calibratedRGB"/>
-                            <accessibility key="accessibilityConfiguration">
-                                <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                            </accessibility>
-                        </imageView>
                         <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwf-P7-NnO" customClass="DisplayEditingView" customModule="FotoMail" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
                         </view>
@@ -68,17 +57,13 @@
                     <color key="backgroundColor" red="1" green="0.56323386659999997" blue="0.061179050659999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="Zwf-P7-NnO" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="1H4-xj-NRl"/>
-                        <constraint firstItem="tsI-2d-IvT" firstAttribute="trailing" secondItem="Ecs-kw-tTM" secondAttribute="trailing" id="6jC-po-D5g"/>
                         <constraint firstAttribute="trailing" secondItem="Zwf-P7-NnO" secondAttribute="trailing" id="87O-yo-fGe"/>
-                        <constraint firstItem="tsI-2d-IvT" firstAttribute="bottom" secondItem="Ecs-kw-tTM" secondAttribute="bottom" id="C3G-xq-CoK"/>
                         <constraint firstItem="XnR-Sd-YQk" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="LQJ-Oh-ZSa"/>
-                        <constraint firstItem="tsI-2d-IvT" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="WZu-aX-m7a"/>
                         <constraint firstItem="XnR-Sd-YQk" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="bqU-cf-xot"/>
                         <constraint firstItem="Zwf-P7-NnO" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="cx8-Cy-jQa"/>
                         <constraint firstAttribute="trailing" secondItem="XnR-Sd-YQk" secondAttribute="trailing" id="d16-a1-DwW"/>
                         <constraint firstAttribute="bottom" secondItem="Zwf-P7-NnO" secondAttribute="bottom" id="i0Y-FS-6Hw"/>
                         <constraint firstAttribute="bottom" secondItem="XnR-Sd-YQk" secondAttribute="bottom" id="kgg-oO-hg4"/>
-                        <constraint firstItem="tsI-2d-IvT" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="pab-S7-hyx"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DmX-co-DyW">
@@ -99,8 +84,8 @@
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" minimumZoomScale="0.10000000000000001" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-Vj-3KM">
                             <rect key="frame" x="0.0" y="30" width="359" height="573"/>
                             <subviews>
-                                <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6u5-vj-3SH" userLabel="backView" customClass="UIImageView">
-                                    <rect key="frame" x="59" y="222" width="240" height="128"/>
+                                <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6u5-vj-3SH" userLabel="backView" customClass="UIImageView">
+                                    <rect key="frame" x="0.0" y="0.0" width="2400" height="2400"/>
                                 </view>
                                 <imageView tag="22" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="2400" placeholderIntrinsicHeight="2400" translatesAutoresizingMaskIntoConstraints="NO" id="ysT-Nw-JqI" userLabel="pathView" customClass="EditingImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="2400" height="2400"/>

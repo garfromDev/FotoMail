@@ -72,11 +72,6 @@ CGPoint contentOffset;  // initialisé par prepareDrawing avec le content offset
 CGSize displaySize;     // initialisé par prepareDrawing avec la taille de l'affichage fournie par le delegué
 __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le delegue
 
-// sauvegarde de l'image originale pour le undo
-UIImage *originaleImg;
-
-/// la layer utilisée pour le dessin à l'échelle 1 de la big image
-//CGLayerRef drawLayer;
 
 
 #pragma mark interaction avec le vue controleur
@@ -84,43 +79,20 @@ UIImage *originaleImg;
 -(void) prepareDisplay{
     
     // création des queues et des groupes
-    /*
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        prepareBigQueue = dispatch_queue_create("com.GarfromDev.Fotomail.prepareBigQueue", DISPATCH_QUEUE_SERIAL);
-        drawBigQueue = dispatch_queue_create("com.GarfromDev.Fotomail.drawBigQueue", DISPATCH_QUEUE_SERIAL);
-        prepareGroup = dispatch_group_create();
-        drawBigGroup = dispatch_group_create();
-    });
-    */
-    // préparation de la layer pour le dessin à l'échelle 1
-//    dispatch_group_async(prepareGroup, prepareBigQueue, ^{
-        // création du contexte big
-        /*
-        UIGraphicsBeginImageContext(self.bounds.size);
-        CGContextRef myContext = UIGraphicsGetCurrentContext();
-        // création de la couche (mémorisée dans la variable d'instance)
-        //on commence par relaese pour le cas où elle existe déjà (undo)
-        
-        drawLayer = CGLayerCreateWithContext(myContext, self.bounds.size, NULL);
-        // libération du contexte
-        UIGraphicsEndImageContext();
-        
-        // dessin de la grande image dans la couche
-        bigContext = CGLayerGetContext(drawLayer);
-        UIGraphicsPushContext(bigContext);
-        [self.image drawAtPoint:CGPointZero];
-        UIGraphicsPopContext();
-        */
-        //mémorisation de l'image pour le undo
-//        originaleImg = [self.image copy]; //l'image est à l'envers
-        
+    
+     static dispatch_once_t onceToken;
+     dispatch_once(&onceToken, ^{
+     prepareBigQueue = dispatch_queue_create("com.GarfromDev.Fotomail.prepareBigQueue", DISPATCH_QUEUE_SERIAL);
+     drawBigQueue = dispatch_queue_create("com.GarfromDev.Fotomail.drawBigQueue", DISPATCH_QUEUE_SERIAL);
+     prepareGroup = dispatch_group_create();
+     drawBigGroup = dispatch_group_create();
+     });
+
     //initialisation du tableau de paths (vide)
     self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
     
     //réinitialiser l'image
-    self.image = nil;
-//    });
+//    self.image = nil; //FIXME: pas besoin si normalement l'image est vide au début
     
 }
 
@@ -130,12 +102,9 @@ UIImage *originaleImg;
 */
 -(void)endDisplay{
     LOG
-    //on release la layer, qui sera recréee par prepareDisplay
-    // avec éventuellement des paramètres différents
-    //CGLayerRelease(drawLayer);
     //note : on ne peut pas libérer self.image, car il va être lu par le controleur pour utiliser l'image
     self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
-    originaleImg = nil; //par contre on libère la copie
+    self.image = nil;
 }
 
 
@@ -173,7 +142,7 @@ UIImage *originaleImg;
     CGPoint point1 = [touch previousLocationInView:self];
     CGPoint point2 = [touch locationInView:self];
     
-    //Tdessin dans le path (la couleur est initialisée dans le prepareDrawing
+    // 1 dessin dans le path (la couleur est initialisée dans le prepareDrawing
     OverPath *p = self.overPaths.lastObject;
     if(p.path.isEmpty){
         if(p.rubber){
@@ -193,19 +162,9 @@ UIImage *originaleImg;
     [p.path addLineToPoint:point2];
     
     //on dessine dans la scroll view, donc les coordonnées sont bonnes pour la bigImage
-//    if(!self.rubberON){ //mode dessin
-//        dispatch_group_async(drawBigGroup, drawBigQueue, ^{
-//            [EditingImageView drawLineFrom:point1 to:point2 thickness:DEFAULT_THICKNESS  inContext:bigContext];
-//        });
-//    }else{ //mode gomme
-//        // on dessine l'image à l'origine, avec un clipage
-//        dispatch_group_async(drawBigGroup, drawBigQueue, ^{
-//            [UIView eraseFrom:point1 to:point2 thickness:(CGFloat) DEFAULT_RUBBER_THICKNESS context:bigContext rubberImg:rubberImg];
-//        });
-//    }
-//    
+
     //2 on indique au délégué de metre à jour l'affichage de la vue réduite
-    [self.delegate updateDisplayWithTouch: touch withRubberOn:self.rubberON paths:self.overPaths];
+    [self.delegate updateDisplayWithTouch: touch  paths:self.overPaths];
 
 }
 
@@ -244,10 +203,9 @@ UIImage *originaleImg;
 
     //on récupère la partie visible de l'image au niveau de zoom actuel, elle est plus grande que l'écran en fonction du zoom
     // on la dessine dans le smallContext en la mettant à l'échelle
-    
-//    CGContextSaveGState(bigContext);
     CGContextTranslateCTM(smallContext, -contentOffset.x, -contentOffset.y);
     CGContextScaleCTM(smallContext, scale, scale);
+    [self.backView.image drawAtPoint:CGPointZero];
 //    CGContextDrawLayerAtPoint(smallContext, CGPointZero, drawLayer);
     
     UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -261,7 +219,8 @@ UIImage *originaleImg;
     [self.overPaths addObject:newOverPath];
     
     //on met à jour la vue d'affichage
-    [self.delegate initViewWithScale:scale
+    [self.delegate initViewWithImage: smallImage
+                                scale:scale
                                 offset:CGPointMake(self.frame.origin.x, self.frame.origin.y)
                                 contentOffset: contentOffset
                                 overPaths: self.overPaths ];
@@ -275,161 +234,108 @@ UIImage *originaleImg;
 
 
 
-/// quitte le mode edition, met fin au contexte graphique et rend la main à la scrollview
+/// quitte le mode edition, rend les path dans une image et rend la main à la scrollview
 -(void) stopEditing
 {
     LOG
-    //on remet la bigImage dans la scrollView si une édition a eu lieu, le  big layer est conservé intact
+
     if(isDrawing){
-        [self saveEditedImage: ^{ [self.delegate editingFinished:self];} ];
-    } else {
+        // on génère l'image transparente avec les paths à superposer à l'image originale
+        self.image = [self createOverPathImage];
+        isDrawing = false;
         [self.delegate editingFinished:self];
+        delegateRequested = false;
     }
-    
-    isDrawing = false;
-    delegateRequested = false;
-  
+
 }
 
 
-/// créee une image à partir de l'image originelle et des paths et la met dans self.image (la scroolView), completion est appellée sur la main queue
-- (void) saveEditedImage: (dispatch_block_t) completion
+/// créee une image à partir de l'image originelle et des paths et la transmet à completion qui est appellée sur la main queue
+- (void) saveEditedWithImage: (UIImage *)originaleImg completion:(void(^)(UIImage *finalImg)) completion
 {
     LOG
-    // fait dans la mainQueue sinon l'affectation de self.image n'ets pas rendu
-    // le group_notify permet d'être sur que toutes les taches de dessins sont terminées sur la drawBigQueue
-    dispatch_group_notify(drawBigGroup, dispatch_get_main_queue(), ^{
-        /*
-        UIGraphicsBeginImageContext(self.bounds.size);
-        CGContextRef currentContext = UIGraphicsGetCurrentContext();
-        [UIColor.clearColor set];
-        CGContextFillRect(currentContext, self.bounds);
-        NSLog(@"background cleared...");
-         */
-//        CGContextDrawLayerAtPoint(currentContext, CGPointZero, drawLayer);
-//        [originaleImg drawAtPoint:CGPointZero];
-        //TODO: rendre les paths
-        
-        // situation de départ , on a
-        // - image originelle
-        // - les paths
-        
-        // 1 créer une image à fond noir
-        NSLog(@"1 créer une image à fond noir");
-        UIGraphicsBeginImageContextWithOptions(originaleImg.size, YES, originaleImg.scale);
-        CGContextRef pathContext = UIGraphicsGetCurrentContext();
-        UIBezierPath *r = [UIBezierPath bezierPathWithRect:self.bounds];
-        [UIColor.blackColor set];
-        [r stroke];
-        [r fill];
-        CGContextTranslateCTM(pathContext, 0.0, originaleImg.size.height);
-        CGContextScaleCTM(pathContext, 1.0, -1.0);
-        
-        // 2 dessiner les path dans une image pathImage en couleur blanche, gomme en noire
-
-
-        for( OverPath *p in self.overPaths){
-            NSLog(@"drawing path into mask with rubber %@", p.rubber ? @"ON" : @"OFF");
-            if(!p.rubber){
-                [UIColor.whiteColor set];
-            }else{
-                [UIColor.blackColor set];
-            }
+    
+    
+    // situation de départ , on a
+    // - image originelle
+    // - les paths
+    
+    // 1 créer une image à fond noir
+    NSLog(@"1 créer une image à fond noir");
+    UIGraphicsBeginImageContextWithOptions(originaleImg.size, YES, originaleImg.scale);
+    CGContextRef pathContext = UIGraphicsGetCurrentContext();
+    UIBezierPath *r = [UIBezierPath bezierPathWithRect:self.bounds];
+    [UIColor.blackColor set];
+    [r stroke];
+    [r fill];
+    CGContextTranslateCTM(pathContext, 0.0, originaleImg.size.height);
+    CGContextScaleCTM(pathContext, 1.0, -1.0);
+    
+    // 2 dessiner les path dans une image pathImage en couleur blanche, gomme en noire
+    for( OverPath *p in self.overPaths){
+        NSLog(@"drawing path into mask with rubber %@", p.rubber ? @"ON" : @"OFF");
+        if(!p.rubber){
+            [UIColor.whiteColor set];
+        }else{
+            [UIColor.blackColor set];
+        }
+        [p.path stroke];
+    }
+    
+    CGImageRef pathImage = CGBitmapContextCreateImage(pathContext);
+    NSAssert(pathImage != nil, @"création path image a échouée");
+    
+    // 3 créer un image masque profondeur 1 bit depuis cette image
+    NSLog(@"creating mask");
+    CGImageRef msq = CGImageMaskCreate( originaleImg.size.width,
+                                       originaleImg.size.height,
+                                       1,
+                                       CGImageGetBitsPerPixel(pathImage),
+                                       CGImageGetBytesPerRow(pathImage),
+                                       CGImageGetDataProvider(pathImage),
+                                       nil,
+                                       FALSE);
+    
+    UIGraphicsEndImageContext();
+    CGImageRelease(pathImage);
+    
+    // 4 dessiner les path rubber-off (en respectant leurs couleurs) dans l'image finale
+    UIGraphicsBeginImageContextWithOptions(originaleImg.size, YES, originaleImg.scale);
+    CGContextRef finalContext = UIGraphicsGetCurrentContext();
+    for( OverPath *p in self.overPaths){
+        NSLog(@"drawing path with rubber %@", p.rubber ? @"ON" : @"OFF");
+        if(!p.rubber){
+            [p.drawColor set];
             [p.path stroke];
         }
-        
-        CGImageRef pathImage = CGBitmapContextCreateImage(pathContext);
-        NSAssert(pathImage != nil, @"création path image a échouée");
-
-        // 3 créer un image masque profondeur 1 bit depuis cette image
-        NSLog(@"creating mask");
-        CGImageRef msq = CGImageMaskCreate( originaleImg.size.width,
-                                           originaleImg.size.height,
-                                         1,
-                                         CGImageGetBitsPerPixel(pathImage),
-                                         CGImageGetBytesPerRow(pathImage),
-                                         CGImageGetDataProvider(pathImage),
-                                           nil,
-                                         FALSE);
-
-        UIGraphicsEndImageContext();
-        CGImageRelease(pathImage);
-        
-        // 4 dessiner les path rubber-off (en respectant leurs couleurs) dans l'image finale
-        UIGraphicsBeginImageContextWithOptions(originaleImg.size, YES, originaleImg.scale);
-        CGContextRef finalContext = UIGraphicsGetCurrentContext();
-        for( OverPath *p in self.overPaths){
-            NSLog(@"drawing path with rubber %@", p.rubber ? @"ON" : @"OFF");
-            if(!p.rubber){
-                [p.drawColor set];
-                [p.path stroke];
-            }
-        }
-        // 5 appliquer clipToMask
-        // il faut des valeurs de 1 (blanc) là où l'image originelle doit apparaitre
-        // il faut des valeurs de 0 (noir) là ou les path doivent apparaitres
-        NSLog(@"5 appliquer clipToMask");
-        CGContextClipToMask(finalContext,
-                            CGRectMake(0, 0,
-                                        originaleImg.size.width, originaleImg.size.height),
-                            msq);
-
-//        CGContextScaleCTM(finalContext, 0, 0);
-//        CGContextScaleCTM(finalContext, 1, 1);
-        // 6 dessiner le fond (image originelle)
-        NSLog(@"// 6 dessiner le fond (image originelle)");
-        UIGraphicsPushContext(finalContext);
-        [originaleImg drawAtPoint:CGPointZero];
-        UIGraphicsPopContext();
-        CGImageRelease(msq);
-//        CGContextDrawImage(finalContext,
-//                           CGRectMake(0, 0,
-//                                      originaleImg.size.width, originaleImg.size.height),
-//                           originaleImg.CGImage);
-
-            /*
-        for( OverPath *p in self.overPaths){
-            NSLog(@"drawing path with rubber %@", p.rubber ? @"ON" : @"OFF");
-            if(p.rubber){
-                CGContextSetBlendMode(bigContext, kCGBlendModeDestinationOut);
-                CGContextSetStrokeColorWithColor(bigContext, UIColor.whiteColor.CGColor);
-//                [UIColor.whiteColor set];
-            }else{
-                CGContextSetBlendMode(bigContext, kCGBlendModeNormal);
-                CGContextSetStrokeColorWithColor(bigContext, p.drawColor.CGColor);
-//                [p.drawColor setStroke];
-            }
-            UIGraphicsPushContext(bigContext);
-            [p.path stroke];
-            UIGraphicsPopContext();
-        }
-             */
-//        NSLog(@"getting path image...");
-//        CGImageRef overpathImg = CGBitmapContextCreateImage(currentContext);
-        
-//        CGContextScaleCTM(currentContext, -1, -1);
-//        NSLog(@"drawing originale image...");
-////        CGContextSetBlendMode(currentContext, kCGBlendModeNormal);
-////        [originaleImg drawAtPoint:CGPointZero];
-//        CGContextDrawImage(currentContext, self.bounds, originaleImg.CGImage);
-        
-//        NSLog(@"drawing path image...");
-//        CGContextDrawImage(currentContext, self.bounds, overpathImg);
-        
-        NSLog(@"getting composite image...");
-        
-//        UIGraphicsBeginImageContext(self.bounds.size);
-//        CGContextRef currentContext = UIGraphicsGetCurrentContext();
-//        CGContextDrawLayerAtPoint(currentContext, CGPointZero, drawLayer);
-        self.image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        NSLog(@"calling completinon");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion();
-        });
-        
-        NSLog(@"saving finished");
+    }
+    // 5 appliquer clipToMask
+    // il faut des valeurs de 1 (blanc) là où l'image originelle doit apparaitre
+    // il faut des valeurs de 0 (noir) là ou les path doivent apparaitres
+    NSLog(@"5 appliquer clipToMask");
+    CGContextClipToMask(finalContext,
+                        CGRectMake(0, 0,
+                                   originaleImg.size.width, originaleImg.size.height),
+                        msq);
+    
+    
+    // 6 dessiner le fond (image originelle)
+    NSLog(@"// 6 dessiner le fond (image originelle)");
+    UIGraphicsPushContext(finalContext);
+    [originaleImg drawAtPoint:CGPointZero];
+    UIGraphicsPopContext();
+    CGImageRelease(msq);
+    
+    NSLog(@"getting composite image...");
+    __block UIImage *finalImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    NSLog(@"calling completinon");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        completion(finalImg);
     });
+    
+    NSLog(@"saving finished");
+    
 }
 
 
@@ -441,11 +347,33 @@ UIImage *originaleImg;
         [self.delegate editingFinished:self];
     }
     // on n'appelle pas endDisplay, car sinon il efface originaleImg
-    self.image = originaleImg;
-//    CGLayerRelease(drawLayer);
+    self.image = nil;
+    self.overPaths = [[NSMutableArray<OverPath*> alloc ] init];
     [self prepareDisplay]; //reconstruit la CGLayer pour nouveau cycle
 }
 
+
+- (UIImage *)createOverPathImage{
+    // 1 création du contexte
+    NSLog(@"1 créer une image transparente");
+    UIGraphicsBeginImageContextWithOptions(self.backView.image.size, NO, self.backView.image.scale);
+
+    // 2 dessiner les path
+    for( OverPath *p in self.overPaths){
+        NSLog(@"drawing path into image with rubber %@", p.rubber ? @"ON" : @"OFF");
+        if(!p.rubber){
+            [p.drawColor set];
+        }else{
+            [UIColor.clearColor set];
+        }
+        [p.path stroke];
+    }
+    
+    // 3 récupérer l'image
+    UIImage *overPathImg =  UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return overPathImg;
+}
 
 
 #pragma mark fonctions utiles

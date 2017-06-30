@@ -67,8 +67,9 @@
 // l'image qui s'affiche pendant l'édition (sous partie de l'image totale)
 @property (weak, nonatomic) IBOutlet DisplayEditingView *displayEditingView;
 /// l'image de fond pendent l'édition
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet PseudoImageView *backgroundPseudoImageView;
+/// le regroupement des vues affichant la petite image pendant l'édition
+@property (weak, nonatomic) IBOutlet UIView *smallDrawingViews;
 
 
 

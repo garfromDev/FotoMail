@@ -59,14 +59,14 @@ extension ViewController : UIScrollViewDelegate {
             - imageView.frame.height) / 2)
         imageViewTopConstraint.constant = yOffset
         imageViewBottomConstraint.constant = yOffset
-        drawingViewTopConstraint.constant = yOffset
-        drawingViewBottomConstraint.constant = yOffset
+//        drawingViewTopConstraint.constant = yOffset
+//        drawingViewBottomConstraint.constant = yOffset
         
         let xOffset = max(0, (size.width - 16 - imageView.frame.width) / 2)
         imageViewLeadingConstraint.constant = xOffset
         imageViewTrailingConstraint.constant = xOffset
-        drawingViewLeadingContraint.constant = xOffset
-        drawingViewTrailingConstraint.constant = xOffset
+//        drawingViewLeadingContraint.constant = xOffset
+//        drawingViewTrailingConstraint.constant = xOffset
         view.layoutIfNeeded()
     }
     
