@@ -57,8 +57,8 @@
     @property ( nonatomic) IBOutlet UIView *previewView;
 /// la scrollview
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-/// l'image originelle en fond
-@property (weak, nonatomic) IBOutlet UIImageView *backView;
+
+
 /// l'image transparente avec les paths surimprimé dans la scroll View, c'est elle qui génère les chemins
 @property (weak, nonatomic) IBOutlet EditingImageView *imageView;
 

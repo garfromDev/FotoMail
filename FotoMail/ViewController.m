@@ -160,7 +160,7 @@ cycle de prise de vue
     
     //TODO: voir comment faire proprement
     self.imageView.drawingColor = UIColor.redColor;
-    self.imageView.backView = self.backView; //l'EditingImageView a besoin d'une référence weak sur la backView (image originale)
+    
     // démarage du 1er cycle
     [self preparePhoto];
 
@@ -432,10 +432,11 @@ cycle de prise de vue
     if(preview){
         // on met l'image dans imageView
         [self.scrollView setZoomScale:1.0];
+        //[self.scrollView setMinimumZoomScale:1.0]; // pour forcer le calcul à revenir au zoom minimum
         [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-        [self.backView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-        self.backView.image = img;
-
+        self.imageView.originaleImage = img;
+        self.imageView.image = img;
+        //le prepareDisplay recopiera originale Image dans image (marche pas)
         [FotomailUserDefault.defaults prepareUndo];
 
         //on cache l'appareil photo
@@ -443,16 +444,15 @@ cycle de prise de vue
 
         //on anime l'animation de la preview
             [self.previewView slideFromBottomWithBouncing:true duration:0.5 completion:^(BOOL finished) {
+                [[self imageView] prepareDisplay];
                 //on règle le niveau de zoom pour afficher l'image en entier
                 [self updateMinZoomScaleForSize:self.previewView.frame.size];
-                [self scrollViewDidZoom:self.scrollView];
-                [[self imageView] prepareDisplay];
-
+                [self scrollViewDidZoom:self.scrollView]; //nécessaire?
                 NSLog(@"preview displayed");
             }];
 
     }else{
-        //option non activé, on joint directement la photo au mail et on laisse l'appareil photo affiché
+        //option previualisation non activée, on joint directement la photo au mail et on laisse l'appareil photo affiché
         [self envoiPhoto:img ];
      }
 }
@@ -464,7 +464,7 @@ cycle de prise de vue
     NSLog(@"cancel appuyé dans imagePicker");
     [FotomailUserDefault.defaults commitUndo]; //restaure le titre avant preview
     [self.imageView endDisplay];
-    self.backView.image = nil; //libérer la mémoire de l'image
+    self.imageView.image = nil; //libérer la mémoire de l'image
     self.previewView.hidden = true;
 
     showPreview = false;
@@ -544,16 +544,17 @@ cycle de prise de vue
         [self.previewView slideToBottomWithDuration:0.2 completion:^(BOOL finished){}];
         
         // on récupère l'image éventuellement éditée dans l'UIImageView et on la transmet à envoiPhoto
-        [self.imageView saveEditedWithImage: self.backView.image completion : ^void(UIImage *finalImg){
-            [self envoiPhoto:finalImg];
+        //[self.imageView saveEditedWithImage: self.imageView.image completion : ^void(UIImage *finalImg){
+            //[self envoiPhoto:finalImg];
+        [self envoiPhoto: self.imageView.image];
             [self.imageView endDisplay];
-            self.backView.image = nil; //libération mémoire
+           // self.imageView.image = nil; //libération mémoire, supprimé pour l'instant car risque de libérer alors qu'utilisé
             [self photo:self];
-        }];
+        //}];
 
     }else{
         
-        [self envoiPhoto:self.backView.image];
+        [self envoiPhoto:self.imageView.image];
     }
 }
 
@@ -595,6 +596,9 @@ cycle de prise de vue
 - (IBAction) envoiMail:(id)sender{
     LOG
     if(FotomailUserDefault.defaults.nbImages == 0){ //normalement ne sera pas appellé puisque l'état visible du bouton est géré
+        // TOTO : supprimer dans version finale
+        UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"Fotomail" message:@"nbImages == 0" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alrt show];
         return;
     }
     [[self message] setText:@"Preparing mail..."]; //@"Préparation du mail..."
@@ -608,6 +612,9 @@ cycle de prise de vue
     if (![MFMailComposeViewController canSendMail]) {
         NSLog(@"Mail services are not available.");
         self.message.text = @"Mail services are not available"; //@"Fonction d'envoi de mail non disponible";
+        // TOTO : supprimer dans version finale, ouremplacer par alerte non deprecated
+        UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"Fotomail" message:@"Mail services are not available" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alrt show];
         return;
     }
     
@@ -703,11 +710,12 @@ cycle de prise de vue
     // et n'a donc pas pris le changement
     self.mailButton.hidden = (FotomailUserDefault.defaults.nbImages == 0);
     
+    [self updateMinZoomScaleForSize:self.view.bounds.size];
     //on tente une remise à jour de displayEditingView pour forcer un réaffichage à l'endroit
     //[self.displayEditingView setNeedsDisplay];
-    /*[self scrollViewDidZoom:self.scrollView];
-    [self.imageView setNeedsUpdateConstraints];
-    [self.scrollView setNeedsUpdateConstraints];*/
+//    [self scrollViewDidZoom:self.scrollView];
+//    [self.imageView setNeedsUpdateConstraints];
+//    [self.scrollView setNeedsUpdateConstraints];
 }
 
 

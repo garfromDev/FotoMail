@@ -12,7 +12,7 @@ import Foundation
 extension ViewController : EditingImageViewController {
     
     public func initView(with image: UIImage!, scale : CGFloat, offset : CGPoint, contentOffset: CGPoint, overPaths : [OverPath]) {
-        print("init view with image \(image) at scale \(image.scale)")
+        print("init view with image \(image) at scale \(image.scale) offset \(offset) contentOffset \(contentOffset) overPath \(overPaths.count)")
         // en arrière plan, la photo
         self.backgroundPseudoImageView.image = image
         self.backgroundPseudoImageView.offset = offset
@@ -31,9 +31,9 @@ extension ViewController : EditingImageViewController {
         print("editingRequested()")
         self.previewStackView.isHidden = true
         backgroundPseudoImageView.isHidden = false
-        backgroundPseudoImageView.setNeedsDisplay() //FIXME vérifier si vraiment nécessaire?
+        backgroundPseudoImageView.setNeedsDisplay() //vérifier si vraiment nécessaire? -> oui, ça l'est
         displayEditingView.isHidden = false
-        self.displayEditingView.setNeedsDisplay() //FIXME vérifier si vraiment nécessaire?
+        self.displayEditingView.setNeedsDisplay()
         
         print("scollview replaced by drawingImage View : \(displayEditingView.bounds)")
     }
@@ -42,11 +42,11 @@ extension ViewController : EditingImageViewController {
     // la vue de la scroll view signale que l'édition est terminée (l'utilisateur a levé le doigt)
     public func editingFinished(_ fromView:EditingImageView) {
         print("editingFinished() by view \(fromView.tag)")
+        //on réaffiche la scrollView et masque les vues de dessin
         self.previewStackView.isHidden = false
-        self.smallDrawingViews.isHidden = true
-//        self.displayEditingView.isHidden = true
-//        self.backgroundImageView.isHidden = true
-//        backgroundPseudoImageView.isHidden = true
+        self.backgroundPseudoImageView.isHidden = true
+        self.displayEditingView.isHidden = true
+
     }
     
 
@@ -73,6 +73,7 @@ extension ViewController : EditingImageViewController {
                            height:fabs(fromPoint.y - endPoint.y)).insetBy(dx: -thick, dy: -thick)
         // il faut agrandir le rectangle, sinon le dessin de la ligne sera clippé
         self.displayEditingView.overPaths = paths
-        self.displayEditingView.setNeedsDisplay(rect)
+//        self.displayEditingView.setNeedsDisplay(rect) //est-ce que on contraint trop la zone?
+        self.displayEditingView.setNeedsDisplay()
     }
 }

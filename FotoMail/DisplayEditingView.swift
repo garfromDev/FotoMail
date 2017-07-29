@@ -16,31 +16,19 @@ import UIKit
  L'EditingImageView contient une image haute résolution et dessinne dedans en tache de fond
  */
 @objc  class DisplayEditingView: UIView {
-    /// L'image à afficher
-    var drawingImage : UIImage!
-    /// l'image avant édition pour la fonction gomme
-    var initialImage : UIImage!
-    /// les requêtes de dessin de la ligne
-    var drawRequest : [ (from:CGPoint, to:CGPoint, rubber:Bool)] = []
+
     /// l'échelle de la scrollView où est affichée l'image d'origine
     var scale : CGFloat = 1.0
     /// l'offset de l'image à afficher par rapport à la frame
     var offset = CGPoint(x:0,y:0)
-    /// la couleur du fond, qui s'affiche autour de l'image si nécessaire
-    var bckgrndColor = UIColor.groupTableViewBackground
-    /// signale que la vue doit être mise à transparente
-    var initToBeDone : Bool = false
-    //var drawLayer : CGLayer!
+
     // le tableau des paths à dessiner, le dernier d'entre eux doit être complétété
     var overPaths : [OverPath] = []
     
-    var drawColor = UIColor.red
-    
-    private var strokeColor  = UIColor.clear
     
     /*
-     le délégué met la ligne dans une propriété de la vue et fait setNeedDisplayInRect
-     la vue dessine l'image back-up , la ligne par dessus son image, puis sauve le tout dans une back-up image
+     le délégué met les path dans une propriété de la vue et fait setNeedDisplayInRect
+     la vue dessine les path en couleur ou en transparent
      */
     
     override func draw(_ rect: CGRect) {

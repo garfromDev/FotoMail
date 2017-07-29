@@ -50,7 +50,9 @@
 @interface EditingImageView : UIImageView
 
 @property( weak) id<EditingImageViewController> delegate;
-@property( weak) UIImageView *backView;
+//@property( weak) UIImageView *backView;
+/// l'image avec le dessin non édité
+@property UIImage *originaleImage;
 
 /// le tableau des ajouts dessinés à rajouter par dessus l'image
 @property(nonatomic) NSMutableArray<OverPath *> *overPaths;

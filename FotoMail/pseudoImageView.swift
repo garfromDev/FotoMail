@@ -18,7 +18,7 @@ class PseudoImageView: UIView {
     
     override func draw(_ rect: CGRect) {
         let frm = self.frame
-        
+        print("PseudoImageView draw in rect \(rect)")
         //on remet le fond gris si il y a besoin d'un fond (quand l'image est plus petite avec un offset)
         if offset.x > 0 || offset.y > 0 {
             let r = UIBezierPath(rect: frm)

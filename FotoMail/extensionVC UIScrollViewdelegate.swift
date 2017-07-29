@@ -10,7 +10,9 @@ import UIKit
 
 extension ViewController : UIScrollViewDelegate {
     
+    
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        // principe : la imageView qui contient l'image est zoomée
         return self.imageView
     }
     
@@ -39,19 +41,30 @@ extension ViewController : UIScrollViewDelegate {
     
     func updateMinZoomScaleForSize(_ size: CGSize)
     {
-        print("updateMinZoomScaleForSize")
+        print("updateMinZoomScaleForSize  \(size)  imageViewBounds \(imageView.bounds) oldminscale \(scrollView.minimumZoomScale) oldscale \(scrollView.zoomScale)")
+        guard imageView.bounds.width > 0 && imageView.bounds.height > 0 else { return }
         let widthScale : CGFloat = size.width / imageView.bounds.width
         let heightScale : CGFloat = size.height / imageView.bounds.height
-        let minScale = min(widthScale, heightScale)        
+        let minScale = min(widthScale, heightScale)
+        var newScale = minScale
+        let oldMinScale = scrollView.minimumZoomScale
+        let currentScale = scrollView.zoomScale
+        // on ne conserve pas le niveau de zoom si c'est le premier calcul
+        if (oldMinScale > 0 && oldMinScale < 1 && currentScale < 1.0){
+            // on réajuste le niveau de zoom pour tenir compte de l'écart de taille et donc des nouvelles bornes de zoom
+            newScale = 1 - ( (1 - currentScale) / (1 - oldMinScale) ) * ( 1 - minScale)
+        }
+        
         scrollView.minimumZoomScale = minScale
-        scrollView.zoomScale = minScale
+        scrollView.zoomScale = newScale
+        print("did set minimumZoomScale : \(minScale)  zommScale : \(newScale)")
     }
     
     
     // to center correctlythe image when zoomed with one dimension less that scrollView size
      func updateConstraintsForSize(size: CGSize)
     {
-        print("update constraint imageView.frame : \(imageView.frame.size) scrollview.bounds \(scrollView.bounds.size)")
+        print("update constraint size : \(size) imageView.frame : \(imageView.frame.size) scrollview.bounds \(scrollView.bounds.size)")
         let yOffset = max(0, (size.height
             - previewTitreTextField.bounds.size.height
             - previewToolbar.bounds.size.height
@@ -67,9 +80,11 @@ extension ViewController : UIScrollViewDelegate {
         imageViewTrailingConstraint.constant = xOffset
 //        drawingViewLeadingContraint.constant = xOffset
 //        drawingViewTrailingConstraint.constant = xOffset
+        print("xOffset : \(xOffset)  yOffset : \(yOffset)")
         view.layoutIfNeeded()
     }
     
+    // TODO: voir si reellement utile
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print("viewWillTransition(to size: \(size)")
         updateConstraintsForSize(size: size)

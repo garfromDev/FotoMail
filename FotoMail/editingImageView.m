@@ -92,8 +92,7 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
     self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
     
     //réinitialiser l'image
-//    self.image = nil; //FIXME: pas besoin si normalement l'image est vide au début
-    
+    self.image = self.originaleImage; //en doublon quand appellé du viewCOntroller, mais utile quand appellé de undoEditing
 }
 
 
@@ -104,7 +103,7 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
     LOG
     //note : on ne peut pas libérer self.image, car il va être lu par le controleur pour utiliser l'image
     self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
-    self.image = nil;
+    //self.image = nil;
 }
 
 
@@ -146,12 +145,8 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
     OverPath *p = self.overPaths.lastObject;
     if(p.path.isEmpty){
         if(p.rubber){
-            CGContextRef context = UIGraphicsGetCurrentContext();
-            CGContextSetBlendMode(context, kCGBlendModeDestinationOut);
-            [UIColor.whiteColor setStroke];
             p.path.lineWidth = DEFAULT_RUBBER_THICKNESS;
         }else{
-            [p.drawColor setStroke];
             p.path.lineWidth = DEFAULT_THICKNESS;
         }
         p.path.lineJoinStyle = kCGLineJoinRound;
@@ -205,7 +200,7 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
     // on la dessine dans le smallContext en la mettant à l'échelle
     CGContextTranslateCTM(smallContext, -contentOffset.x, -contentOffset.y);
     CGContextScaleCTM(smallContext, scale, scale);
-    [self.backView.image drawAtPoint:CGPointZero];
+    [self.image drawAtPoint:CGPointZero];
 //    CGContextDrawLayerAtPoint(smallContext, CGPointZero, drawLayer);
     
     UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -241,7 +236,10 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
 
     if(isDrawing){
         // on génère l'image transparente avec les paths à superposer à l'image originale
-        self.image = [self createOverPathImage];
+        CGFloat zoomScale = scrollView.zoomScale;
+        scrollView.zoomScale = 1.0;
+        self.image = [self createEditedImage];
+        scrollView.zoomScale = zoomScale;
         isDrawing = false;
         [self.delegate editingFinished:self];
         delegateRequested = false;
@@ -250,12 +248,96 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
 }
 
 
+- (UIImage *) createEditedImage {
+    LOG
+    
+    // situation de départ , on a
+    // - image originelle
+    // - les paths
+    
+    // 1 créer une image à fond noir
+    NSLog(@"1 créer une image à fond noir");
+    NSAssert(self.originaleImage.size.width > 0 && self.originaleImage.size.height > 0, @"originale image est vide!");
+    UIGraphicsBeginImageContextWithOptions(self.originaleImage.size, YES, self.originaleImage.scale);
+    CGContextRef pathContext = UIGraphicsGetCurrentContext();
+    NSAssert(self.bounds.size.width == self.originaleImage.size.width, @"self.bounds n'est pas égale à originale image");
+    UIBezierPath *r = [UIBezierPath bezierPathWithRect:self.bounds]; //est-on sur que ce soit la même taille que originale image?
+    [UIColor.blackColor set];
+    [r stroke];
+    [r fill];
+    
+    //modification du système de coordonnées entre UIKit et CoreGraphic
+    CGContextTranslateCTM(pathContext, 0.0, self.originaleImage.size.height);
+    CGContextScaleCTM(pathContext, 1.0, -1.0);
+    
+    // 2 dessiner les path dans une image pathImage en couleur blanche, gomme en noire
+    for( OverPath *p in self.overPaths){
+        NSLog(@"drawing path into mask with rubber %@", p.rubber ? @"ON" : @"OFF");
+        if(!p.rubber){
+            [UIColor.whiteColor set];
+        }else{
+            [UIColor.blackColor set];
+        }
+        [p.path stroke];
+    }
+    
+    CGImageRef pathImage = CGBitmapContextCreateImage(pathContext);
+    NSAssert(pathImage != nil, @"création path image a échouée");
+    
+    // 3 créer un image masque profondeur 1 bit depuis cette image
+    NSLog(@"creating mask");
+    CGImageRef msq = CGImageMaskCreate( self.originaleImage.size.width,
+                                       self.originaleImage.size.height,
+                                       1,
+                                       CGImageGetBitsPerPixel(pathImage),
+                                       CGImageGetBytesPerRow(pathImage),
+                                       CGImageGetDataProvider(pathImage),
+                                       nil,
+                                       FALSE);
+    
+    UIGraphicsEndImageContext();
+    CGImageRelease(pathImage);
+    
+    // 4 dessiner les path rubber-off (en respectant leurs couleurs) dans l'image finale
+    UIGraphicsBeginImageContextWithOptions(self.originaleImage.size, YES, self.originaleImage.scale);
+    CGContextRef finalContext = UIGraphicsGetCurrentContext();
+    for( OverPath *p in self.overPaths){
+        NSLog(@"drawing path with rubber %@", p.rubber ? @"ON" : @"OFF");
+        if(!p.rubber){
+            [p.drawColor set];
+            [p.path stroke];
+        }
+    }
+    // 5 appliquer clipToMask
+    // il faut des valeurs de 1 (blanc) là où l'image originelle doit apparaitre
+    // il faut des valeurs de 0 (noir) là ou les path doivent apparaitres
+    NSLog(@"5 appliquer clipToMask");
+    CGContextClipToMask(finalContext,
+                        CGRectMake(0, 0,
+                                   self.originaleImage.size.width, self.originaleImage.size.height),
+                        msq);
+    
+    
+    // 6 dessiner le fond (image originelle)
+    NSLog(@"// 6 dessiner le fond (image originelle)");
+    UIGraphicsPushContext(finalContext);
+    [self.originaleImage drawAtPoint:CGPointZero];
+    UIGraphicsPopContext();
+    CGImageRelease(msq);
+    
+    NSLog(@"getting composite image...");
+    UIImage *finalImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return finalImg;
+}
+
+
 /// créee une image à partir de l'image originelle et des paths et la transmet à completion qui est appellée sur la main queue
 - (void) saveEditedWithImage: (UIImage *)originaleImg completion:(void(^)(UIImage *finalImg)) completion
 {
     LOG
     
-    
+    /*
     // situation de départ , on a
     // - image originelle
     // - les paths
@@ -325,11 +407,11 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
     [originaleImg drawAtPoint:CGPointZero];
     UIGraphicsPopContext();
     CGImageRelease(msq);
-    
+    */
     NSLog(@"getting composite image...");
-    __block UIImage *finalImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    NSLog(@"calling completinon");
+    __block UIImage *finalImg = [self image];
+    //UIGraphicsEndImageContext();
+    NSLog(@"calling completion");
     dispatch_async(dispatch_get_main_queue(), ^{
         completion(finalImg);
     });
@@ -346,18 +428,26 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
         delegateRequested = false;
         [self.delegate editingFinished:self];
     }
-    // on n'appelle pas endDisplay, car sinon il efface originaleImg
-    self.image = nil;
-    self.overPaths = [[NSMutableArray<OverPath*> alloc ] init];
-    [self prepareDisplay]; //reconstruit la CGLayer pour nouveau cycle
+
+    [self prepareDisplay]; //efface les path et remet l'image à originale image
 }
 
 
 - (UIImage *)createOverPathImage{
     // 1 création du contexte
     NSLog(@"1 créer une image transparente");
-    UIGraphicsBeginImageContextWithOptions(self.backView.image.size, NO, self.backView.image.scale);
-
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);
+    CGContextRef overPathContext = UIGraphicsGetCurrentContext();
+    NSAssert(overPathContext != nil, @"creation of overPath context failed in createOverPathImage");
+    
+    //mettre à l'échelle
+//    CGContextScaleCTM(overPathContext,
+//                      scrollView.bounds.size.width / self.backView.image.size.width ,
+//                      scrollView.bounds.size.height / self.backView.image.size.height);
+//    CGContextScaleCTM(overPathContext,
+//                      self.backView.image.size.width / scrollView.bounds.size.width  ,
+//                      self.backView.image.size.height / scrollView.bounds.size.height );
+    
     // 2 dessiner les path
     for( OverPath *p in self.overPaths){
         NSLog(@"drawing path into image with rubber %@", p.rubber ? @"ON" : @"OFF");
@@ -371,6 +461,7 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
     
     // 3 récupérer l'image
     UIImage *overPathImg =  UIGraphicsGetImageFromCurrentImageContext();
+    NSLog(@"createOverPathImage size : %f %f", overPathImg.size.width, overPathImg.size.height);
     UIGraphicsEndImageContext();
     return overPathImg;
 }

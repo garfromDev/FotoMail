@@ -16,7 +16,8 @@
 {
     LOG
     UIImage *stampedImg;
-    UIGraphicsBeginImageContext(self.size);
+    //UIGraphicsBeginImageContext(self.size);
+    UIGraphicsBeginImageContextWithOptions(self.size, YES, 1.0);
     [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
     NSDate *now = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
