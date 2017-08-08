@@ -13,21 +13,6 @@
 #import "float.h"
 
 
-@implementation OverPath
--(id) initWithDrawColor: (UIColor *)color rubber: (BOOL)rubber
-{
-    self = [super init];
-    if(self){
-        self.path = [[UIBezierPath alloc] init];
-        self.drawColor = color;
-        self.rubber = rubber;
-    }
-    return self;
-}
-
-@end
-
-
 /**
  Cette classe implémente un UIImageView incorporé dans un UISCrollView (qui est sa supervue)
  qui permet de dessiner en rouge par dessus
@@ -92,7 +77,7 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
     self.overPaths = [[NSMutableArray<OverPath*> alloc] init];
     
     //réinitialiser l'image
-    self.image = self.originaleImage; //en doublon quand appellé du viewCOntroller, mais utile quand appellé de undoEditing
+    self.image = self.originaleImage; //en doublon quand appellé du viewController, mais utile quand appellé de undoEditing
 }
 
 
@@ -137,12 +122,10 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
     }
     isDrawing = true;
 
-    //on met à jour la grande image en tache de fond
-    CGPoint point1 = [touch previousLocationInView:self];
-    CGPoint point2 = [touch locationInView:self];
     
-    // 1 dessin dans le path (la couleur est initialisée dans le prepareDrawing
+    // 1 dessin dans le path (la couleur est initialisée dans le prepareDrawing)
     OverPath *p = self.overPaths.lastObject;
+    
     if(p.path.isEmpty){
         if(p.rubber){
             p.path.lineWidth = DEFAULT_RUBBER_THICKNESS;
@@ -151,9 +134,11 @@ __weak UIScrollView *scrollView ; //référence sur la scrollview fournie par le
         }
         p.path.lineJoinStyle = kCGLineJoinRound;
         p.path.lineCapStyle = kCGLineCapRound;
+        CGPoint point1 = [touch previousLocationInView:self];
         [ p.path moveToPoint:point1];
     }
     
+    CGPoint point2 = [touch locationInView:self];
     [p.path addLineToPoint:point2];
     
     //on dessine dans la scroll view, donc les coordonnées sont bonnes pour la bigImage

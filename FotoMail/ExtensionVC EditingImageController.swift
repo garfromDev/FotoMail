@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 // implentation of the protocol EditingImageViewController to work with the EditingImageView
 extension ViewController : EditingImageViewController {
     
@@ -64,16 +64,17 @@ extension ViewController : EditingImageViewController {
         //print("updateDisplay(with image:")
         // l'utilisation d'une UIimageView avec self.drawingImageView.image = image provoque des carrés noir dans les marges
         //        image.draw(at: CGPoint(x: 0, y: 0)) //-> marche pas, image non affiché,  pas le bon contexte, il faut être dans drawRect:
-        let fromPoint = touch.previousLocation(in: self.displayEditingView)
-        let endPoint = touch.location(in: self.displayEditingView)
-        let thick = max(CGFloat(DEFAULT_THICKNESS) * self.displayEditingView.scale, 10.0)
-        let rect = CGRect( x:min(fromPoint.x, endPoint.x),
-                           y:min(fromPoint.y, endPoint.y),
-                           width:fabs(fromPoint.x - endPoint.x),
-                           height:fabs(fromPoint.y - endPoint.y)).insetBy(dx: -thick, dy: -thick)
-        // il faut agrandir le rectangle, sinon le dessin de la ligne sera clippé
+//        let fromPoint = touch.previousLocation(in: self.displayEditingView)
+//        let endPoint = touch.location(in: self.displayEditingView)
+//        let thick = max(CGFloat(DEFAULT_THICKNESS) * self.displayEditingView.scale, 10.0)
+//        let rect = CGRect( x:min(fromPoint.x, endPoint.x),
+//                           y:min(fromPoint.y, endPoint.y),
+//                           width:fabs(fromPoint.x - endPoint.x),
+//                           height:fabs(fromPoint.y - endPoint.y)).insetBy(dx: -thick, dy: -thick)
+//        // il faut agrandir le rectangle, sinon le dessin de la ligne sera clippé
         self.displayEditingView.overPaths = paths
 //        self.displayEditingView.setNeedsDisplay(rect) //est-ce que on contraint trop la zone?
         self.displayEditingView.setNeedsDisplay()
     }
 }
+ */

@@ -23,8 +23,10 @@
 #import "FotoMail-Bridging-Header.h"
 
 
-@class DisplayEditingView;
-@class PseudoImageView; // on ne peut pas importer FotoMail-Swift.h dans un .h, seulement dans .m, voir https://stackoverflow.com/questions/26328034/importing-project-swift-h-into-a-objective-c-class-file-not-found
+@class TransparentPathView;
+@class EditingSupportImageView;
+@class FotoMailPathManager;
+// on ne peut pas importer FotoMail-Swift.h dans un .h, seulement dans .m, voir https://stackoverflow.com/questions/26328034/importing-project-swift-h-into-a-objective-c-class-file-not-found
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,  MFMailComposeViewControllerDelegate>
 // écran de fond
@@ -57,20 +59,10 @@
     @property ( nonatomic) IBOutlet UIView *previewView;
 /// la scrollview
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
-
-/// l'image transparente avec les paths surimprimé dans la scroll View, c'est elle qui génère les chemins
-@property (weak, nonatomic) IBOutlet EditingImageView *imageView;
-
-
-
-// l'image qui s'affiche pendant l'édition (sous partie de l'image totale)
-@property (weak, nonatomic) IBOutlet DisplayEditingView *displayEditingView;
-/// l'image de fond pendent l'édition
-@property (weak, nonatomic) IBOutlet PseudoImageView *backgroundPseudoImageView;
-/// le regroupement des vues affichant la petite image pendant l'édition
-@property (weak, nonatomic) IBOutlet UIView *smallDrawingViews;
-
+/// l'image transparente avec les paths surimprimé devant la scroll View
+@property (weak, nonatomic) IBOutlet TransparentPathView *clrView;
+/// l'image contenu dans la scrollView, c'est elle qui génère les path
+@property (weak, nonatomic) IBOutlet EditingSupportImageView *imageView;
 
 
 //les contraintes de imageView à l'intérieur de la scrollView
@@ -79,19 +71,15 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewLeadingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTrailingConstraint;
 
-//inutilisée
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *drawingViewBottomConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *drawingViewTrailingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *drawingViewLeadingContraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *drawingViewTopConstraint;
-
+// les menu de la preview
 
 @property (weak, nonatomic) IBOutlet UITextField *previewTitreTextField;
 @property (weak, nonatomic) IBOutlet UIToolbar *previewToolbar;
 @property (weak, nonatomic) IBOutlet UIButton *rubberButton;
 @property (weak, nonatomic) IBOutlet UIStackView *previewStackView;
 
-
+/// le pathManager qui stocke les paths (annotations graphiques)
+@property FotoMailPathManager *pathManager;
 
 @end
 

@@ -7,21 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PathMixer.h"
 
 /**
  Cette classe implémente un UIImageView incorporé dans un UISCrollView
  qui permet de dessiner en rouge par dessus
  */
 @class EditingImageView;
-
+/*
 // Déclaration d'un type regroupant le path et sa couleur
 @interface OverPath : NSObject
 @property(strong, nonatomic) UIBezierPath *path;
 @property(strong, nonatomic) UIColor *drawColor;
 @property BOOL rubber;
 @end
-
+*/
 // protocol that mustbe respected by the delegate
 @protocol EditingImageViewController
 

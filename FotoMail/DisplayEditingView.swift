@@ -36,6 +36,7 @@ import UIKit
         let context = UIGraphicsGetCurrentContext()
         context?.scaleBy(x: self.scale, y: self.scale)
         context?.translateBy(x: -self.offset.x, y: -self.offset.y)
+        
         for p in self.overPaths {
             
             if p.rubber {

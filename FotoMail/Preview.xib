@@ -10,13 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
-                <outlet property="backgroundPseudoImageView" destination="XnR-Sd-YQk" id="7oL-cD-CeQ"/>
-                <outlet property="displayEditingView" destination="Zwf-P7-NnO" id="qxt-Wi-oSY"/>
-                <outlet property="drawingViewBottomConstraint" destination="kgg-oO-hg4" id="rqB-s8-q1T"/>
-                <outlet property="drawingViewLeadingContraint" destination="bqU-cf-xot" id="IC2-xn-vkl"/>
-                <outlet property="drawingViewTopConstraint" destination="LQJ-Oh-ZSa" id="uRZ-BI-y4h"/>
-                <outlet property="drawingViewTrailingConstraint" destination="d16-a1-DwW" id="VsB-0h-glA"/>
-                <outlet property="imageView" destination="rjq-sC-eSG" id="tAh-Nl-9dY"/>
+                <outlet property="clrView" destination="ccg-cP-dV6" id="6eP-Yk-6mV"/>
+                <outlet property="imageView" destination="rjq-sC-eSG" id="GGf-Bv-YzA"/>
                 <outlet property="imageViewBottomConstraint" destination="yDo-FL-ryq" id="bG1-7t-szv"/>
                 <outlet property="imageViewLeadingConstraint" destination="Bku-fd-vRL" id="5wH-Ps-NGe"/>
                 <outlet property="imageViewTopConstraint" destination="ozP-pu-dfC" id="Suu-Px-Tnw"/>
@@ -27,7 +22,6 @@
                 <outlet property="previewView" destination="iN0-l3-epB" id="aaw-gn-GpB"/>
                 <outlet property="rubberButton" destination="4yA-e3-imV" id="gQi-Ei-h0B"/>
                 <outlet property="scrollView" destination="Pj9-Vj-3KM" id="YQP-iE-yaO"/>
-                <outlet property="smallDrawingViews" destination="Ecs-kw-tTM" id="IxK-ha-HFn"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -46,51 +40,10 @@
                     <rect key="frame" x="8" y="12" width="359" height="647"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </view>
-                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-kw-tTM" userLabel="ContainerForDrawingView">
-                    <rect key="frame" x="8" y="42" width="359" height="573"/>
-                    <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XnR-Sd-YQk" customClass="PseudoImageView" customModule="FotoMail" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
-                        </view>
-                        <view hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwf-P7-NnO" customClass="DisplayEditingView" customModule="FotoMail" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="359" height="573"/>
-                            <accessibility key="accessibilityConfiguration">
-                                <accessibilityTraits key="traits" notEnabled="YES"/>
-                            </accessibility>
-                            <attributedString key="userComments">
-                                <fragment content="Il faut opaque à false, clearGraphicContext à true">
-                                    <attributes>
-                                        <font key="NSFont" metaFont="smallSystem"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                            </attributedString>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="0.56323386659999997" blue="0.061179050659999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="Zwf-P7-NnO" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="1H4-xj-NRl"/>
-                        <constraint firstAttribute="trailing" secondItem="Zwf-P7-NnO" secondAttribute="trailing" id="87O-yo-fGe"/>
-                        <constraint firstItem="XnR-Sd-YQk" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="LQJ-Oh-ZSa"/>
-                        <constraint firstItem="XnR-Sd-YQk" firstAttribute="leading" secondItem="Ecs-kw-tTM" secondAttribute="leading" id="bqU-cf-xot"/>
-                        <constraint firstItem="Zwf-P7-NnO" firstAttribute="top" secondItem="Ecs-kw-tTM" secondAttribute="top" id="cx8-Cy-jQa"/>
-                        <constraint firstAttribute="trailing" secondItem="XnR-Sd-YQk" secondAttribute="trailing" id="d16-a1-DwW"/>
-                        <constraint firstAttribute="bottom" secondItem="Zwf-P7-NnO" secondAttribute="bottom" id="i0Y-FS-6Hw"/>
-                        <constraint firstAttribute="bottom" secondItem="XnR-Sd-YQk" secondAttribute="bottom" id="kgg-oO-hg4"/>
-                    </constraints>
-                    <attributedString key="userComments">
-                        <fragment content="Ne pas mettre en Hidden, le viewController gère les vues en dessous">
-                            <attributes>
-                                <font key="NSFont" metaFont="smallSystem"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DmX-co-DyW">
                     <rect key="frame" x="8" y="12" width="359" height="647"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" tag="2" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titre" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-bX-8Xg" customClass="TintTextField" customModule="FotoMail" customModuleProvider="target">
+                        <textField opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titre" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-bX-8Xg" customClass="TintTextField" customModule="FotoMail" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <nil key="textColor"/>
@@ -102,10 +55,10 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" minimumZoomScale="0.10000000000000001" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-Vj-3KM">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" minimumZoomScale="0.10000000000000001" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-Vj-3KM">
                             <rect key="frame" x="0.0" y="30" width="359" height="573"/>
                             <subviews>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-sC-eSG" customClass="EditingImageView">
+                                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-sC-eSG" customClass="EditingSupportImageView" customModule="FotoMail" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="158" width="359" height="128"/>
                                 </imageView>
                             </subviews>
@@ -154,27 +107,35 @@
                         </toolbar>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="Pj9-Vj-3KM" firstAttribute="bottom" secondItem="5Pb-4m-kv4" secondAttribute="top" id="Au6-5G-Gjz"/>
                         <constraint firstItem="5Pb-4m-kv4" firstAttribute="width" secondItem="DmX-co-DyW" secondAttribute="width" id="GSo-M9-Csr"/>
+                        <constraint firstItem="Pj9-Vj-3KM" firstAttribute="top" secondItem="bLW-bX-8Xg" secondAttribute="bottom" id="ssy-0h-h7S"/>
                     </constraints>
                 </stackView>
+                <view opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccg-cP-dV6" userLabel="clrView" customClass="TransparentPathView" customModule="FotoMail" customModuleProvider="target">
+                    <rect key="frame" x="8" y="42" width="359" height="573"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="Ecs-kw-tTM" firstAttribute="width" secondItem="Pj9-Vj-3KM" secondAttribute="width" id="1FH-0i-62C"/>
                 <constraint firstItem="LoE-t8-XGf" firstAttribute="trailing" secondItem="Qfl-n9-AWR" secondAttribute="trailing" constant="-4" id="2c6-bT-1ZC"/>
                 <constraint firstAttribute="bottom" secondItem="Qfl-n9-AWR" secondAttribute="bottom" constant="4" id="988-pn-xqC"/>
+                <constraint firstItem="ccg-cP-dV6" firstAttribute="bottom" secondItem="Pj9-Vj-3KM" secondAttribute="bottom" id="B8y-d0-O7N"/>
                 <constraint firstItem="LoE-t8-XGf" firstAttribute="bottom" secondItem="Qfl-n9-AWR" secondAttribute="bottom" constant="-4" id="BCo-je-Nnp"/>
                 <constraint firstItem="Qfl-n9-AWR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="CGp-IQ-oEs">
                     <variation key="heightClass=compact" constant="4"/>
                 </constraint>
-                <constraint firstItem="Ecs-kw-tTM" firstAttribute="centerY" secondItem="Pj9-Vj-3KM" secondAttribute="centerY" id="E7o-oE-tf1"/>
-                <constraint firstItem="Ecs-kw-tTM" firstAttribute="centerX" secondItem="Pj9-Vj-3KM" secondAttribute="centerX" id="GIC-2N-put"/>
+                <constraint firstItem="ccg-cP-dV6" firstAttribute="trailing" secondItem="Pj9-Vj-3KM" secondAttribute="trailing" id="EBC-Ro-46w"/>
+                <constraint firstItem="ccg-cP-dV6" firstAttribute="leading" secondItem="Pj9-Vj-3KM" secondAttribute="leading" id="Hft-aF-FQd"/>
                 <constraint firstAttribute="trailing" secondItem="Qfl-n9-AWR" secondAttribute="trailing" constant="4" id="IKH-7L-Wum"/>
                 <constraint firstItem="DmX-co-DyW" firstAttribute="width" secondItem="Qfl-n9-AWR" secondAttribute="width" constant="-8" id="MLk-1p-vbE"/>
+                <constraint firstItem="ccg-cP-dV6" firstAttribute="top" secondItem="Pj9-Vj-3KM" secondAttribute="top" id="Oyx-CS-NfO"/>
                 <constraint firstItem="DmX-co-DyW" firstAttribute="centerX" secondItem="Qfl-n9-AWR" secondAttribute="centerX" id="eS9-iQ-0gN"/>
                 <constraint firstItem="Qfl-n9-AWR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="kxu-kD-gyt"/>
-                <constraint firstItem="Ecs-kw-tTM" firstAttribute="height" secondItem="Pj9-Vj-3KM" secondAttribute="height" id="qdW-KT-AV3"/>
                 <constraint firstItem="DmX-co-DyW" firstAttribute="height" secondItem="Qfl-n9-AWR" secondAttribute="height" constant="-8" id="rRV-fc-VZm"/>
                 <constraint firstItem="LoE-t8-XGf" firstAttribute="top" secondItem="Qfl-n9-AWR" secondAttribute="top" constant="4" id="usL-0s-2gF"/>
                 <constraint firstItem="DmX-co-DyW" firstAttribute="centerY" secondItem="Qfl-n9-AWR" secondAttribute="centerY" id="wWI-ef-h0F"/>

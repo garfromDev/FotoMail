@@ -17,8 +17,9 @@
  0.6 build 1 : ajout d'un mode simulateur pour réaliser les screenshots appStore
  0.7 build 1 : passé l'app en universal, ajouté vérification disonibilité mode macro, ajouté revue appStore, passé tout en anglais
  1.0 build 2 : pour release AppStore
+  SORTIE APPSTORE
+ 1.2 build 3 : ajout gomme, pour flightTest
  
- SORTIE APPSTORE
  
  A faire après :
  corriger bug de la torche système non disponible quand Fotomail est lancée
@@ -28,7 +29,7 @@
  ajouter choix couleur pinceaux
  faire passer la vue en edition sous la barre d'outil et le titre (translucide)
  V1.3
- ajouter loupe de réglage mise au point
+ ajouter loupe = zoom numérique en macro
  V1.4
  ajouter localization textes
  v1.5
@@ -110,8 +111,7 @@ cycle de prise de vue
     
     /// indique que l'écran de prévisualisation devra être affiché
     BOOL preview;
-    /// le mode gomme
-    BOOL rubberMode;
+
 }
 
 
@@ -146,7 +146,12 @@ cycle de prise de vue
     // configure the scrollView to avoid scrolling when drawing
     [self.scrollView configureFor2FingersScroll];
     [self.view addSubview:self.previewView];
-    self.imageView.delegate = self;
+    
+    //Le pathManager travaille avec EditingSUpportImageView et TransparentPathView pour afficher les annotations devant l'image
+    self.pathManager = [[FotoMailPathManager alloc] init];
+    self.pathManager.controller = self; //en tant que PathDisplayer
+    self.imageView.delegate = self.pathManager; //en tant que pathManager
+    self.clrView.delegate = self; //en tant que pathProvider
     
     //on s'abonne aux notification des champs de texte pour mettre à jour l'affichage quand le titre a été édité
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(titleDidEditing:) name:UITextFieldTextDidEndEditingNotification  object:self.titre];
@@ -157,9 +162,6 @@ cycle de prise de vue
     //reste affiché pour screenshot
     self.flashMode.hidden = ![ UIImagePickerController isFlashAvailableForCameraDevice:UIImagePickerControllerCameraDeviceRear];
 #endif
-    
-    //TODO: voir comment faire proprement
-    self.imageView.drawingColor = UIColor.redColor;
     
     // démarage du 1er cycle
     [self preparePhoto];
@@ -434,7 +436,6 @@ cycle de prise de vue
         [self.scrollView setZoomScale:1.0];
         //[self.scrollView setMinimumZoomScale:1.0]; // pour forcer le calcul à revenir au zoom minimum
         [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-        self.imageView.originaleImage = img;
         self.imageView.image = img;
         //le prepareDisplay recopiera originale Image dans image (marche pas)
         [FotomailUserDefault.defaults prepareUndo];
@@ -444,7 +445,6 @@ cycle de prise de vue
 
         //on anime l'animation de la preview
             [self.previewView slideFromBottomWithBouncing:true duration:0.5 completion:^(BOOL finished) {
-                [[self imageView] prepareDisplay];
                 //on règle le niveau de zoom pour afficher l'image en entier
                 [self updateMinZoomScaleForSize:self.previewView.frame.size];
                 [self scrollViewDidZoom:self.scrollView]; //nécessaire?
@@ -463,8 +463,9 @@ cycle de prise de vue
 {   // l'utilisateur a annulé la prise de photo, on masque l'aperçu et on réaffiche l'appareil photo
     NSLog(@"cancel appuyé dans imagePicker");
     [FotomailUserDefault.defaults commitUndo]; //restaure le titre avant preview
-    [self.imageView endDisplay];
+    //[self.imageView endDisplay];
     self.imageView.image = nil; //libérer la mémoire de l'image
+    [self.pathManager clear];
     self.previewView.hidden = true;
 
     showPreview = false;
@@ -523,10 +524,10 @@ cycle de prise de vue
 
 -(IBAction)rubberModeChange:(id)sender{
     UIButton *bouton = (UIButton *)sender;
-    rubberMode = !rubberMode;
+    BOOL rubberMode = !bouton.isSelected;
     bouton.selected = rubberMode;
-    self.imageView.rubberON = rubberMode;
-    self.imageView.drawingColor = rubberMode ? UIColor.clearColor : UIColor.redColor; //TODO: remplacer par choix couleur approprié
+    self.pathManager.rubberMode = rubberMode;
+    self.pathManager.drawColor = rubberMode ? UIColor.clearColor : UIColor.redColor; //TODO: remplacer par choix couleur approprié
 }
 
 
@@ -544,18 +545,17 @@ cycle de prise de vue
         [self.previewView slideToBottomWithDuration:0.2 completion:^(BOOL finished){}];
         
         // on récupère l'image éventuellement éditée dans l'UIImageView et on la transmet à envoiPhoto
-        //[self.imageView saveEditedWithImage: self.imageView.image completion : ^void(UIImage *finalImg){
-            //[self envoiPhoto:finalImg];
-        [self envoiPhoto: self.imageView.image];
-            [self.imageView endDisplay];
-           // self.imageView.image = nil; //libération mémoire, supprimé pour l'instant car risque de libérer alors qu'utilisé
-            [self photo:self];
-        //}];
+        [PathMixer saveEditedWithImage:self.imageView.image paths:self.pathManager.paths completion:^(UIImage *finalImg) {
+            [self envoiPhoto:finalImg];
+        }];
 
-    }else{
+        [self.pathManager clear];
         
+    }else{ //pas de preview
         [self envoiPhoto:self.imageView.image];
     }
+    
+    self.imageView.image = nil; //libération mémoire, supprimé pour l'instant car risque de libérer alors qu'utilisé
 }
 
 
@@ -710,12 +710,8 @@ cycle de prise de vue
     // et n'a donc pas pris le changement
     self.mailButton.hidden = (FotomailUserDefault.defaults.nbImages == 0);
     
-    [self updateMinZoomScaleForSize:self.view.bounds.size];
-    //on tente une remise à jour de displayEditingView pour forcer un réaffichage à l'endroit
-    //[self.displayEditingView setNeedsDisplay];
-//    [self scrollViewDidZoom:self.scrollView];
-//    [self.imageView setNeedsUpdateConstraints];
-//    [self.scrollView setNeedsUpdateConstraints];
+    [self updateMinZoomScaleForSize:self.scrollView.bounds.size];
+
 }
 
 

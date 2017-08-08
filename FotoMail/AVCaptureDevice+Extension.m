@@ -101,7 +101,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
     cameraLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [view.layer addSublayer:cameraLayer];
     dispatch_async([self sessionQueue],  ^{ //les appels à session sont bloquants
-        [captureSesion setSessionPreset:AVCaptureSessionPresetMedium]; //FIXME pour réduire la conso mémoire
+        [captureSesion setSessionPreset:AVCaptureSessionPresetPhoto]; //FIXME pour réduire la conso mémoire
         [captureSesion startRunning];
     });
     

@@ -11,7 +11,6 @@
 		300D8A061D361B18003EE973 /* Overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300D8A051D361B18003EE973 /* Overlay.xib */; };
 		301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */; };
 		3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */; };
-		3019271D1D46363F00C8E3CF /* editingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3019271C1D46363E00C8E3CF /* editingImageView.m */; };
 		302059C31D66ECD700B47988 /* ColoredPlaceHolderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */; };
 		302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
 		302662B71E087343003D80E9 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302662B61E087343003D80E9 /* Settings.storyboard */; };
@@ -25,10 +24,11 @@
 		3036FBEA1D29351F004036D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3036FBE81D29351F004036D6 /* LaunchScreen.storyboard */; };
 		3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBF41D29351F004036D6 /* FotoMailTests.m */; };
 		3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */; };
+		30580C3A1F37174F002A4FC8 /* EditingSupportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30580C391F37174F002A4FC8 /* EditingSupportImageView.swift */; };
 		305F5B291E09AA5D00421A73 /* RecipientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */; };
+		306AB0E71F384A7E00CF238F /* extensionVC+PathDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306AB0E61F384A7E00CF238F /* extensionVC+PathDisplayer.swift */; };
 		306F07631E1D852F00D3DD2C /* RoundImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */; };
 		306F78B51D610A7700634C5B /* TitleUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 306F78B41D610A7700634C5B /* TitleUITextField.m */; };
-		306F78BE1D6365D600634C5B /* ExtensionVC EditingImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F78BD1D6365D600634C5B /* ExtensionVC EditingImageController.swift */; };
 		307182EB1E0730580032BBDB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307182EA1E0730580032BBDB /* SettingsViewController.swift */; };
 		307E7DC01E3CE28900CAA001 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */; };
@@ -44,7 +44,6 @@
 		3092D8CD1EBCF832004F93D3 /* UIImage+isEqualToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */; };
 		3092D8CF1EBE61A2004F93D3 /* CGrect+initWith2Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */; };
 		3093CC1C1E41291E00FFEEFA /* FotoMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBFF1D29351F004036D6 /* FotoMailUITests.m */; };
-		30964AF71EC0BF8400FCE165 /* BackgroundDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30964AF61EC0BF8400FCE165 /* BackgroundDrawingView.swift */; };
 		309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */; };
 		30A836AF1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */; };
 		30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */; };
@@ -52,14 +51,17 @@
 		30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */; };
 		30B16F671E0B320900980161 /* Recipients_CNContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F661E0B320900980161 /* Recipients_CNContactPickerDelegate.swift */; };
 		30B3F4731E8C465800881E82 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
-		30BA40121EE88B8A00ED368F /* pseudoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BA40111EE88B8A00ED368F /* pseudoImageView.swift */; };
+		30B4277F1F384DAF0025034F /* FotomailPathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B4277E1F384DAF0025034F /* FotomailPathManager.swift */; };
+		30B427811F384FC40025034F /* extensionVC+PathProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B427801F384FC40025034F /* extensionVC+PathProvider.swift */; };
+		30B427841F3858350025034F /* PathMixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B427831F3858350025034F /* PathMixer.m */; };
+		30B427871F385EFE0025034F /* OverPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B427861F385EFE0025034F /* OverPath.m */; };
+		30B427891F3864370025034F /* TransparentPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B427881F3864370025034F /* TransparentPathView.swift */; };
 		30C084F41E74A29C004BA873 /* UIImage + createImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */; };
 		30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */; };
 		30E2A2D11E2023BF00A18AD4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2D01E2023BF00A18AD4 /* Reachability.m */; };
 		30E2A2D31E20246800A18AD4 /* ReachabilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2D21E20246800A18AD4 /* ReachabilityExtension.swift */; };
 		30E2A2D51E2034CC00A18AD4 /* Extension_NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2D41E2034CC00A18AD4 /* Extension_NSBundle.swift */; };
 		30EFF5121DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EFF5111DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift */; };
-		30EFF5141DF15336005E23C2 /* DisplayEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EFF5131DF15336005E23C2 /* DisplayEditingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,8 +88,6 @@
 		301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extensionVC UIScrollViewdelegate.swift"; sourceTree = "<group>"; };
 		301927181D42BCE500C8E3CF /* UIImage+timeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+timeStamp.h"; sourceTree = "<group>"; };
 		301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+timeStamp.m"; sourceTree = "<group>"; };
-		3019271B1D46363E00C8E3CF /* editingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editingImageView.h; sourceTree = "<group>"; };
-		3019271C1D46363E00C8E3CF /* editingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editingImageView.m; sourceTree = "<group>"; };
 		302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredPlaceHolderTextField.swift; sourceTree = "<group>"; };
 		302059C41D6786F900B47988 /* UIVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIVIewExtension.swift; path = ../../maxouf14/maxouf14/UIVIewExtension.swift; sourceTree = "<group>"; };
 		302662B61E087343003D80E9 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -112,11 +112,12 @@
 		303E6B171D6EC9150008CC51 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		3052474A1D48D739003FB600 /* TitleTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleTextFieldDelegate.h; sourceTree = "<group>"; };
 		3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTextFieldDelegate.m; sourceTree = "<group>"; };
+		30580C391F37174F002A4FC8 /* EditingSupportImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditingSupportImageView.swift; path = ../../tests/testScrollViewPlusTransparent/testScrollViewPlusTransparent/EditingSupportImageView.swift; sourceTree = "<group>"; };
 		305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipientsTableViewController.swift; sourceTree = "<group>"; };
+		306AB0E61F384A7E00CF238F /* extensionVC+PathDisplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extensionVC+PathDisplayer.swift"; sourceTree = "<group>"; };
 		306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageTableViewCell.swift; sourceTree = "<group>"; };
 		306F78B31D610A7700634C5B /* TitleUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleUITextField.h; sourceTree = "<group>"; };
 		306F78B41D610A7700634C5B /* TitleUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleUITextField.m; sourceTree = "<group>"; };
-		306F78BD1D6365D600634C5B /* ExtensionVC EditingImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtensionVC EditingImageController.swift"; sourceTree = "<group>"; };
 		307182EA1E0730580032BBDB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		308F7EBE1E4F461C007BCD5B /* AVCaptureDevice+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVCaptureDevice+Extension.h"; sourceTree = "<group>"; };
 		308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+Extension.m"; sourceTree = "<group>"; };
@@ -131,13 +132,18 @@
 		3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageEraseTests.swift; path = ../UIImageEraseTests.swift; sourceTree = "<group>"; };
 		3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+isEqualToImage.swift"; sourceTree = "<group>"; };
 		3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGrect+initWith2Points.swift"; sourceTree = "<group>"; };
-		30964AF61EC0BF8400FCE165 /* BackgroundDrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundDrawingView.swift; sourceTree = "<group>"; };
 		30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController + YesNoAlertViewController.swift"; sourceTree = "<group>"; };
 		30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_DataSource.swift; sourceTree = "<group>"; };
 		30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_TextFieldDelegate.swift; sourceTree = "<group>"; };
 		30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailEditableTableViewCell.swift; sourceTree = "<group>"; };
 		30B16F661E0B320900980161 /* Recipients_CNContactPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_CNContactPickerDelegate.swift; sourceTree = "<group>"; };
-		30BA40111EE88B8A00ED368F /* pseudoImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pseudoImageView.swift; sourceTree = "<group>"; };
+		30B4277E1F384DAF0025034F /* FotomailPathManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FotomailPathManager.swift; sourceTree = "<group>"; };
+		30B427801F384FC40025034F /* extensionVC+PathProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extensionVC+PathProvider.swift"; sourceTree = "<group>"; };
+		30B427821F3858350025034F /* PathMixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathMixer.h; sourceTree = "<group>"; };
+		30B427831F3858350025034F /* PathMixer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathMixer.m; sourceTree = "<group>"; };
+		30B427851F385EFE0025034F /* OverPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverPath.h; sourceTree = "<group>"; };
+		30B427861F385EFE0025034F /* OverPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverPath.m; sourceTree = "<group>"; };
+		30B427881F3864370025034F /* TransparentPathView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentPathView.swift; sourceTree = "<group>"; };
 		30C084F21E74A29C004BA873 /* UIImage + createImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage + createImageWithColor.h"; sourceTree = "<group>"; };
 		30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage + createImageWithColor.m"; sourceTree = "<group>"; };
 		30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
@@ -146,7 +152,6 @@
 		30E2A2D21E20246800A18AD4 /* ReachabilityExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityExtension.swift; sourceTree = "<group>"; };
 		30E2A2D41E2034CC00A18AD4 /* Extension_NSBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension_NSBundle.swift; sourceTree = "<group>"; };
 		30EFF5111DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension AVCaptureVideoOrientation.swift"; sourceTree = "<group>"; };
-		30EFF5131DF15336005E23C2 /* DisplayEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayEditingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,17 +275,14 @@
 				302662B61E087343003D80E9 /* Settings.storyboard */,
 				30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */,
 				302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */,
-				3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */,
-				30EFF5131DF15336005E23C2 /* DisplayEditingView.swift */,
-				30964AF61EC0BF8400FCE165 /* BackgroundDrawingView.swift */,
 				306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */,
-				3019271B1D46363E00C8E3CF /* editingImageView.h */,
-				3019271C1D46363E00C8E3CF /* editingImageView.m */,
+				3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */,
+				30580C391F37174F002A4FC8 /* EditingSupportImageView.swift */,
+				30B427881F3864370025034F /* TransparentPathView.swift */,
 				3052474A1D48D739003FB600 /* TitleTextFieldDelegate.h */,
 				3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */,
 				306F78B31D610A7700634C5B /* TitleUITextField.h */,
 				306F78B41D610A7700634C5B /* TitleUITextField.m */,
-				30BA40111EE88B8A00ED368F /* pseudoImageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -315,7 +317,8 @@
 				3036FBE01D29351F004036D6 /* ViewController.h */,
 				3036FBE11D29351F004036D6 /* ViewController.m */,
 				301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */,
-				306F78BD1D6365D600634C5B /* ExtensionVC EditingImageController.swift */,
+				306AB0E61F384A7E00CF238F /* extensionVC+PathDisplayer.swift */,
+				30B427801F384FC40025034F /* extensionVC+PathProvider.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -336,6 +339,11 @@
 			isa = PBXGroup;
 			children = (
 				303E6B171D6EC9150008CC51 /* defines.h */,
+				30B427851F385EFE0025034F /* OverPath.h */,
+				30B427861F385EFE0025034F /* OverPath.m */,
+				30B427821F3858350025034F /* PathMixer.h */,
+				30B427831F3858350025034F /* PathMixer.m */,
+				30B4277E1F384DAF0025034F /* FotomailPathManager.swift */,
 				3092C50E1E17AEAD0031BC20 /* FotomailUserDefault.h */,
 				3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */,
 				30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */,
@@ -483,20 +491,19 @@
 				30E2A2D11E2023BF00A18AD4 /* Reachability.m in Sources */,
 				306F78B51D610A7700634C5B /* TitleUITextField.m in Sources */,
 				30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */,
-				30BA40121EE88B8A00ED368F /* pseudoImageView.swift in Sources */,
 				3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */,
 				3036FBE21D29351F004036D6 /* ViewController.m in Sources */,
 				302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */,
 				307182EB1E0730580032BBDB /* SettingsViewController.swift in Sources */,
-				30964AF71EC0BF8400FCE165 /* BackgroundDrawingView.swift in Sources */,
 				3092D8CF1EBE61A2004F93D3 /* CGrect+initWith2Points.swift in Sources */,
 				30A836AF1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift in Sources */,
 				3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */,
 				30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */,
 				3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,
+				30B427891F3864370025034F /* TransparentPathView.swift in Sources */,
 				3036FBDF1D29351F004036D6 /* AppDelegate.m in Sources */,
+				30B427841F3858350025034F /* PathMixer.m in Sources */,
 				308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */,
-				306F78BE1D6365D600634C5B /* ExtensionVC EditingImageController.swift in Sources */,
 				301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */,
 				30B16F631E0B2FE000980161 /* Recipients_TextFieldDelegate.swift in Sources */,
 				30B16F671E0B320900980161 /* Recipients_CNContactPickerDelegate.swift in Sources */,
@@ -506,14 +513,17 @@
 				30E2A2D51E2034CC00A18AD4 /* Extension_NSBundle.swift in Sources */,
 				3092C5101E17AEAD0031BC20 /* FotomailUserDefault.m in Sources */,
 				3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */,
+				306AB0E71F384A7E00CF238F /* extensionVC+PathDisplayer.swift in Sources */,
 				30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */,
-				30EFF5141DF15336005E23C2 /* DisplayEditingView.swift in Sources */,
 				3036FBDC1D29351F004036D6 /* main.m in Sources */,
 				302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */,
+				30B4277F1F384DAF0025034F /* FotomailPathManager.swift in Sources */,
+				30B427871F385EFE0025034F /* OverPath.m in Sources */,
 				30E2A2D31E20246800A18AD4 /* ReachabilityExtension.swift in Sources */,
-				3019271D1D46363F00C8E3CF /* editingImageView.m in Sources */,
+				30580C3A1F37174F002A4FC8 /* EditingSupportImageView.swift in Sources */,
 				3092D8CB1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift in Sources */,
 				30EFF5121DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift in Sources */,
+				30B427811F384FC40025034F /* extensionVC+PathProvider.swift in Sources */,
 				30C084F41E74A29C004BA873 /* UIImage + createImageWithColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
