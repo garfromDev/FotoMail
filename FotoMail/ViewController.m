@@ -546,10 +546,13 @@ cycle de prise de vue
         [self.previewView slideToBottomWithDuration:0.2 completion:^(BOOL finished){}];
         
         // on récupère l'image éventuellement éditée dans l'UIImageView et on la transmet à envoiPhoto
-        [PathMixer saveEditedWithImage:self.imageView.image paths:self.pathManager.paths completion:^(UIImage *finalImg) {
-            [self envoiPhoto:finalImg];
-        }];
-
+        __block  UIImage *originaleImg = self.imageView.image;
+        __block NSArray<OverPath*> *paths = self.pathManager.paths;
+        dispatch_group_async(imgGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
+                             ^{[PathMixer saveEditedWithImage:originaleImg paths:paths completion:^(UIImage *finalImg) {
+                                    [self envoiPhoto:finalImg];
+                                }];
+            });
         [self.pathManager clear];
         
     }else{ //pas de preview
@@ -572,7 +575,7 @@ cycle de prise de vue
     dispatch_group_async(imgGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
                          ^{
                              NSLog(@"conversion asynchrone image %lu - %@",(unsigned long)FotomailUserDefault.defaults.nbImages, [NSDate date]);
-                             NSData * myData = UIImageJPEGRepresentation(imgDef, 1.0);
+                             __block NSData * myData = UIImageJPEGRepresentation(imgDef, 1.0);
                              NSLog(@"conversion image finie %lu - %@",(unsigned long)FotomailUserDefault.defaults.nbImages,[NSDate date]);
                              
                              dispatch_group_notify(mailGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
