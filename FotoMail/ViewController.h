@@ -64,7 +64,14 @@
 @property (weak, nonatomic) IBOutlet TransparentPathView *clrView;
 /// l'image contenu dans la scrollView, c'est elle qui génère les path
 @property (weak, nonatomic) IBOutlet EditingSupportImageView *imageView;
-
+/* principe de fonctionnement :
+ la scrollview est configurée pour ne traiter que les touches à 2 doigts pour le pan
+ La EditingSupportImageView dans la scrollview est une ImageView qui affiche l'image originale
+ en même temps,traite les touch event à un doigt pour générer les paths. et les envoyer
+ au PathManager. celui-ci les stockes en ajoutant les informations de couleur et de mode gomme/dessin
+ Le viewController, en tant que PathProvider, fourni les paths à afficher ainsi que les infos de zoom
+ et d'offset à la TransparentPathView qui est devant la scrollView avec la même taille
+ */
 
 // les menu de la preview
 @property (weak, nonatomic) IBOutlet UITextField *previewTitreTextField;

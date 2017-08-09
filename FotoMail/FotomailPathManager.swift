@@ -38,7 +38,7 @@ import UIKit
         }else{
             self.paths[self.paths.count - 1] = op
         }
-        print("update with path : \(paths.last!.path.bounds)  total \(paths.count) path")
+//        print("update with path : \(paths.last!.path.bounds)  total \(paths.count) path")
         //on prévient le viewControlleur de metre à jour la vue
         controller?.updateDisplay()
     }

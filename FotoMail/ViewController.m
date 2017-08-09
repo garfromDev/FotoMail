@@ -436,9 +436,12 @@ cycle de prise de vue
     // affiche le controleur de Preview si option activée
     if(preview){
         // on met l'image dans imageView
+        [self.scrollView setMinimumZoomScale:0.0]; //pour forcer un nouveau calcul du zoom, empêche de garder le précédent
         [self.scrollView setZoomScale:1.0];
         [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
         self.imageView.image = img;
+        [self.scrollView setMinimumZoomScale:0.0]; //pour forcer un nouveau calcul du zoom, empêche de garder le précédent
+        [self.scrollView layoutIfNeeded];
         [FotomailUserDefault.defaults prepareUndo];
 
         //on cache l'appareil photo
