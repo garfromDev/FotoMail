@@ -12,10 +12,6 @@
             <connections>
                 <outlet property="clrView" destination="ccg-cP-dV6" id="6eP-Yk-6mV"/>
                 <outlet property="imageView" destination="rjq-sC-eSG" id="GGf-Bv-YzA"/>
-                <outlet property="imageViewBottomConstraint" destination="yDo-FL-ryq" id="bG1-7t-szv"/>
-                <outlet property="imageViewLeadingConstraint" destination="Bku-fd-vRL" id="5wH-Ps-NGe"/>
-                <outlet property="imageViewTopConstraint" destination="ozP-pu-dfC" id="Suu-Px-Tnw"/>
-                <outlet property="imageViewTrailingConstraint" destination="5Pj-cm-68S" id="0oR-Fu-QKi"/>
                 <outlet property="previewStackView" destination="DmX-co-DyW" id="1b4-wh-VFd"/>
                 <outlet property="previewTitreTextField" destination="bLW-bX-8Xg" id="maB-bi-DKe"/>
                 <outlet property="previewToolbar" destination="5Pb-4m-kv4" id="Lau-ig-iKv"/>

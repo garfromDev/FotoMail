@@ -66,14 +66,7 @@
 @property (weak, nonatomic) IBOutlet EditingSupportImageView *imageView;
 
 
-//les contraintes de imageView à l'intérieur de la scrollView
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewBottomConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTopConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewLeadingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTrailingConstraint;
-
 // les menu de la preview
-
 @property (weak, nonatomic) IBOutlet UITextField *previewTitreTextField;
 @property (weak, nonatomic) IBOutlet UIToolbar *previewToolbar;
 @property (weak, nonatomic) IBOutlet UIButton *rubberButton;

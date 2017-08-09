@@ -25,8 +25,6 @@
  A faire après :
  corriger bug de la torche système non disponible quand Fotomail est lancée
  ajouter du unittest du ViewController pour compléter le test coverage
- ajouter gomme
- V1.2
  ajouter un undo incrémental
  ajouter choix couleur pinceaux
  faire passer la vue en edition sous la barre d'outil et le titre (translucide)
@@ -45,6 +43,7 @@
 // NICETOHAVE : ajouter un encadré jaune quand on fait le focus à un endroit?
 // NICETOHAVE : réglage puissance torche en macro avec un slider
 // NICETOHAVE : mode zoom numérique en macro
+// NICETOHAVE : gomme prend la taille du doigt (indexRadius)
 // NICETOHAVE : ajouter aide avec surimpression légendes sur image
 // NICETOHAVE : réglage correction lumière comme photo système
 // NICETOHAVE : voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
@@ -180,6 +179,7 @@ cycle de prise de vue
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(adaptToScreenSize)    name:UIDeviceOrientationDidChangeNotification  object:nil];
 }
 
+
 //et on supprime l'abonnement
 -(void) viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -293,6 +293,7 @@ cycle de prise de vue
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
+
 
 //--------------------------------------
 #pragma mark Picture_Taking_part
@@ -436,10 +437,8 @@ cycle de prise de vue
     if(preview){
         // on met l'image dans imageView
         [self.scrollView setZoomScale:1.0];
-        //[self.scrollView setMinimumZoomScale:1.0]; // pour forcer le calcul à revenir au zoom minimum
         [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
         self.imageView.image = img;
-        //le prepareDisplay recopiera originale Image dans image (marche pas)
         [FotomailUserDefault.defaults prepareUndo];
 
         //on cache l'appareil photo
@@ -448,9 +447,7 @@ cycle de prise de vue
         //on anime l'animation de la preview
             [self.previewView slideFromBottomWithBouncing:true duration:0.5 completion:^(BOOL finished) {
                 //on règle le niveau de zoom pour afficher l'image en entier
-//                [self updateMinZoomScaleForSize:self.previewView.frame.size];
-                //[self scrollViewDidZoom:self.scrollView]; //nécessaire?
-                [self.scrollView layoutIfNeeded]; //nécessaire?
+                [self.scrollView layoutIfNeeded];
                 NSLog(@"preview displayed");
             }];
 
@@ -466,10 +463,9 @@ cycle de prise de vue
 {   // l'utilisateur a annulé la prise de photo, on masque l'aperçu et on réaffiche l'appareil photo
     NSLog(@"cancel appuyé dans imagePicker");
     [FotomailUserDefault.defaults commitUndo]; //restaure le titre avant preview
-    //[self.imageView endDisplay];
     self.imageView.image = nil; //libérer la mémoire de l'image
     [self.pathManager clear];
-    [self.scrollView reset];
+    [self.scrollView reset]; //pour éviter la mémorisation du niveau de zoom précédent
     self.previewView.hidden = true;
 
     showPreview = false;
@@ -525,6 +521,7 @@ cycle de prise de vue
         [self scrollViewDidZoom:self.scrollView];
     }
 }
+
 
 -(IBAction)rubberModeChange:(id)sender{
     UIButton *bouton = (UIButton *)sender;
@@ -599,12 +596,6 @@ cycle de prise de vue
  */
 - (IBAction) envoiMail:(id)sender{
     LOG
-    if(FotomailUserDefault.defaults.nbImages == 0){ //normalement ne sera pas appellé puisque l'état visible du bouton est géré
-        // TOTO : supprimer dans version finale
-        UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"Fotomail" message:@"nbImages == 0" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alrt show];
-        return;
-    }
     [[self message] setText:@"Preparing mail..."]; //@"Préparation du mail..."
     [self.activityIndicator startAnimating];
     [self displayComposerSheet];
@@ -616,7 +607,7 @@ cycle de prise de vue
     if (![MFMailComposeViewController canSendMail]) {
         NSLog(@"Mail services are not available.");
         self.message.text = @"Mail services are not available"; //@"Fonction d'envoi de mail non disponible";
-        // TOTO : supprimer dans version finale, ouremplacer par alerte non deprecated
+        // TOTO : supprimer dans version finale, ou remplacer par alerte non deprecated
         UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"Fotomail" message:@"Mail services are not available" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alrt show];
         return;
