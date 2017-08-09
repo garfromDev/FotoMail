@@ -19,6 +19,7 @@
  1.0 build 2 : pour release AppStore
   SORTIE APPSTORE
  1.2 build 3 : ajout gomme, pour flightTest
+ modification configureFor2FingerSCroll pour diminuer risque de dessiner en déplaçant
  
  
  A faire après :
@@ -26,6 +27,7 @@
  ajouter du unittest du ViewController pour compléter le test coverage
  ajouter gomme
  V1.2
+ ajouter un undo incrémental
  ajouter choix couleur pinceaux
  faire passer la vue en edition sous la barre d'outil et le titre (translucide)
  V1.3
@@ -446,8 +448,9 @@ cycle de prise de vue
         //on anime l'animation de la preview
             [self.previewView slideFromBottomWithBouncing:true duration:0.5 completion:^(BOOL finished) {
                 //on règle le niveau de zoom pour afficher l'image en entier
-                [self updateMinZoomScaleForSize:self.previewView.frame.size];
+//                [self updateMinZoomScaleForSize:self.previewView.frame.size];
                 [self scrollViewDidZoom:self.scrollView]; //nécessaire?
+                [self.scrollView layoutIfNeeded]; //nécessaire?
                 NSLog(@"preview displayed");
             }];
 
@@ -681,8 +684,9 @@ cycle de prise de vue
     if (motion == UIEventSubtypeMotionShake) {
         NSLog(@"shake");
         if(!self.previewView.hidden){
-            EditingImageView *editor = (EditingImageView *)self.imageView;
-            [editor undoEditing];
+            // on efface toute les annotations
+            [self.pathManager clear];
+            [self.clrView setNeedsDisplay];
         }
         
     }
@@ -709,8 +713,10 @@ cycle de prise de vue
     // on remet à jour le bouton mail car en cas de rotation, un des deux n'était pas activé
     // et n'a donc pas pris le changement
     self.mailButton.hidden = (FotomailUserDefault.defaults.nbImages == 0);
-    
-    [self updateMinZoomScaleForSize:self.scrollView.bounds.size];
+    if(preview){
+        [self.scrollView layoutIfNeeded];
+    }
+//    [self updateMinZoomScaleForSize:self.scrollView.bounds.size];
 
 }
 

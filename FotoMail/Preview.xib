@@ -55,7 +55,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" minimumZoomScale="0.10000000000000001" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-Vj-3KM">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" minimumZoomScale="0.10000000000000001" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-Vj-3KM" customClass="AutoZoomingScrollView" customModule="FotoMail" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="30" width="359" height="573"/>
                             <subviews>
                                 <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-sC-eSG" customClass="EditingSupportImageView" customModule="FotoMail" customModuleProvider="target">

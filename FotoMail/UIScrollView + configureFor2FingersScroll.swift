@@ -18,6 +18,8 @@ extension  UIScrollView //configureFor2FingersScroll)
         for gestureRecognizer in recognizers {
             if gestureRecognizer.isKind(of: UIPanGestureRecognizer.self){
                 (gestureRecognizer as! UIPanGestureRecognizer).minimumNumberOfTouches = 2
+                // évite que les évènements soient envoyé  à la vue avant quer la reconnaissance des 2 doigts ait lieu
+                (gestureRecognizer as! UIPanGestureRecognizer).delaysTouchesEnded = true // delaysTouchesBegan Ne marche pas, on ne reçoit plus les éléments
             }
         }
     }

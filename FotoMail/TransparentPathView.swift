@@ -47,6 +47,7 @@ import UIKit
             }else{
                 context?.setBlendMode(.normal)
                 p.drawColor.set()
+                print("drawing path \(p.path.bounds)")
             }
             p.path.stroke()
         }
