@@ -26,6 +26,7 @@
 @class TransparentPathView;
 @class EditingSupportImageView;
 @class FotoMailPathManager;
+@class AutoZoomingScrollView;
 // on ne peut pas importer FotoMail-Swift.h dans un .h, seulement dans .m, voir https://stackoverflow.com/questions/26328034/importing-project-swift-h-into-a-objective-c-class-file-not-found
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,  MFMailComposeViewControllerDelegate>
@@ -58,7 +59,7 @@
 // écran preview
     @property ( nonatomic) IBOutlet UIView *previewView;
 /// la scrollview
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet AutoZoomingScrollView *scrollView;
 /// l'image transparente avec les paths surimprimé devant la scroll View
 @property (weak, nonatomic) IBOutlet TransparentPathView *clrView;
 /// l'image contenu dans la scrollView, c'est elle qui génère les path

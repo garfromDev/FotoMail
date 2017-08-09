@@ -449,7 +449,7 @@ cycle de prise de vue
             [self.previewView slideFromBottomWithBouncing:true duration:0.5 completion:^(BOOL finished) {
                 //on règle le niveau de zoom pour afficher l'image en entier
 //                [self updateMinZoomScaleForSize:self.previewView.frame.size];
-                [self scrollViewDidZoom:self.scrollView]; //nécessaire?
+                //[self scrollViewDidZoom:self.scrollView]; //nécessaire?
                 [self.scrollView layoutIfNeeded]; //nécessaire?
                 NSLog(@"preview displayed");
             }];
@@ -469,6 +469,7 @@ cycle de prise de vue
     //[self.imageView endDisplay];
     self.imageView.image = nil; //libérer la mémoire de l'image
     [self.pathManager clear];
+    [self.scrollView reset];
     self.previewView.hidden = true;
 
     showPreview = false;
