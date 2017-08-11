@@ -714,7 +714,6 @@ cycle de prise de vue
     if(preview){
         [self.scrollView layoutIfNeeded];
     }
-//    [self updateMinZoomScaleForSize:self.scrollView.bounds.size];
 
 }
 
