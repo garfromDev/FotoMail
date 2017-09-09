@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 extern NSString *kcameraControlsMacroModeChangedNotification;
-
+extern NSString *UserControlsErrorDomain;
 
 /// les codes d'erreurs du framework
 enum {

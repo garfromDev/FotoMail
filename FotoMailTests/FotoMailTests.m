@@ -40,7 +40,7 @@ ViewController *myvc;
 // may run on simulator
 - (void)testViewDidLoad {
     
-    UIScrollView * scrollView = myvc.scrollView;
+    UIScrollView * scrollView = (UIScrollView *)myvc.scrollView;
     for( UIGestureRecognizer *gr in scrollView.gestureRecognizers){
         if([gr isKindOfClass:[UIPanGestureRecognizer class]]){
             UIPanGestureRecognizer *pgr = (UIPanGestureRecognizer *)gr;

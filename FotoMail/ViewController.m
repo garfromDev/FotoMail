@@ -30,6 +30,7 @@
  faire passer la vue en edition sous la barre d'outil et le titre (translucide)
  V1.3
  ajouter loupe = zoom numérique en macro
+ passer le déclencheur en bas à droite pour ergonomie 1 main (voir ou me mettre en horizontal)
  V1.4
  ajouter localization textes
  v1.5

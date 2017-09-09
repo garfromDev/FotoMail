@@ -14,12 +14,14 @@
 
 @end
 
+/// doit être exécuté sur DEVICE
 @implementation AVCaptureDevice_ExtensionTests
 
 AVCaptureDevice *camera;
 
 - (void)setUp {
     [super setUp];
+    
     camera = nil;
     NSArray<AVCaptureDevice*>* devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     // Select back camera
@@ -29,6 +31,8 @@ AVCaptureDevice *camera;
             break;
         }
     }
+    
+    XCTAssert(camera != nil, @"test must be run on device to have camera available");
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -36,6 +40,7 @@ AVCaptureDevice *camera;
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
+
 
 - (void)testMacroOn {
     /* 

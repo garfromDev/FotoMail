@@ -48,7 +48,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
 + (AVCaptureDevice *) initCameraOnView: (UIView *)view error:(NSError **)outError{
     LOG
     AVCaptureSession *captureSesion = [[AVCaptureSession alloc] init];
-    if (![captureSesion canSetSessionPreset:AVCaptureSessionPresetPhoto]) { //FIXME normalement AVCaptureSessionPresetPhoto, mis medium pour baisser la conso mémoire
+    if (![captureSesion canSetSessionPreset:AVCaptureSessionPresetPhoto]) { 
         if(outError!=nil){
             *outError = [NSError errorWithDomain:UserControlsErrorDomain
                     code: AVCaptureSessionPresetPhotoNotAvailable

@@ -35,34 +35,9 @@ class UIImageEraseTests: XCTestCase {
         
         // les 2 images doivent êtres différentes
         XCTAssertFalse(imgG.isEqualToImage(image:imgR), "les 2 images doivent êtres différentes")
-        
-        //on crée un contexte
-        UIGraphicsBeginImageContext(size)
-        let context = UIGraphicsGetCurrentContext()!
-        
-        //on y dessine l'image verte
-        imgG.draw(at:CGPoint.zero)
-        let imgAvant = UIGraphicsGetImageFromCurrentImageContext()!
 
 
-        // on gomme une partie de l'image verte avec la gomme rouge
-        UIView.erase(from:p1, to:p2, thickness:thick, context:context, rubberImg:imgR)
-        let imgGommee2 = UIGraphicsGetImageFromCurrentImageContext()!
-//        context.restoreGState()
-       XCTAssertFalse(imgAvant.isEqualToImage(image:imgGommee2),"l'image gommée par du rouge ne doit plus être verte")
-        
-        //on gomme le rouge avec du vert
-        UIView.erase(from:p1, to:p2, thickness:thick, context:context, rubberImg:imgG)
-        let imgGommee = UIGraphicsGetImageFromCurrentImageContext()!
-        XCTAssert(imgAvant.isEqualToImage(image:imgGommee),"l'image gommée par du vert doit  être à nouveau verte")
-        UIGraphicsEndImageContext()
-    }
+     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
 }
