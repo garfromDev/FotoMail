@@ -20,7 +20,8 @@
   SORTIE APPSTORE
  1.2 build 3 : ajout gomme, pour flightTest
  modification configureFor2FingerSCroll pour diminuer risque de dessiner en déplaçant
- 
+ 1.3 release avec gomme
+ 1.4 correction bug touch cancelled
  
  A faire après :
  corriger bug de la torche système non disponible quand Fotomail est lancée
@@ -28,16 +29,15 @@
  ajouter un undo incrémental
  ajouter choix couleur pinceaux
  faire passer la vue en edition sous la barre d'outil et le titre (translucide)
- V1.3
+ V1.5
  ajouter loupe = zoom numérique en macro
- V1.4
+ V1.6
  ajouter localization textes
- v1.5
+ v1.7
  ajouter contact editeur
  Ajouter message explicatif tri automatique dans gmail
- V1.6
- ajouter largeur variable avec pression?? ou vitesse
- v1.7
+ V1.8
+
 */
 
 // NICETOHAVE : ajouter un encadré jaune quand on fait le focus à un endroit?
@@ -153,7 +153,7 @@ cycle de prise de vue
     self.pathManager.controller = self; //en tant que PathDisplayer
     self.imageView.delegate = self.pathManager; //en tant que pathManager
     self.clrView.delegate = self; //en tant que pathProvider
-    
+
     //on s'abonne aux notification des champs de texte pour mettre à jour l'affichage quand le titre a été édité
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(titleDidEditing:) name:UITextFieldTextDidEndEditingNotification  object:self.titre];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(titleDidEditing:) name:UITextFieldTextDidEndEditingNotification  object:self.previewTitreTextField];
