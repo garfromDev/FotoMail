@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="landscape">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,25 +22,25 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clp-V7-bpR" userLabel="FondNoir">
-                    <rect key="frame" x="0.0" y="743" width="1024" height="25"/>
+                    <rect key="frame" x="0.0" y="543" width="320" height="25"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJQ-aE-I41" userLabel="ViewForGesture">
-                    <rect key="frame" x="0.0" y="38" width="1024" height="730"/>
+                    <rect key="frame" x="0.0" y="38" width="320" height="530"/>
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="ROR-Tv-zZq" appends="YES" id="46N-7q-kVl"/>
                     </connections>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="3FW-5F-Y0b" userLabel="HorizontalPhotoControl">
-                    <rect key="frame" x="0.0" y="743" width="1024" height="25"/>
+                    <rect key="frame" x="0.0" y="543" width="320" height="25"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8KH-KD-sMe" userLabel="Mail">
-                            <rect key="frame" x="0.0" y="0.0" width="241.5" height="25"/>
+                            <rect key="frame" x="0.0" y="0.0" width="75.5" height="25"/>
                             <accessibility key="accessibilityConfiguration" hint="send e-mail" identifier="Mail"/>
                             <state key="normal" image="enveloppe">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +50,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eA-f8-oG4" userLabel="PrendPhoto">
-                            <rect key="frame" x="243.5" y="0.0" width="241.5" height="25"/>
+                            <rect key="frame" x="77.5" y="0.0" width="75.5" height="25"/>
                             <state key="normal" image="takePicture">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -58,14 +59,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5K4-UJ-bZL" userLabel="takeAndReview">
-                            <rect key="frame" x="487" y="0.0" width="241.5" height="25"/>
+                            <rect key="frame" x="155" y="0.0" width="75.5" height="25"/>
                             <state key="normal" image="takeAndPreview"/>
                             <connections>
                                 <action selector="takeAndPreview:" destination="-1" eventType="touchUpInside" id="M8p-UU-mvG"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmu-Kf-Yq0" userLabel="Settings">
-                            <rect key="frame" x="730.5" y="0.0" width="293.5" height="25"/>
+                            <rect key="frame" x="232.5" y="0.0" width="87.5" height="25"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="Settings">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,14 +79,14 @@
                     <variation key="heightClass=compact-widthClass=compact" axis="vertical"/>
                 </stackView>
                 <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3I-Cp-DGp" userLabel="Fond translucide">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="48"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <variation key="heightClass=compact-widthClass=compact">
                         <nil key="backgroundColor"/>
                     </variation>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YUQ-c5-Peh">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="38"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIU-m5-bVw" userLabel="macroMode">
                             <rect key="frame" x="0.0" y="0.0" width="25" height="38"/>
@@ -117,7 +118,7 @@
                             </connections>
                         </segmentedControl>
                         <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="center" horizontalHuggingPriority="100" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Titre" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="RmI-U2-qs1" userLabel="Titre" customClass="TintTextField" customModule="FotoMail" customModuleProvider="target">
-                            <rect key="frame" x="193" y="0.0" width="807" height="38"/>
+                            <rect key="frame" x="193" y="0.0" width="103" height="38"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" identifier="Titre"/>
                             <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -130,7 +131,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kpM-Ht-gqX" userLabel="NoPhoto">
-                            <rect key="frame" x="1008" y="0.0" width="16" height="38"/>
+                            <rect key="frame" x="304" y="0.0" width="16" height="38"/>
                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" identifier="NoPhoto"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
