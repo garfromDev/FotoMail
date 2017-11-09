@@ -25,6 +25,7 @@
                                    STAMPSIZE : @MEDIUM,
                                    PREVIEW : @YES,
                                    RECIPIENTS : @[ @"" ],
+                                   PROJECTS : @[ @"" ],
                                    IMGNUMBER : @0 };
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultDict];
 

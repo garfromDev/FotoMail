@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
 @property (weak, nonatomic) IBOutlet UIView *blackViewForVisualEffect;
+@property (weak, nonatomic) IBOutlet UIButton *project;
 
 
 // attention, valueChanged n'est pas appellée par UItextField quand modif programatique
@@ -54,6 +55,7 @@
 - (IBAction) reglages:(id)sender;
 - (IBAction)tapOutsideTextField:(UITapGestureRecognizer *)sender;
 - (IBAction)takeAndPreview:(id)sender;
+- (IBAction)projectLongPress:(UILongPressGestureRecognizer *)sender;
 
 
 // écran preview

@@ -16,7 +16,10 @@
 //propriétés sauvegardés
 @property(nonatomic) bool timeStamp;
 @property(nonatomic) float stampSize;
+/// les adresses e-mails des destinataires
 @property(nonatomic) NSArray<NSString *> *recipients;
+/// les projets prédéfinis
+@property(nonatomic) NSArray<NSString *> *projects;
 /// le numéro incrémental pour numéroter les photos prises
 @property (nonatomic) NSUInteger imgNumber;
 

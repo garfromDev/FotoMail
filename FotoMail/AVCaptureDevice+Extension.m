@@ -120,7 +120,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
         }
         
         // pas compris pourquoi, mail il faut la garder ici sinon la photo est mal orienté een paysage
-        connexion.videoOrientation = [orientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
+        connexion.videoOrientation = [OrientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
         [imageOutput captureStillImageAsynchronouslyFromConnection:connexion completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
             NSLog(@"takePicture - image captured error:%@", error.description);
             if(error){
@@ -294,7 +294,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
  ];
  @endcode
  */
--(void)configure: (void (^)())action{
+-(void)configure: (void (^)(void))action{
     NSError *error;
     // il faut verouiller le device avant de changer sa config
     if( ![camera lockForConfiguration:&error]) { return;}

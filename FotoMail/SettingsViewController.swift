@@ -82,6 +82,31 @@ class SettingsViewController: UITableViewController {
 }
 
 
+class EditProjectListController : EditableStringArrayTableViewController {
+}
+
+/// une cellulle avec un champ de texte éditable n'acceptant que des noms de fichier
+//class ProjectEditableCell: EditableTextTableViewCell<TitleUITextField> { }
+
+// FIXME : overrider la definition du saveModel, voir comment faire?
+// FIXME : plutot une protocol extension?
+
+extension SettingsViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case "chooseProjects":
+            let dest = segue.destination as! EditProjectListController
+            dest.saveModel = {
+                (mdl: [String] ) in
+                FotomailUserDefault.defaults().projects =  mdl as [String]
+            }
+            dest.model = FotomailUserDefault.defaults().projects
+            dest.identifier = "textFieldCell"
+        default:
+            break
+        }
+    }
+}
 
 class LegalNoticeViewController: UIViewController {
     @IBOutlet weak var notice: UITextView!
@@ -97,3 +122,5 @@ class LegalNoticeViewController: UIViewController {
         self.notice.text = versioned
     }
 }
+
+

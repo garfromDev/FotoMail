@@ -241,8 +241,34 @@ cycle de prise de vue
     }else{
         [camera setMacroOn];
     }
+
 }
 
+/// long press sur le nom du projet
+/// on anime en grossisant, puis on affiche une liste de choix
+-(IBAction)projectLongPress:(UILongPressGestureRecognizer *)sender{
+    switch( sender.state) {
+        case UIGestureRecognizerStateBegan:{
+            [UIView animateWithDuration:ANIMATION_TIME animations: ^{
+                self.project.transform = CGAffineTransformMakeScale((CGFloat) LONGPRESS_SCALE, (CGFloat) LONGPRESS_SCALE); }
+             ];
+            break;}
+        case UIGestureRecognizerStateEnded:{
+             [UIView animateWithDuration:ANIMATION_TIME animations: ^{
+                 [self.project setTransform: CGAffineTransformIdentity]; }
+              ];
+            [self chooseProject];
+            break;}
+        case UIGestureRecognizerStateFailed:
+        case UIGestureRecognizerStateCancelled:{
+            [UIView animateWithDuration:ANIMATION_TIME animations: ^{
+                [self.project setTransform: CGAffineTransformIdentity]; }
+             ];
+            break;}
+        default:
+            break;
+    }
+}
 
 /// l'utilisateur a touché l'icone réglages
 - (IBAction) reglages:(id)sender{
@@ -268,6 +294,15 @@ cycle de prise de vue
     NSString *titre = camera.isMacroOn ? @"macro-jaune" : @"macro" ;
     UIImage *newImg = [UIImage imageNamed:titre];
     [self.macroMode setImage:newImg forState:UIControlStateNormal];
+}
+
+/// affiche la liste de projets disponibles et gère la sélection et l'ajout d'un nouveau projet
+-(void) chooseProject
+{
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"ChooseProject" bundle:nil];
+    UIViewController *tbv = [story instantiateViewControllerWithIdentifier:@"ChooseProject"];
+    tbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:tbv animated:true completion:nil];
 }
 
 
@@ -312,7 +347,7 @@ cycle de prise de vue
     
     // on fait la préparation du controleur de mail en tache de fond pour afficher le plus vite possible l'appareil photo
     // on utilise le groupe mailGroup pour ne pas lancer d'attachement d'image avant que le controlleur ne soit crée
-    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0),
+    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), //FIXME: était QOS_CLASS_USER_INITIATED
     ^{ //on prépare le composeur de mail
         NSLog(@"allocate Mail controller %@", [NSDate date]);
         mailPicker = [[MFMailComposeViewController alloc] init];
@@ -368,6 +403,7 @@ cycle de prise de vue
 #endif
 
 }
+
 
 /// gère les effets et le son de la capture de l'image
 - (void) visualCaptureImage: (id)sender {
@@ -707,7 +743,7 @@ cycle de prise de vue
     if(!camera) {return;} //rien à faire si pas de caméra initialisée ou accessible
     // Merci à Matteo Caldari, c'est le truc qui manquait pour faire fonctionner la rotation
     camera.cameraLayer.frame = self.cameraPreviewView.bounds;
-    camera.cameraLayer.connection.videoOrientation = [orientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
+    camera.cameraLayer.connection.videoOrientation = [OrientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
     // on remet à jour le bouton mail car en cas de rotation, un des deux n'était pas activé
     // et n'a donc pas pris le changement
     self.mailButton.hidden = (FotomailUserDefault.defaults.nbImages == 0);

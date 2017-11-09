@@ -34,6 +34,7 @@ class RecipientsTableViewController: UITableViewController  {
     
     @IBAction func chooseContact(_ sender: Any) {
         // comment on trouve l'émetteur -> par le tag
+        // le tag a été fixé dans le cell for indexPath du Datasource
         let bouton = sender as! UIButton
         editedRow = bouton.tag
         

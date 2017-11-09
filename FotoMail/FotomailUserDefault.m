@@ -47,6 +47,16 @@ NSString *oldTitle;
 }
 
 
+- (NSArray<NSString *> *)projects {
+    NSArray *listProjects = [[ NSUserDefaults standardUserDefaults] arrayForKey:PROJECTS];
+    return listProjects;
+}
+
+
+- (void) setProjects:(NSArray<NSString *> *)projects{
+    [[NSUserDefaults standardUserDefaults] setValue:projects forKey:PROJECTS];
+}
+
 
 - (float)stampSize {
     return [[NSUserDefaults standardUserDefaults] floatForKey:STAMPSIZE];
