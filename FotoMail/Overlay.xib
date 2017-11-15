@@ -119,9 +119,9 @@
                             </connections>
                         </segmentedControl>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHE-Eg-YaM">
-                            <rect key="frame" x="193" y="0.0" width="54" height="38"/>
+                            <rect key="frame" x="193" y="0.0" width="30" height="38"/>
                             <gestureRecognizers/>
-                            <state key="normal" title="Project\">
+                            <state key="normal" title="\">
                                 <color key="titleColor" red="1" green="0.56323386659999997" blue="0.061179050659999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -129,7 +129,7 @@
                             </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="center" horizontalHuggingPriority="100" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Titre" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="RmI-U2-qs1" userLabel="Titre" customClass="TintTextField" customModule="FotoMail" customModuleProvider="target">
-                            <rect key="frame" x="255" y="0.0" width="41" height="38"/>
+                            <rect key="frame" x="231" y="0.0" width="65" height="38"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <accessibility key="accessibilityConfiguration" identifier="Titre"/>
                             <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

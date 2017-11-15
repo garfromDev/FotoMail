@@ -26,6 +26,7 @@
                                    PREVIEW : @YES,
                                    RECIPIENTS : @[ @"" ],
                                    PROJECTS : @[ @"" ],
+                                   CURRENTPROJECT : @"",
                                    IMGNUMBER : @0 };
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultDict];
 

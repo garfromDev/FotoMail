@@ -22,6 +22,9 @@ protocol IsInitializable {
     var identifier: String { get set}
 }
 
+///Delegate pour les textField ETTV
+typealias ETTVTextFieldDelegate = UITextFieldDelegate & IsInitializable & CellIdentifiable & ModelIndexed
+
 /// TextField pour les cellules de ETTV
 typealias EditableTableViewTextField = UITextField & ModelIndexed & CellIdentifiable
 
@@ -31,20 +34,22 @@ typealias EditableTableViewTextField = UITextField & ModelIndexed & CellIdentifi
  - Cellidentifiable, pour pourvoir filtrer les messages qui seront émis par le délégué
  - ModelIndexed, pour ratacher le texte édité à un élément du modèle
  */
-class TableViewTextField<D:IsInitializable & UITextFieldDelegate & CellIdentifiable & ModelIndexed>: UITextField, CellIdentifiable, ModelIndexed {
+class TableViewTextField<D:IsInitializable & UITextFieldDelegate>: UITextField, CellIdentifiable, ModelIndexed {
 
     var identifier: String = ""
     
     var modelIndex: Int = 0
+
     
+    private var dlg : D! //il faut garder vivant le délégué, car UITextField a une référence weak sur delegate
     
     override init(frame:CGRect){
         super.init(frame: frame)
-        let dlg = D() //le delegué sera chargé de valider le texte saisie
+        dlg = D() //le delegué sera chargé de valider le texte saisie
         //on lui transmet les informations nécessaires pour identifier les messages émis
         // ceci suppose que l'ilitialisation soit effectué via l'initialisateur de convenience
-        dlg.identifier = identifier
-        dlg.modelIndex = modelIndex
+//        dlg.identifier = identifier
+//        dlg.modelIndex = modelIndex
         self.delegate = dlg
     }
     

@@ -1,5 +1,5 @@
 //
-//  EditableStringArrayTableViewController.swift
+//  ETTV - EditableStringArrayTableViewController
 //  FotoMail
 //
 //  Created by Alistef on 03/11/2017.
@@ -17,22 +17,8 @@ protocol StringArrayTableViewController {
     var saveModel: ([String]) -> Void { get set}
 }
 
-/** un textFieldDelegate basé sur TitleTextField, qui lui rajoute les propriétés nécessaires
- pour respecter les protocoles. Doit être final pour éviter les problèmes avec init()
- */
-final class ProjectTextFieldDelegate: TitleTextFieldDelegate, IsInitializable, ModelIndexed, CellIdentifiable {
-    var modelIndex: Int = 0
-    var identifier: String = ""
-}
-
-/// un textField personalisé avec le delegate ProjectTextFieldDelegate
-class ProjectTextField: TableViewTextField<ProjectTextFieldDelegate> {}
-
-/// une cellule personalisée avec ce textField
-class ProjectCell: EditableTextTableViewCell<ProjectTextField> {}
-
 /**
- Ce TableViewControlelr gère un tableau de String, que l'on peut
+ Ce TableViewControler gère un tableau de String, que l'on peut
  éditer via des champs de texte
  pour utilisation, il faut
  créer un TableViewController de ce type dans Storyboard
@@ -73,27 +59,32 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
                                         target: self,
                                         action: #selector(addItem))
         self.navigationItem.rightBarButtonItem = addButton
+        updateAddButtonStatus()
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidEndEditing, object: nil)
+        
+        // hide separator for empty cells
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // only 1 section in ETTV
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        print("numberOfRowsInSection \(model.count)")
+        print("model : \(model)")
         return model.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        var cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! EditableTextTableCell  //FIXME utiliser un générique?
-
+        var cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! EditableTextTableCell
+        
         // Configure the cell...
         cell.modelIndex = indexPath.row
         cell.modelText = model[indexPath.row]
@@ -114,18 +105,36 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            // Delete the row from the data source            
+            //tableView.deleteRows(at: [indexPath], with: .fade)
             model.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+            updateAddButtonStatus()
         }
     }
     
-
+    private var previousSelected : Int?
+    
+    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        return
+//        //super.tableView(tableView, didSelectRowAt: indexPath)
+//        print("didSelectRowAt \(indexPath.row)")
+//        if let prev = previousSelected {
+//            let c = tableView.cellForRow(at: IndexPath(row:prev, section:0)) as! EditableTextTableCell
+//            c.stopEditing()
+//        }
+//        previousSelected = indexPath.row
+//    }
+//
+    
     func addItem(){
+        print("addItem  nb before = \(model.count)")
         let s = ""
         model.append(s)
-        tableView?.insertRows(at: [IndexPath(row:model.count, section:0)], with: .fade)
-        //tableView?.reloadData()
+       // tableView?.insertRows(at: [IndexPath(row:model.count-1, section:0)], with: .fade) //avant l'ajout, le row était count - 1
+        tableView?.reloadData()
+        updateAddButtonStatus()
     }
     
     
@@ -134,6 +143,7 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
     /// est appellé en cas de modification d'un champ de texte, met à jour le modèle
     func textFieldDidChange(notification:Notification)
     {
+        print("textFieldDidChange ")
         // on vérifie que la notification s'acompagne d'un objet
         guard let o = notification.object  else { return }
         // on récupère le champ de texte si il est du bon type
@@ -142,8 +152,18 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
         guard txtField.identifier == identifier else { return }
         // on met à jour le modèle avec la valeur du champ de texte
         model[txtField.modelIndex] = txtField.text ?? ""
+        print("textField n° \(txtField.modelIndex) new value \(txtField.text!)")
+        
+        updateAddButtonStatus()
     }
     
+    /// le bouton "Add" est actif uniquement lorsque la dernière ligne n'est pas vide
+    private func updateAddButtonStatus()
+    {
+        if let lastItem = model.last {
+            self.navigationItem.rightBarButtonItem?.isEnabled = (lastItem != "")
+        }
+    }
     
     // on résilie les abonnements
     deinit {

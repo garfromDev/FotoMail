@@ -8,21 +8,31 @@
 
 import UIKit
 
-class ChooseProjectTableViewController: UITableViewController {
+/**
+Controller générique pour afficher le contenu d'un tableau de String
+en mode overlay (avecd es coins arrondis)
+*/
+@objc class ChooseProjectTableViewController: StringArrayDisplayerViewController {}
 
-    let identifier = "ChooseProjectIdentifier"
+class StringArrayDisplayerViewController: UITableViewController {
+
+    @IBInspectable let identifier = "ChooseProjectIdentifier"
+    @IBInspectable var radius : CGFloat = 20
+    /// le tableau de String à afficher
+    @objc var model : [NSString] = []
+    
+    /// l'action a faire lorsque une ligne est sélectionnée
+    @objc var didSelect = { (index:NSInteger, content:NSString) -> Void in}
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.layer.cornerRadius = 20
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.view.layer.cornerRadius = radius
     }
 
+    /// le menu disparait quand on tape à l'extérieur, à brancher sur un
+    // gesture recognizer
     @IBAction func TapOutside(_ sender: UITapGestureRecognizer) {
+        print("TapOuside project list controler")
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -30,13 +40,12 @@ class ChooseProjectTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // 1 seule section
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
+        return model.count
     }
 
     
@@ -44,60 +53,16 @@ class ChooseProjectTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = "ligne \(indexPath.row)" //Fixme
+        cell.textLabel?.text = String(describing:model[indexPath.row])
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //FIXME faire quelque chose
+        print("didSelectRowAt")
+        didSelect(NSInteger(indexPath.row), model[indexPath.row])
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

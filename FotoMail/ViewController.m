@@ -86,8 +86,6 @@ cycle de prise de vue
 */
 @implementation ViewController 
 {
-    /// l'adresse e-mail de destination
-    NSString *toName;
     /// le sujet par défaut du mail
     NSString *subject;
 
@@ -128,6 +126,8 @@ cycle de prise de vue
     // permettra d'adapter l'interface au nombre de photo prise et au changement du titre via observeValueForKeyPath:
     [FotomailUserDefault.defaults addObserver:self forKeyPath:@"nbImages" options:NSKeyValueObservingOptionNew context:nil];
     [FotomailUserDefault.defaults addObserver:self forKeyPath:@"titreImg" options:NSKeyValueObservingOptionNew context:nil];
+     // permettra d'adapter l'interface au changement du projet courante   via observeValueForKeyPath:
+    [FotomailUserDefault.defaults addObserver:self forKeyPath:@"currentProject" options:NSKeyValueObservingOptionNew context:nil];
     // permet d'adapter l'interface au changement de mode macro
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(macroModeHasChanged:) name:kcameraControlsMacroModeChangedNotification object:camera];
     //permet d'être averti en cas de changement des autorisations dans privacy setting
@@ -155,9 +155,17 @@ cycle de prise de vue
     self.clrView.delegate = self; //en tant que pathProvider
 
     //on s'abonne aux notification des champs de texte pour mettre à jour l'affichage quand le titre a été édité
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(titleDidEditing:) name:UITextFieldTextDidEndEditingNotification  object:self.titre];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(titleDidEditing:) name:UITextFieldTextDidEndEditingNotification  object:self.previewTitreTextField];
-    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+        selector:@selector(titleDidEditing:)
+        name:UITextFieldTextDidEndEditingNotification
+        object:self.titre];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+        selector:@selector(titleDidEditing:)
+        name:UITextFieldTextDidEndEditingNotification
+        object:self.previewTitreTextField];
+
     // on masque les commandes de flash et de macro si il n'est pas disponible
 #ifndef SCREENSHOTMODE
     //reste affiché pour screenshot
@@ -176,7 +184,11 @@ cycle de prise de vue
     LOG
     if(!camera){return;}
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(adaptToScreenSize)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+        selector:@selector(adaptToScreenSize)
+        name:UIDeviceOrientationDidChangeNotification
+        object:nil];
 }
 
 
@@ -300,8 +312,16 @@ cycle de prise de vue
 -(void) chooseProject
 {
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"ChooseProject" bundle:nil];
-    UIViewController *tbv = [story instantiateViewControllerWithIdentifier:@"ChooseProject"];
+    ContainerViewController *tbv = [story instantiateViewControllerWithIdentifier:@"ChooseProject"];
     tbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    tbv.model = FotomailUserDefault.defaults.projects;
+    // le bloc qui sera invoqué lorsque l'utilisateur cliquera sur un nom de projet
+    void(^action)(NSInteger index, NSString *content) = ^void(NSInteger index, NSString *content){
+        NSLog(@"project %@ a été choisi", content);
+        FotomailUserDefault.defaults.currentProject = content;
+    };
+    tbv.didSelect = action;
+    
     [self presentViewController:tbv animated:true completion:nil];
 }
 
@@ -323,6 +343,9 @@ cycle de prise de vue
     }else if([keyPath isEqualToString:@"titreImg"]) {
         //on remet à jour le nom de l'image affiché dans titre
         [self updateTitles];
+    }else if([keyPath isEqualToString:@"currentProject"]) {
+        NSString *nameWithPath = FotomailUserDefault.defaults.currentProject;
+        [self.project setTitle:nameWithPath forState:UIControlStateNormal];
     }
     else{
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -656,7 +679,7 @@ cycle de prise de vue
     }
     
     // on met à jour la liste de destinataire qui a pu changer entre temps (réglages)
-    [mailPicker setToRecipients:[FotomailUserDefault.defaults recipients]];
+    [mailPicker setToRecipients:[FotomailUserDefault.defaults recipientsWithExtension]];
     //on attend que toutes les images ait été ajoutées avant d'afficher
     dispatch_group_notify(imgGroup, dispatch_get_main_queue(),
                           ^{

@@ -10,5 +10,6 @@
 
 /// ne sont admis que les caractères alphabétiques, formant un nom de fichier valide,  taille maxi 24 caractères
 @interface TitleTextFieldDelegate : NSObject  <UITextFieldDelegate>
-
+- (BOOL) textFieldShouldReturn:(UITextField *)textField;
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 @end

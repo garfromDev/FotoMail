@@ -23,7 +23,11 @@ class RecipientsTableViewController: UITableViewController  {
         super.viewDidLoad()
         
         // chargement des adresses
-        emailAdress = UserDefaults.standard.array(forKey: RECIPIENTS) as! [String]
+        emailAdress = FotomailUserDefault.defaults().recipients
+        // on ajoute une chaine vide à la fin si nécessaire pour pouvoir entrer une nouvelle adresse
+        if emailAdress.last != "" {
+            emailAdress.append("")
+        }
         
         // préparation de la tableView
         tableView.delegate = self

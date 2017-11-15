@@ -93,9 +93,10 @@ class EditProjectListController : EditableStringArrayTableViewController {
 
 extension SettingsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier! {
+        guard let segID = segue.identifier else {return}
+        switch segID {
         case "chooseProjects":
-            let dest = segue.destination as! EditProjectListController
+            let dest = segue.destination as! EditableStringArrayTableViewController
             dest.saveModel = {
                 (mdl: [String] ) in
                 FotomailUserDefault.defaults().projects =  mdl as [String]

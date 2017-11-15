@@ -5,9 +5,8 @@
 //  Created by Alistef on 21/01/2017.
 //  Copyright © 2017 garfromDev. All rights reserved.
 //
-
-#import <XCTest/XCTest.h>
 #import "FotomailUserDefault.h"
+#import <XCTest/XCTest.h>
 
 @interface FotomailUserDefaultTests : XCTestCase
 
@@ -18,6 +17,7 @@
 - (void)setUp {
     [super setUp];
     [FotomailUserDefault.defaults setImgNumber:0];
+    [FotomailUserDefault.defaults setProjects:[]];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -56,5 +56,13 @@
     XCTAssert([FotomailUserDefault.defaults imgNumber] == 1, @"imgNumber doit être à un");
     [FotomailUserDefault.defaults setImgNumber:NSIntegerMax];
     XCTAssert([FotomailUserDefault.defaults imgNumber] == 0, @"imgNumber doit être à zéro");    
+}
+
+-(void)testSetCurrentProject{
+    FotomailUserDefault.defaults.currentProject = @"testProject";
+    XCTAssert([[FotomailUserDefault.defaults currentProject] isEqualToString:@"testProject\\"]], @"un \\ doit être ajouté à la fin");
+    
+    FotomailUserDefault.defaults.currentProject = @"";
+    XCTAssert([[FotomailUserDefault.defaults currentProject] isEqualToString:@"\\"]], @"un \\ doit être ajouté à la fin même si la chaine est vide");
 }
 @end

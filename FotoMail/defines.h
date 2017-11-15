@@ -16,6 +16,7 @@
 #define PREVIEW @"preview"
 #define RECIPIENTS @"recipients"
 #define PROJECTS @"projects"
+#define CURRENTPROJECT @"currentProject"
 #define NBIMAGE @"nbImage"
 #define IMGNUMBER @"imgNumber"
 
