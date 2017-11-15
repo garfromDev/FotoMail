@@ -27,10 +27,10 @@ protocol StringArrayTableViewController {
  personaliser le cell identifier si on n'utilise pas le défaut
  fournir un bloc pour la sauvegarde du modèle si on veut une persistence
  fournir la valeur initiale du modèle si pas vide au départ
- 
  */
 class EditableStringArrayTableViewController: UITableViewController, StringArrayTableViewController, CellIdentifiable
 {
+    // MARK:- Interface
     var model: [String] = [] {
         didSet {
             tableView?.reloadData()
@@ -44,15 +44,9 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
     /// block to be invoqued for persistent saving of the model
     var saveModel: ([String]) -> Void = { (m : [String]) in }
     
-    
+    // MARK:- LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         //ajoute un bouton plus pour l'ajout d'une ligne vierge
         let addButton = UIBarButtonItem(barButtonSystemItem: .add,
@@ -66,6 +60,13 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
         tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
+    
+    // on résilie les abonnements
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
 
     // MARK: - Table view data source
 
@@ -157,6 +158,9 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
         updateAddButtonStatus()
     }
     
+    
+    // MARK: - UI state management
+    
     /// le bouton "Add" est actif uniquement lorsque la dernière ligne n'est pas vide
     private func updateAddButtonStatus()
     {
@@ -165,37 +169,6 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
         }
     }
     
-    // on résilie les abonnements
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

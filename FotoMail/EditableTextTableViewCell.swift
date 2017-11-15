@@ -7,12 +7,6 @@
 
 import UIKit
 
-/*
- le textField doit être un textField normal, mais ayant pour délgéué un TitleTextFieldDelegate
- et répondant au protocol ModelIndexed
- La cellule 
- */
-
 
 /// cellule d'une ETTV
 typealias EditableTextTableCell = UITableViewCell & ModelIndexed & ModelTextSetable & TextFieldEditable
@@ -31,9 +25,9 @@ Personalisée avec un délégué qui validera le texte saisie
  est ModelTextSetable pour être initalisée avec le texte issu du modèle
  est ModelIndexed pour relier le texte édité à l'index du modèle
 */
-
 class EditableTextTableViewCell<T:EditableTableViewTextField>: UITableViewCell , ModelIndexed , ModelTextSetable, TextFieldEditable{
-
+    
+    // MARK:- Interface
     var modelText : String? {
         didSet {
             txtField?.text = modelText
@@ -48,25 +42,30 @@ class EditableTextTableViewCell<T:EditableTableViewTextField>: UITableViewCell ,
         }
     }
     
-    fileprivate var txtField : T!
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        txtField = T(frame: CGRect(x: 8, y: 8, width: 300, height: 25))
-        txtField.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        txtField.identifier = reuseIdentifier ?? ""
-        //txtField.modelIndex = modelIndex //FIXME: n'ets pas setté au moemetn d'awake from Nib
-        contentView.addSubview(txtField)
-        print("EditableTextTableViewCell awakeFromNib index \(modelIndex)")
-    }
-
-    // stope le mode édition du txtField
+    /// stope le mode édition du txtField
     func stopEditing(){
         txtField?.resignFirstResponder()
     }
     
-    //on fournit un moyen de voir ce que contient
+    
+    // MARK:- Private
+    fileprivate var txtField : T!
+    
+    
+    // MARK:- LifeCycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // FIXME: valeurs arbitraires, voir sur différents appareils
+        txtField = T(frame: CGRect(x: 8, y: 8, width: 300, height: 25))
+        txtField.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        txtField.identifier = reuseIdentifier ?? ""
+        contentView.addSubview(txtField)
+        print("EditableTextTableViewCell awakeFromNib index \(modelIndex)")
+    }
+
+
+    //on fournit un moyen de voir ce que contient la cellule et son textField
     override public var description: String{
         return "EditableTextTableViewCell index:\(modelIndex) txtFieldIndex:\(txtField.modelIndex) txtFieldText:\(txtField.text ?? "no text") delegateIndex \( (txtField.delegate) as! ETTVTextFieldDelegate).modelIndex"
     }
