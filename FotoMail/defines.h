@@ -45,7 +45,7 @@
 
 //mode screenshot for capturing AppSTore screenshot on simulator
 // comment out for device/release
-//#define SCREENSHOTMODE
+#define SCREENSHOTMODE
 
 #ifdef SCREENSHOTMODE
 #pragma message "!!!!! SCREENSHOT MODE FOR SIMULATOR USE !!!!!"
