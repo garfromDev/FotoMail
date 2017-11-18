@@ -22,22 +22,26 @@
  modification configureFor2FingerSCroll pour diminuer risque de dessiner en déplaçant
  1.3 release avec gomme
  1.4 correction bug touch cancelled
+ 1.5 ajout sélection du projet avec extension adresse e-mail
  
  A faire après :
- corriger bug de la torche système non disponible quand Fotomail est lancée
- ajouter du unittest du ViewController pour compléter le test coverage
- ajouter un undo incrémental
- ajouter choix couleur pinceaux
- faire passer la vue en edition sous la barre d'outil et le titre (translucide)
- V1.5
+  V1.6
  ajouter loupe = zoom numérique en macro
- V1.6
- ajouter localization textes
+ voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
+ ajouter du unittest du ViewController pour compléter le test coverage
  v1.7
+ réglage puissance torche en macro avec un slider
+ corriger bug de la torche système non disponible quand Fotomail est lancée
+ corriger les warning pour deprecated
+  V1.8
+ ajouter localization textes
+ V1.9
+ ajouter choix couleur pinceaux
+ ajouter crop à la taille de la vue en édition
+ faire passer la vue en edition sous la barre d'outil et le titre (translucide)
+V1.9.1
  ajouter contact editeur
  Ajouter message explicatif tri automatique dans gmail
- V1.8
-
 */
 
 // NICETOHAVE : ajouter un encadré jaune quand on fait le focus à un endroit?
@@ -46,7 +50,6 @@
 // NICETOHAVE : gomme prend la taille du doigt (indexRadius)
 // NICETOHAVE : ajouter aide avec surimpression légendes sur image
 // NICETOHAVE : réglage correction lumière comme photo système
-// NICETOHAVE : voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
 // NICETOHAVE : version appli message
 
 #import "ViewController.h"
@@ -345,7 +348,10 @@ cycle de prise de vue
         [self updateTitles];
     }else if([keyPath isEqualToString:@"currentProject"]) {
         NSString *nameWithPath = FotomailUserDefault.defaults.currentProject;
+        // on remet à jour le projet affiché sur l'écran de prise de vue
         [self.project setTitle:nameWithPath forState:UIControlStateNormal];
+        // et celui affiché sur l'écran de preview
+        [self.previewProject setText:nameWithPath];
     }
     else{
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
