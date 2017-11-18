@@ -57,6 +57,10 @@ NSString *oldTitle;
 
 
 - (void) setProjects:(NSArray<NSString *> *)projects{
+    // on élimine les chaines vides à la fin
+    if([[projects lastObject] isEqualToString: @""]){
+        projects = [projects subarrayWithRange:NSMakeRange(0, projects.count - 1)];
+    }
     [[NSUserDefaults standardUserDefaults] setValue:projects forKey:PROJECTS];
     //si current project ne fait pas partie de project, il faut le mettre à chaine vide
     if([projects indexOfObject:[self currentPrjctWithoutSlash]] == NSNotFound){

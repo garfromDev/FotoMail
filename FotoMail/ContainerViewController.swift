@@ -30,6 +30,9 @@ import UIKit
         guard let segID = segue.identifier else {return}
         if segID == "EmbedChooseProjectView" {
             let containerController = segue.destination as! ChooseProjectTableViewController
+            if model.last != "" { //model vide => nil => différent de ""
+                model.append("") //on ajoute une ligne vide pour pouvoir effacer le choix actuel
+            }
             containerController.model = model
             containerController.didSelect = didSelect
         }

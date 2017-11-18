@@ -46,10 +46,6 @@ class TableViewTextField<D:IsInitializable & UITextFieldDelegate>: UITextField, 
     override init(frame:CGRect){
         super.init(frame: frame)
         dlg = D() //le delegué sera chargé de valider le texte saisie
-        //on lui transmet les informations nécessaires pour identifier les messages émis
-        // ceci suppose que l'ilitialisation soit effectué via l'initialisateur de convenience
-//        dlg.identifier = identifier
-//        dlg.modelIndex = modelIndex
         self.delegate = dlg
     }
     

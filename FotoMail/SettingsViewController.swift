@@ -81,17 +81,10 @@ class SettingsViewController: UITableViewController {
 
 }
 
-
-class EditProjectListController : EditableStringArrayTableViewController {
-}
-
-/// une cellulle avec un champ de texte éditable n'acceptant que des noms de fichier
-//class ProjectEditableCell: EditableTextTableViewCell<TitleUITextField> { }
-
-// FIXME : overrider la definition du saveModel, voir comment faire?
-// FIXME : plutot une protocol extension?
-
-extension SettingsViewController {
+// MARK:- appel à l'écran d'édition des projets
+extension SettingsViewController
+{
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let segID = segue.identifier else {return}
         switch segID {
@@ -109,6 +102,7 @@ extension SettingsViewController {
     }
 }
 
+// MARK:-  gère l'écran Legal Notice
 class LegalNoticeViewController: UIViewController {
     @IBOutlet weak var notice: UITextView!
     var appVersion : String!

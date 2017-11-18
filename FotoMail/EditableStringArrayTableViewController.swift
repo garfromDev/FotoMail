@@ -95,19 +95,11 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
     
 
     // MARK: - TableViewDelegate
-    // Override to support conditional editing of the table view.
-    /*
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source            
-            //tableView.deleteRows(at: [indexPath], with: .fade)
+            // Delete the row from the data source
             model.remove(at: indexPath.row)
             tableView.reloadData()
             updateAddButtonStatus()
@@ -117,23 +109,10 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
     private var previousSelected : Int?
     
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        return
-//        //super.tableView(tableView, didSelectRowAt: indexPath)
-//        print("didSelectRowAt \(indexPath.row)")
-//        if let prev = previousSelected {
-//            let c = tableView.cellForRow(at: IndexPath(row:prev, section:0)) as! EditableTextTableCell
-//            c.stopEditing()
-//        }
-//        previousSelected = indexPath.row
-//    }
-//
-    
     func addItem(){
         print("addItem  nb before = \(model.count)")
         let s = ""
         model.append(s)
-       // tableView?.insertRows(at: [IndexPath(row:model.count-1, section:0)], with: .fade) //avant l'ajout, le row était count - 1
         tableView?.reloadData()
         updateAddButtonStatus()
     }

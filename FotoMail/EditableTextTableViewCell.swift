@@ -56,8 +56,10 @@ class EditableTextTableViewCell<T:EditableTableViewTextField>: UITableViewCell ,
     // MARK:- LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // FIXME: valeurs arbitraires, voir sur différents appareils
-        txtField = T(frame: CGRect(x: 8, y: 8, width: 300, height: 25))
+
+        let w = self.bounds.width
+        let h = self.bounds.height
+        txtField = T(frame: CGRect(x: 8, y: 8, width: w - 16 , height: h - 16))
         txtField.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         txtField.identifier = reuseIdentifier ?? ""
         contentView.addSubview(txtField)
