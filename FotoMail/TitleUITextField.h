@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ModelIndexed;
+
 /// UITextField with only 24 characters valid in filenames allowed
-@interface TitleUITextField : UITextField<UITextFieldDelegate>
+@interface TitleUITextField : UITextField<UITextFieldDelegate, ModelIndexed>
 
 @property(nonatomic) NSString *textForEdition;
+@property int modelIndex;
 
 @end

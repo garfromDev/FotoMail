@@ -22,22 +22,26 @@
  modification configureFor2FingerSCroll pour diminuer risque de dessiner en déplaçant
  1.3 release avec gomme
  1.4 correction bug touch cancelled
+ 1.5 ajout sélection du projet avec extension adresse e-mail
  
  A faire après :
- corriger bug de la torche système non disponible quand Fotomail est lancée
- ajouter du unittest du ViewController pour compléter le test coverage
- ajouter un undo incrémental
- ajouter choix couleur pinceaux
- faire passer la vue en edition sous la barre d'outil et le titre (translucide)
- V1.5
+  V1.6
  ajouter loupe = zoom numérique en macro
- V1.6
- ajouter localization textes
+ voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
+ ajouter du unittest du ViewController pour compléter le test coverage
  v1.7
+ réglage puissance torche en macro avec un slider
+ corriger bug de la torche système non disponible quand Fotomail est lancée
+ corriger les warning pour deprecated
+  V1.8
+ ajouter localization textes
+ V1.9
+ ajouter choix couleur pinceaux
+ ajouter crop à la taille de la vue en édition
+ faire passer la vue en edition sous la barre d'outil et le titre (translucide)
+V1.9.1
  ajouter contact editeur
  Ajouter message explicatif tri automatique dans gmail
- V1.8
-
 */
 
 // NICETOHAVE : ajouter un encadré jaune quand on fait le focus à un endroit?
@@ -46,7 +50,6 @@
 // NICETOHAVE : gomme prend la taille du doigt (indexRadius)
 // NICETOHAVE : ajouter aide avec surimpression légendes sur image
 // NICETOHAVE : réglage correction lumière comme photo système
-// NICETOHAVE : voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
 // NICETOHAVE : version appli message
 
 #import "ViewController.h"
@@ -86,8 +89,6 @@ cycle de prise de vue
 */
 @implementation ViewController 
 {
-    /// l'adresse e-mail de destination
-    NSString *toName;
     /// le sujet par défaut du mail
     NSString *subject;
 
@@ -128,6 +129,8 @@ cycle de prise de vue
     // permettra d'adapter l'interface au nombre de photo prise et au changement du titre via observeValueForKeyPath:
     [FotomailUserDefault.defaults addObserver:self forKeyPath:@"nbImages" options:NSKeyValueObservingOptionNew context:nil];
     [FotomailUserDefault.defaults addObserver:self forKeyPath:@"titreImg" options:NSKeyValueObservingOptionNew context:nil];
+     // permettra d'adapter l'interface au changement du projet courante   via observeValueForKeyPath:
+    [FotomailUserDefault.defaults addObserver:self forKeyPath:@"currentProject" options:NSKeyValueObservingOptionNew context:nil];
     // permet d'adapter l'interface au changement de mode macro
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(macroModeHasChanged:) name:kcameraControlsMacroModeChangedNotification object:camera];
     //permet d'être averti en cas de changement des autorisations dans privacy setting
@@ -155,9 +158,17 @@ cycle de prise de vue
     self.clrView.delegate = self; //en tant que pathProvider
 
     //on s'abonne aux notification des champs de texte pour mettre à jour l'affichage quand le titre a été édité
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(titleDidEditing:) name:UITextFieldTextDidEndEditingNotification  object:self.titre];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(titleDidEditing:) name:UITextFieldTextDidEndEditingNotification  object:self.previewTitreTextField];
-    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+        selector:@selector(titleDidEditing:)
+        name:UITextFieldTextDidEndEditingNotification
+        object:self.titre];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+        selector:@selector(titleDidEditing:)
+        name:UITextFieldTextDidEndEditingNotification
+        object:self.previewTitreTextField];
+
     // on masque les commandes de flash et de macro si il n'est pas disponible
 #ifndef SCREENSHOTMODE
     //reste affiché pour screenshot
@@ -176,7 +187,11 @@ cycle de prise de vue
     LOG
     if(!camera){return;}
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(adaptToScreenSize)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+        selector:@selector(adaptToScreenSize)
+        name:UIDeviceOrientationDidChangeNotification
+        object:nil];
 }
 
 
@@ -241,8 +256,34 @@ cycle de prise de vue
     }else{
         [camera setMacroOn];
     }
+
 }
 
+/// long press sur le nom du projet
+/// on anime en grossisant, puis on affiche une liste de choix
+-(IBAction)projectLongPress:(UILongPressGestureRecognizer *)sender{
+    switch( sender.state) {
+        case UIGestureRecognizerStateBegan:{
+            [UIView animateWithDuration:ANIMATION_TIME animations: ^{
+                self.project.transform = CGAffineTransformMakeScale((CGFloat) LONGPRESS_SCALE, (CGFloat) LONGPRESS_SCALE); }
+             ];
+            break;}
+        case UIGestureRecognizerStateEnded:{
+             [UIView animateWithDuration:ANIMATION_TIME animations: ^{
+                 [self.project setTransform: CGAffineTransformIdentity]; }
+              ];
+            [self chooseProject];
+            break;}
+        case UIGestureRecognizerStateFailed:
+        case UIGestureRecognizerStateCancelled:{
+            [UIView animateWithDuration:ANIMATION_TIME animations: ^{
+                [self.project setTransform: CGAffineTransformIdentity]; }
+             ];
+            break;}
+        default:
+            break;
+    }
+}
 
 /// l'utilisateur a touché l'icone réglages
 - (IBAction) reglages:(id)sender{
@@ -270,6 +311,23 @@ cycle de prise de vue
     [self.macroMode setImage:newImg forState:UIControlStateNormal];
 }
 
+/// affiche la liste de projets disponibles et gère la sélection et l'ajout d'un nouveau projet
+-(void) chooseProject
+{
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"ChooseProject" bundle:nil];
+    ContainerViewController *tbv = [story instantiateViewControllerWithIdentifier:@"ChooseProject"];
+    tbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    tbv.model = FotomailUserDefault.defaults.projects;
+    // le bloc qui sera invoqué lorsque l'utilisateur cliquera sur un nom de projet
+    void(^action)(NSInteger index, NSString *content) = ^void(NSInteger index, NSString *content){
+        NSLog(@"project %@ a été choisi", content);
+        FotomailUserDefault.defaults.currentProject = content;
+    };
+    tbv.didSelect = action;
+    
+    [self presentViewController:tbv animated:true completion:nil];
+}
+
 
 /// adapte l'interface en fonction du nombre de photo prise, pas de bouton Mail si 0 images
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
@@ -288,6 +346,12 @@ cycle de prise de vue
     }else if([keyPath isEqualToString:@"titreImg"]) {
         //on remet à jour le nom de l'image affiché dans titre
         [self updateTitles];
+    }else if([keyPath isEqualToString:@"currentProject"]) {
+        NSString *nameWithPath = FotomailUserDefault.defaults.currentProject;
+        // on remet à jour le projet affiché sur l'écran de prise de vue
+        [self.project setTitle:nameWithPath forState:UIControlStateNormal];
+        // et celui affiché sur l'écran de preview
+        [self.previewProject setText:nameWithPath];
     }
     else{
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -312,7 +376,7 @@ cycle de prise de vue
     
     // on fait la préparation du controleur de mail en tache de fond pour afficher le plus vite possible l'appareil photo
     // on utilise le groupe mailGroup pour ne pas lancer d'attachement d'image avant que le controlleur ne soit crée
-    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0),
+    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), //FIXME: était QOS_CLASS_USER_INITIATED
     ^{ //on prépare le composeur de mail
         NSLog(@"allocate Mail controller %@", [NSDate date]);
         mailPicker = [[MFMailComposeViewController alloc] init];
@@ -368,6 +432,7 @@ cycle de prise de vue
 #endif
 
 }
+
 
 /// gère les effets et le son de la capture de l'image
 - (void) visualCaptureImage: (id)sender {
@@ -620,7 +685,7 @@ cycle de prise de vue
     }
     
     // on met à jour la liste de destinataire qui a pu changer entre temps (réglages)
-    [mailPicker setToRecipients:[FotomailUserDefault.defaults recipients]];
+    [mailPicker setToRecipients:[FotomailUserDefault.defaults recipientsWithExtension]];
     //on attend que toutes les images ait été ajoutées avant d'afficher
     dispatch_group_notify(imgGroup, dispatch_get_main_queue(),
                           ^{
@@ -707,7 +772,7 @@ cycle de prise de vue
     if(!camera) {return;} //rien à faire si pas de caméra initialisée ou accessible
     // Merci à Matteo Caldari, c'est le truc qui manquait pour faire fonctionner la rotation
     camera.cameraLayer.frame = self.cameraPreviewView.bounds;
-    camera.cameraLayer.connection.videoOrientation = [orientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
+    camera.cameraLayer.connection.videoOrientation = [OrientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
     // on remet à jour le bouton mail car en cas de rotation, un des deux n'était pas activé
     // et n'a donc pas pris le changement
     self.mailButton.hidden = (FotomailUserDefault.defaults.nbImages == 0);

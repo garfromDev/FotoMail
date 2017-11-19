@@ -81,8 +81,28 @@ class SettingsViewController: UITableViewController {
 
 }
 
+// MARK:- appel à l'écran d'édition des projets
+extension SettingsViewController
+{
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let segID = segue.identifier else {return}
+        switch segID {
+        case "chooseProjects":
+            let dest = segue.destination as! EditableStringArrayTableViewController
+            dest.saveModel = {
+                (mdl: [String] ) in
+                FotomailUserDefault.defaults().projects =  mdl as [String]
+            }
+            dest.model = FotomailUserDefault.defaults().projects
+            dest.identifier = "textFieldCell"
+        default:
+            break
+        }
+    }
+}
 
-
+// MARK:-  gère l'écran Legal Notice
 class LegalNoticeViewController: UIViewController {
     @IBOutlet weak var notice: UITextView!
     var appVersion : String!
@@ -97,3 +117,5 @@ class LegalNoticeViewController: UIViewController {
         self.notice.text = versioned
     }
 }
+
+

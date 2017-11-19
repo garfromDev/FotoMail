@@ -17,6 +17,7 @@
                 <outlet property="mailButton" destination="8KH-KD-sMe" id="kN5-Ow-u7v"/>
                 <outlet property="noPhoto" destination="kpM-Ht-gqX" id="5lV-ug-nJ1"/>
                 <outlet property="overlayView" destination="iN0-l3-epB" id="hvE-FH-8BE"/>
+                <outlet property="project" destination="nHE-Eg-YaM" id="a8e-Rz-Wty"/>
                 <outlet property="titre" destination="RmI-U2-qs1" id="8Mo-Ii-qEt"/>
             </connections>
         </placeholder>
@@ -88,7 +89,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YUQ-c5-Peh">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIU-m5-bVw" userLabel="macroMode">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" placeholderIntrinsicWidth="25" placeholderIntrinsicHeight="38" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIU-m5-bVw" userLabel="macroMode">
                             <rect key="frame" x="0.0" y="0.0" width="25" height="38"/>
                             <accessibility key="accessibilityConfiguration" identifier="macroMode"/>
                             <state key="normal" image="macro"/>
@@ -96,7 +97,7 @@
                                 <action selector="macroMode:" destination="-1" eventType="touchUpInside" id="CBj-Vk-7ue"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIr-b8-AZt" userLabel="FlashMode">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" placeholderIntrinsicWidth="25" placeholderIntrinsicHeight="38" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIr-b8-AZt" userLabel="FlashMode">
                             <rect key="frame" x="33" y="0.0" width="25" height="38"/>
                             <state key="normal" image="flashOff">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -105,7 +106,7 @@
                                 <action selector="changeFlashMode:" destination="-1" eventType="touchUpInside" id="aI5-9I-bov"/>
                             </connections>
                         </button>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="V3R-ZG-9Pr" userLabel="flashControls">
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="V3R-ZG-9Pr" userLabel="flashControls">
                             <rect key="frame" x="66" y="0.0" width="119" height="39"/>
                             <segments>
                                 <segment title="" image="flashOff"/>
@@ -146,7 +147,7 @@
             </subviews>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="3FW-5F-Y0b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="01b-MP-1J0"/>
+                <constraint firstItem="3FW-5F-Y0b" firstAttribute="leading" secondItem="RzR-Gy-yIG" secondAttribute="leading" id="01b-MP-1J0"/>
                 <constraint firstItem="3FW-5F-Y0b" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="7X7-mr-bPd">
                     <variation key="heightClass=compact" constant="0.0"/>
                 </constraint>
@@ -155,9 +156,9 @@
                 <constraint firstItem="pJQ-aE-I41" firstAttribute="top" secondItem="YUQ-c5-Peh" secondAttribute="bottom" priority="750" id="LLu-HR-A6F"/>
                 <constraint firstItem="D3I-Cp-DGp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PU6-xe-Axf"/>
                 <constraint firstItem="pJQ-aE-I41" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="S3C-Sq-2Yt"/>
-                <constraint firstItem="3FW-5F-Y0b" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="VEQ-36-f9F"/>
-                <constraint firstItem="YUQ-c5-Peh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aig-HR-rmb"/>
-                <constraint firstAttribute="trailing" secondItem="YUQ-c5-Peh" secondAttribute="trailing" id="amS-57-zbw"/>
+                <constraint firstItem="3FW-5F-Y0b" firstAttribute="bottom" secondItem="RzR-Gy-yIG" secondAttribute="bottom" id="VEQ-36-f9F"/>
+                <constraint firstItem="YUQ-c5-Peh" firstAttribute="leading" secondItem="RzR-Gy-yIG" secondAttribute="leading" id="aig-HR-rmb"/>
+                <constraint firstItem="RzR-Gy-yIG" firstAttribute="trailing" secondItem="YUQ-c5-Peh" secondAttribute="trailing" id="amS-57-zbw"/>
                 <constraint firstItem="clp-V7-bpR" firstAttribute="centerY" secondItem="3FW-5F-Y0b" secondAttribute="centerY" id="bOM-EJ-zs1"/>
                 <constraint firstItem="pJQ-aE-I41" firstAttribute="width" secondItem="D3I-Cp-DGp" secondAttribute="width" id="bUU-Xc-Sk7"/>
                 <constraint firstItem="D3I-Cp-DGp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="g17-oQ-H27"/>
@@ -165,10 +166,11 @@
                 <constraint firstItem="clp-V7-bpR" firstAttribute="width" secondItem="3FW-5F-Y0b" secondAttribute="width" id="jjb-hr-Lb2"/>
                 <constraint firstItem="D3I-Cp-DGp" firstAttribute="height" secondItem="YUQ-c5-Peh" secondAttribute="height" constant="10" id="lWj-vo-bvY"/>
                 <constraint firstItem="clp-V7-bpR" firstAttribute="height" secondItem="3FW-5F-Y0b" secondAttribute="height" id="mfa-Au-TsJ"/>
-                <constraint firstItem="YUQ-c5-Peh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pPm-jj-AC5"/>
+                <constraint firstItem="YUQ-c5-Peh" firstAttribute="top" secondItem="RzR-Gy-yIG" secondAttribute="top" id="pPm-jj-AC5"/>
                 <constraint firstAttribute="trailing" secondItem="D3I-Cp-DGp" secondAttribute="trailing" id="ruJ-wP-hDU"/>
                 <constraint firstItem="clp-V7-bpR" firstAttribute="centerX" secondItem="3FW-5F-Y0b" secondAttribute="centerX" id="w3S-yv-RaS"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="RzR-Gy-yIG"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="7X7-mr-bPd"/>
@@ -201,6 +203,11 @@
                 <action selector="tapOutsideTextField:" destination="-1" id="4N5-qt-syZ"/>
             </connections>
         </tapGestureRecognizer>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="aKo-K6-EEJ">
+            <connections>
+                <action selector="projectLongPress:" destination="-1" id="QNP-7U-con"/>
+            </connections>
+        </pongPressGestureRecognizer>
     </objects>
     <resources>
         <image name="Settings" width="25" height="25"/>

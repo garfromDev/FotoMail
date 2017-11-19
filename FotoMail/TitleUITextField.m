@@ -9,6 +9,7 @@
 #import "TitleUITextField.h"
 #import "TitleTextFieldDelegate.h"
 #import "defines.h"
+#import "FotoMail-Swift.h"
 
 @interface TitleUITextField(){
 //keep living the delegate object as long as this UITextField is living
@@ -97,4 +98,16 @@ TitleTextFieldDelegate *myDelegate; //ATTENTION, je l'avais par erreur déclaré
     NSLog(@"textForEdition: %@  text: %@  isEditing: %@", ((TitleUITextField *)textField).textForEdition, textField.text, textField.isEditing?@"TRUE":@"FALSE");
     
 }
+
+#pragma mark- ModelIndexed protocol
+int _modelIndex;
+
+-(int)modelIndex {
+    return _modelIndex;
+}
+
+-(void) setModelIndex:(int)modelIndex{
+    self.tag = modelIndex;
+}
+
 @end

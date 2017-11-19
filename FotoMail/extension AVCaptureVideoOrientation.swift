@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 /// Fournis un service pour convertir les enums UIInterfaceOrientation-> AVCaptureVideoOrientation
-@objc class orientationHelper:NSObject{
+@objc class OrientationHelper:NSObject{
     @objc class func convertInterfaceOrientationToAVCatureVideoOrientation(ui:UIInterfaceOrientation) -> AVCaptureVideoOrientation{
         switch ui {
         case .landscapeRight:       return .landscapeRight
