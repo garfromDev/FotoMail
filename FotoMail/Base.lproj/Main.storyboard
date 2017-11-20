@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,7 +33,7 @@
                                 <rect key="frame" x="197" y="301.66666666666669" width="20" height="20"/>
                             </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fond FotoMail" translatesAutoresizingMaskIntoConstraints="NO" id="ONP-e5-HQX">
-                                <rect key="frame" x="107" y="341.66666666666663" width="200" height="199.99999999999989"/>
+                                <rect key="frame" x="107" y="341.66666666666669" width="200" height="200.00000000000006"/>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FrT-mW-zX5" userLabel="CameraPreviewView">
                                 <rect key="frame" x="0.0" y="92" width="414" height="552"/>
@@ -67,7 +68,7 @@
                             <constraint firstItem="snC-8g-gMs" firstAttribute="top" secondItem="FrT-mW-zX5" secondAttribute="top" id="OVC-xx-bO3"/>
                             <constraint firstItem="ONP-e5-HQX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SdJ-0J-nRe"/>
                             <constraint firstItem="snC-8g-gMs" firstAttribute="height" secondItem="FrT-mW-zX5" secondAttribute="height" id="VdD-D9-ZhB"/>
-                            <constraint firstItem="ONP-e5-HQX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.2" id="Vfs-7b-Aap"/>
+                            <constraint firstItem="ONP-e5-HQX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.2" priority="750" id="Vfs-7b-Aap"/>
                             <constraint firstItem="ONP-e5-HQX" firstAttribute="height" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.8" id="Xg8-bR-JbM"/>
                             <constraint firstItem="ONP-e5-HQX" firstAttribute="top" secondItem="sHQ-sK-t7O" secondAttribute="bottom" constant="20" id="Zhj-Fa-Z2h"/>
                             <constraint firstItem="FrT-mW-zX5" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" priority="250" id="bcV-pA-ybw"/>
@@ -76,6 +77,7 @@
                             <constraint firstItem="sHQ-sK-t7O" firstAttribute="top" secondItem="HlR-fB-PyW" secondAttribute="bottom" constant="20" id="o1n-bU-zNt"/>
                             <constraint firstItem="ONP-e5-HQX" firstAttribute="width" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="tdx-xQ-HCG"/>
                             <constraint firstItem="snC-8g-gMs" firstAttribute="leading" secondItem="FrT-mW-zX5" secondAttribute="leading" id="vM9-98-fIx"/>
+                            <constraint firstItem="HlR-fB-PyW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="28" id="vMX-rZ-Kel"/>
                             <constraint firstItem="FrT-mW-zX5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xZ9-RX-OYo"/>
                             <constraint firstItem="sHQ-sK-t7O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yry-7y-g5t"/>
                             <constraint firstItem="snC-8g-gMs" firstAttribute="width" secondItem="FrT-mW-zX5" secondAttribute="width" id="zyb-PL-7fp"/>

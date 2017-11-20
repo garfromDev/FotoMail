@@ -15,6 +15,8 @@
 #define STAMPSIZE @"stampSize"
 #define PREVIEW @"preview"
 #define RECIPIENTS @"recipients"
+#define PROJECTS @"projects"
+#define CURRENTPROJECT @"currentProject"
 #define NBIMAGE @"nbImage"
 #define IMGNUMBER @"imgNumber"
 
@@ -34,6 +36,12 @@
 
 // sound when capturing picture
 #define PHOTO_SOUND 1108
+
+// default time for animations
+#define ANIMATION_TIME 0.2
+
+// default scale to apply when long pressing an item
+#define LONGPRESS_SCALE 1.6
 
 //mode screenshot for capturing AppSTore screenshot on simulator
 // comment out for device/release

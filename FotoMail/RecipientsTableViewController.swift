@@ -23,7 +23,11 @@ class RecipientsTableViewController: UITableViewController  {
         super.viewDidLoad()
         
         // chargement des adresses
-        emailAdress = UserDefaults.standard.array(forKey: RECIPIENTS) as! [String]
+        emailAdress = FotomailUserDefault.defaults().recipients
+        // on ajoute une chaine vide à la fin si nécessaire pour pouvoir entrer une nouvelle adresse
+        if emailAdress.last != "" {
+            emailAdress.append("")
+        }
         
         // préparation de la tableView
         tableView.delegate = self
@@ -34,6 +38,7 @@ class RecipientsTableViewController: UITableViewController  {
     
     @IBAction func chooseContact(_ sender: Any) {
         // comment on trouve l'émetteur -> par le tag
+        // le tag a été fixé dans le cell for indexPath du Datasource
         let bouton = sender as! UIButton
         editedRow = bouton.tag
         

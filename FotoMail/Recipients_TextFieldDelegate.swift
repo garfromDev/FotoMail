@@ -37,8 +37,12 @@ extension RecipientsTableViewController : UITextFieldDelegate {
         }
         
         tableView.reloadData()
-        // on sauve la list en préférence
-        FotomailUserDefault.defaults().recipients = emailAdress
+        // on sauve la list en préférence, sans inclure l'adresse vide  à la fin
+        if emailAdress.last == "" {
+            FotomailUserDefault.defaults().recipients = Array(emailAdress.dropLast())
+        }else{
+            FotomailUserDefault.defaults().recipients = emailAdress
+        }
     }
 
 }

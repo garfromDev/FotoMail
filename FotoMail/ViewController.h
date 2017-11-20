@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
 @property (weak, nonatomic) IBOutlet UIView *blackViewForVisualEffect;
+@property (weak, nonatomic) IBOutlet UIButton *project;
 
 
 // attention, valueChanged n'est pas appellée par UItextField quand modif programatique
@@ -54,6 +55,7 @@
 - (IBAction) reglages:(id)sender;
 - (IBAction)tapOutsideTextField:(UITapGestureRecognizer *)sender;
 - (IBAction)takeAndPreview:(id)sender;
+- (IBAction)projectLongPress:(UILongPressGestureRecognizer *)sender;
 
 
 // écran preview
@@ -64,6 +66,9 @@
 @property (weak, nonatomic) IBOutlet TransparentPathView *clrView;
 /// l'image contenu dans la scrollView, c'est elle qui génère les path
 @property (weak, nonatomic) IBOutlet EditingSupportImageView *imageView;
+/// le nom du projet sélectionné
+@property(weak, nonatomic) IBOutlet UILabel *previewProject;
+
 /* principe de fonctionnement :
  la scrollview est configurée pour ne traiter que les touches à 2 doigts pour le pan
  La EditingSupportImageView dans la scrollview est une ImageView qui affiche l'image originale

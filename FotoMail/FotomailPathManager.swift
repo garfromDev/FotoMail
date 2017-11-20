@@ -25,7 +25,7 @@ import UIKit
     func addPath(path: UIBezierPath) {
         let op = OverPath(path: path, draw: self.drawColor, rubber: self.rubberMode)
         self.paths.append(op)
-        print("addPath path \(path.bounds)  total : \(paths.count)")
+        //print("addPath path \(path.bounds)  total : \(paths.count)")
     }
     
 
@@ -47,6 +47,7 @@ import UIKit
     func cancelPath() {
         guard !self.paths.isEmpty else { return }
         self.paths.removeLast()
+        controller?.updateDisplay()
     }
     
     

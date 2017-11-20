@@ -29,35 +29,6 @@ extension ViewController : UIScrollViewDelegate {
     }
     
     
-//    open override func viewDidLayoutSubviews() {
-//        print("viewDidLayoutSubviews() \(scrollView.bounds)")
-//        super.viewWillLayoutSubviews()
-//        updateMinZoomScaleForSize(scrollView.bounds.size) //le niveau de zoom mini peut être différent en portrait ou en paysage
-//    }
-//    
-//    
-//    func updateMinZoomScaleForSize(_ size: CGSize) {
-//        var widthScale, heightScale : CGFloat
-//        if view!.bounds.size.width <= view!.bounds.size.height { //portrait
-//            widthScale = size.width / imageView.bounds.width
-//            heightScale = size.height / imageView.bounds.height
-//        }else{
-//            widthScale = size.height / imageView.bounds.width
-//            heightScale = size.width / imageView.bounds.height
-//        }
-//        let minScale = max(widthScale, heightScale) //on choisi de toujours remplir l'écran, un peu de l'image sera en dehors si le ratio n'est pas le même
-//        var newScale = minScale
-//        let oldMinScale = scrollView.minimumZoomScale
-//        let currentScale = scrollView.zoomScale
-//        // si l'utilisateur avait déjà zoomé, on tente de garder le même niveau de zoom
-//        if (oldMinScale > 0 && oldMinScale < 1 ){
-//            newScale = 1 - (1 - currentScale) / (1 - oldMinScale) * ( 1 - minScale)
-//        }
-//        scrollView.minimumZoomScale = minScale
-//        //        print("updateMinZoomScaleForSize \(size) oldMin \(oldMinScale)  min \(minScale)  actuel \(scrollView.zoomScale) new \(newScale)")
-//        scrollView.zoomScale = newScale
-//    }
-//    
     
     
 }
