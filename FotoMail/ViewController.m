@@ -376,7 +376,7 @@ cycle de prise de vue
     
     // on fait la préparation du controleur de mail en tache de fond pour afficher le plus vite possible l'appareil photo
     // on utilise le groupe mailGroup pour ne pas lancer d'attachement d'image avant que le controlleur ne soit crée
-    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), //FIXME: était QOS_CLASS_USER_INITIATED
+    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0),
     ^{ //on prépare le composeur de mail
         NSLog(@"allocate Mail controller %@", [NSDate date]);
         mailPicker = [[MFMailComposeViewController alloc] init];

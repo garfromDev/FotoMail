@@ -5,7 +5,7 @@
 //  Created by Alistef on 21/01/2017.
 //  Copyright © 2017 garfromDev. All rights reserved.
 //
-#import "FotomailUserDefault.h"
+
 #import <XCTest/XCTest.h>
 
 @interface FotomailUserDefaultTests : XCTestCase
