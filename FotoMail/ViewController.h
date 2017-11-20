@@ -19,7 +19,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-#import "editingImageView.h"
 #import "FotoMail-Bridging-Header.h"
 
 
