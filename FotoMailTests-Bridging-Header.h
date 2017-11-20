@@ -3,4 +3,5 @@
 //
 #import "UIImage+timeStamp.h"
 #import "UIImage + createImageWithColor.h"
-
+#import "editingImageView.h"
+#import "TitleTextFieldDelegate.h"

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */; };
 		300D8A061D361B18003EE973 /* Overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300D8A051D361B18003EE973 /* Overlay.xib */; };
+		301463451FC37ECA00E7CD47 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */; };
 		3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */; };
 		302059C31D66ECD700B47988 /* ColoredPlaceHolderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */; };
@@ -27,7 +28,7 @@
 		3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */; };
 		30580C3A1F37174F002A4FC8 /* EditingSupportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30580C391F37174F002A4FC8 /* EditingSupportImageView.swift */; };
 		305F5B291E09AA5D00421A73 /* RecipientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */; };
-		306073111F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */; };
+		3062EBAC1FACEBC500DC01BC /* EditableStringArrayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3062EBAB1FACEBC500DC01BC /* EditableStringArrayTableViewController.swift */; };
 		306AB0E71F384A7E00CF238F /* extensionVC+PathDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306AB0E61F384A7E00CF238F /* extensionVC+PathDisplayer.swift */; };
 		306F07631E1D852F00D3DD2C /* RoundImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */; };
 		306F78B51D610A7700634C5B /* TitleUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 306F78B41D610A7700634C5B /* TitleUITextField.m */; };
@@ -126,6 +127,7 @@
 		30580C391F37174F002A4FC8 /* EditingSupportImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditingSupportImageView.swift; path = ../../tests/testScrollViewPlusTransparent/testScrollViewPlusTransparent/EditingSupportImageView.swift; sourceTree = "<group>"; };
 		305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipientsTableViewController.swift; sourceTree = "<group>"; };
 		306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+ExtensionFaultTests.m"; sourceTree = "<group>"; };
+		3062EBAB1FACEBC500DC01BC /* EditableStringArrayTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableStringArrayTableViewController.swift; sourceTree = "<group>"; };
 		306AB0E61F384A7E00CF238F /* extensionVC+PathDisplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extensionVC+PathDisplayer.swift"; sourceTree = "<group>"; };
 		306F07621E1D852F00D3DD2C /* RoundImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageTableViewCell.swift; sourceTree = "<group>"; };
 		306F78B31D610A7700634C5B /* TitleUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleUITextField.h; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 			files = (
 				3092D8C91EBBCD5E004F93D3 /* UIVIewExtension.swift in Sources */,
 				3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */,
+				301463451FC37ECA00E7CD47 /* FotomailUserDefault.m in Sources */,
 				309B30561F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
 				3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */,
@@ -639,7 +642,7 @@
 				308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */,
 				3092D8CD1EBCF832004F93D3 /* UIImage+isEqualToImage.swift in Sources */,
 				3092D8C61EBBBF75004F93D3 /* UIImageEraseTests.swift in Sources */,
-				306073111F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m in Sources */,
+				30BAF6621FB5969A0068660F /* TableViewTextFieldTest.swift in Sources */,
 				30B3F4731E8C465800881E82 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
