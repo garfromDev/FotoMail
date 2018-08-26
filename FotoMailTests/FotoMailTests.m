@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+
 #import "FotomailUserDefault.h"
 #import "ViewController.h"
 
@@ -52,5 +53,9 @@ ViewController *myvc;
 
 }
 
+// need device
+-(void)testTorchOff{
+    
+}
 
 @end

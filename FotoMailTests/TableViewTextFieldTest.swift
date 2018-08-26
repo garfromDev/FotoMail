@@ -7,7 +7,8 @@
 //
 
 import UIKit
+import XCTest
 
-class TableViewTextFieldTest: XCTest {
+class TableViewTextFieldTest: XCTestCase {
 
 }

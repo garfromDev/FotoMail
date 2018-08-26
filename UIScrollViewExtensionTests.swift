@@ -22,8 +22,9 @@ class UIScrollViewExtensionTests: XCTestCase {
         super.tearDown()
     }
     
+    // nominal case
     func testConfigureFor2FingersScroll() {
-        var scr = UIScrollView()
+        let scr = UIScrollView()
         scr.configureFor2FingersScroll()
         for gr in scr.gestureRecognizers! {
             if gr.isKind(of:UIPanGestureRecognizer.self) {
@@ -34,12 +35,20 @@ class UIScrollViewExtensionTests: XCTestCase {
         }
         XCTFail("No PanGestureRecognizer found in scrollView")
         
-        
+    }
+    
+    // no GestureRecognizers
+    func testConfigureNoGestureRecognizers(){
+        let scr = UIScrollView()
         scr.gestureRecognizers = nil
         scr.configureFor2FingersScroll()
         // not fail is expected
         
-        scr = UIScrollView()
+    }
+    
+    // no PanGestureRecognizers
+    func testConfigureNoPangesture() {
+        let scr = UIScrollView()
         for (index, gr) in scr.gestureRecognizers!.enumerated() {
             if gr.isKind(of:UIPanGestureRecognizer.self) {
                 scr.gestureRecognizers!.remove(at: index)

@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3002081F2131C9D600D73D67 /* UIViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3002081E2131C9D600D73D67 /* UIViewControllerTest.m */; };
 		3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */; };
+		3008E8972074104700596A1A /* AVCaptureDevice+ExtensionFaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */; };
 		300D8A061D361B18003EE973 /* Overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300D8A051D361B18003EE973 /* Overlay.xib */; };
 		301463451FC37ECA00E7CD47 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */; };
@@ -93,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3002081E2131C9D600D73D67 /* UIViewControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTest.m; sourceTree = "<group>"; };
 		3007F8461E8C40AD00C26109 /* FotoMailTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FotoMailTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIScrollViewExtensionTests.swift; path = ../UIScrollViewExtensionTests.swift; sourceTree = "<group>"; };
 		300D8A051D361B18003EE973 /* Overlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Overlay.xib; sourceTree = "<group>"; };
@@ -271,6 +274,7 @@
 				3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */,
 				309176181EBE6D40002438D4 /* EditingImageViewTests.swift */,
 				30BAF6611FB5969A0068660F /* TableViewTextFieldTest.swift */,
+				3002081E2131C9D600D73D67 /* UIViewControllerTest.m */,
 			);
 			path = FotoMailTests;
 			sourceTree = "<group>";
@@ -635,6 +639,8 @@
 				3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */,
 				301463451FC37ECA00E7CD47 /* FotomailUserDefault.m in Sources */,
 				309B30561F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m in Sources */,
+				3002081F2131C9D600D73D67 /* UIViewControllerTest.m in Sources */,
+				3008E8972074104700596A1A /* AVCaptureDevice+ExtensionFaultTests.m in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
 				3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */,
 				309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */,

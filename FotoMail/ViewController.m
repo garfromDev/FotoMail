@@ -23,6 +23,7 @@
  1.3 release avec gomme
  1.4 correction bug touch cancelled
  1.5 ajout sélection du projet avec extension adresse e-mail
+ 1.6 coupe la torche lorsqu'on affiche la prévisualisation et lors de l'envoi de mail
  
  A faire après :
   V1.6
@@ -108,8 +109,8 @@ cycle de prise de vue
     /// le controlleur de mail
     MFMailComposeViewController *mailPicker;
 
-    /// le device de prise d'image
-    AVCaptureDevice *camera;
+    /// le device de prise d'image (we use protocol to be able to inject mock for testing)
+    id <AbstractCameraDevice> camera;
     
     /// indique que l'écran de prévisualisation devra être affiché
     BOOL preview;
@@ -358,6 +359,13 @@ cycle de prise de vue
     }
 }
 
+/// turn the torch off if it is on and switch back to flash off
+- (void)turnTorchOff {
+    if(![camera isTorchActive]) { return;}
+    [[self flashControls] setSelectedSegmentIndex:0]; // affiche flash OFF
+    [self choisiFlashMode:[self flashControls]];  //va reconfigurer l'affichage et le mode de la torche
+}
+
 
 //--------------------------------------
 #pragma mark Picture_Taking_part
@@ -490,6 +498,7 @@ cycle de prise de vue
 
 //--------------------------------------
 #pragma mark  Photo_Picker_Delegate
+
 /** Une image a été choisie, on l'ajoute en pièce jointe au mail, on dismiss l'appareil photo pour le rafficher aussitot. Pour raison de récupération code existant, signature du pickerDelegate
     l'image prise est passée sous la clef UIImagePickerControllerOriginalImage du dico
 */
@@ -512,6 +521,9 @@ cycle de prise de vue
         //on cache l'appareil photo
         showPreview = true;
 
+        // on éteint la torche
+        [self turnTorchOff];
+        
         //on anime l'animation de la preview
             [self.previewView slideFromBottomWithBouncing:true duration:0.5 completion:^(BOOL finished) {
                 //on règle le niveau de zoom pour afficher l'image en entier
@@ -669,6 +681,7 @@ cycle de prise de vue
     LOG
     [[self message] setText:@"Preparing mail..."]; //@"Préparation du mail..."
     [self.activityIndicator startAnimating];
+    [self turnTorchOff];
     [self displayComposerSheet];
 }
 
@@ -788,6 +801,8 @@ cycle de prise de vue
 
 /// vérifie les autorisation d'accès et change de mode en fonction de la réponse
 /// appellé par preparePhoto au début de chaque cycle ou par notification d'activation de l'application
+// TODO: a transférer dans AVCaptureDevice+Extension, avec un protocol CameraAuthorisationSetable, et une extension du view controller pour ce protocol
+
 -(void) checkAuthorisation
 {   LOG
     //on vérifie les autorisations, le callback est rappellé sur la mainqueue

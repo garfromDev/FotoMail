@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import FotoMail
+//@testable import FotoMail
 
 // FIXME: construire le bon tets pour SupportEditingView
 
