@@ -8,12 +8,13 @@
 
 #import <XCTest/XCTest.h>
 
-#import "FotomailUserDefault.h"
 #import "ViewController.h"
-
+#import "FotomailUserDefault.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import "AVCaptureDevice+Extension.h"
+#import "UIImage + createImageWithColor.h"
+
 @interface MockCaptureDevice: NSObject <AbstractCameraDevice>
 @property(nonatomic, readonly) BOOL hasTorch;
 @property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive NS_AVAILABLE_IOS(6_0);
@@ -30,23 +31,36 @@
 -(void) setFocusToPoint: (CGPoint) pointInPreview;
 -(void) captureUIImage: (void (^)(UIImage *image)) imageHandler;
 - (AVCaptureVideoPreviewLayer *)cameraLayer;
+
+@property XCTestExpectation *torchOffExpectation;
+
 @end
 
 @implementation MockCaptureDevice
 BOOL _isTorchOn = false;
 
+/// always has torch available
+-(BOOL) hasTorch{
+    return true;
+}
+
 -(void)setFlashOff{
+    [self setTorchOff];
     return;
 }
 -(void)setFlashAuto{
+    [self setTorchOff];
     return;
 }
 -(void)setTorchOn{
+    LOG
     _isTorchOn = true;
     return;
 }
 -(void)setTorchOff{
+    LOG
     _isTorchOn = false;
+    [self.torchOffExpectation fulfill];
     return;
 }
 
@@ -69,15 +83,20 @@ BOOL _isTorchOn = false;
 -(void) setFocusToPoint: (CGPoint) pointInPreview{
     return;
 }
+/// return a faked image
 -(void) captureUIImage: (void (^)(UIImage *image)) imageHandler{
-    return;
+    CGSize size = CGSizeMake(300.0, 300.0);
+    UIImage *img = [UIImage createImageWithColor:UIColor.cyanColor size:size];
+    imageHandler(img);
 }
+
 - (AVCaptureVideoPreviewLayer *)cameraLayer{
     return nil;
 }
 
+/// will always return false for flash mode auto, true for other mode
 - (BOOL)isFlashModeSupported:(AVCaptureFlashMode)flashMode {
-    return true;
+    return flashMode != AVCaptureFlashModeAuto;
 }
 
 @end
@@ -89,7 +108,9 @@ BOOL _isTorchOn = false;
 
 @implementation FotoMailTests
 ViewController *myvc;
+MockCaptureDevice *mockCamera;
 UIWindow *rootWindow;
+XCTestExpectation *torchOffExpectation;
 
 - (void)setUp {
     [super setUp];
@@ -99,7 +120,10 @@ UIWindow *rootWindow;
                                                           bundle: [NSBundle mainBundle]];
     // thanks https://stackoverflow.com/questions/29669381/unit-test-swift-casting-view-controller-from-storyboard-not-working
     myvc = (ViewController *)[storyboard instantiateInitialViewController];
-    myvc.camera = [[MockCaptureDevice alloc] init];
+    mockCamera  = [[MockCaptureDevice alloc] init];
+    myvc.camera = mockCamera;
+    torchOffExpectation = [[XCTestExpectation alloc] initWithDescription:@"Torch must be off"];
+    mockCamera.torchOffExpectation = torchOffExpectation;
     rootWindow = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     [rootWindow setHidden:false];
     [rootWindow setRootViewController:myvc];
@@ -137,10 +161,43 @@ UIWindow *rootWindow;
 }
 
 
--(void)testTorchOff{
-    
+-(void)testTorchOffByPreview{
+
+    XCTAssert(mockCamera.isTorchActive==false,@"The torch must be off at start");
     UISegmentedControl *controls = myvc.flashControls;
+    
+    [self turnTorchOnThroughUI];
+    XCTAssert(mockCamera.isTorchActive,@"The torch must be activated by the segmented control");
+    
+    // appel à takeAndPreview va appeller capture image qui va appeler capture de la camera, puis appeler didFinishPickingMediaWithInf sur un bloc asynchrone, c'est lui qui éteint la torche
+    // -> il faut rendr une image bidon via la mockcamera, et il faut utiliser une expectation
+    [myvc takeAndPreview:nil];
+    [self waitForExpectations:@[torchOffExpectation] timeout:6.0];
+}
+
+-(void)testTorchOffByMailSending{
+    
+    [self turnTorchOnThroughUI];
+    XCTAssert(mockCamera.isTorchActive,@"The torch must be activated by the segmented control");
+    
+    [myvc envoiMail:nil];
+    [self waitForExpectations:@[torchOffExpectation] timeout:6.0];
     
 }
 
+
+-(void)testFlashModeAutoNotAvailable{
+    UISegmentedControl *controls = myvc.flashControls;
+    XCTAssertFalse([controls isEnabledForSegmentAtIndex:1],"The segment for Flash auto must not be enabled when flash auto not available");
+    XCTAssertTrue([controls isEnabledForSegmentAtIndex:0],"The segment for Flash off must be enabled when flash off available");
+    XCTAssertTrue([controls isEnabledForSegmentAtIndex:2],"The segment for torch must be enabled when torch available");
+}
+
+
+/// helper function to turn the torch on by choosing the segmented control item
+-(void) turnTorchOnThroughUI{
+    UISegmentedControl *controls = myvc.flashControls;
+    controls.selectedSegmentIndex = 2;
+    [myvc choisiFlashMode:controls];
+}
 @end

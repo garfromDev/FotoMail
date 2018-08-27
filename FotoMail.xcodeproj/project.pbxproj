@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */; };
 		300D8A061D361B18003EE973 /* Overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300D8A051D361B18003EE973 /* Overlay.xib */; };
-		301463451FC37ECA00E7CD47 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */; };
 		3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */; };
 		302059C31D66ECD700B47988 /* ColoredPlaceHolderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */; };
@@ -23,9 +22,9 @@
 		3036FBE51D29351F004036D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3036FBE31D29351F004036D6 /* Main.storyboard */; };
 		3036FBE71D29351F004036D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3036FBE61D29351F004036D6 /* Assets.xcassets */; };
 		3036FBEA1D29351F004036D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3036FBE81D29351F004036D6 /* LaunchScreen.storyboard */; };
-		3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBF41D29351F004036D6 /* FotoMailTests.m */; };
 		304893D21FB1974B000189A9 /* TableViewTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304893D11FB1974B000189A9 /* TableViewTextField.swift */; };
 		3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */; };
+		30536360213400EB007FBE0E /* FotoMailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBF41D29351F004036D6 /* FotoMailTests.m */; };
 		30580C3A1F37174F002A4FC8 /* EditingSupportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30580C391F37174F002A4FC8 /* EditingSupportImageView.swift */; };
 		305F5B291E09AA5D00421A73 /* RecipientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */; };
 		3062EBAC1FACEBC500DC01BC /* EditableStringArrayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3062EBAB1FACEBC500DC01BC /* EditableStringArrayTableViewController.swift */; };
@@ -35,12 +34,10 @@
 		307182EB1E0730580032BBDB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307182EA1E0730580032BBDB /* SettingsViewController.swift */; };
 		3071F0311FB9834E00FF5E43 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3071F0301FB9834E00FF5E43 /* ContainerViewController.swift */; };
 		30752E271FAAFE1E00BDD882 /* EditableTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30752E261FAAFE1E00BDD882 /* EditableTextTableViewCell.swift */; };
-		307E7DC01E3CE28900CAA001 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */; };
 		30905F1C1D3BFA2F00BC37D3 /* Preview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30905F1B1D3BFA2F00BC37D3 /* Preview.xib */; };
 		309176191EBE6D40002438D4 /* EditingImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309176181EBE6D40002438D4 /* EditingImageViewTests.swift */; };
 		3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
-		3092C5101E17AEAD0031BC20 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */; };
 		3092D8C61EBBBF75004F93D3 /* UIImageEraseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */; };
 		3092D8C91EBBCD5E004F93D3 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
@@ -52,7 +49,6 @@
 		30A836AF1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */; };
 		30ADC2EE21334A310052AF72 /* AVCaptureDevice+ExtensionFaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */; };
 		30ADC2F32133D17A0052AF72 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
-		30ADC2F52133D17A0052AF72 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		30ADC2FA2133D17A0052AF72 /* CGrect+initWith2Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */; };
 		30ADC2FC2133D17A0052AF72 /* AVCaptureDevice+ExtensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */; };
 		30ADC2FD2133D17A0052AF72 /* UIImage+isEqualToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */; };
@@ -78,6 +74,7 @@
 		30EEE0C01F810E020030B068 /* ChooseProject.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30EEE0BF1F810E020030B068 /* ChooseProject.storyboard */; };
 		30EEE0C21F810E830030B068 /* ChooseProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EEE0C11F810E830030B068 /* ChooseProjectTableViewController.swift */; };
 		30EFF5121DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EFF5111DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift */; };
+		30F967DB2133FA5000864CFD /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		30F98B5A1F3A575D00814613 /* AutoZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F98B591F3A575D00814613 /* AutoZoomingScrollView.swift */; };
 /* End PBXBuildFile section */
 
@@ -685,13 +682,13 @@
 				305F5B291E09AA5D00421A73 /* RecipientsTableViewController.swift in Sources */,
 				306F07631E1D852F00D3DD2C /* RoundImageTableViewCell.swift in Sources */,
 				30E2A2D51E2034CC00A18AD4 /* Extension_NSBundle.swift in Sources */,
-				3092C5101E17AEAD0031BC20 /* FotomailUserDefault.m in Sources */,
 				3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */,
 				306AB0E71F384A7E00CF238F /* extensionVC+PathDisplayer.swift in Sources */,
 				30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */,
 				30752E271FAAFE1E00BDD882 /* EditableTextTableViewCell.swift in Sources */,
 				304893D21FB1974B000189A9 /* TableViewTextField.swift in Sources */,
 				3036FBDC1D29351F004036D6 /* main.m in Sources */,
+				30F967DB2133FA5000864CFD /* FotomailUserDefault.m in Sources */,
 				302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */,
 				30B4277F1F384DAF0025034F /* FotomailPathManager.swift in Sources */,
 				30B427871F385EFE0025034F /* OverPath.m in Sources */,
@@ -712,8 +709,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3092D8C91EBBCD5E004F93D3 /* UIVIewExtension.swift in Sources */,
-				3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */,
-				301463451FC37ECA00E7CD47 /* FotomailUserDefault.m in Sources */,
 				30ADC3082133D29F0052AF72 /* AVCaptureSession+extension.m in Sources */,
 				30ADC2EE21334A310052AF72 /* AVCaptureDevice+ExtensionFaultTests.m in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
@@ -721,6 +716,7 @@
 				309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */,
 				309176191EBE6D40002438D4 /* EditingImageViewTests.swift in Sources */,
 				3092D8CD1EBCF832004F93D3 /* UIImage+isEqualToImage.swift in Sources */,
+				30536360213400EB007FBE0E /* FotoMailTests.m in Sources */,
 				3092D8C61EBBBF75004F93D3 /* UIImageEraseTests.swift in Sources */,
 				30BAF6621FB5969A0068660F /* TableViewTextFieldTest.swift in Sources */,
 				30B3F4731E8C465800881E82 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,
@@ -732,7 +728,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3093CC1C1E41291E00FFEEFA /* FotoMailUITests.m in Sources */,
-				307E7DC01E3CE28900CAA001 /* FotomailUserDefault.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,7 +736,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				30ADC2F32133D17A0052AF72 /* UIVIewExtension.swift in Sources */,
-				30ADC2F52133D17A0052AF72 /* FotomailUserDefault.m in Sources */,
 				30ADC2FA2133D17A0052AF72 /* CGrect+initWith2Points.swift in Sources */,
 				30ADC2FC2133D17A0052AF72 /* AVCaptureDevice+ExtensionTests.m in Sources */,
 				30ADC2FD2133D17A0052AF72 /* UIImage+isEqualToImage.swift in Sources */,
@@ -925,6 +919,7 @@
 		3036FC081D29351F004036D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FotoMailTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -941,6 +936,7 @@
 		3036FC091D29351F004036D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FotoMailTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

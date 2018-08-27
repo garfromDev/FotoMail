@@ -264,7 +264,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
                             completionHandler:handler
             ];
             break;
-            
+        // note : the simulator may returns AVAuthorizationStatusAuthorized even if there is no camera
         case AVAuthorizationStatusAuthorized:
             handler(true);
             break;

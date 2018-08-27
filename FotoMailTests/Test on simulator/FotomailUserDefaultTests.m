@@ -8,7 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import "FotomailUserDefault.h"
-
+// CAUTION : works with Fotomail defined as target in Target/General/Host Application
+// and with "allows Host API testing" checked (go to the Navigator, select Fotomail, then SimulatorFotomailTest target
 @interface FotomailUserDefaultTests : XCTestCase
 
 @end
