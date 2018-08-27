@@ -8,10 +8,13 @@
 
 #import <XCTest/XCTest.h>
 #import "AVCaptureDevice+Extension.h"
+#import "ViewController.h"
 
 @interface MockCaptureDevice: NSObject <AbstractCameraDevice>
 @property(nonatomic, readonly) BOOL hasTorch;
 @property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive NS_AVAILABLE_IOS(6_0);
+@property(nonatomic, readonly, getter=isFlashAvailable) BOOL flashAvailable;
+- (BOOL)isFlashModeSupported:(AVCaptureFlashMode)flashMode;
 -(void)setFlashOff;
 -(void)setFlashAuto;
 -(void)setTorchOn;
@@ -26,6 +29,8 @@
 @end
 
 @implementation MockCaptureDevice
+BOOL _isTorchOn;
+
 -(void)setFlashOff{
     return;
 }
@@ -33,11 +38,18 @@
     return;
 }
 -(void)setTorchOn{
+    _isTorchOn = true;
     return;
 }
 -(void)setTorchOff{
+    _isTorchOn = false;
     return;
 }
+
+-(BOOL)isTorchActive{
+    return _isTorchOn;
+}
+
 -(BOOL) isMacroAvailable{
     return true;
 }
@@ -67,12 +79,12 @@
 @end
 
 @implementation UIViewControllerTest
-UIViewController *vc;
+ViewController *vc;
 
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    vc = [[UIViewController alloc] initWithNibName:nil bundle:[NSBundle mainBundle]];
+    vc = [[ViewController alloc] initWithNibName:nil bundle:[NSBundle mainBundle]];
 }
 
 - (void)tearDown {
@@ -82,14 +94,10 @@ UIViewController *vc;
 
 - (void)testExample {
     MockCaptureDevice *mockCamera = [[MockCaptureDevice alloc] init];
+    vc.camera = mockCamera;
     
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
+
 
 @end

@@ -14,10 +14,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>FotoMailTests copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>FotoMailTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>UnitTestOnDevice.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>UnitTestOnSimulator.xcscheme</key>
 		<dict>

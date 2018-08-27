@@ -26,6 +26,7 @@
 @class EditingSupportImageView;
 @class FotoMailPathManager;
 @class AutoZoomingScrollView;
+@protocol AbstractCameraDevice;
 // on ne peut pas importer FotoMail-Swift.h dans un .h, seulement dans .m, voir https://stackoverflow.com/questions/26328034/importing-project-swift-h-into-a-objective-c-class-file-not-found
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,  MFMailComposeViewControllerDelegate>
@@ -85,6 +86,9 @@
 
 /// le pathManager qui stocke les paths (annotations graphiques)
 @property FotoMailPathManager *pathManager;
+
+/// le device de prise d'image (we use protocol to be able to inject mock for testing)
+@property  id <AbstractCameraDevice> camera;
 
 @end
 

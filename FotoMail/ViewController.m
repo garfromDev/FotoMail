@@ -109,9 +109,7 @@ cycle de prise de vue
     /// le controlleur de mail
     MFMailComposeViewController *mailPicker;
 
-    /// le device de prise d'image (we use protocol to be able to inject mock for testing)
-    id <AbstractCameraDevice> camera;
-    
+
     /// indique que l'écran de prévisualisation devra être affiché
     BOOL preview;
 
@@ -133,7 +131,7 @@ cycle de prise de vue
      // permettra d'adapter l'interface au changement du projet courante   via observeValueForKeyPath:
     [FotomailUserDefault.defaults addObserver:self forKeyPath:@"currentProject" options:NSKeyValueObservingOptionNew context:nil];
     // permet d'adapter l'interface au changement de mode macro
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(macroModeHasChanged:) name:kcameraControlsMacroModeChangedNotification object:camera];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(macroModeHasChanged:) name:kcameraControlsMacroModeChangedNotification object:self.camera];
     //permet d'être averti en cas de changement des autorisations dans privacy setting
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [self checkAuthorisation];
@@ -169,12 +167,6 @@ cycle de prise de vue
         selector:@selector(titleDidEditing:)
         name:UITextFieldTextDidEndEditingNotification
         object:self.previewTitreTextField];
-
-    // on masque les commandes de flash et de macro si il n'est pas disponible
-#ifndef SCREENSHOTMODE
-    //reste affiché pour screenshot
-    self.flashMode.hidden = ![ UIImagePickerController isFlashAvailableForCameraDevice:UIImagePickerControllerCameraDeviceRear];
-#endif
     
     // démarage du 1er cycle
     [self preparePhoto];
@@ -186,7 +178,7 @@ cycle de prise de vue
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     LOG
-    if(!camera){return;}
+    if(!self.camera){return;}
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -211,10 +203,6 @@ cycle de prise de vue
 - (IBAction) changeFlashMode:(id)sender
 {
     LOG
-#ifndef SCREENSHOTMODE
-    //on masque la commande de torche si la torche n'est pas disponible
-    [self.flashControls setEnabled:[camera hasTorch] forSegmentAtIndex:2];
-#endif
     self.flashControls.hidden = !self.flashControls.hidden;
 }
 
@@ -227,17 +215,17 @@ cycle de prise de vue
     // 0 = FLash OFF, 1 = Flash Auto, 2 = Torche
     switch (sender.selectedSegmentIndex) {
         case 0:
-            [camera setFlashOff];
+            [self.camera setFlashOff];
             [self.flashMode setImage:[UIImage imageNamed:@"flashOff"] forState:UIControlStateNormal];
             break;
             
         case 1:
-            [camera setFlashAuto];
+            [self.camera setFlashAuto];
             [self.flashMode setImage:[UIImage imageNamed:@"flashAuto"] forState:UIControlStateNormal];
             break;
         
         case 2:
-            [camera setTorchOn];
+            [self.camera setTorchOn];
             [self.flashMode setImage:[UIImage imageNamed:@"torche"] forState:UIControlStateNormal];
             break;
             
@@ -252,10 +240,10 @@ cycle de prise de vue
 /// ou par appui à nouveau sur le bouton
 - (IBAction) macroMode:(UIButton*)sender{
     LOG
-    if([camera isMacroOn]){
-        [camera setMacroOff];
+    if([self.camera isMacroOn]){
+        [self.camera setMacroOff];
     }else{
-        [camera setMacroOn];
+        [self.camera setMacroOn];
     }
 
 }
@@ -301,13 +289,13 @@ cycle de prise de vue
     }else{
         NSLog(@"focusing");
         CGPoint pointInPreview = [sender locationInView:sender.view];
-        [camera setFocusToPoint:pointInPreview];
+        [self.camera setFocusToPoint:pointInPreview];
     }
 }
 
 // on affiche le bouton macro en jaune lorque le mode macro est activé
 -(void) macroModeHasChanged: (NSNotification *)notification{
-    NSString *titre = camera.isMacroOn ? @"macro-jaune" : @"macro" ;
+    NSString *titre = self.camera.isMacroOn ? @"macro-jaune" : @"macro" ;
     UIImage *newImg = [UIImage imageNamed:titre];
     [self.macroMode setImage:newImg forState:UIControlStateNormal];
 }
@@ -361,7 +349,7 @@ cycle de prise de vue
 
 /// turn the torch off if it is on and switch back to flash off
 - (void)turnTorchOff {
-    if(![camera isTorchActive]) { return;}
+    if(![self.camera isTorchActive]) { return;}
     [[self flashControls] setSelectedSegmentIndex:0]; // affiche flash OFF
     [self choisiFlashMode:[self flashControls]];  //va reconfigurer l'affichage et le mode de la torche
 }
@@ -478,7 +466,7 @@ cycle de prise de vue
     // dans un 2eme temps, peutêtre un objet simili picker aurait un interet pour sortir du code du controller?
     LOG
     
-    [camera captureUIImage:^(UIImage *stillImg){
+    [self.camera captureUIImage:^(UIImage *stillImg){
                 //bloc exécuté à la fin de l'acquisition
                 //On rajoute le timeStamp si demandé
                 if ([[FotomailUserDefault defaults] timeStamp]) {
@@ -782,10 +770,10 @@ cycle de prise de vue
 -(void)viewDidLayoutSubviews{
     LOG
     [super viewDidLayoutSubviews];
-    if(!camera) {return;} //rien à faire si pas de caméra initialisée ou accessible
+    if(!self.camera) {return;} //rien à faire si pas de caméra initialisée ou accessible
     // Merci à Matteo Caldari, c'est le truc qui manquait pour faire fonctionner la rotation
-    camera.cameraLayer.frame = self.cameraPreviewView.bounds;
-    camera.cameraLayer.connection.videoOrientation = [OrientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
+    self.camera.cameraLayer.frame = self.cameraPreviewView.bounds;
+    self.camera.cameraLayer.connection.videoOrientation = [OrientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
     // on remet à jour le bouton mail car en cas de rotation, un des deux n'était pas activé
     // et n'a donc pas pris le changement
     self.mailButton.hidden = (FotomailUserDefault.defaults.nbImages == 0);
@@ -824,10 +812,10 @@ cycle de prise de vue
 /// l'accès à l'appareil photo n'est pas autorisé, passe en mode d'affichage du message
 -(void)setNonAuthorized{
     LOG
-    if(camera){
+    if(self.camera){
         //perte de l'authorization, on retire la couche de prévisualisation et on release l'objet camera
         [self.cameraView.layer.sublayers.lastObject removeFromSuperlayer];
-        camera = nil;
+        self.camera = nil;
     }
     self.overlayView.hidden = true;
     [self.message setText:@"Camera usage not authorized\nChange Fotomail privacy setting for camera in Settings"];
@@ -838,10 +826,10 @@ cycle de prise de vue
 -(void)setAuthorized{
     // Mise en place de l'affichage temps réel appareil photo
     LOG
-    if(!camera){ //création de l'objet camera si il n'existe pas
-        camera = [AVCaptureDevice initCameraOnView:self.cameraPreviewView error: nil];
+    if(!self.camera){ //création de l'objet camera si il n'existe pas
+        self.camera = [AVCaptureDevice initCameraOnView:self.cameraPreviewView error: nil];
     }
-    if( camera == nil){ //si la création échoue, cela signifie qu'il n'y a pas de caméra disponible
+    if( self.camera == nil){ //si la création échoue, cela signifie qu'il n'y a pas de caméra disponible
 #ifdef SCREENSHOTMODE
         //on affiche un fond vert pour permettre l'incrustation d'images en postproduction
         self.cameraPreviewView.backgroundColor = [UIColor greenColor];
@@ -852,9 +840,21 @@ cycle de prise de vue
     }
     self.overlayView.hidden = false;
 #ifndef SCREENSHOTMODE
+        //reste affiché pour screenshot
+    // on déselectionne les options de flash ou de torche non disponibles
+    [self.flashControls setEnabled:[self.camera hasTorch] forSegmentAtIndex:2];
+    [self.flashControls setEnabled:[self.camera isFlashModeSupported:AVCaptureFlashModeOn]
+                 forSegmentAtIndex:1];
+    [self.flashControls setEnabled:[self.camera isFlashModeSupported:AVCaptureFlashModeOff]
+                 forSegmentAtIndex:0];
+
+    // on masque complètement la commande de mode si ni flash ni torche
+    [self.flashMode setHidden:!(self.camera.flashAvailable || self.camera.hasTorch)];
+    
     //on masque les commandes macro si le device n'est pas capable
-    self.macroMode.hidden = ![camera isMacroAvailable];
+    self.macroMode.hidden = ![self.camera isMacroAvailable];
 #endif
+
     NSLog(@"setAuthorized camera initialisée...");
 }
 

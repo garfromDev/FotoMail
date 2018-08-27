@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3002081F2131C9D600D73D67 /* UIViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3002081E2131C9D600D73D67 /* UIViewControllerTest.m */; };
 		3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */; };
-		3008E8972074104700596A1A /* AVCaptureDevice+ExtensionFaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */; };
 		300D8A061D361B18003EE973 /* Overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300D8A051D361B18003EE973 /* Overlay.xib */; };
 		301463451FC37ECA00E7CD47 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */; };
@@ -39,7 +37,6 @@
 		30752E271FAAFE1E00BDD882 /* EditableTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30752E261FAAFE1E00BDD882 /* EditableTextTableViewCell.swift */; };
 		307E7DC01E3CE28900CAA001 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 		308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */; };
-		308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */; };
 		30905F1C1D3BFA2F00BC37D3 /* Preview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30905F1B1D3BFA2F00BC37D3 /* Preview.xib */; };
 		309176191EBE6D40002438D4 /* EditingImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309176181EBE6D40002438D4 /* EditingImageViewTests.swift */; };
 		3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
@@ -51,9 +48,16 @@
 		3092D8CD1EBCF832004F93D3 /* UIImage+isEqualToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */; };
 		3092D8CF1EBE61A2004F93D3 /* CGrect+initWith2Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */; };
 		3093CC1C1E41291E00FFEEFA /* FotoMailUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBFF1D29351F004036D6 /* FotoMailUITests.m */; };
-		309B30561F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 309B30551F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m */; };
 		309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */; };
 		30A836AF1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */; };
+		30ADC2EE21334A310052AF72 /* AVCaptureDevice+ExtensionFaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */; };
+		30ADC2F32133D17A0052AF72 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
+		30ADC2F52133D17A0052AF72 /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
+		30ADC2FA2133D17A0052AF72 /* CGrect+initWith2Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */; };
+		30ADC2FC2133D17A0052AF72 /* AVCaptureDevice+ExtensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */; };
+		30ADC2FD2133D17A0052AF72 /* UIImage+isEqualToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */; };
+		30ADC3002133D17A0052AF72 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
+		30ADC3082133D29F0052AF72 /* AVCaptureSession+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 309B30551F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m */; };
 		30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */; };
 		30B16F631E0B2FE000980161 /* Recipients_TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */; };
 		30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */; };
@@ -92,12 +96,19 @@
 			remoteGlobalIDString = 3036FBD61D29351F004036D6;
 			remoteInfo = FotoMail;
 		};
+		30ADC2F12133D17A0052AF72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3036FBCF1D29351F004036D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3036FBD61D29351F004036D6;
+			remoteInfo = FotoMail;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3002081E2131C9D600D73D67 /* UIViewControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTest.m; sourceTree = "<group>"; };
 		3007F8461E8C40AD00C26109 /* FotoMailTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FotoMailTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIScrollViewExtensionTests.swift; path = ../UIScrollViewExtensionTests.swift; sourceTree = "<group>"; };
+		3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensionTests.swift; sourceTree = "<group>"; };
 		300D8A051D361B18003EE973 /* Overlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Overlay.xib; sourceTree = "<group>"; };
 		301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extensionVC UIScrollViewdelegate.swift"; sourceTree = "<group>"; };
 		301927181D42BCE500C8E3CF /* UIImage+timeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+timeStamp.h"; sourceTree = "<group>"; };
@@ -117,7 +128,7 @@
 		3036FBE61D29351F004036D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3036FBE91D29351F004036D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3036FBEB1D29351F004036D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3036FBF01D29351F004036D6 /* FotoMailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FotoMailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3036FBF01D29351F004036D6 /* SimulatorFotoMailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimulatorFotoMailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3036FBF41D29351F004036D6 /* FotoMailTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FotoMailTests.m; sourceTree = "<group>"; };
 		3036FBF61D29351F004036D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3036FBFB1D29351F004036D6 /* FotoMailUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FotoMailUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,12 +159,14 @@
 		3092C50E1E17AEAD0031BC20 /* FotomailUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FotomailUserDefault.h; sourceTree = "<group>"; };
 		3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotomailUserDefault.m; sourceTree = "<group>"; };
 		3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableViewCell.swift; sourceTree = "<group>"; };
-		3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageEraseTests.swift; path = ../UIImageEraseTests.swift; sourceTree = "<group>"; };
+		3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageEraseTests.swift; sourceTree = "<group>"; };
 		3092D8CA1EBCF6DD004F93D3 /* UIImage+isEqualToImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+isEqualToImage.swift"; sourceTree = "<group>"; };
 		3092D8CE1EBE61A2004F93D3 /* CGrect+initWith2Points.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGrect+initWith2Points.swift"; sourceTree = "<group>"; };
 		309B30541F3F3F3C00FBB8C8 /* AVCaptureSession+extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVCaptureSession+extension.h"; sourceTree = "<group>"; };
 		309B30551F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureSession+extension.m"; sourceTree = "<group>"; };
 		30A836AE1EA4EBAF005B593E /* UIAlertController + YesNoAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController + YesNoAlertViewController.swift"; sourceTree = "<group>"; };
+		30ADC3062133D17A0052AF72 /* DeviceFotoMailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeviceFotoMailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		30ADC3072133D17A0052AF72 /* FotoMailTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FotoMailTests copy-Info.plist"; path = "/Users/Alistef/Documents/Programmation/FotoMail/FotoMailTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		30B16F601E0B2E4200980161 /* Recipients_DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_DataSource.swift; sourceTree = "<group>"; };
 		30B16F621E0B2FE000980161 /* Recipients_TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipients_TextFieldDelegate.swift; sourceTree = "<group>"; };
 		30B16F641E0B308200980161 /* EmailEditableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailEditableTableViewCell.swift; sourceTree = "<group>"; };
@@ -202,6 +215,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		30ADC3012133D17A0052AF72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -220,6 +240,7 @@
 				3036FBFE1D29351F004036D6 /* FotoMailUITests */,
 				3036FBD81D29351F004036D6 /* Products */,
 				3007F8461E8C40AD00C26109 /* FotoMailTests-Bridging-Header.h */,
+				30ADC3072133D17A0052AF72 /* FotoMailTests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -227,8 +248,9 @@
 			isa = PBXGroup;
 			children = (
 				3036FBD71D29351F004036D6 /* FotoMail.app */,
-				3036FBF01D29351F004036D6 /* FotoMailTests.xctest */,
+				3036FBF01D29351F004036D6 /* SimulatorFotoMailTests.xctest */,
 				3036FBFB1D29351F004036D6 /* FotoMailUITests.xctest */,
+				30ADC3062133D17A0052AF72 /* DeviceFotoMailTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,15 +285,9 @@
 		3036FBF31D29351F004036D6 /* FotoMailTests */ = {
 			isa = PBXGroup;
 			children = (
-				308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */,
-				306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */,
-				309B30541F3F3F3C00FBB8C8 /* AVCaptureSession+extension.h */,
-				309B30551F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m */,
-				3036FBF41D29351F004036D6 /* FotoMailTests.m */,
-				3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */,
+				308BDD472133D96000483C65 /* TestOnDevice */,
+				308BDD482133D98100483C65 /* Test on simulator */,
 				3036FBF61D29351F004036D6 /* Info.plist */,
-				3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */,
-				3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */,
 				309176181EBE6D40002438D4 /* EditingImageViewTests.swift */,
 				30BAF6611FB5969A0068660F /* TableViewTextFieldTest.swift */,
 				3002081E2131C9D600D73D67 /* UIViewControllerTest.m */,
@@ -409,6 +425,36 @@
 			name = ChooseProject;
 			sourceTree = "<group>";
 		};
+		308BDD462133D93E00483C65 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				309B30541F3F3F3C00FBB8C8 /* AVCaptureSession+extension.h */,
+				309B30551F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		308BDD472133D96000483C65 /* TestOnDevice */ = {
+			isa = PBXGroup;
+			children = (
+				308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */,
+			);
+			path = TestOnDevice;
+			sourceTree = "<group>";
+		};
+		308BDD482133D98100483C65 /* Test on simulator */ = {
+			isa = PBXGroup;
+			children = (
+				3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */,
+				3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */,
+				308BDD462133D93E00483C65 /* Supporting */,
+				3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */,
+				3036FBF41D29351F004036D6 /* FotoMailTests.m */,
+				306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */,
+			);
+			path = "Test on simulator";
+			sourceTree = "<group>";
+		};
 		30C28CF51E090E4900A0AB04 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,9 +512,9 @@
 			productReference = 3036FBD71D29351F004036D6 /* FotoMail.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3036FBEF1D29351F004036D6 /* FotoMailTests */ = {
+		3036FBEF1D29351F004036D6 /* SimulatorFotoMailTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3036FC071D29351F004036D6 /* Build configuration list for PBXNativeTarget "FotoMailTests" */;
+			buildConfigurationList = 3036FC071D29351F004036D6 /* Build configuration list for PBXNativeTarget "SimulatorFotoMailTests" */;
 			buildPhases = (
 				3036FBEC1D29351F004036D6 /* Sources */,
 				3036FBED1D29351F004036D6 /* Frameworks */,
@@ -479,9 +525,9 @@
 			dependencies = (
 				3036FBF21D29351F004036D6 /* PBXTargetDependency */,
 			);
-			name = FotoMailTests;
+			name = SimulatorFotoMailTests;
 			productName = FotoMailTests;
-			productReference = 3036FBF01D29351F004036D6 /* FotoMailTests.xctest */;
+			productReference = 3036FBF01D29351F004036D6 /* SimulatorFotoMailTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		3036FBFA1D29351F004036D6 /* FotoMailUITests */ = {
@@ -501,6 +547,24 @@
 			productName = FotoMailUITests;
 			productReference = 3036FBFB1D29351F004036D6 /* FotoMailUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		30ADC2EF2133D17A0052AF72 /* DeviceFotoMailTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30ADC3032133D17A0052AF72 /* Build configuration list for PBXNativeTarget "DeviceFotoMailTests" */;
+			buildPhases = (
+				30ADC2F22133D17A0052AF72 /* Sources */,
+				30ADC3012133D17A0052AF72 /* Frameworks */,
+				30ADC3022133D17A0052AF72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				30ADC2F02133D17A0052AF72 /* PBXTargetDependency */,
+			);
+			name = DeviceFotoMailTests;
+			productName = FotoMailTests;
+			productReference = 30ADC3062133D17A0052AF72 /* DeviceFotoMailTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -526,6 +590,10 @@
 						CreatedOnToolsVersion = 7.2;
 						TestTargetID = 3036FBD61D29351F004036D6;
 					};
+					30ADC2EF2133D17A0052AF72 = {
+						DevelopmentTeam = QXYQ94XRJK;
+						TestTargetID = 3036FBD61D29351F004036D6;
+					};
 				};
 			};
 			buildConfigurationList = 3036FBD21D29351F004036D6 /* Build configuration list for PBXProject "FotoMail" */;
@@ -542,8 +610,9 @@
 			projectRoot = "";
 			targets = (
 				3036FBD61D29351F004036D6 /* FotoMail */,
-				3036FBEF1D29351F004036D6 /* FotoMailTests */,
+				3036FBEF1D29351F004036D6 /* SimulatorFotoMailTests */,
 				3036FBFA1D29351F004036D6 /* FotoMailUITests */,
+				30ADC2EF2133D17A0052AF72 /* DeviceFotoMailTests */,
 			);
 		};
 /* End PBXProject section */
@@ -571,6 +640,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3036FBF91D29351F004036D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30ADC3022133D17A0052AF72 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -638,14 +714,12 @@
 				3092D8C91EBBCD5E004F93D3 /* UIVIewExtension.swift in Sources */,
 				3036FBF51D29351F004036D6 /* FotoMailTests.m in Sources */,
 				301463451FC37ECA00E7CD47 /* FotomailUserDefault.m in Sources */,
-				309B30561F3F3F3C00FBB8C8 /* AVCaptureSession+extension.m in Sources */,
-				3002081F2131C9D600D73D67 /* UIViewControllerTest.m in Sources */,
-				3008E8972074104700596A1A /* AVCaptureDevice+ExtensionFaultTests.m in Sources */,
+				30ADC3082133D29F0052AF72 /* AVCaptureSession+extension.m in Sources */,
+				30ADC2EE21334A310052AF72 /* AVCaptureDevice+ExtensionFaultTests.m in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
 				3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */,
 				309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */,
 				309176191EBE6D40002438D4 /* EditingImageViewTests.swift in Sources */,
-				308F7EC21E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m in Sources */,
 				3092D8CD1EBCF832004F93D3 /* UIImage+isEqualToImage.swift in Sources */,
 				3092D8C61EBBBF75004F93D3 /* UIImageEraseTests.swift in Sources */,
 				30BAF6621FB5969A0068660F /* TableViewTextFieldTest.swift in Sources */,
@@ -662,6 +736,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		30ADC2F22133D17A0052AF72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30ADC2F32133D17A0052AF72 /* UIVIewExtension.swift in Sources */,
+				30ADC2F52133D17A0052AF72 /* FotomailUserDefault.m in Sources */,
+				30ADC2FA2133D17A0052AF72 /* CGrect+initWith2Points.swift in Sources */,
+				30ADC2FC2133D17A0052AF72 /* AVCaptureDevice+ExtensionTests.m in Sources */,
+				30ADC2FD2133D17A0052AF72 /* UIImage+isEqualToImage.swift in Sources */,
+				30ADC3002133D17A0052AF72 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -674,6 +761,11 @@
 			isa = PBXTargetDependency;
 			target = 3036FBD61D29351F004036D6 /* FotoMail */;
 			targetProxy = 3036FBFC1D29351F004036D6 /* PBXContainerItemProxy */;
+		};
+		30ADC2F02133D17A0052AF72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3036FBD61D29351F004036D6 /* FotoMail */;
+			targetProxy = 30ADC2F12133D17A0052AF72 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -833,7 +925,6 @@
 		3036FC081D29351F004036D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FotoMailTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -850,7 +941,6 @@
 		3036FC091D29351F004036D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FotoMailTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -889,6 +979,39 @@
 			};
 			name = Release;
 		};
+		30ADC3042133D17A0052AF72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = QXYQ94XRJK;
+				INFOPLIST_FILE = "FotoMailTests copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fr.GarfromDev.FotoMailTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FotoMailTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FotoMail.app/FotoMail";
+			};
+			name = Debug;
+		};
+		30ADC3052133D17A0052AF72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = QXYQ94XRJK;
+				INFOPLIST_FILE = "FotoMailTests copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fr.GarfromDev.FotoMailTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FotoMailTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FotoMail.app/FotoMail";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -910,7 +1033,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3036FC071D29351F004036D6 /* Build configuration list for PBXNativeTarget "FotoMailTests" */ = {
+		3036FC071D29351F004036D6 /* Build configuration list for PBXNativeTarget "SimulatorFotoMailTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3036FC081D29351F004036D6 /* Debug */,
@@ -924,6 +1047,15 @@
 			buildConfigurations = (
 				3036FC0B1D29351F004036D6 /* Debug */,
 				3036FC0C1D29351F004036D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30ADC3032133D17A0052AF72 /* Build configuration list for PBXNativeTarget "DeviceFotoMailTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30ADC3042133D17A0052AF72 /* Debug */,
+				30ADC3052133D17A0052AF72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

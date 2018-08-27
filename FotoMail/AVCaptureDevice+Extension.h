@@ -19,10 +19,14 @@ enum {
     unableToAddIputOrOutputToCaptureSession
 };
 
+
+
 /// define a partial abstract interface for AVCaptureDevice in order to replace by another object as needed
 @protocol AbstractCameraDevice
 @property(nonatomic, readonly) BOOL hasTorch;
 @property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive NS_AVAILABLE_IOS(6_0);
+@property(nonatomic, readonly, getter=isFlashAvailable) BOOL flashAvailable;
+- (BOOL)isFlashModeSupported:(AVCaptureFlashMode)flashMode;
 -(void)setFlashOff;
 -(void)setFlashAuto;
 -(void)setTorchOn;
@@ -35,6 +39,9 @@ enum {
 -(void) captureUIImage: (void (^)(UIImage *image)) imageHandler;
 - (AVCaptureVideoPreviewLayer *)cameraLayer;
 @end
+
+
+
 
 /// add usefull method to control torch and flash mode and for picture preview and picture taking
 @interface AVCaptureDevice (UserControls)

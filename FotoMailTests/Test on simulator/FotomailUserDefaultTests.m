@@ -15,6 +15,7 @@
 
 @implementation FotomailUserDefaultTests
 
+
 - (void)setUp {
     [super setUp];
     [FotomailUserDefault.defaults setImgNumber:0];
