@@ -68,7 +68,7 @@
 @property (weak, nonatomic) IBOutlet EditingSupportImageView *imageView;
 /// le nom du projet sélectionné
 @property(weak, nonatomic) IBOutlet UILabel *previewProject;
-
+-(IBAction)cropAccordingCurrentView:(id)sender;
 /* principe de fonctionnement :
  la scrollview est configurée pour ne traiter que les touches à 2 doigts pour le pan
  La EditingSupportImageView dans la scrollview est une ImageView qui affiche l'image originale

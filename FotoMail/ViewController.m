@@ -376,7 +376,7 @@ cycle de prise de vue
     
     // on fait la préparation du controleur de mail en tache de fond pour afficher le plus vite possible l'appareil photo
     // on utilise le groupe mailGroup pour ne pas lancer d'attachement d'image avant que le controlleur ne soit crée
-    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), //FIXME: était QOS_CLASS_USER_INITIATED
+    dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), 
     ^{ //on prépare le composeur de mail
         NSLog(@"allocate Mail controller %@", [NSDate date]);
         mailPicker = [[MFMailComposeViewController alloc] init];
@@ -501,12 +501,8 @@ cycle de prise de vue
     // affiche le controleur de Preview si option activée
     if(preview){
         // on met l'image dans imageView
-        [self.scrollView setMinimumZoomScale:0.0]; //pour forcer un nouveau calcul du zoom, empêche de garder le précédent
-        [self.scrollView setZoomScale:1.0];
-        [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-        self.imageView.image = img;
-        [self.scrollView setMinimumZoomScale:0.0]; //pour forcer un nouveau calcul du zoom, empêche de garder le précédent
-        [self.scrollView layoutIfNeeded];
+        [self insertImageInScrollView:img];
+
         [FotomailUserDefault.defaults prepareUndo];
 
         //on cache l'appareil photo
@@ -628,6 +624,28 @@ cycle de prise de vue
     }
     
     self.imageView.image = nil; //libération mémoire, supprimé pour l'instant car risque de libérer alors qu'utilisé
+}
+
+-(IBAction)cropAccordingCurrentView:(id)sender{
+    __block  UIImage *originaleImg = self.imageView.image;
+    __block NSArray<OverPath*> *paths = self.pathManager.paths;
+    [PathMixer saveEditedWithImage:originaleImg paths:paths completion:^(UIImage *finalImg) {
+        UIImage *croppedImg = [finalImg croppedImageInRect:[self.scrollView onScreenRect]];
+        [self insertImageInScrollView:croppedImg];
+        //TODO: envoyer en tache de fond la partie non UI, et désactiver les boutons done pendant traitement de fond
+        [self.pathManager clear];
+    }];
+}
+
+
+-(void) insertImageInScrollView: (UIImage *)img{
+    [self.scrollView setMinimumZoomScale:0.0];
+    [self.scrollView setZoomScale:1.0];
+    [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+    
+    [self.imageView setImage:img];
+    [self.scrollView setMinimumZoomScale:1.0];
+    [self.scrollView layoutIfNeeded];
 }
 
 

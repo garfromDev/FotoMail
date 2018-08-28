@@ -48,7 +48,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
 + (AVCaptureDevice *) initCameraOnView: (UIView *)view error:(NSError **)outError{
     LOG
     AVCaptureSession *captureSesion = [[AVCaptureSession alloc] init];
-    if (![captureSesion canSetSessionPreset:AVCaptureSessionPresetPhoto]) { //FIXME normalement AVCaptureSessionPresetPhoto, mis medium pour baisser la conso mémoire
+    if (![captureSesion canSetSessionPreset:AVCaptureSessionPresetPhoto]) {
         if(outError!=nil){
             *outError = [NSError errorWithDomain:UserControlsErrorDomain
                     code: AVCaptureSessionPresetPhotoNotAvailable
@@ -101,7 +101,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
     cameraLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [view.layer addSublayer:cameraLayer];
     dispatch_async([self sessionQueue],  ^{ //les appels à session sont bloquants
-        [captureSesion setSessionPreset:AVCaptureSessionPresetPhoto]; //FIXME pour réduire la conso mémoire
+        [captureSesion setSessionPreset:AVCaptureSessionPresetPhoto]; 
         [captureSesion startRunning];
     });
     
