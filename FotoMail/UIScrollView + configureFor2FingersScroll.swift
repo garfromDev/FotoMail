@@ -26,3 +26,35 @@ extension  UIScrollView //configureFor2FingersScroll)
     }
 
 }
+
+
+/// this extension provide a calculation of the CGRect that correspond to the portion of the image on the screen
+extension UIScrollView{
+    func onScreenRect()->CGRect{
+        /* besoin de comprendre :
+         la taille à l'écran en pixel est .frame
+         la taille de l'image complète au niveau de zoom est .contentSize
+         le .contentOffset est le décalage de la frame dans l'image au niveau de zoom
+         du coup, la coin du rectangle est .contentOffset / zoomSCale?
+         sa taille est .frame / .zoomSCale?
+         ATTENTION : marche en paysage, ou il faut inverser les coordonnées?
+         => faire des essais dans un truc séparé
+         */
+        //let  w  = self.frame.width / self.zoomScale
+        return CGRect(origin: self.contentOffset, size: self.frame.size).scaledBy(1/Float(self.zoomScale))
+    }
+    
+    
+    /// if the subview of the scrollview is an image view, crop it to the visible on screen
+    @discardableResult func cropImageToAeraVisibleonScreen()->UIImage?{
+        guard let imgView = self.subviews.first as? UIImageView else {return nil}
+        guard let img = imgView.image else {return nil}
+        // crop the image
+        guard let croppedImg = img.croppedImage(in:self.onScreenRect()) else {return nil}
+        // re-insert it into the scrollview, same zoom factor
+        imgView.image? = croppedImg
+        self.contentOffset = CGPoint.zero
+        return croppedImg
+    }
+    
+}

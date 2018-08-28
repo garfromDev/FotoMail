@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,14 +45,14 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hCY-Ts-sG9">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Label" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k7-RI-cnt">
-                                    <rect key="frame" x="0.0" y="0.0" width="35.5" height="30"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k7-RI-cnt">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" tag="2" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titre" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bLW-bX-8Xg" customClass="TintTextField" customModule="FotoMail" customModuleProvider="target">
-                                    <rect key="frame" x="43.5" y="0.0" width="315.5" height="30"/>
+                                    <rect key="frame" x="58" y="0.0" width="301" height="30"/>
                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -96,7 +96,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="Dje-S4-Eba"/>
                                 <barButtonItem style="plain" id="06y-i6-hYB" userLabel="Rubber">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="4yA-e3-imV">
-                                        <rect key="frame" x="167" y="9.5" width="25" height="25"/>
+                                        <rect key="frame" x="108.5" y="9.5" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="gomme"/>
                                         <state key="selected" image="gommeHighlighted"/>
@@ -107,6 +107,12 @@
                                     </button>
                                 </barButtonItem>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="wJu-OJ-Ofh"/>
+                                <barButtonItem title="crop" id="f1S-K3-Sxf">
+                                    <connections>
+                                        <action selector="cropAccordingCurrentView:" destination="-1" id="ZE6-KX-eI8"/>
+                                    </connections>
+                                </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="Hy1-fN-HfT"/>
                                 <barButtonItem image="retake" id="xv7-Ae-PQf" userLabel="Cancel">
                                     <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
