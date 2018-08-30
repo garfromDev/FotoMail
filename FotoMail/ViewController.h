@@ -19,20 +19,23 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "editingImageView.h"
 #import "FotoMail-Bridging-Header.h"
-
+#import "MailComposer Protocol.h"
 
 @class TransparentPathView;
 @class EditingSupportImageView;
 @class FotoMailPathManager;
 @class AutoZoomingScrollView;
 @protocol AbstractCameraDevice;
+@protocol CameraManager;
 // on ne peut pas importer FotoMail-Swift.h dans un .h, seulement dans .m, voir https://stackoverflow.com/questions/26328034/importing-project-swift-h-into-a-objective-c-class-file-not-found
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,  MFMailComposeViewControllerDelegate>
 // écran de fond
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *message;
+@property (weak, nonatomic) IBOutlet UILabel *mailAvailabilityMessage;
 
 // écran appareil photo
 @property (weak, nonatomic) IBOutlet UIButton *macroMode;
@@ -89,6 +92,11 @@
 
 /// le device de prise d'image (we use protocol to be able to inject mock for testing)
 @property  id <AbstractCameraDevice> camera;
+/// le Camera Manager qui fournit l'objet camera et les autorisations
+@property id <CameraManager> cameraManager;
+
+/// the e-mail composition controller (we use protocol to be able to inject mock for testing)
+@property Class mailComposerClass;
 
 @end
 

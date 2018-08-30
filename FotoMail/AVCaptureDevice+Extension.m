@@ -48,7 +48,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
 + (AVCaptureDevice *) initCameraOnView: (UIView *)view error:(NSError **)outError{
     LOG
     AVCaptureSession *captureSesion = [[AVCaptureSession alloc] init];
-    if (![captureSesion canSetSessionPreset:AVCaptureSessionPresetPhoto]) { 
+    if (![captureSesion canSetSessionPreset:AVCaptureSessionPresetPhoto]) {
         if(outError!=nil){
             *outError = [NSError errorWithDomain:UserControlsErrorDomain
                     code: AVCaptureSessionPresetPhotoNotAvailable
@@ -297,7 +297,9 @@ AVCaptureVideoPreviewLayer *cameraLayer;
 -(void)configure: (void (^)(void))action{
     NSError *error;
     // il faut verouiller le device avant de changer sa config
-    if( ![camera lockForConfiguration:&error]) { return;}
+    if( ![camera lockForConfiguration:&error]){
+        [camera unlockForConfiguration]; //just to be safe
+        return;}
     
     action();
     

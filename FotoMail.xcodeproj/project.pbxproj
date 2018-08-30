@@ -11,6 +11,7 @@
 		300D8A061D361B18003EE973 /* Overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300D8A051D361B18003EE973 /* Overlay.xib */; };
 		301927171D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */; };
 		3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */; };
+		301E484D2136FFAC000CCB0A /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301E484C2136FFAC000CCB0A /* CameraManager.swift */; };
 		302059C31D66ECD700B47988 /* ColoredPlaceHolderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */; };
 		302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
 		302662B71E087343003D80E9 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302662B61E087343003D80E9 /* Settings.storyboard */; };
@@ -110,6 +111,7 @@
 		301927161D42082000C8E3CF /* extensionVC UIScrollViewdelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extensionVC UIScrollViewdelegate.swift"; sourceTree = "<group>"; };
 		301927181D42BCE500C8E3CF /* UIImage+timeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+timeStamp.h"; sourceTree = "<group>"; };
 		301927191D42BCE500C8E3CF /* UIImage+timeStamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+timeStamp.m"; sourceTree = "<group>"; };
+		301E484C2136FFAC000CCB0A /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		302059C21D66ECD700B47988 /* ColoredPlaceHolderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredPlaceHolderTextField.swift; sourceTree = "<group>"; };
 		302059C41D6786F900B47988 /* UIVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIVIewExtension.swift; path = ../../maxouf14/maxouf14/UIVIewExtension.swift; sourceTree = "<group>"; };
 		302662B61E087343003D80E9 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		307182EA1E0730580032BBDB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3071F0301FB9834E00FF5E43 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		30752E261FAAFE1E00BDD882 /* EditableTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextTableViewCell.swift; sourceTree = "<group>"; };
+		30799E302135ED2C006FE501 /* MailComposer Protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MailComposer Protocol.h"; sourceTree = "<group>"; };
 		308F7EBE1E4F461C007BCD5B /* AVCaptureDevice+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVCaptureDevice+Extension.h"; sourceTree = "<group>"; };
 		308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+Extension.m"; sourceTree = "<group>"; };
 		308F7EC11E4F4787007BCD5B /* AVCaptureDevice+ExtensionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+ExtensionTests.m"; sourceTree = "<group>"; };
@@ -381,6 +384,7 @@
 			children = (
 				3062EBA71FACE84800DC01BC /* ETTV */,
 				3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */,
+				30799E302135ED2C006FE501 /* MailComposer Protocol.h */,
 				30E2A2D21E20246800A18AD4 /* ReachabilityExtension.swift */,
 				30E2A2CF1E2023BF00A18AD4 /* Reachability.h */,
 				30E2A2D01E2023BF00A18AD4 /* Reachability.m */,
@@ -485,6 +489,7 @@
 				3092C50E1E17AEAD0031BC20 /* FotomailUserDefault.h */,
 				3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */,
 				30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */,
+				301E484C2136FFAC000CCB0A /* CameraManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -691,6 +696,7 @@
 				30F967DB2133FA5000864CFD /* FotomailUserDefault.m in Sources */,
 				302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */,
 				30B4277F1F384DAF0025034F /* FotomailPathManager.swift in Sources */,
+				301E484D2136FFAC000CCB0A /* CameraManager.swift in Sources */,
 				30B427871F385EFE0025034F /* OverPath.m in Sources */,
 				30E2A2D31E20246800A18AD4 /* ReachabilityExtension.swift in Sources */,
 				30DB231F2134794D008591D4 /* AutoZoomingScrollView.swift in Sources */,

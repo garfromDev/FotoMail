@@ -42,7 +42,6 @@ enum {
 
 
 
-
 /// add usefull method to control torch and flash mode and for picture preview and picture taking
 @interface AVCaptureDevice (UserControls)
 

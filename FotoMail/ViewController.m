@@ -24,12 +24,17 @@
  1.4 correction bug touch cancelled
  1.5 ajout sélection du projet avec extension adresse e-mail
  1.6 coupe la torche lorsqu'on affiche la prévisualisation et lors de l'envoi de mail (unit tested)
-     n'affiche plus les commandes de prise de vue lorsque aucune caméra n'est disponible (not unit tested)
+     n'affiche plus les commandes de prise de vue lorsque aucune caméra n'est disponible (partially unit tested, à couvrir par UI)
      n'affiche plus les commandes de flash ou de torche lorsque flash non disponible (unit tested)
      vérifie l'accès au mail pour ne pas planter si pas de compte (not unit tested)
+    ajoute la fonction crop (sans icone et sans gestion du dateStamp)
+    corrige un bug d'affichage quand aucun projet choisi
  
  A faire après :
-  V1.6
+ finir injecter MailComposer
+ ajouter icone crop
+ 
+  V1.7
  ajouter loupe = zoom numérique en macro
  voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
  ajouter du unittest du ViewController pour compléter le test coverage
@@ -41,7 +46,6 @@
  ajouter localization textes
  V1.9
  ajouter choix couleur pinceaux
- ajouter crop à la taille de la vue en édition
  faire passer la vue en edition sous la barre d'outil et le titre (translucide)
 V1.9.1
  ajouter contact editeur
@@ -54,7 +58,6 @@ V1.9.1
 // NICETOHAVE : gomme prend la taille du doigt (indexRadius)
 // NICETOHAVE : ajouter aide avec surimpression légendes sur image
 // NICETOHAVE : réglage correction lumière comme photo système
-// NICETOHAVE : version appli message
 
 #import "ViewController.h"
 #import "UIImage+timeStamp.h"
@@ -111,11 +114,21 @@ cycle de prise de vue
     dispatch_group_t mailGroup, imgGroup;
     /// le controlleur de mail
     MFMailComposeViewController *mailPicker;
-
-
+    
     /// indique que l'écran de prévisualisation devra être affiché
     BOOL preview;
 
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder; {
+    self = [super initWithCoder: aDecoder];
+    if(self!=nil){
+        //load the cameraManager, could be overruled for tetsing purpose
+        self.cameraManager = [[DefaultCameraManager alloc] init];
+        //load the system mailComposeViewCOntrolelr, could be overruled for testing
+        self.mailComposerClass = [MFMailComposeViewController class];
+    }
+    return self;
 }
 
 
@@ -158,7 +171,7 @@ cycle de prise de vue
     self.pathManager.controller = self; //en tant que PathDisplayer
     self.imageView.delegate = self.pathManager; //en tant que pathManager
     self.clrView.delegate = self; //en tant que pathProvider
-
+    
     //on s'abonne aux notification des champs de texte pour mettre à jour l'affichage quand le titre a été édité
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -212,7 +225,7 @@ cycle de prise de vue
 
 /// l'utilisateur a choisi une des icones de flash mode (segmentedCOntrol)
 - (IBAction) choisiFlashMode:(UISegmentedControl *)sender{
-
+    LOG
     self.flashControls.hidden = true;
     
     // 0 = FLash OFF, 1 = Flash Auto, 2 = Torche
@@ -360,6 +373,7 @@ cycle de prise de vue
 
 /// enabled the different segment of the flash mode controls when capacities are available on device
 -(void)adaptUItoAvailableFlashModes{
+    LOG
     [self.flashControls setEnabled:[self.camera isFlashModeSupported:AVCaptureFlashModeOff] forSegmentAtIndex:0];
     [self.flashControls setEnabled:[self.camera isFlashModeSupported:AVCaptureFlashModeAuto] forSegmentAtIndex:1];
     [self.flashControls setEnabled:[self.camera hasTorch] forSegmentAtIndex:2];
@@ -377,23 +391,23 @@ cycle de prise de vue
 
     // on masque les commandes de preview
     self.previewView.hidden = true;
-    
+    [self adaptUItoAvailableFlashModes]; // n'est pas réellement nécessaire ici puisque sera refait après les checkAuthorisation, mais celà peut prendre du temps avant le callback
     //on réinitialise le titre
     [FotomailUserDefault.defaults resetImageAndTitle];
     
     // on fait la préparation du controleur de mail en tache de fond pour afficher le plus vite possible l'appareil photo
     // on utilise le groupe mailGroup pour ne pas lancer d'attachement d'image avant que le controlleur ne soit crée
-    if([MFMailComposeViewController canSendMail]){
+    if([self.mailComposerClass canSendMail]){
         dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0),
         ^{ //on prépare le composeur de mail
             NSLog(@"allocate Mail controller %@", [NSDate date]);
-            mailPicker = [[MFMailComposeViewController alloc] init];
+            mailPicker = [[self.mailComposerClass alloc] init];
             mailPicker.mailComposeDelegate = self;
             [mailPicker setSubject:subject];
         } );
     }
-    [self adaptUItoAvailableFlashModes];
-    //on vérifie les autorisations, le callback est rappellé sur la mainqueue
+
+    //on vérifie les autorisations, le callback est rappellé sur la mainqueue et adaptera les commandes en fonction des capacités
     [self checkAuthorisation];
 }
 
@@ -707,7 +721,7 @@ cycle de prise de vue
 
 -(void)displayComposerSheet
 {
-    if (![MFMailComposeViewController canSendMail]) {
+    if (![self.mailComposerClass canSendMail]) {
         NSLog(@"Mail services are not available.");
         self.message.text = @"Mail services are not available"; //@"Fonction d'envoi de mail non disponible";
         // TOTO : supprimer dans version finale, ou remplacer par alerte non deprecated
@@ -820,12 +834,10 @@ cycle de prise de vue
 
 /// vérifie les autorisation d'accès et change de mode en fonction de la réponse
 /// appellé par preparePhoto au début de chaque cycle ou par notification d'activation de l'application
-// TODO: a transférer dans AVCaptureDevice+Extension, avec un protocol CameraAuthorisationSetable, et une extension du view controller pour ce protocol
-
 -(void) checkAuthorisation
 {   LOG
     //on vérifie les autorisations d'accès à la caméra, le callback est rappellé sur la mainqueue
-    [AVCaptureDevice checkCameraAuthorizationWithCompletion:^(BOOL granted) {
+    [self.cameraManager checkCameraAuthorizationWithCompletion:^(BOOL granted) {
 #ifdef SCREENSHOTMODE
         [self setCameraAuthorized];
 #else
@@ -841,7 +853,7 @@ cycle de prise de vue
 #ifdef SCREENSHOTMODE
     [self setMailAuthorized];
 #else
-    if([MFMailComposeViewController canSendMail]){
+    if([self.mailComposerClass canSendMail]){
         [self setMailAuthorized];
     }else{
         [self setMailNotAuthorized];
@@ -869,7 +881,7 @@ cycle de prise de vue
     // Mise en place de l'affichage temps réel appareil photo
     LOG
     if(!self.camera){ //création de l'objet camera si il n'existe pas
-        self.camera = [AVCaptureDevice initCameraOnView:self.cameraPreviewView error: nil];
+        self.camera = [self.cameraManager startCameraOnView:self.cameraPreviewView];
     }
     if( self.camera == nil){ //si la création échoue, cela signifie qu'il n'y a pas de caméra disponible
 #ifdef SCREENSHOTMODE
@@ -885,11 +897,7 @@ cycle de prise de vue
 #ifndef SCREENSHOTMODE
         //reste affiché pour screenshot
     // on déselectionne les options de flash ou de torche non disponibles
-    [self.flashControls setEnabled:[self.camera hasTorch] forSegmentAtIndex:2];
-    [self.flashControls setEnabled:[self.camera isFlashModeSupported:AVCaptureFlashModeOn]
-                 forSegmentAtIndex:1];
-    [self.flashControls setEnabled:[self.camera isFlashModeSupported:AVCaptureFlashModeOff]
-                 forSegmentAtIndex:0];
+    [self adaptUItoAvailableFlashModes];
 
     // on masque complètement la commande de mode si ni flash ni torche
     [self.flashMode setHidden:!(self.camera.flashAvailable || self.camera.hasTorch)];
@@ -903,15 +911,17 @@ cycle de prise de vue
 
 /// access to mail composer has been authorized
 -(void)setMailAuthorized{
+    LOG
     self.mailButton.enabled = true;
 }
 
 /// access to mail composer has not been granted
 -(void)setMailNotAuthorized{
+    LOG
     self.mailButton.enabled = false;
     // CAUTION : assumption is done that this method is called after setCameraNotAuthorized
     // otherwise the message would be erased by the one about the camera
-    NSString *completeMsg = [self.message.text stringByAppendingString:@"e-mail account not available"];
-    [self.message setText:completeMsg];
+    NSString *completeMsg = @"e-mail account not available";
+    [self.mailAvailabilityMessage setText:completeMsg];
 }
 @end
