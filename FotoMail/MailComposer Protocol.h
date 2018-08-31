@@ -8,10 +8,10 @@
 
 #ifndef MailComposer_Protocol_h
 #define MailComposer_Protocol_h
-
-@protocol MailComposer
-+ (BOOL)canSendMail;
-@end
+//
+//@protocol MailComposer
+//+ (BOOL)canSendMail;
+//@end
 
 
 #endif /* MailComposer_Protocol_h */

@@ -24,15 +24,16 @@
  1.4 correction bug touch cancelled
  1.5 ajout sélection du projet avec extension adresse e-mail
  1.6 coupe la torche lorsqu'on affiche la prévisualisation et lors de l'envoi de mail (unit tested)
-     n'affiche plus les commandes de prise de vue lorsque aucune caméra n'est disponible (partially unit tested, à couvrir par UI)
+     n'affiche plus les commandes de prise de vue lorsque aucune caméra n'est disponible ( unit tested)
      n'affiche plus les commandes de flash ou de torche lorsque flash non disponible (unit tested)
-     vérifie l'accès au mail pour ne pas planter si pas de compte (not unit tested)
-    ajoute la fonction crop (sans icone et sans gestion du dateStamp)
+     vérifie l'accès au mail pour ne pas planter si pas de compte (unit tested)
+    ajoute la fonction crop (sans icone et sans gestion du dateStamp) (not unit tested)
     corrige un bug d'affichage quand aucun projet choisi
  
  A faire après :
- finir injecter MailComposer
+ finir unit testing des ajouts
  ajouter icone crop
+ corriger les warnings
  
   V1.7
  ajouter loupe = zoom numérique en macro
@@ -525,7 +526,7 @@ cycle de prise de vue
     // affiche le controleur de Preview si option activée
     if(preview){
         // on met l'image dans imageView
-        [self insertImageInScrollView:img];
+        [self.scrollView insertImage:img];
 
         [FotomailUserDefault.defaults prepareUndo];
 
@@ -658,21 +659,10 @@ cycle de prise de vue
     __block NSArray<OverPath*> *paths = self.pathManager.paths;
     [PathMixer saveEditedWithImage:originaleImg paths:paths completion:^(UIImage *finalImg) {
         UIImage *croppedImg = [finalImg croppedImageInRect:[self.scrollView onScreenRect]];
-        [self insertImageInScrollView:croppedImg];
+        [self.scrollView insertImage:croppedImg];
         //TODO: envoyer en tache de fond la partie non UI, et désactiver les boutons done pendant traitement de fond
         [self.pathManager clear];
     }];
-}
-
-
--(void) insertImageInScrollView: (UIImage *)img{
-    [self.scrollView setMinimumZoomScale:0.0];
-    [self.scrollView setZoomScale:1.0];
-    [self.imageView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-    
-    [self.imageView setImage:img];
-    [self.scrollView setMinimumZoomScale:1.0];
-    [self.scrollView layoutIfNeeded];
 }
 
 
@@ -721,15 +711,7 @@ cycle de prise de vue
 
 -(void)displayComposerSheet
 {
-    if (![self.mailComposerClass canSendMail]) {
-        NSLog(@"Mail services are not available.");
-        self.message.text = @"Mail services are not available"; //@"Fonction d'envoi de mail non disponible";
-        // TOTO : supprimer dans version finale, ou remplacer par alerte non deprecated
-        UIAlertView *alrt = [[UIAlertView alloc] initWithTitle:@"Fotomail" message:@"Mail services are not available" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alrt show];
-        return;
-    }
-    
+    if(![self.mailComposerClass canSendMail]){ return;}
     // on met à jour la liste de destinataire qui a pu changer entre temps (réglages)
     [mailPicker setToRecipients:[FotomailUserDefault.defaults recipientsWithExtension]];
     //on attend que toutes les images ait été ajoutées avant d'afficher
@@ -913,6 +895,7 @@ cycle de prise de vue
 -(void)setMailAuthorized{
     LOG
     self.mailButton.enabled = true;
+    [self.mailAvailabilityMessage setText:@""];
 }
 
 /// access to mail composer has not been granted

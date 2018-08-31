@@ -45,6 +45,21 @@ extension UIScrollView{
     }
     
     
+    /**
+        insert a new image into the UIImageView handled by the scollView
+        CAUTION : works only if scrollview subview is an ImageView
+    */
+    func insertImage(_ img:UIImage){
+        guard let imgView = self.subviews.first as? UIImageView else {return}
+        self.minimumZoomScale = 0.0
+        self.zoomScale = 1.0
+        imgView.frame = CGRect(x: 0.0, y: 0.0, width: img.size.width, height: img.size.height)
+        imgView.image = img
+        self.minimumZoomScale = 1.0
+        self.layoutIfNeeded()
+    }
+    
+    
     /// if the subview of the scrollview is an image view, crop it to the visible on screen
     @discardableResult func cropImageToAeraVisibleonScreen()->UIImage?{
         guard let imgView = self.subviews.first as? UIImageView else {return nil}

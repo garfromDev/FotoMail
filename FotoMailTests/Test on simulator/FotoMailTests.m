@@ -15,7 +15,11 @@
 #import "AVCaptureDevice+Extension.h"
 #import "UIImage + createImageWithColor.h"
 
-
+/**
+    This mock camera will act like an extended camera (i.e.
+    AbstractCameraDevice), have all flash mode available except Auto,
+    ,return a fake image and trigger an expectation when torch is set off
+*/
 @interface MockCaptureDevice: NSObject <AbstractCameraDevice>
 @property(nonatomic, readonly) BOOL hasTorch;
 @property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive NS_AVAILABLE_IOS(6_0);
@@ -34,6 +38,7 @@
 - (AVCaptureVideoPreviewLayer *)cameraLayer;
 
 //parameters for testing :
+/// this expectation will be fulfflilled when torch is set off
 @property XCTestExpectation *torchOffExpectation;
 @end
 
@@ -103,7 +108,8 @@ BOOL _granted = true;
 
 @end
 
-/// redefinition of CameraManager protocol because not possible to import swift-h in objectiveC
+
+/// redefinition of CameraManager protocol because not possible to import swift-h in objectiveC (BE CAREFULL if original declarion changes)
 @protocol CameraManager
 -(id<AbstractCameraDevice>)startCameraOnView:(UIView *)view;
 -(void)checkCameraAuthorizationWithCompletion:(void(^)(BOOL granted))completionHandler;
@@ -111,7 +117,7 @@ BOOL _granted = true;
 
 
 /** This mock camera manager will :
-  - return a MOckCaptureDevice
+  - return a MockCaptureDevice for the camera
   - return authorisation as defined by property "granted"
 */
 @interface MockCameraManager:NSObject<CameraManager>
@@ -144,6 +150,24 @@ BOOL _granted = true;
 @end
 
 
+/** This mock object will always forbid access to mail
+    CAUTION: it does not implement method of MFMailComposeViewController
+    Do not try to use it for mail sending
+*/
+@interface MockMailManager:NSObject
++ (BOOL)canSendMail;
+@end
+@implementation MockMailManager
++ (BOOL)canSendMail{
+    return false;
+}
+@end
+
+
+/// we declare an extension on ViewControlelr to get access to overlayView for tetsing
+@interface ViewController(UnitTest)
+-(UIView *)overlayView;
+@end
 
 @interface FotoMailTests : XCTestCase
 
@@ -153,6 +177,7 @@ BOOL _granted = true;
 ViewController *myvc;
 MockCaptureDevice *mockCamera;
 MockCameraManager *mockCameraManager;
+
 UIWindow *rootWindow;
 XCTestExpectation *torchOffExpectation;
 XCTestExpectation *authorizationAnsweredExpectation;
@@ -167,8 +192,6 @@ XCTestExpectation *authorizationAnsweredExpectation;
     myvc = (ViewController *)[storyboard instantiateInitialViewController];
     mockCameraManager = [[MockCameraManager alloc] init];
     myvc.cameraManager = mockCameraManager;
-//    mockCamera  = [[MockCaptureDevice alloc] init];
-//    myvc.camera = mockCamera;
     
     rootWindow = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     [rootWindow setHidden:false];
@@ -209,15 +232,6 @@ XCTestExpectation *authorizationAnsweredExpectation;
 
 }
 
-/*
- FIXME: Le problème vient du fait que le viewController initialise les propriété
- camera dans le viewDidLoad, et donc écrase les propriétés que l'on lui injecte -> essayer de créer
- - (instancetype)initWithCoder:(NSCoder *)aDecoder; {
- [super initWithCoder: aDecoder];
- //your init code goes here.
- }
- et d'y initialisé le cameraManager ici (la camera sera initialisé à chechAuthorisation)
- */
 
 -(void)testTorchOffByPreview{
 
@@ -233,7 +247,7 @@ XCTestExpectation *authorizationAnsweredExpectation;
 }
 
 -(void)testTorchOffByMailSending{
-    
+    myvc.mailComposerClass = [MFMailComposeViewController class];
     [self turnTorchOnThroughUI];
     XCTAssert(mockCamera.isTorchActive,@"The torch must be activated by the segmented control");
     
@@ -251,10 +265,7 @@ XCTestExpectation *authorizationAnsweredExpectation;
 }
 
 -(void)testCameraNotAuthorized{
-    // en fait, iln'y a pas de moyen de vérifier si l'interface de prise de vue a été caché car
-    // il n'y a pas de propriété accessible sur l'overlay view
-    // on peut vérifier le contenu du message
-    // => à couvrir par un UI test pour test plus complet
+    
     [mockCameraManager setGranted:false];
     authorizationAnsweredExpectation = [[XCTestExpectation alloc] initWithDescription:@"request for authorization must be answered"];
     mockCameraManager.authorizationAnsweredExpectation = authorizationAnsweredExpectation;
@@ -262,8 +273,15 @@ XCTestExpectation *authorizationAnsweredExpectation;
     NSLog(@"waiting authorizationAnsweredExpectation");
     [self waitForExpectations:@[authorizationAnsweredExpectation] timeout:5.0];
     XCTAssert([myvc.message.text isEqualToString:@"Camera usage not authorized\nChange Fotomail privacy setting for camera in Settings"],@"Message about camera not available must be displayed");
+    XCTAssertTrue([myvc.overlayView isHidden],"Camera overlay view must be hidden");
 }
 
+
+-(void)testMailNotAuthorized{
+    myvc.mailComposerClass = [MockMailManager class];
+    [myvc viewDidLoad];
+    XCTAssert([myvc.mailAvailabilityMessage.text isEqualToString:@"e-mail account not available"]);
+}
 /// helper function to turn the torch on by choosing the segmented control item
 -(void) turnTorchOnThroughUI{
     UISegmentedControl *controls = myvc.flashControls;

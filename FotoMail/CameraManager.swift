@@ -9,14 +9,23 @@
 import Foundation
 import AVFoundation
 
+/**
+ This protocol defines an object that is responsible for:
+ - checking athorization to use the camera
+ - creating the actual camera device and initialize it on a given view
+*/
 @objc protocol CameraManager{
     func startCamera(onView view:UIView)->AbstractCameraDevice?
     func checkCameraAuthorization(withCompletion  completionHandler:@escaping (Bool)->())
 }
 
+/// AVCaptureDevice is naturally conforming to AbstractCameraDevice
 extension AVCaptureDevice:AbstractCameraDevice{
 }
 
+/**
+    This object interface with AVCaptureDevice class
+*/
 @objc class DefaultCameraManager:NSObject, CameraManager{
     func startCamera(onView view:UIView)->AbstractCameraDevice? {
         return try? AVCaptureDevice.initCamera(on: view) as AbstractCameraDevice
