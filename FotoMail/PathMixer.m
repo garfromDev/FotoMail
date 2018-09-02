@@ -12,6 +12,11 @@
 
 @implementation PathMixer
 
+/**
+ draw the path onto the originaleImage and call completion
+ with the result as new UIImage
+ In case of invalid image, completion is not called
+ */
 + (void) saveEditedWithImage: (UIImage *)originaleImg paths: (NSArray<OverPath *> *)paths completion:(void(^)(UIImage *finalImg)) completion{
     
     // situation de départ , on a
@@ -20,7 +25,10 @@
     
     // 1 créer une image à fond noir
     NSLog(@"1 créer une image à fond noir");
-    NSAssert(originaleImg.size.width > 0 && originaleImg.size.height > 0, @"originale image est vide!");
+    if( originaleImg==nil || !(originaleImg.size.width > 0 && originaleImg.size.height > 0)){
+        NSLog( @"originale image est vide!");
+        return; //invalid image, completion not called
+    }
     UIGraphicsBeginImageContextWithOptions(originaleImg.size, YES, originaleImg.scale);
     CGContextRef pathContext = UIGraphicsGetCurrentContext();
 //    NSAssert(self.bounds.size.width == originaleImg.size.width, @"self.bounds n'est pas égale à originale image");

@@ -559,6 +559,7 @@ cycle de prise de vue
 - (IBAction)imagePickerControllerDidCancel
 {   // l'utilisateur a annulé la prise de photo, on masque l'aperçu et on réaffiche l'appareil photo
     NSLog(@"cancel appuyé dans imagePicker");
+    [cropQueue cancelAllOperations]; //cancel on going cropping if any
     [FotomailUserDefault.defaults commitUndo]; //restaure le titre avant preview
     self.imageView.image = nil; //libérer la mémoire de l'image
     [self.pathManager clear];
@@ -646,7 +647,8 @@ cycle de prise de vue
         __block  UIImage *originaleImg = self.imageView.image;
         __block NSArray<OverPath*> *paths = self.pathManager.paths;
         dispatch_group_async(imgGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
-                             ^{[PathMixer saveEditedWithImage:originaleImg paths:paths completion:^(UIImage *finalImg) {
+                             ^{//[cropQueue waitUntilAllOperationsAreFinished]; //
+                                 [PathMixer saveEditedWithImage:originaleImg paths:paths completion:^(UIImage *finalImg) {
                                     [self envoiPhoto:finalImg];
                                 }];
             });
@@ -667,6 +669,8 @@ cycle de prise de vue
     //TODO: il faudrait que le bouton "done" reste activé, mais que l'utilisation de l'image attende la fin du traitement, ou que le bouton "done" soit désactivé
     //TODO: également cancel doit interompre la tache en cours
 //    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0),
+ 
+    
     [cropQueue addOperationWithBlock: ^{
         [PathMixer saveEditedWithImage:originaleImg paths:paths
                             completion:^(UIImage *finalImg) {
