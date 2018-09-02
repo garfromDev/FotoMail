@@ -16,6 +16,8 @@
 		302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
 		302662B71E087343003D80E9 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302662B61E087343003D80E9 /* Settings.storyboard */; };
 		302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */; };
+		3029A077213AF03900A55A6E /* MultipleBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3029A076213AF03900A55A6E /* MultipleBlockOperation.swift */; };
+		3029A079213B18AF00A55A6E /* TestMultipleBlocksOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3029A078213B18AF00A55A6E /* TestMultipleBlocksOperation.swift */; };
 		3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */; };
 		3036FBDC1D29351F004036D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBDB1D29351F004036D6 /* main.m */; };
 		3036FBDF1D29351F004036D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBDE1D29351F004036D6 /* AppDelegate.m */; };
@@ -76,6 +78,7 @@
 		30EEE0C01F810E020030B068 /* ChooseProject.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30EEE0BF1F810E020030B068 /* ChooseProject.storyboard */; };
 		30EEE0C21F810E830030B068 /* ChooseProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EEE0C11F810E830030B068 /* ChooseProjectTableViewController.swift */; };
 		30EFF5121DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EFF5111DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift */; };
+		30F857022139D6A70079A4D5 /* performUIUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F857012139D6A70079A4D5 /* performUIUpdate.swift */; };
 		30F967DB2133FA5000864CFD /* FotomailUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092C50F1E17AEAD0031BC20 /* FotomailUserDefault.m */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +119,8 @@
 		302059C41D6786F900B47988 /* UIVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIVIewExtension.swift; path = ../../maxouf14/maxouf14/UIVIewExtension.swift; sourceTree = "<group>"; };
 		302662B61E087343003D80E9 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		3029A076213AF03900A55A6E /* MultipleBlockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleBlockOperation.swift; sourceTree = "<group>"; };
+		3029A078213B18AF00A55A6E /* TestMultipleBlocksOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMultipleBlocksOperation.swift; sourceTree = "<group>"; };
 		3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotomailUserDefaultTests.m; sourceTree = "<group>"; };
 		3036FBD71D29351F004036D6 /* FotoMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FotoMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3036FBDB1D29351F004036D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -191,6 +196,7 @@
 		30EEE0BF1F810E020030B068 /* ChooseProject.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChooseProject.storyboard; sourceTree = "<group>"; };
 		30EEE0C11F810E830030B068 /* ChooseProjectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseProjectTableViewController.swift; sourceTree = "<group>"; };
 		30EFF5111DE2373B005E23C2 /* extension AVCaptureVideoOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "extension AVCaptureVideoOrientation.swift"; sourceTree = "<group>"; };
+		30F857012139D6A70079A4D5 /* performUIUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = performUIUpdate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +391,7 @@
 				3062EBA71FACE84800DC01BC /* ETTV */,
 				3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */,
 				30799E302135ED2C006FE501 /* MailComposer Protocol.h */,
+				30F857012139D6A70079A4D5 /* performUIUpdate.swift */,
 				30E2A2D21E20246800A18AD4 /* ReachabilityExtension.swift */,
 				30E2A2CF1E2023BF00A18AD4 /* Reachability.h */,
 				30E2A2D01E2023BF00A18AD4 /* Reachability.m */,
@@ -452,6 +459,7 @@
 				3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */,
 				3036FBF41D29351F004036D6 /* FotoMailTests.m */,
 				306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */,
+				3029A078213B18AF00A55A6E /* TestMultipleBlocksOperation.swift */,
 			);
 			path = "Test on simulator";
 			sourceTree = "<group>";
@@ -478,6 +486,7 @@
 				30B427821F3858350025034F /* PathMixer.h */,
 				30B427831F3858350025034F /* PathMixer.m */,
 				30B4277E1F384DAF0025034F /* FotomailPathManager.swift */,
+				3029A076213AF03900A55A6E /* MultipleBlockOperation.swift */,
 			);
 			name = Preview;
 			sourceTree = "<group>";
@@ -676,6 +685,7 @@
 				3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */,
 				30B16F611E0B2E4200980161 /* Recipients_DataSource.swift in Sources */,
 				3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */,
+				30F857022139D6A70079A4D5 /* performUIUpdate.swift in Sources */,
 				30B427891F3864370025034F /* TransparentPathView.swift in Sources */,
 				3036FBDF1D29351F004036D6 /* AppDelegate.m in Sources */,
 				30B427841F3858350025034F /* PathMixer.m in Sources */,
@@ -690,6 +700,7 @@
 				3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */,
 				306AB0E71F384A7E00CF238F /* extensionVC+PathDisplayer.swift in Sources */,
 				30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */,
+				3029A077213AF03900A55A6E /* MultipleBlockOperation.swift in Sources */,
 				30752E271FAAFE1E00BDD882 /* EditableTextTableViewCell.swift in Sources */,
 				304893D21FB1974B000189A9 /* TableViewTextField.swift in Sources */,
 				3036FBDC1D29351F004036D6 /* main.m in Sources */,
@@ -717,6 +728,7 @@
 				3092D8C91EBBCD5E004F93D3 /* UIVIewExtension.swift in Sources */,
 				30ADC3082133D29F0052AF72 /* AVCaptureSession+extension.m in Sources */,
 				30ADC2EE21334A310052AF72 /* AVCaptureDevice+ExtensionFaultTests.m in Sources */,
+				3029A079213B18AF00A55A6E /* TestMultipleBlocksOperation.swift in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
 				3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */,
 				309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */,

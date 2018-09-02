@@ -110,12 +110,14 @@ cycle de prise de vue
     BOOL showPreview;
     
     /* utilisé pour garantir  que le controlleur de mail est prêt avant d'attacher les images
-     / que toute les images ont été converties et attachées avant d'affichée le  composeur de mail
+     / que toute les images ont été converties et attachées avant d'afficher le  composeur de mail
     */
     dispatch_group_t mailGroup, imgGroup;
     /// le controlleur de mail
     MFMailComposeViewController *mailPicker;
     
+    /// la queue utilisée par la prévue pour effectuer le crop
+    NSOperationQueue *cropQueue;
     /// indique que l'écran de prévisualisation devra être affiché
     BOOL preview;
 
@@ -128,6 +130,9 @@ cycle de prise de vue
         self.cameraManager = [[DefaultCameraManager alloc] init];
         //load the system mailComposeViewCOntrolelr, could be overruled for testing
         self.mailComposerClass = [MFMailComposeViewController class];
+        cropQueue = [[NSOperationQueue alloc] init];
+        [cropQueue setMaxConcurrentOperationCount:1];
+        [cropQueue setQualityOfService:NSQualityOfServiceUserInitiated];
     }
     return self;
 }
@@ -657,11 +662,23 @@ cycle de prise de vue
 -(IBAction)cropAccordingCurrentView:(id)sender{
     __block  UIImage *originaleImg = self.imageView.image;
     __block NSArray<OverPath*> *paths = self.pathManager.paths;
-    [PathMixer saveEditedWithImage:originaleImg paths:paths completion:^(UIImage *finalImg) {
-        UIImage *croppedImg = [finalImg croppedImageInRect:[self.scrollView onScreenRect]];
-        [self.scrollView insertImage:croppedImg];
-        //TODO: envoyer en tache de fond la partie non UI, et désactiver les boutons done pendant traitement de fond
-        [self.pathManager clear];
+    __block UIControl *cropButton = (UIControl *)sender;
+    [cropButton setEnabled:false];
+    //TODO: il faudrait que le bouton "done" reste activé, mais que l'utilisation de l'image attende la fin du traitement, ou que le bouton "done" soit désactivé
+    //TODO: également cancel doit interompre la tache en cours
+//    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0),
+    [cropQueue addOperationWithBlock: ^{
+        [PathMixer saveEditedWithImage:originaleImg paths:paths
+                            completion:^(UIImage *finalImg) {
+                                [cropQueue addOperationWithBlock: ^{
+                                    UIImage *croppedImg = [finalImg croppedImageInRect:[self.scrollView onScreenRect]];
+                                        [NSOperation performUIUpdateUsing:^{
+                                            [self.scrollView insertImage:croppedImg];
+                                            [cropButton setEnabled:true];
+                                        }];
+                                }];
+                                [self.pathManager clear];
+                            }];
     }];
 }
 
