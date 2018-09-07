@@ -32,7 +32,6 @@
  
  A faire après :
  finir unit testing des ajouts
- ajouter icone crop
  corriger les warnings
  
   V1.7

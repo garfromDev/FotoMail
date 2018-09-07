@@ -12,8 +12,8 @@ extension UIAlertController {
 
    class func yesNoAlert( title : String? = "",
                      message : String? = "",
-                     yesAction : ((Void) -> Void)? = nil,
-                     noAction : ((Void) -> Void)? = nil
+                     yesAction : (() -> Void)? = nil,
+                     noAction : (() -> Void)? = nil
         ) -> UIAlertController
     {
         let controller = UIAlertController(title:title,

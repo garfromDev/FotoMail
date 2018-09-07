@@ -100,6 +100,7 @@ TitleTextFieldDelegate *myDelegate; //ATTENTION, je l'avais par erreur déclaré
 }
 
 #pragma mark- ModelIndexed protocol
+
 int _modelIndex;
 
 -(int)modelIndex {

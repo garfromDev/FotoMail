@@ -7,6 +7,9 @@
 //
 
 import Foundation
+
+// NOTE : not used in FotoMail
+
 /**
   Allow to launch a sequence of block excution on a serial queue, with cancellation possible between each bloc
     cancellation is triggered by queue.cancelAllOperations()

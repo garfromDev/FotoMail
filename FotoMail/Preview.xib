@@ -96,7 +96,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="Dje-S4-Eba"/>
                                 <barButtonItem style="plain" id="06y-i6-hYB" userLabel="Rubber">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="4yA-e3-imV">
-                                        <rect key="frame" x="108.5" y="9.5" width="25" height="25"/>
+                                        <rect key="frame" x="115" y="9.5" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="gomme"/>
                                         <state key="selected" image="gommeHighlighted"/>
@@ -107,7 +107,7 @@
                                     </button>
                                 </barButtonItem>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="wJu-OJ-Ofh"/>
-                                <barButtonItem title="crop" id="f1S-K3-Sxf">
+                                <barButtonItem title="crop" image="Crop" largeContentSizeImage="Crop" id="f1S-K3-Sxf">
                                     <connections>
                                         <action selector="cropAccordingCurrentView:" destination="-1" id="ZE6-KX-eI8"/>
                                     </connections>
@@ -168,6 +168,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="Crop" width="25" height="25"/>
         <image name="gomme" width="25" height="25"/>
         <image name="gommeHighlighted" width="25" height="25"/>
         <image name="retake" width="25" height="25"/>

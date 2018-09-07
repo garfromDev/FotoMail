@@ -20,9 +20,10 @@
  
  */
 @implementation AVCaptureSession(TestExtension)
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wall"
 -(BOOL)canSetSessionPreset:(NSString *)preset{
-
+#pragma clang diagnostic pop
         return NO;    
 }
 

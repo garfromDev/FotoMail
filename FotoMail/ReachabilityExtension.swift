@@ -31,7 +31,7 @@ extension Reachability {
  - Parameter message: la vue a cacher ou afficher,
  - Parameter action: le bloc a exécuter si connexion internet présente
  */
-    init(internetAccess : Reachability, message : UIView, action : @escaping (Void) -> Void) {
+    init(internetAccess : Reachability, message : UIView, action : @escaping () -> Void) {
         super.init()
         self.internetAccess = internetAccess
         self.message = message
