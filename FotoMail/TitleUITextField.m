@@ -6,19 +6,18 @@
 //  Copyright © 2016 garfromDev. All rights reserved.
 //
 
+#import "FotoMail-Swift.h"
 #import "TitleUITextField.h"
 #import "TitleTextFieldDelegate.h"
 #import "defines.h"
-#import "FotoMail-Swift.h"
 
-@interface TitleUITextField(){
+@interface TitleUITextField()<ModelIndexed>{
 //keep living the delegate object as long as this UITextField is living
 TitleTextFieldDelegate *myDelegate; //ATTENTION, je l'avais par erreur déclaré dans le @implementation, dans ce cas c'est une variable de classe et le délégué du 2ème textField releasait le délégué du 1er
 }
 @end
 
 @implementation TitleUITextField
-
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     NSLog(@"TitleUITextField initWithCoder");

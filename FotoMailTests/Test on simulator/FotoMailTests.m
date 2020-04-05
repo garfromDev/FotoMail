@@ -198,7 +198,10 @@ XCTestExpectation *authorizationAnsweredExpectation;
     [rootWindow setRootViewController:myvc];
     
     // The One Weird Trick!
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Weverything"
     UIView *_ = myvc.view; //charge la vue
+    #pragma clang diagnostic pop
     [myvc viewWillAppear:false];
     [myvc viewDidAppear:false];
     mockCamera  =  (MockCaptureDevice *)myvc.camera;

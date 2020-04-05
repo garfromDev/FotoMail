@@ -20,7 +20,7 @@ import UIKit
 
 @objc class TransparentPathView: UIView {
 
-    weak var delegate : PathProvider!
+    @objc weak var delegate : PathProvider!
     
     
     override func draw(_ rect: CGRect) {

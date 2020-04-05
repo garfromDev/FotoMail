@@ -18,7 +18,7 @@ extension RecipientsTableViewController  {
         cell.textField.placeholder = "Enter email adress"
         cell.textField.tag = indexPath.row
         cell.contactButton.tag = indexPath.row
-        cell.contactButton.addTarget(self, action: #selector(chooseContact(_:)), for: UIControlEvents.touchUpInside)
+        cell.contactButton.addTarget(self, action: #selector(chooseContact(_:)), for: UIControl.Event.touchUpInside)
         cell.textField.tag =  indexPath.row
         return cell
     }

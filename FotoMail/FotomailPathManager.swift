@@ -16,10 +16,10 @@ import UIKit
 /// le PathManager décide du mode gomme, de la couleur et de la largeur de trait et stocke les paths
 /// travaille avec EditingSupportImageView
 @objc class FotoMailPathManager: NSObject, PathManager {
-    var rubberMode = false
-    var drawColor = UIColor.red
-    weak var controller : PathDisplayer!
-    var paths : [OverPath] = []
+    @objc var rubberMode = false
+    @objc var drawColor = UIColor.red
+    @objc weak var controller : PathDisplayer!
+    @objc var paths : [OverPath] = []
     
     /// ajoute un path au tableau
     func addPath(path: UIBezierPath) {

@@ -8,7 +8,7 @@
 
 import UIKit
 @available(iOS 9.0, *)
-extension UIAlertController {
+public extension UIAlertController {
 
    class func yesNoAlert( title : String? = "",
                      message : String? = "",

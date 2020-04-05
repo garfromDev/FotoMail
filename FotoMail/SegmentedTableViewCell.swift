@@ -37,7 +37,7 @@ class SegmentedTableViewCell: RoundImageTableViewCell {
     
     
     /// appellée par le mécanisme action/target du switch
-    func switchValueDidChange(_ sender:UISegmentedControl){
+    @objc func switchValueDidChange(_ sender:UISegmentedControl){
         valueDidChanged(sender)
     }
     
@@ -65,7 +65,7 @@ class SegmentedTableViewCell: RoundImageTableViewCell {
     
     
     /// attention, le reuse identifier est systémaiquement écrasé
-    override convenience init(style: UITableViewCellStyle, reuseIdentifier: String?){
+    override convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         self.init(nil)!
     }
     

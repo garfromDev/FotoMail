@@ -7,13 +7,13 @@
 //
 
 import XCTest
-@testable import FotoMail
+//@testable import FotoMail
 
 let Task1ExecutedExpectation = XCTestExpectation(description: "Test1 executed")
 let Task2ExecutedExpectation = XCTestExpectation(description: "Test2 executed")
 let cancelledExpectation = XCTestExpectation(description: "cancelled")
 
-class MultipleBlockOperationTest: XCTestCase {
+class MultipleBlockOperationTests: XCTestCase {
     var q=OperationQueue()
     var tasks:MultipleBlockOperation!
     var resultValue : String!
@@ -74,6 +74,6 @@ class MultipleBlockOperationTest: XCTestCase {
 
     self.wait(for: [taskFinished], timeout: 1.0)
         XCTAssert(self.resultValue == "dispatch done", "return value must changed to dispatch done")
-        print("==== value is \(self.resultValue)")
+        print("==== value is \(String(describing: self.resultValue))")
     }
 }

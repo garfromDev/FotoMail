@@ -9,7 +9,7 @@
 import Foundation
 import CoreGraphics
 
-extension CGRect {
+public extension CGRect {
     init( origin:CGPoint, to:CGPoint){
         let w = abs(to.x - origin.x)
         let h = abs(to.y - origin.y)

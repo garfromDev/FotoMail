@@ -54,7 +54,7 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
                                         action: #selector(addItem))
         self.navigationItem.rightBarButtonItem = addButton
         updateAddButtonStatus()
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidEndEditing, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: UITextField.textDidEndEditingNotification, object: nil)
         
         // hide separator for empty cells
         tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -97,7 +97,7 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
     // MARK: - TableViewDelegate
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             model.remove(at: indexPath.row)
@@ -109,7 +109,7 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
     private var previousSelected : Int?
     
     
-    func addItem(){
+    @objc func addItem(){
         print("addItem  nb before = \(model.count)")
         let s = ""
         model.append(s)
@@ -121,7 +121,7 @@ class EditableStringArrayTableViewController: UITableViewController, StringArray
     // MARK: - TextField Management
     
     /// est appellé en cas de modification d'un champ de texte, met à jour le modèle
-    func textFieldDidChange(notification:Notification)
+    @objc func textFieldDidChange(notification:Notification)
     {
         print("textFieldDidChange ")
         // on vérifie que la notification s'acompagne d'un objet

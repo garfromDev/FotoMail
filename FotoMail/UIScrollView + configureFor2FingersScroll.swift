@@ -9,7 +9,7 @@
 import UIKit
 
 /// this extension provide a convenience function to configure a scrollview to use 2 finger to scroll the content
-extension  UIScrollView //configureFor2FingersScroll)
+@objc extension  UIScrollView //configureFor2FingersScroll)
 {
     /** configure a scrollview to use 2 finger to scroll the content
      */
@@ -29,7 +29,7 @@ extension  UIScrollView //configureFor2FingersScroll)
 
 
 /// this extension provide a calculation of the CGRect that correspond to the portion of the image on the screen
-extension UIScrollView{
+@objc public extension UIScrollView{
     func onScreenRect()->CGRect{
         /* besoin de comprendre :
          la taille à l'écran en pixel est .frame

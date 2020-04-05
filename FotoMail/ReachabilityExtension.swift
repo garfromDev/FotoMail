@@ -43,7 +43,7 @@ extension Reachability {
     Si internet est accessible, on cache la vue et on déclenche l'action
      - Return true si internet accessible, false si innaccessible ou si statut impossible à vérifier
     */
-    func updateDisplay() -> Bool{
+    @objc func updateDisplay() -> Bool{
         //on vérifie que l'objet internetAccess existe
         guard let _ = internetAccess else { return false }
        

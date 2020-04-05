@@ -21,7 +21,7 @@ import AVFoundation
         }
     }
     
-    @objc class func convertUIInterfaceToUIImageOrientation(_ inter:UIInterfaceOrientation)->UIImageOrientation{
+    @objc class func convertUIInterfaceToUIImageOrientation(_ inter:UIInterfaceOrientation)->UIImage.Orientation{
         switch inter {
         case .landscapeRight:       return .right
         case .landscapeLeft:        return .left
@@ -43,7 +43,7 @@ import AVFoundation
     }
     
 
-    @objc class func decodeUIImageOrientation(_ or :UIImageOrientation) -> String {
+    @objc class func decodeUIImageOrientation(_ or :UIImage.Orientation) -> String {
         switch or{
         case .right:        return "landscapeRight"
         case .left:         return "landscapeLeft"

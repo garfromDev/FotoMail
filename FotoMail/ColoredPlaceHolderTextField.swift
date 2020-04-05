@@ -9,7 +9,7 @@
 import Foundation
 
 @IBDesignable
-class ColoredPlaceholderTextField: TitleUITextField {
+public class ColoredPlaceholderTextField: TitleUITextField {
     @IBInspectable var placeholderColor: UIColor
 
     required init?(coder aDecoder: NSCoder) {
@@ -17,17 +17,17 @@ class ColoredPlaceholderTextField: TitleUITextField {
         super.init(coder: aDecoder)
     }
     
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         let attributes = [
-            NSForegroundColorAttributeName: self.placeholderColor
+            convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): self.placeholderColor
         ]
-        self.attributedPlaceholder = NSMutableAttributedString(string: self.placeholder ?? "", attributes: attributes)
+        self.attributedPlaceholder = NSMutableAttributedString(string: self.placeholder ?? "", attributes: convertToOptionalNSAttributedStringKeyDictionary(attributes))
         super.draw(rect)
     }
 }
 
 //@IBDesignable
-class TintTextField: TitleUITextField {
+public class TintTextField: TitleUITextField {
     @IBInspectable var placeholderColor: UIColor
     
     var tintedClearImage: UIImage?
@@ -40,11 +40,11 @@ class TintTextField: TitleUITextField {
     
     
     
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         let attributes = [
-            NSForegroundColorAttributeName: self.placeholderColor
+            convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): self.placeholderColor
         ]
-        self.attributedPlaceholder = NSMutableAttributedString(string: self.placeholder ?? "", attributes: attributes)
+        self.attributedPlaceholder = NSMutableAttributedString(string: self.placeholder ?? "", attributes: convertToOptionalNSAttributedStringKeyDictionary(attributes))
         super.draw(rect)
     }
     
@@ -60,7 +60,7 @@ class TintTextField: TitleUITextField {
 //        textColor = tintColor
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         tintClearImage()
     }
@@ -99,4 +99,15 @@ func tintImage(image: UIImage, color: UIColor) -> UIImage {
     UIGraphicsEndImageContext()
     
     return tintedImage!
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

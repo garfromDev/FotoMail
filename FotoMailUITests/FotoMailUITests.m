@@ -93,7 +93,7 @@ XCUIApplication *app;
     NSLog(@"buttonMail.enabled %@", buttonMail.enabled? @"YES" : @"NO");
     XCUIElement *textField = app.textFields[@"Titre"];
     NSString *titleBefore = textField.value;
-    NSLog(@"textfield.exists %@  value %@   imgNumber : %u", textField.exists? @"YES" : @"NO", textField.value, FotomailUserDefault.defaults.imgNumber);
+    NSLog(@"textfield.exists %@  value %@   imgNumber : %lu", textField.exists? @"YES" : @"NO", textField.value, (unsigned long)FotomailUserDefault.defaults.imgNumber);
     
     //on prend une photo
     [buttonTakePicture tap];

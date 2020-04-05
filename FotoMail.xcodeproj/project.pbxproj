@@ -16,7 +16,6 @@
 		302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302059C41D6786F900B47988 /* UIVIewExtension.swift */; };
 		302662B71E087343003D80E9 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302662B61E087343003D80E9 /* Settings.storyboard */; };
 		302662B91E0875F8003D80E9 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302662B81E0875F8003D80E9 /* SwitchTableViewCell.swift */; };
-		3029A077213AF03900A55A6E /* MultipleBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3029A076213AF03900A55A6E /* MultipleBlockOperation.swift */; };
 		3029A079213B18AF00A55A6E /* TestMultipleBlocksOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3029A078213B18AF00A55A6E /* TestMultipleBlocksOperation.swift */; };
 		3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */; };
 		3036FBDC1D29351F004036D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBDB1D29351F004036D6 /* main.m */; };
@@ -28,6 +27,7 @@
 		304893D21FB1974B000189A9 /* TableViewTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304893D11FB1974B000189A9 /* TableViewTextField.swift */; };
 		3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */; };
 		30536360213400EB007FBE0E /* FotoMailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3036FBF41D29351F004036D6 /* FotoMailTests.m */; };
+		305F289521431B250077C4F2 /* UIVIewController showAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F289421431B250077C4F2 /* UIVIewController showAlert.swift */; };
 		305F5B291E09AA5D00421A73 /* RecipientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */; };
 		3062EBAC1FACEBC500DC01BC /* EditableStringArrayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3062EBAB1FACEBC500DC01BC /* EditableStringArrayTableViewController.swift */; };
 		306AB0E71F384A7E00CF238F /* extensionVC+PathDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306AB0E61F384A7E00CF238F /* extensionVC+PathDisplayer.swift */; };
@@ -38,6 +38,7 @@
 		30752E271FAAFE1E00BDD882 /* EditableTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30752E261FAAFE1E00BDD882 /* EditableTextTableViewCell.swift */; };
 		308F7EC01E4F461C007BCD5B /* AVCaptureDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 308F7EBF1E4F461C007BCD5B /* AVCaptureDevice+Extension.m */; };
 		30905F1C1D3BFA2F00BC37D3 /* Preview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30905F1B1D3BFA2F00BC37D3 /* Preview.xib */; };
+		30912E112143129B00AC174E /* MultipleBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3029A076213AF03900A55A6E /* MultipleBlockOperation.swift */; };
 		309176191EBE6D40002438D4 /* EditingImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309176181EBE6D40002438D4 /* EditingImageViewTests.swift */; };
 		3091A8D91E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3091A8D81E89A45A00A7B455 /* UIScrollView + configureFor2FingersScroll.swift */; };
 		3092C5121E18235E0031BC20 /* SegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3092C5111E18235E0031BC20 /* SegmentedTableViewCell.swift */; };
@@ -142,6 +143,7 @@
 		304893D11FB1974B000189A9 /* TableViewTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewTextField.swift; sourceTree = "<group>"; };
 		3052474A1D48D739003FB600 /* TitleTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleTextFieldDelegate.h; sourceTree = "<group>"; };
 		3052474B1D48D739003FB600 /* TitleTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTextFieldDelegate.m; sourceTree = "<group>"; };
+		305F289421431B250077C4F2 /* UIVIewController showAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController showAlert.swift"; sourceTree = "<group>"; };
 		305F5B281E09AA5D00421A73 /* RecipientsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipientsTableViewController.swift; sourceTree = "<group>"; };
 		306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVCaptureDevice+ExtensionFaultTests.m"; sourceTree = "<group>"; };
 		3062EBAB1FACEBC500DC01BC /* EditableStringArrayTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableStringArrayTableViewController.swift; sourceTree = "<group>"; };
@@ -364,8 +366,9 @@
 			isa = PBXGroup;
 			children = (
 				307182E91E07301E0032BBDB /* Main */,
-				3071F02F1FB9831B00FF5E43 /* ChooseProject */,
 				30C28CF51E090E4900A0AB04 /* Settings */,
+				3071F02F1FB9831B00FF5E43 /* ChooseProject */,
+				30912E1221431AA500AC174E /* Extensions */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -462,6 +465,14 @@
 				3029A078213B18AF00A55A6E /* TestMultipleBlocksOperation.swift */,
 			);
 			path = "Test on simulator";
+			sourceTree = "<group>";
+		};
+		30912E1221431AA500AC174E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				305F289421431B250077C4F2 /* UIVIewController showAlert.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		30C28CF51E090E4900A0AB04 /* Settings */ = {
@@ -583,14 +594,14 @@
 		3036FBCF1D29351F004036D6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = garfromDev;
 				TargetAttributes = {
 					3036FBD61D29351F004036D6 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = QXYQ94XRJK;
 						DevelopmentTeamName = "Stephane Fromont";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1010;
 					};
 					3036FBEF1D29351F004036D6 = {
 						CreatedOnToolsVersion = 7.2;
@@ -675,6 +686,7 @@
 				306F78B51D610A7700634C5B /* TitleUITextField.m in Sources */,
 				30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */,
 				3019271A1D42BCE500C8E3CF /* UIImage+timeStamp.m in Sources */,
+				305F289521431B250077C4F2 /* UIVIewController showAlert.swift in Sources */,
 				3036FBE21D29351F004036D6 /* ViewController.m in Sources */,
 				302059C51D6786F900B47988 /* UIVIewExtension.swift in Sources */,
 				30DB23202134794D008591D4 /* EditingSupportImageView.swift in Sources */,
@@ -700,7 +712,6 @@
 				3052474C1D48D739003FB600 /* TitleTextFieldDelegate.m in Sources */,
 				306AB0E71F384A7E00CF238F /* extensionVC+PathDisplayer.swift in Sources */,
 				30B16F651E0B308200980161 /* EmailEditableTableViewCell.swift in Sources */,
-				3029A077213AF03900A55A6E /* MultipleBlockOperation.swift in Sources */,
 				30752E271FAAFE1E00BDD882 /* EditableTextTableViewCell.swift in Sources */,
 				304893D21FB1974B000189A9 /* TableViewTextField.swift in Sources */,
 				3036FBDC1D29351F004036D6 /* main.m in Sources */,
@@ -730,6 +741,7 @@
 				30ADC2EE21334A310052AF72 /* AVCaptureDevice+ExtensionFaultTests.m in Sources */,
 				3029A079213B18AF00A55A6E /* TestMultipleBlocksOperation.swift in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
+				30912E112143129B00AC174E /* MultipleBlockOperation.swift in Sources */,
 				3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */,
 				309FB7DE1EBE67E100819FAC /* CGrect+initWith2Points.swift in Sources */,
 				309176191EBE6D40002438D4 /* EditingImageViewTests.swift in Sources */,
@@ -813,12 +825,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -849,6 +863,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -864,12 +879,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -894,6 +911,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -911,7 +929,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FotoMail/FotoMail-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -929,7 +947,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FotoMail/FotoMail-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

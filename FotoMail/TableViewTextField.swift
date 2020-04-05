@@ -13,7 +13,7 @@ protocol IsInitializable {
 }
 
 /// décrit un objet se reliant à l'index du tableau modèle
-@objc protocol ModelIndexed {
+@objc public protocol ModelIndexed {
     var modelIndex : Int {get set}
 }
 

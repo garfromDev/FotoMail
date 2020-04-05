@@ -7,8 +7,8 @@
 //
 
 import Foundation
-extension Operation{
-    static func performUIUpdate(using closure: @escaping () -> Void) {
+@objc public extension Operation{
+    public static func performUIUpdate(using closure: @escaping () -> Void) {
         // If we are already on the main thread, execute the closure directly
         if Thread.isMainThread {
             closure()

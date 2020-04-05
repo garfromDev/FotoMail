@@ -10,8 +10,10 @@
 @protocol ModelIndexed;
 
 /// UITextField with only 24 characters valid in filenames allowed
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Weverything"
 @interface TitleUITextField : UITextField<UITextFieldDelegate, ModelIndexed>
-
+#pragma clang diagnostic pop
 @property(nonatomic) NSString *textForEdition;
 @property int modelIndex;
 

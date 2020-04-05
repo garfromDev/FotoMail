@@ -36,13 +36,13 @@
     XCTAssert([FotomailUserDefault.defaults.nomImg isEqualToString:@"Foto_0.jpg"],@"titreImg should be equal to Foto_0.jpg");
 }
 
-
--(void)testSetTitreImgToNil{
-    
-    [FotomailUserDefault.defaults setTitreImg:nil];
-    XCTAssert([FotomailUserDefault.defaults.titreImg isEqualToString: @""],@"titreImg should be equal to empry string");
-    XCTAssert([FotomailUserDefault.defaults.nomImg isEqualToString:@"Foto_0.jpg"],@"titreImg should be equal to Foto_0.jpg");
-}
+// titreImg is nonnull so there is no point to test for nil
+//-(void)testSetTitreImgToNil{
+//
+//    [FotomailUserDefault.defaults setTitreImg:nil];
+//    XCTAssert([FotomailUserDefault.defaults.titreImg isEqualToString: @""],@"titreImg should be equal to empry string");
+//    XCTAssert([FotomailUserDefault.defaults.nomImg isEqualToString:@"Foto_0.jpg"],@"titreImg should be equal to Foto_0.jpg");
+//}
 
 
 -(void)testSetTitreImgToValue{

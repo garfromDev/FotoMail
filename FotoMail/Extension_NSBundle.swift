@@ -9,7 +9,7 @@
 import UIKit
 
 /// ajoute une variable calculé appName qui retourne le nom de l'application
-extension Bundle {
+public extension Bundle {
     var appName : String {
         return Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
     }

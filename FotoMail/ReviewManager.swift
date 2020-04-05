@@ -88,7 +88,7 @@ let appId = 1210869548
     }
 
     // création du signeton (cf https://thatthinginswift.com/singletons/)
-    static let sharedInstance = Reviewmanager()
+    @objc public static let sharedInstance = Reviewmanager()
 
     // MARK: interface de paramétrage
     /// nombre d'activation de l'appli nécessaire pour qu'une reve puisse être demandée en fonction des autres conditions
@@ -107,7 +107,7 @@ let appId = 1210869548
     // MARK: Interface
     
     /// en fonction de l'état passé ou présent, interoge l'utilisateur et lui fait attribuer une évaluation
-    func checkReview()  {
+    @objc public func checkReview()  {
         let ( shouldAsk, msg) = shouldAskForReview()
         guard shouldAsk && msg != nil && displayStatus == .ready else { return }
         displayStatus = .question1
@@ -141,7 +141,7 @@ let appId = 1210869548
     
     /**  appellé pour indiquer que l'utilisateur a atteint un achievement
      *   la définition de l'achievement est au libre arbitre de l'applicatif */
-    func userHasAchieved(){
+    @objc public func userHasAchieved(){
         achievements += 1
     }
     
@@ -276,7 +276,7 @@ let appId = 1210869548
         // on vérifie si les valeurs sauvées existent (l'appli a déjà été activée)
         let defaults = UserDefaults.standard
         // on s'abonne pour suivre le nombre d'activation de l'appli
-        NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         guard let _ = defaults.object(forKey: UserDefaultKeys.firstInitDate.rawValue)
             else { // 1ere activation de l'appli
                 self.firstInitDate = NSDate()
@@ -305,7 +305,7 @@ let appId = 1210869548
     }
     
     /// appellé à chaque activation de l'application
-    func becomeActive(){
+    @objc func becomeActive(){
         activationNb += 1
         currentActivationNb += 1
         print("ReviewManager : activation number incremented : \(activationNb)")
@@ -366,23 +366,24 @@ let appId = 1210869548
     func displayMessage(msg: String, negatifChoice neg : String?) {
         let name = Bundle.main.appName
         // -- partie à remplacer à cause de déprécation --
-        let alrt = UIAlertView(
-            title: name,
-            message: msg,
-            delegate: self,
-            cancelButtonTitle: "Oui",
-            otherButtonTitles:   neg ?? "Non")
-        alrt.show()
+//        let alrt = UIAlertView(
+//            title: name,
+//            message: msg,
+//            delegate: self,
+//            cancelButtonTitle: "Oui",
+//            otherButtonTitles:   neg ?? "Non")
+//        alrt.show()
+        let alrt = UIAlertController(title: name, message: msg, preferredStyle: .alert)
+        let positiveAction = UIAlertAction(title: "Yes", style: .default) { [weak self] (a) in
+            self?.alertView(clickedButtonAt: 0)
+        }
+        let negativeAction = UIAlertAction(title: neg ?? "No", style: .default) { [weak self] (a) in
+            self?.alertView(clickedButtonAt: 1)
+        }
+        alrt.addAction(positiveAction)
+        alrt.addAction(negativeAction)
         
-        //--- partie en cours d'écriture utilisant l'AlertViewCOntroller ------
-//        let alrt = UIAlertController.yesNoAlert(title   :name,
-//                                                message :msg,
-//                                                yesAction:{},
-//                                                noAction:{}
-//        )
-//        //TODO: mettre les actions ici
-//        //comment trouver le viewController?
-//        UIApplication.shared.keyWindow?.rootViewController?.present(alrt, animated:true)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alrt, animated: true)
  
     }
     
@@ -438,7 +439,7 @@ let appId = 1210869548
 
     // MARK: UIALertviewdelegate
 
-    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+    func alertView( clickedButtonAt buttonIndex: Int) {
         switch displayStatus {
         case .question1:
             userLikeDecision(decision: buttonIndex == 0) //le bouton OUI est à gauche en premier

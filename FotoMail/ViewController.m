@@ -59,15 +59,16 @@ V1.9.1
 // NICETOHAVE : ajouter aide avec surimpression légendes sur image
 // NICETOHAVE : réglage correction lumière comme photo système
 
+#import "FotoMail-Swift.h"
 #import "ViewController.h"
 #import "UIImage+timeStamp.h"
 #import "FotoMail-Bridging-Header.h"
 #import "defines.h"
 #import <AVFoundation/AVFoundation.h>
-#import "FotoMail-Swift.h"
 #import "FotomailUserDefault.h"
 #import "AVCaptureDevice+Extension.h"
 #import "UIImage + createImageWithColor.h"
+//#import "UIScrollView + configureFor2FingersScroll-Swift.h"
 
 
 @interface ViewController ()
@@ -191,7 +192,7 @@ cycle de prise de vue
     
     // démarage du 1er cycle
     [self preparePhoto];
-
+   
 }
 
 
@@ -406,9 +407,9 @@ cycle de prise de vue
         dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0),
         ^{ //on prépare le composeur de mail
             NSLog(@"allocate Mail controller %@", [NSDate date]);
-            mailPicker = [[self.mailComposerClass alloc] init];
-            mailPicker.mailComposeDelegate = self;
-            [mailPicker setSubject:subject];
+            self->mailPicker = [[self.mailComposerClass alloc] init];
+            self->mailPicker.mailComposeDelegate = self;
+            [self->mailPicker setSubject:self->subject];
         } );
     }
 
@@ -673,7 +674,7 @@ cycle de prise de vue
     [cropQueue addOperationWithBlock: ^{
         [PathMixer saveEditedWithImage:originaleImg paths:paths
                             completion:^(UIImage *finalImg) {
-                                [cropQueue addOperationWithBlock: ^{
+                                [self->cropQueue addOperationWithBlock: ^{
                                     UIImage *croppedImg = [finalImg croppedImageInRect:[self.scrollView onScreenRect]];
                                         [NSOperation performUIUpdateUsing:^{
                                             [self.scrollView insertImage:croppedImg];
@@ -701,10 +702,10 @@ cycle de prise de vue
                              __block NSData * myData = UIImageJPEGRepresentation(imgDef, 1.0);
                              NSLog(@"conversion image finie %lu - %@",(unsigned long)FotomailUserDefault.defaults.nbImages,[NSDate date]);
                              
-                             dispatch_group_notify(mailGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
+                             dispatch_group_notify(self->mailGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
                                                    ^{
                                                        NSLog(@"attachement de l'image %@", fileName);
-                                                       [mailPicker addAttachmentData:myData mimeType:@"image/jpg" fileName:fileName];
+                                                       [self->mailPicker addAttachmentData:myData mimeType:@"image/jpg" fileName:fileName];
                                                    });
                          });
     if(preview) { // on le réaffiche
@@ -739,7 +740,7 @@ cycle de prise de vue
                           ^{
                               // quand tout est prêt on affiche le mail
                               NSLog(@"présente mail controller %@", [NSDate date]);
-                              [self presentViewController:mailPicker animated:YES completion:nil];
+                              [self presentViewController:self->mailPicker animated:YES completion:nil];
                           }
                           );
 }
@@ -817,6 +818,7 @@ cycle de prise de vue
 -(void)viewDidLayoutSubviews{
     LOG
     [super viewDidLayoutSubviews];
+
     if(!self.camera) {return;} //rien à faire si pas de caméra initialisée ou accessible
     // Merci à Matteo Caldari, c'est le truc qui manquait pour faire fonctionner la rotation
     self.camera.cameraLayer.frame = self.cameraPreviewView.bounds;
