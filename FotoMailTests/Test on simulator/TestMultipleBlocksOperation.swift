@@ -7,16 +7,15 @@
 //
 
 import XCTest
-//@testable import FotoMail
-
-let Task1ExecutedExpectation = XCTestExpectation(description: "Test1 executed")
-let Task2ExecutedExpectation = XCTestExpectation(description: "Test2 executed")
-let cancelledExpectation = XCTestExpectation(description: "cancelled")
 
 class MultipleBlockOperationTests: XCTestCase {
     var q=OperationQueue()
     var tasks:MultipleBlockOperation!
     var resultValue : String!
+    
+    let Task1ExecutedExpectation = XCTestExpectation(description: "Test1 executed")
+    let Task2ExecutedExpectation = XCTestExpectation(description: "Test2 executed")
+    let cancelledExpectation = XCTestExpectation(description: "cancelled")
     
     override func setUp() {
         super.setUp()
@@ -25,20 +24,20 @@ class MultipleBlockOperationTests: XCTestCase {
                 { (p:Any?) in
                     guard let n = p as! Int? else {return nil}
                     print("=========== bloc \(n) executed")
-                    Task1ExecutedExpectation.fulfill()
+                    self.Task1ExecutedExpectation.fulfill()
                     sleep(1)
                     return n+1
                 },
                 { (p:Any?) in
                     guard let n = p as! Int? else {return nil}
                     print("========== bloc \(n) executed")
-                    Task2ExecutedExpectation.fulfill()
+                    self.Task2ExecutedExpectation.fulfill()
                     return n+1
                 },
                 ],
             queue:q,
             firstParameter:1,
-            cancelHandler:{cancelledExpectation.fulfill()
+            cancelHandler:{self.cancelledExpectation.fulfill()
                 print("======== cancelled")})
     }
     
