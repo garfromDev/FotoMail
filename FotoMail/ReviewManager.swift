@@ -431,6 +431,8 @@ let appId = 1210869548
             print("Feedback Mail composer Result: sent")
             feedbackCallback( UserSatisfaction.unsatisfiedDidFeedback )
         
+        @unknown default:
+            break // don't know what to do...
         }
 
         controller.dismiss(animated: true, completion: nil)

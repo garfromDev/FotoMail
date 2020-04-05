@@ -28,7 +28,7 @@ class SegmentedTableViewCell: RoundImageTableViewCell {
     var indexToSelect : (() -> Int) = {
         
         let size = FotomailUserDefault.defaults().stampSize
-        if let index = [ SMALL , MEDIUM , LARGE].index(of: size){
+        if let index = [ SMALL , MEDIUM , LARGE].firstIndex(of: size){
             return Int(index)
         }
         
