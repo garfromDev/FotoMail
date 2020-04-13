@@ -7,13 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "FotomailUserDefault.h"
-
 
 #define STD_TIMEOUT 5.0
 
 @implementation XCUIElement(waitForExpectation)
-
 
 /*! attend qu'une condition soit remplie pour l'objet
  
@@ -50,9 +47,11 @@ XCUIApplication *app;
     self.continueAfterFailure = YES;
     // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
     app = [[XCUIApplication alloc] init];
+    /* userdefault can be set through command line, see https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/UserDefaults/AboutPreferenceDomains/AboutPreferenceDomains.html#//apple_ref/doc/uid/10000059i-CH2-SW1
+       this will not be recorded in disk, only transient during app's lifetime
+     */
+    [app setLaunchArguments: @[@"-imgNumber", @"0"]];
     [ app launch];
-    [FotomailUserDefault.defaults setImgNumber:0];
-    
     // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
 }
 
@@ -69,6 +68,8 @@ XCUIApplication *app;
 
 
 - (void)testTakePictureButton {
+    // Note : si un message parlant de problème de signature de l'appli appparait quand on teste sur iphone 5S
+    // il faut le rebooter (probleme 32 bits) https://stackoverflow.com/questions/39464682/dtdevicekit-could-not-start-house-arrest-service-for-app-identifier-xxx
     /* : on n'a pas accès au modèle de l'application, donc on ne peut pas manipuler le compteur incrémental, qui va changer à chaque test
      On ne sait pas quel est le titre en cours et le n° en cours*/
     
@@ -76,49 +77,45 @@ XCUIApplication *app;
      - le n° d'image affiché après une photo ait changé
      - le titre affiché après une photo ait changé
      */
-    
-    
+
     //on attend que le bouton "take picture apparaisse
     XCUIElement *buttonTakePicture = app.buttons[@"takePicture"];
     
     [buttonTakePicture waitForExpectationWithPredicate:@"exists == true" inTestCase:self];
-    //        NSLog(@"%@",[app debugDescription]);
-    
+    // on mémorize le numero et titre actuel
     XCUIElement *noPhotoLabel = app.staticTexts[@"NoPhoto"];
     NSString *displayedBefore = noPhotoLabel.label;
     NSLog(@"--- displayed before %@", displayedBefore);
-    
-    XCUIElement *buttonMail = app.buttons[@"Mail"]; //pas trouvé comment vérifier l'activation du bouton mail, car exist et enabled sont toujours vrai
-    //[buttonMail waitForExpectationWithPredicate:@"exists == true" inTestCase:self];
-    NSLog(@"buttonMail.enabled %@", buttonMail.enabled? @"YES" : @"NO");
     XCUIElement *textField = app.textFields[@"Titre"];
-    NSString *titleBefore = textField.value;
-    NSLog(@"textfield.exists %@  value %@   imgNumber : %lu", textField.exists? @"YES" : @"NO", textField.value, (unsigned long)FotomailUserDefault.defaults.imgNumber);
+    NSLog(@"textfield.exists %@  value %@   ", textField.exists? @"YES" : @"NO", textField.value);
+    // le bouton mail ne doit pas être disponible
+    XCTAssert(![app.buttons[@"Mail"] exists]);
     
     //on prend une photo
     [buttonTakePicture tap];
     
+    // il faut attendre que le bouton soit de nouveau disponible
+    [buttonTakePicture waitForExpectationWithPredicate:@"enabled == true" inTestCase:self];
+    
     //On vérifie que le n° d'image affiché après soit différent
     NSLog(@"noPhoto : %@", noPhotoLabel.label);
     XCTAssertFalse([noPhotoLabel.label isEqualToString:displayedBefore],@"NoPhoto must display new number after taking picture");
-    
-    //On vérifie que le titre affiché après soit différent
-    NSLog(@"textfield.exists %@  value %@", textField.exists? @"YES" : @"NO", textField.value);
-    XCTAssertFalse([textField.value isEqualToString:titleBefore],@"Titre must display new number after taking picture");
-    
+    // vérification du titre déjà faite dans les test unitaires controlleur
+    // le bouton d'envoi de mail doit avoir apparu
+    XCTAssert([app.buttons[@"Mail"] exists]);
 }
 
 -(void)testChainingThroughPictureTakingreviewProcess{
 
     [XCUIDevice sharedDevice].orientation = UIDeviceOrientationPortrait;
-    
     XCUIApplication *app = [[XCUIApplication alloc] init];
     
     //prend une photo avec prévisualisation
     [app.buttons[@"takeAndPreview"] tap];
-    
+    XCUIElement *buttonDone = app.toolbars.buttons[@"use"];
+    [buttonDone waitForExpectationWithPredicate:@"exists == true" inTestCase:self];
     //fait zoomer la scrollView, dessine, swipe...
-    XCUIElement *scrollView = [[[[[[app.otherElements containingType:XCUIElementTypeActivityIndicator identifier:@"Progress halted"] childrenMatchingType:XCUIElementTypeOther] elementBoundByIndex:2] childrenMatchingType:XCUIElementTypeOther] elementBoundByIndex:2] childrenMatchingType:XCUIElementTypeScrollView].element;
+    XCUIElement *scrollView = [app.scrollViews firstMatch];
     [scrollView pinchWithScale:2.0 velocity:1];
     XCUIElement *image = [app.scrollViews childrenMatchingType:XCUIElementTypeImage].element;
     [image tap];
@@ -133,10 +130,9 @@ XCUIApplication *app;
     //on prépare le mail puis on abondonne
     [app.buttons[@"Mail"] tap];
     [app.navigationBars[@"FotoMail"].buttons[@"Annuler"] tap];
-    XCUIElement *effacerLeBrouillonButton = app.sheets.collectionViews.buttons[@"Effacer le brouillon"];
+    XCUIElement *effacerLeBrouillonButton = [[[app.sheets elementBoundByIndex:0] buttons] elementBoundByIndex:0];
     [effacerLeBrouillonButton tap];
-
-    
 }
+
 @end
 

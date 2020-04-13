@@ -14,7 +14,7 @@
       codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3036FBEF1D29351F004036D6"
@@ -39,6 +39,16 @@
                   Identifier = "UIScrollViewExtensionTests">
                </Test>
             </SkippedTests>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3036FBFA1D29351F004036D6"
+               BuildableName = "FotoMailUITests.xctest"
+               BlueprintName = "FotoMailUITests"
+               ReferencedContainer = "container:FotoMail.xcodeproj">
+            </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>

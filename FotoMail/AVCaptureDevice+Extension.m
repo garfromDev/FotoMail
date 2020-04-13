@@ -109,7 +109,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
 }
 
 #pragma mark Image capture
--(void) captureUIImage: (void (^)(UIImage *image)) imageHandler{
+-(void) captureUIImageWith: (AVCaptureVideoOrientation) orientation completion:(void (^)(UIImage *image)) imageHandler{
     // capture asynchrone pour ne pas bloquer
     dispatch_async([AVCaptureDevice sessionQueue], ^{
         NSLog(@"takePicture - capturing image...");
@@ -120,7 +120,7 @@ AVCaptureVideoPreviewLayer *cameraLayer;
         }
         
         // pas compris pourquoi, mail il faut la garder ici sinon la photo est mal orienté een paysage
-        connexion.videoOrientation = [OrientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
+        connexion.videoOrientation = orientation;
         [imageOutput captureStillImageAsynchronouslyFromConnection:connexion completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
             NSLog(@"takePicture - image captured error:%@", error.description);
             if(error){

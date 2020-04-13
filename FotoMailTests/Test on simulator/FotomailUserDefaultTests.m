@@ -48,8 +48,9 @@
 -(void)testSetTitreImgToValue{
     
     [FotomailUserDefault.defaults setTitreImg:@"SomeValue"];
+    [FotomailUserDefault.defaults setImgNumber:11];
     XCTAssert([FotomailUserDefault.defaults.titreImg isEqualToString: @"SomeValue"],@"titreImg should be equal to SomeValue");
-    XCTAssert([FotomailUserDefault.defaults.nomImg isEqualToString:@"SomeValue_0.jpg"],@"titreImg should be equal to SomeValue_0.jpg");
+    XCTAssert([FotomailUserDefault.defaults.nomImg isEqualToString:@"SomeValue_11.jpg"],@"titreImg should be equal to SomeValue_0.jpg");
 }
 
 -(void)testSetImgNumberToValue{
@@ -58,7 +59,7 @@
     FotomailUserDefault.defaults.imgNumber++;
     XCTAssert([FotomailUserDefault.defaults imgNumber] == 1, @"imgNumber doit être à un");
     [FotomailUserDefault.defaults setImgNumber:NSIntegerMax];
-    XCTAssert([FotomailUserDefault.defaults imgNumber] == 0, @"imgNumber doit être à zéro");    
+    XCTAssert([FotomailUserDefault.defaults imgNumber] == 0, @"imgNumber doit être à zéro");
 }
 
 -(void)testSetCurrentProject{
@@ -67,5 +68,15 @@
     
     FotomailUserDefault.defaults.currentProject = @"";
     XCTAssert([[FotomailUserDefault.defaults currentProject] isEqualToString:@"\\"], @"un \\ doit être ajouté à la fin même si la chaine est vide");
+}
+
+-(void) testNextName {
+    // on fixe le numero incrémental à 20, on suppose que c'est la premiere photo de la session
+        
+    [FotomailUserDefault.defaults setNbImages:0];
+    [FotomailUserDefault.defaults nextName];
+    XCTAssert([FotomailUserDefault.defaults imgNumber] == 21, @"imgNumber doit être à vingt et un");
+    XCTAssertEqualObjects([FotomailUserDefault.defaults nomImg], @"Foto_21.jpg", @"titre doit etre Foto_21.jpg");
+    XCTAssertEqual([FotomailUserDefault.defaults nbImages], 0, @"le no de l'image courante doit être 0, car il n'est pas incrémenté par next_name");
 }
 @end

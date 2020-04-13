@@ -70,6 +70,7 @@
 		30BAF5B91FB593050068660F /* ChooseProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BAF5B81FB593050068660F /* ChooseProject.swift */; };
 		30BAF6621FB5969A0068660F /* TableViewTextFieldTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BAF6611FB5969A0068660F /* TableViewTextFieldTest.swift */; };
 		30C084F41E74A29C004BA873 /* UIImage + createImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C084F31E74A29C004BA873 /* UIImage + createImageWithColor.m */; };
+		30D23D8A243FB1D5008073EB /* UIViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3002081E2131C9D600D73D67 /* UIViewControllerTest.m */; };
 		30DB231F2134794D008591D4 /* AutoZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DB231D2134794D008591D4 /* AutoZoomingScrollView.swift */; };
 		30DB23202134794D008591D4 /* EditingSupportImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DB231E2134794D008591D4 /* EditingSupportImageView.swift */; };
 		30E2A2CE1E201BA900A18AD4 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2A2CD1E201BA900A18AD4 /* ReviewManager.swift */; };
@@ -137,7 +138,7 @@
 		3036FBF41D29351F004036D6 /* FotoMailTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FotoMailTests.m; sourceTree = "<group>"; };
 		3036FBF61D29351F004036D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3036FBFB1D29351F004036D6 /* FotoMailUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FotoMailUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3036FBFF1D29351F004036D6 /* FotoMailUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FotoMailUITests.m; path = FotoMailUITests/FotoMailUITests.m; sourceTree = SOURCE_ROOT; };
+		3036FBFF1D29351F004036D6 /* FotoMailUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FotoMailUITests.m; sourceTree = "<group>"; };
 		3036FC011D29351F004036D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		303E6B171D6EC9150008CC51 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		304893D11FB1974B000189A9 /* TableViewTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewTextField.swift; sourceTree = "<group>"; };
@@ -297,9 +298,6 @@
 				308BDD472133D96000483C65 /* TestOnDevice */,
 				308BDD482133D98100483C65 /* Test on simulator */,
 				3036FBF61D29351F004036D6 /* Info.plist */,
-				309176181EBE6D40002438D4 /* EditingImageViewTests.swift */,
-				30BAF6611FB5969A0068660F /* TableViewTextFieldTest.swift */,
-				3002081E2131C9D600D73D67 /* UIViewControllerTest.m */,
 			);
 			path = FotoMailTests;
 			sourceTree = "<group>";
@@ -456,11 +454,14 @@
 		308BDD482133D98100483C65 /* Test on simulator */ = {
 			isa = PBXGroup;
 			children = (
+				3036FBF41D29351F004036D6 /* FotoMailTests.m */,
+				309176181EBE6D40002438D4 /* EditingImageViewTests.swift */,
+				30BAF6611FB5969A0068660F /* TableViewTextFieldTest.swift */,
+				3002081E2131C9D600D73D67 /* UIViewControllerTest.m */,
 				3007F8471E8C40AE00C26109 /* UIScrollViewExtensionTests.swift */,
 				3092D8C51EBBBF75004F93D3 /* UIImageEraseTests.swift */,
 				308BDD462133D93E00483C65 /* Supporting */,
 				3033A8FF1E33C84400061030 /* FotomailUserDefaultTests.m */,
-				3036FBF41D29351F004036D6 /* FotoMailTests.m */,
 				306073101F3F559D0017EA9C /* AVCaptureDevice+ExtensionFaultTests.m */,
 				3029A078213B18AF00A55A6E /* TestMultipleBlocksOperation.swift */,
 			);
@@ -741,6 +742,7 @@
 				30ADC3082133D29F0052AF72 /* AVCaptureSession+extension.m in Sources */,
 				30ADC2EE21334A310052AF72 /* AVCaptureDevice+ExtensionFaultTests.m in Sources */,
 				3029A079213B18AF00A55A6E /* TestMultipleBlocksOperation.swift in Sources */,
+				30D23D8A243FB1D5008073EB /* UIViewControllerTest.m in Sources */,
 				3033A9001E33C84400061030 /* FotomailUserDefaultTests.m in Sources */,
 				30912E112143129B00AC174E /* MultipleBlockOperation.swift in Sources */,
 				3007F8481E8C40AE00C26109 /* UIScrollViewExtensionTests.swift in Sources */,

@@ -40,6 +40,7 @@
 // écran appareil photo
 @property (weak, nonatomic) IBOutlet UIButton *macroMode;
 @property (weak, nonatomic) IBOutlet UIButton *flashMode;
+/// le nom du fichier photo qui sera généré
 @property (weak,nonatomic) IBOutlet UITextField *titre;
 @property (weak,nonatomic) IBOutlet UILabel *noPhoto;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *flashControls;

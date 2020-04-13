@@ -6,6 +6,11 @@
 //  Copyright © 2018 garfromDev. All rights reserved.
 //
 
+/* ==========================================================
+        WIP - not part of production test suite
+   ===========================================================
+ */
+
 #import <XCTest/XCTest.h>
 #import "AVCaptureDevice+Extension.h"
 #import "ViewController.h"
@@ -24,7 +29,7 @@
 -(void)setMacroOff;
 -(BOOL) isMacroOn;
 -(void) setFocusToPoint: (CGPoint) pointInPreview;
--(void) captureUIImage: (void (^)(UIImage *image)) imageHandler;
+- (void)captureUIImageWith:(AVCaptureVideoOrientation)orientation completion:(void (^)(UIImage *))imageHandler;
 - (AVCaptureVideoPreviewLayer *)cameraLayer;
 @end
 
@@ -65,12 +70,16 @@ BOOL _isTorchOn;
 -(void) setFocusToPoint: (CGPoint) pointInPreview{
     return;
 }
--(void) captureUIImage: (void (^)(UIImage *image)) imageHandler{
-    return;
-}
 - (AVCaptureVideoPreviewLayer *)cameraLayer{
     return nil;
 }
+- (void)captureUIImageWith:(AVCaptureVideoOrientation)orientation completion:(void (^)(UIImage *))imageHandler {
+    return;
+}
+- (BOOL)isFlashModeSupported:(AVCaptureFlashMode)flashMode {
+    return true;
+}
+
 @end
 
 
@@ -84,6 +93,7 @@ ViewController *vc;
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    [FotomailUserDefault.defaults setImgNumber:20];
     vc = [[ViewController alloc] initWithNibName:nil bundle:[NSBundle mainBundle]];
 }
 
@@ -95,6 +105,7 @@ ViewController *vc;
 - (void)testExample {
     MockCaptureDevice *mockCamera = [[MockCaptureDevice alloc] init];
     vc.camera = mockCamera;
+
     
 }
 

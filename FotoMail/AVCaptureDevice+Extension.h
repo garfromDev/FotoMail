@@ -36,7 +36,7 @@ enum {
 -(void)setMacroOff;
 -(BOOL) isMacroOn;
 -(void) setFocusToPoint: (CGPoint) pointInPreview;
--(void) captureUIImage: (void (^)(UIImage *image)) imageHandler;
+-(void) captureUIImageWith: (AVCaptureVideoOrientation) orientation completion:(void (^)(UIImage *image)) imageHandler;
 - (AVCaptureVideoPreviewLayer *)cameraLayer;
 @end
 
@@ -92,6 +92,7 @@ enum {
 -(void) setFocusToPoint: (CGPoint) pointInPreview;
 
 /*! capture asynchronously a still image
+ @param orientation : the current orientation of the interface
  @param the handler that will receive the captured image
  @return UIImage is transmitted to the handler, may be nil if problem
  @discussion there is no commitment on which thread/queu the handler is called
@@ -100,7 +101,7 @@ enum {
  @code
  @endcode
  */
--(void) captureUIImage: (void (^)(UIImage *image)) imageHandler;
+-(void) captureUIImageWith: (AVCaptureVideoOrientation) orientation completion:(void (^)(UIImage *image)) imageHandler;
 
 
 /// return true if the device has capability for macro mode

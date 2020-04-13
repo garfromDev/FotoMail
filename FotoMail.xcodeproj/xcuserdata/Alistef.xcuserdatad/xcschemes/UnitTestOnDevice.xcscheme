@@ -7,8 +7,8 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForTesting = "NO"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
@@ -17,6 +17,34 @@
                BlueprintIdentifier = "3036FBEF1D29351F004036D6"
                BuildableName = "SimulatorFotoMailTests.xctest"
                BlueprintName = "SimulatorFotoMailTests"
+               ReferencedContainer = "container:FotoMail.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "30ADC2EF2133D17A0052AF72"
+               BuildableName = "DeviceFotoMailTests.xctest"
+               BlueprintName = "DeviceFotoMailTests"
+               ReferencedContainer = "container:FotoMail.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3036FBD61D29351F004036D6"
+               BuildableName = "FotoMail.app"
+               BlueprintName = "FotoMail"
                ReferencedContainer = "container:FotoMail.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,16 +70,11 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3036FBEF1D29351F004036D6"
-               BuildableName = "SimulatorFotoMailTests.xctest"
-               BlueprintName = "SimulatorFotoMailTests"
+               BlueprintIdentifier = "30ADC2EF2133D17A0052AF72"
+               BuildableName = "DeviceFotoMailTests.xctest"
+               BlueprintName = "DeviceFotoMailTests"
                ReferencedContainer = "container:FotoMail.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "AVCaptureDevice_ExtensionTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
@@ -66,15 +89,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "NO">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3036FBEF1D29351F004036D6"
-            BuildableName = "SimulatorFotoMailTests.xctest"
-            BlueprintName = "SimulatorFotoMailTests"
-            ReferencedContainer = "container:FotoMail.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
          <AdditionalOption
             key = "NSZombieEnabled"
@@ -92,9 +106,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3036FBEF1D29351F004036D6"
-            BuildableName = "SimulatorFotoMailTests.xctest"
-            BlueprintName = "SimulatorFotoMailTests"
+            BlueprintIdentifier = "30ADC2EF2133D17A0052AF72"
+            BuildableName = "DeviceFotoMailTests.xctest"
+            BlueprintName = "DeviceFotoMailTests"
             ReferencedContainer = "container:FotoMail.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

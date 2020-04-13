@@ -20,7 +20,7 @@
     AbstractCameraDevice), have all flash mode available except Auto,
     ,return a fake image and trigger an expectation when torch is set off
 */
-@interface MockCaptureDevice: NSObject <AbstractCameraDevice>
+@interface MockCaptureDevice2: NSObject <AbstractCameraDevice>
 @property(nonatomic, readonly) BOOL hasTorch;
 @property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive NS_AVAILABLE_IOS(6_0);
 @property(nonatomic, readonly, getter=isFlashAvailable) BOOL flashAvailable;
@@ -34,7 +34,7 @@
 -(void)setMacroOff;
 -(BOOL) isMacroOn;
 -(void) setFocusToPoint: (CGPoint) pointInPreview;
--(void) captureUIImage: (void (^)(UIImage *image)) imageHandler;
+- (void)captureUIImageWith:(AVCaptureVideoOrientation)orientation completion:(void (^)(UIImage *))imageHandler;
 - (AVCaptureVideoPreviewLayer *)cameraLayer;
 
 //parameters for testing :
@@ -42,8 +42,8 @@
 @property XCTestExpectation *torchOffExpectation;
 @end
 
-@implementation MockCaptureDevice
-BOOL _isTorchOn = false;
+@implementation MockCaptureDevice2
+BOOL _isTorchOn2 = false;
 BOOL _granted = true;
 
 /// always has torch available
@@ -61,18 +61,18 @@ BOOL _granted = true;
 }
 -(void)setTorchOn{
     LOG
-    _isTorchOn = true;
+    _isTorchOn2 = true;
     return;
 }
 -(void)setTorchOff{
     LOG
-    _isTorchOn = false;
+    _isTorchOn2 = false;
     [self.torchOffExpectation fulfill];
     return;
 }
 
 -(BOOL)isTorchActive{
-    return _isTorchOn;
+    return _isTorchOn2;
 }
 
 -(BOOL) isMacroAvailable{
@@ -91,7 +91,7 @@ BOOL _granted = true;
     return;
 }
 /// return a faked image
--(void) captureUIImage: (void (^)(UIImage *image)) imageHandler{
+- (void)captureUIImageWith:(AVCaptureVideoOrientation)orientation completion:(void (^)(UIImage *))imageHandler {
     CGSize size = CGSizeMake(300.0, 300.0);
     UIImage *img = [UIImage createImageWithColor:UIColor.cyanColor size:size];
     imageHandler(img);
@@ -140,7 +140,7 @@ BOOL _granted = true;
 }
 
 -(id<AbstractCameraDevice>)startCameraOnView:(UIView *)view{
-    return [[MockCaptureDevice alloc] init];
+    return [[MockCaptureDevice2 alloc] init];
 }
 -(void)checkCameraAuthorizationWithCompletion:(void(^)(BOOL granted))completionHandler{
     completionHandler(self.granted);
@@ -169,18 +169,35 @@ BOOL _granted = true;
 -(UIView *)overlayView;
 @end
 
-@interface FotoMailTests : XCTestCase
+// we subclass ViewController to access the observer
+@interface TestViewController:ViewController
+@property XCTestExpectation *titreChangedExpectation;
+@end
 
+@implementation TestViewController
+
+    - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        if ([keyPath isEqualToString:@"nbImages"] || [keyPath isEqualToString:@"titreImg"]){
+            [self.titreChangedExpectation fulfill];
+        }
+    }
+@end
+
+
+
+@interface FotoMailTests : XCTestCase
 @end
 
 @implementation FotoMailTests
-ViewController *myvc;
-MockCaptureDevice *mockCamera;
+TestViewController *myvc;
+MockCaptureDevice2 *mockCamera;
 MockCameraManager *mockCameraManager;
 
 UIWindow *rootWindow;
 XCTestExpectation *torchOffExpectation;
 XCTestExpectation *authorizationAnsweredExpectation;
+XCTestExpectation *nbImageChangedExpectation;
 
 - (void)setUp {
     [super setUp];
@@ -189,7 +206,14 @@ XCTestExpectation *authorizationAnsweredExpectation;
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main"
                                                           bundle: [NSBundle mainBundle]];
     // thanks https://stackoverflow.com/questions/29669381/unit-test-swift-casting-view-controller-from-storyboard-not-working
-    myvc = (ViewController *)[storyboard instantiateInitialViewController];
+    UIStoryboardViewControllerCreator creator = ^(NSCoder *coder){
+        return [[TestViewController alloc] initWithCoder:coder];
+    };
+    if (@available(iOS 13.0, *)) {
+        myvc = (TestViewController *)[storyboard instantiateInitialViewControllerWithCreator:creator];
+    } else {
+        XCTFail(@"This test must be run on iOS >= 13.0");
+    }
     mockCameraManager = [[MockCameraManager alloc] init];
     myvc.cameraManager = mockCameraManager;
     
@@ -204,7 +228,7 @@ XCTestExpectation *authorizationAnsweredExpectation;
     #pragma clang diagnostic pop
     [myvc viewWillAppear:false];
     [myvc viewDidAppear:false];
-    mockCamera  =  (MockCaptureDevice *)myvc.camera;
+    mockCamera  =  (MockCaptureDevice2 *)myvc.camera;
     torchOffExpectation = [[XCTestExpectation alloc] initWithDescription:@"Torch must be off"];
     mockCamera.torchOffExpectation = torchOffExpectation;
 
@@ -285,6 +309,19 @@ XCTestExpectation *authorizationAnsweredExpectation;
     [myvc viewDidLoad];
     XCTAssert([myvc.mailAvailabilityMessage.text isEqualToString:@"e-mail account not available"]);
 }
+
+-(void)testIncrementFotoName{
+    nbImageChangedExpectation = [[XCTestExpectation alloc] initWithDescription:@"nbImage and Title must change through observer"];
+    myvc.titreChangedExpectation = nbImageChangedExpectation;
+    XCTAssertEqualObjects(myvc.titre.text, @"Foto_0.jpg", @"Le nom de l'image doit être Foto_0.jpg");
+    XCTAssertEqualObjects(myvc.noPhoto.text, @"#1", @"1ere photo doit être afffiché");
+    [myvc takePicture:nil];
+    [self waitForExpectations:@[nbImageChangedExpectation] timeout:5.0];
+    XCTAssertEqualObjects(myvc.titre.text, @"Foto_1.jpg", @"Le nom de l'image doit être Foto_1.jpg");
+    XCTAssertEqualObjects(myvc.noPhoto.text, @"#2", @"2eme photo doit être afffiché");
+}
+
+
 /// helper function to turn the torch on by choosing the segmented control item
 -(void) turnTorchOnThroughUI{
     UISegmentedControl *controls = myvc.flashControls;

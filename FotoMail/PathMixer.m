@@ -57,10 +57,11 @@
     NSAssert(pathImage != nil, @"création path image a échouée");
     
     // 3 créer un image masque profondeur 1 bit depuis cette image
+    // BitsPerComponent = 1 does not work, must be same as pathImage
     NSLog(@"creating mask");
     CGImageRef msq = CGImageMaskCreate( originaleImg.size.width,
                                        originaleImg.size.height,
-                                       1,
+                                       CGImageGetBitsPerComponent(pathImage),
                                        CGImageGetBitsPerPixel(pathImage),
                                        CGImageGetBytesPerRow(pathImage),
                                        CGImageGetDataProvider(pathImage),
@@ -83,6 +84,7 @@
     // 5 appliquer clipToMask
     // il faut des valeurs de 1 (blanc) là où l'image originelle doit apparaitre
     // il faut des valeurs de 0 (noir) là ou les path doivent apparaitres
+    // !!! les path sont à moitié transparents -> à corriger
     NSLog(@"5 appliquer clipToMask");
     CGContextClipToMask(finalContext,
                         CGRectMake(0, 0,

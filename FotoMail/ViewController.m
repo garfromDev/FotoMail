@@ -29,10 +29,15 @@
      vérifie l'accès au mail pour ne pas planter si pas de compte (unit tested)
     ajoute la fonction crop (sans icone et sans gestion du dateStamp) (not unit tested)
     corrige un bug d'affichage quand aucun projet choisi
+ 1.7 conversion swift 5
+     correction bug masquage après crop
+     corrrection utilisation UIKit hors mainThread
+     regroupement tests par target simulateur, device, UI
+     finalisation UI testing
+     correction warning
  
  A faire après :
  finir unit testing des ajouts
- corriger les warnings
  
   V1.7
  ajouter loupe = zoom numérique en macro
@@ -404,10 +409,10 @@ cycle de prise de vue
     // on fait la préparation du controleur de mail en tache de fond pour afficher le plus vite possible l'appareil photo
     // on utilise le groupe mailGroup pour ne pas lancer d'attachement d'image avant que le controlleur ne soit crée
     if([self.mailComposerClass canSendMail]){
+        NSLog(@"allocate Mail controller %@", [NSDate date]);
+        mailPicker = [[self.mailComposerClass alloc] init];
         dispatch_group_async(mailGroup, dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0),
         ^{ //on prépare le composeur de mail
-            NSLog(@"allocate Mail controller %@", [NSDate date]);
-            self->mailPicker = [[self.mailComposerClass alloc] init];
             self->mailPicker.mailComposeDelegate = self;
             [self->mailPicker setSubject:self->subject];
         } );
@@ -498,10 +503,11 @@ cycle de prise de vue
     // voir https://www.objc.io/issues/21-camera-and-photos/camera-capture-on-ios/
     // dans un 2eme temps, peutêtre un objet simili picker aurait un interet pour sortir du code du controller?
     LOG
-    
-    [self.camera captureUIImage:^(UIImage *stillImg){
+    AVCaptureVideoOrientation videoOrientation = [OrientationHelper convertInterfaceOrientationToAVCatureVideoOrientationWithUi:[[UIApplication sharedApplication] statusBarOrientation]];
+    [self.camera captureUIImageWith: videoOrientation completion:^(UIImage *stillImg){
                 //bloc exécuté à la fin de l'acquisition
                 //On rajoute le timeStamp si demandé
+                NSLog(@"captureUIImageWith completion");
                 if ([[FotomailUserDefault defaults] timeStamp]) {
                     float size = [[ FotomailUserDefault defaults] stampSize];
                     stillImg = [stillImg addTimeStampWithFontSize:size];
@@ -509,8 +515,8 @@ cycle de prise de vue
                 //on appelle completion sur la mainQueue et on rend la main via didFinishPickingMediaWithInfo
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSLog(@"takePicture - calling didFinishPicking");
-                    completion();
                     [self imagePickerController:nil didFinishPickingMediaWithInfo:@{UIImagePickerControllerOriginalImage:stillImg}];
+                    completion();
                 });
             }
      ];
@@ -668,22 +674,17 @@ cycle de prise de vue
     [cropButton setEnabled:false];
     //TODO: il faudrait que le bouton "done" reste activé, mais que l'utilisation de l'image attende la fin du traitement, ou que le bouton "done" soit désactivé
     //TODO: également cancel doit interompre la tache en cours
-//    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0),
- 
-    
     [cropQueue addOperationWithBlock: ^{
         [PathMixer saveEditedWithImage:originaleImg paths:paths
                             completion:^(UIImage *finalImg) {
-                                [self->cropQueue addOperationWithBlock: ^{
-                                    UIImage *croppedImg = [finalImg croppedImageInRect:[self.scrollView onScreenRect]];
-                                        [NSOperation performUIUpdateUsing:^{
-                                            [self.scrollView insertImage:croppedImg];
-                                            [cropButton setEnabled:true];
-                                        }];
-                                }];
-                                [self.pathManager clear];
-                            }];
-    }];
+            [NSOperation performUIUpdateUsing:^{
+                UIImage *croppedImg = [finalImg croppedImageInRect:[self.scrollView onScreenRect]];
+                [self.scrollView insertImage:croppedImg];
+                [cropButton setEnabled:true];
+            }]; // end main thread update
+            [self.pathManager clear];
+        }]; // end completion handler
+    }]; // end crop queue op
 }
 
 
@@ -693,7 +694,7 @@ cycle de prise de vue
     __block NSString *fileName = [FotomailUserDefault.defaults nomImg];
     [FotomailUserDefault.defaults nextName];
     FotomailUserDefault.defaults.nbImages++; //doit être fait après le nextName sinon le nom modifié n'ets pas réaffiché par l'observation de nbImage
-    [[self message] setText:@"saving image..."]; //"sauvegarde de l'image"
+    [[self message] setText:NSLocalizedString(@"saving image...",nil)]; //"sauvegarde de l'image"
     // on effectue en tache de fond la transformation et l'attachement de l'image
     // le imgGroup permet d'attendre la fin de tous les attachements avant d'afficher le mail composer
     dispatch_group_async(imgGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
@@ -723,7 +724,7 @@ cycle de prise de vue
  */
 - (IBAction) envoiMail:(id)sender{
     LOG
-    [[self message] setText:@"Preparing mail..."]; //@"Préparation du mail..."
+    [[self message] setText:NSLocalizedString(@"Preparing mail...",nil)]; //@"Préparation du mail..."
     [self.activityIndicator startAnimating];
     [self turnTorchOff];
     [self displayComposerSheet];
@@ -757,23 +758,23 @@ cycle de prise de vue
     {
         case MFMailComposeResultCancelled:
             NSLog(@"Result: canceled");
-            [[self message] setText:@"mail not sent"]; //@"mail non envoyé"
+            [[self message] setText:NSLocalizedString(@"mail not sent",nil)]; //@"mail non envoyé"
             break;
         case MFMailComposeResultSaved:
             NSLog(@"Result: saved");
             break;
         case MFMailComposeResultSent:
-            [[self message] setText:@"mail succesfully sent"]; //@"mail envoyé"
+            [[self message] setText:NSLocalizedString(@"mail succesfully sent",nil)]; //@"mail envoyé"
             [[Reviewmanager sharedInstance] userHasAchieved];
             [[Reviewmanager sharedInstance] checkReview];
             NSLog(@"Result: sent");
             break;
         case MFMailComposeResultFailed:
-            [[self message] setText:@"mail not sent"]; //@"mail non envoyé"
+            [[self message] setText:NSLocalizedString(@"mail not sent",nil)]; //@"mail non envoyé"
             NSLog(@"Result: failed");
             break;
         default:
-            [[self message] setText:@"mail not sent"]; //@"mail non envoyé"
+            [[self message] setText:NSLocalizedString(@"mail not sent",nil)]; //@"mail non envoyé"
             NSLog(@"Result: not sent");
             break;
     }
@@ -892,7 +893,7 @@ cycle de prise de vue
         //on affiche un fond vert pour permettre l'incrustation d'images en postproduction
         self.cameraPreviewView.backgroundColor = [UIColor greenColor];
 #else
-        self.message.text = @"No camera available"; //@"Appareil photo non disponible"
+        self.message.text = NSLocalizedString(@"No camera available",nil); //@"Appareil photo non disponible"
         self.overlayView.hidden = true;
         return; //on arrête tout et on affiche un message si appareil photo pas disponible
 #endif
@@ -927,6 +928,6 @@ cycle de prise de vue
     // CAUTION : assumption is done that this method is called after setCameraNotAuthorized
     // otherwise the message would be erased by the one about the camera
     NSString *completeMsg = @"e-mail account not available";
-    [self.mailAvailabilityMessage setText:completeMsg];
+    [self.mailAvailabilityMessage setText:NSLocalizedString(completeMsg,nil)];
 }
 @end

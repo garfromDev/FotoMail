@@ -22,13 +22,13 @@
 @property(nonatomic, nonnull) NSArray<NSString *> *projects;
 ///le projet en cours (en lecture, contient le \ final, en écriture ne pas le mettre), peut être une chaine vide devant le slash
 @property(nonatomic, nonnull)  NSString  *currentProject;
-/// le numéro incrémental pour numéroter les photos prises
+/// le numéro incrémental pour numéroter les photos prises (est incrémenté par nextName)
 @property (nonatomic) NSUInteger imgNumber;
 
 
 // valeurs non sauvegardées
 
-/// le nb d'images prises
+/// le nb d'images prises (n'est pas incrémenté automatiquement)
 @property(nonatomic) int nbImages;
 /// le titre edité dans le textField (sans n°)
 @property(nonatomic, nonnull) NSString *titreImg;
