@@ -12,7 +12,7 @@ import UIKit
 /// et dont les bords sont arrondis avec un tour noir (pour utilisation sur fond noir)
 class RoundImageTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
+    @objc override func awakeFromNib() {
         super.awakeFromNib()
         self.imageView?.layer.cornerRadius = CGFloat(CORNER_RADIUS)
         self.layer.cornerRadius = CGFloat(CORNER_RADIUS)

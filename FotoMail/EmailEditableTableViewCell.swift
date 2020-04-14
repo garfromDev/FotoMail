@@ -15,7 +15,7 @@ class EmailEditableTableViewCell: UITableViewCell {
     
     @IBOutlet weak var contactButton: UIButton!
     
-    override func awakeFromNib() {
+    @objc override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }

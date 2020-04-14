@@ -34,7 +34,7 @@ import UIKit
     }
 
     
-    init?(_ coder: NSCoder? = nil) {
+    @objc init?(_ coder: NSCoder? = nil) {
 
         self.sw = UISwitch()
 
@@ -50,12 +50,12 @@ import UIKit
 
     
     /// attention, le ruse identifier est systémaiquement écrasé
-    override convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    @objc override convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         self.init(nil)!
     }
 
     
-    required convenience init?(coder aDecoder: NSCoder) {
+    @objc required convenience init?(coder aDecoder: NSCoder) {
         self.init(aDecoder)
     }
 

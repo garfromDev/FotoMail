@@ -42,14 +42,14 @@ class SegmentedTableViewCell: RoundImageTableViewCell {
     }
     
     
-    override func awakeFromNib() {
+    @objc override func awakeFromNib() {
         super.awakeFromNib()
         self.sw.selectedSegmentIndex = self.indexToSelect()
 
     }
     
     
-    init?(_ coder: NSCoder? = nil) {
+    @objc init?(_ coder: NSCoder? = nil) {
         
         self.sw = UISegmentedControl(items:["48", "96", "160"])
         
@@ -65,12 +65,12 @@ class SegmentedTableViewCell: RoundImageTableViewCell {
     
     
     /// attention, le reuse identifier est systémaiquement écrasé
-    override convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    @objc override convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         self.init(nil)!
     }
     
     
-    required convenience init?(coder aDecoder: NSCoder) {
+    @objc required convenience init?(coder aDecoder: NSCoder) {
         self.init(aDecoder)
     }
     

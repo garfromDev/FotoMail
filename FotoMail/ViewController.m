@@ -303,7 +303,9 @@ cycle de prise de vue
 
 /// l'utilisateur a touché l'icone réglages
 - (IBAction) reglages:(id)sender{
+    LOG
     SettingsViewController *settingsViewC = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateViewControllerWithIdentifier:@"Settings"];
+    NSLog(@"SettingsViewControlle instancié");
     [self presentViewController:settingsViewC animated:true completion:nil];
 }
 
