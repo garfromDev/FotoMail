@@ -231,6 +231,7 @@ cycle de prise de vue
 {
     LOG
     self.flashControls.hidden = !self.flashControls.hidden;
+    self.flashControls.userInteractionEnabled = !self.flashControls.hidden;
 }
 
 

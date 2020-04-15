@@ -52,7 +52,8 @@ class SegmentedTableViewCell: RoundImageTableViewCell {
     @objc init?(_ coder: NSCoder? = nil) {
         
         self.sw = UISegmentedControl(items:["48", "96", "160"])
-        
+        self.sw.tintColor = .white
+        self.sw.backgroundColor = .lightGray
         if let coder = coder {
             super.init(coder: coder)
         } else {

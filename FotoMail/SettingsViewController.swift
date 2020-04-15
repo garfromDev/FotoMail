@@ -71,12 +71,12 @@ class SettingsViewController: UITableViewController {
         if(reviewIndex == indexPath){
             self.reviewApp()
         }
-    }
-    
+    }    
     
     override var prefersStatusBarHidden: Bool {
         return false
     }
+    
     
 
 }

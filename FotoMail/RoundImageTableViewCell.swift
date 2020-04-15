@@ -16,8 +16,8 @@ class RoundImageTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.imageView?.layer.cornerRadius = CGFloat(CORNER_RADIUS)
         self.layer.cornerRadius = CGFloat(CORNER_RADIUS)
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.borderWidth = 3.0
+        //self.layer.borderColor = UIColor.black.cgColor
+        //self.layer.borderWidth = 3.0
     }
 
 

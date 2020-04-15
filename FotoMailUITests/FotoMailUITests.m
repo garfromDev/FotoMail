@@ -134,5 +134,12 @@ XCUIApplication *app;
     [effacerLeBrouillonButton tap];
 }
 
+-(void) testDisplaySettingsAndBack{
+    XCUIApplication *app = [[XCUIApplication alloc] init];
+    // go to settings
+    [app.buttons[@"Settings"] tap];
+    // come back
+    [app.buttons[@"Done"] tap];
+}
 @end
 
