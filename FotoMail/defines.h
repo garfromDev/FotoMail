@@ -44,8 +44,11 @@
 #define LONGPRESS_SCALE 1.6
 
 //mode screenshot for capturing AppSTore screenshot on simulator
-// comment out for device/release
-//#define SCREENSHOTMODE
+// Fotomails's target scheme for release defines SCREENSHOT_NOT_ALLOWED
+// Fotomails's target scheme for debug on simulator defines SCREENSHOTMODE
+#ifdef SCREENSHOT_NOT_ALLOWED
+#undef SCREENSHOTMODE
+#endif
 
 #ifdef SCREENSHOTMODE
 #pragma message "!!!!! SCREENSHOT MODE FOR SIMULATOR USE !!!!!"

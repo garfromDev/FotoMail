@@ -187,12 +187,13 @@ AVCaptureVideoPreviewLayer *cameraLayer;
     
     // désactive le mode macro si il était actif
     [self setMacroOff];
-    
-    [self configure: ^{
-        self.focusPointOfInterest = pointInCamera;
-        self.focusMode = AVCaptureFocusModeAutoFocus;
+    if(self.focusPointOfInterestSupported){
+        [self configure: ^{
+            self.focusPointOfInterest = pointInCamera;
+            self.focusMode = AVCaptureFocusModeAutoFocus;
+        }
+         ];
     }
-     ];
 }
 
 

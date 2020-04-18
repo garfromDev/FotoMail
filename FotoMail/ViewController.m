@@ -459,14 +459,14 @@ cycle de prise de vue
 
 // l'utilisateur appui sur le bouton de prise de photo + preview
 - (IBAction)takeAndPreview:(id)sender {
-#ifndef SCREENSHOTMODE
+//#ifndef SCREENSHOTMODE
         preview = true;
+//#endif
         [self visualCaptureImage:sender];
-#endif
-#ifdef SCREENSHOTMODE
+//#ifdef SCREENSHOTMODE
         //on affiche directement l'interface de preview en mode screenshot
-        self.previewView.hidden = false;
-#endif
+//        self.previewView.hidden = false;
+//#endif
 
 }
 
@@ -493,7 +493,8 @@ cycle de prise de vue
     //on reaffiche le bouton et on appelle directement didFinishPickingMediaWithInfo
     // avec une image factice
     button.enabled = true;
-    UIImage *greenImg = [UIImage createImageWithColor:[UIColor greenColor] size:CGSizeMake(DUMMYWIDTH, DUMMYHEIGHT)];
+//    UIImage *greenImg = [UIImage createImageWithColor:[UIColor greenColor] size:CGSizeMake(DUMMYWIDTH, DUMMYHEIGHT)];
+    UIImage *greenImg = [UIImage imageNamed:@"SampleImage"];
     [self imagePickerController:nil didFinishPickingMediaWithInfo:@{ UIImagePickerControllerOriginalImage:greenImg}];
 #endif
     
