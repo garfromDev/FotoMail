@@ -155,8 +155,11 @@ NSString *oldTitle;
         NSArray<NSString *> *sub = [s componentsSeparatedByString:@"@"];
         
         if(sub.count == 2){ // une adresse e-mail valide doit contenir des choses avant et après le @
-            withExt = [sub[0] stringByAppendingString:@"+"];
-            withExt = [withExt stringByAppendingString:[self currentPrjctWithoutSlash]];
+            withExt = sub[0];
+            if(self.currentPrjctWithoutSlash.length){  //avoid +@ which is not accepeted by some mail provider
+                withExt = [withExt stringByAppendingString:@"+"];
+                withExt = [withExt stringByAppendingString:[self currentPrjctWithoutSlash]];
+            }
             withExt = [withExt stringByAppendingString:@"@"];
             withExt = [withExt stringByAppendingString:sub[1]];
             [rwe addObject:withExt];
