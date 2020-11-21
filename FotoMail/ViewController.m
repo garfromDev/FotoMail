@@ -35,24 +35,27 @@
      regroupement tests par target simulateur, device, UI
      finalisation UI testing
      correction warning
+ 1.8 build 1 :
+     supression du + devant le @ si pas de projet
+     SDK iOS 14
  
  A faire après :
  finir unit testing des ajouts
  
-  V1.7
+  Va
  ajouter loupe = zoom numérique en macro
  voir possibilité ajouter réglage vitesse, diaph pour améliorer stabilité macro (mode pied, mode main levé)
  ajouter du unittest du ViewController pour compléter le test coverage
- v1.7
+ vb
  réglage puissance torche en macro avec un slider
  corriger bug de la torche système non disponible quand Fotomail est lancée
  corriger les warning pour deprecated
-  V1.8
+  Vc
  ajouter localization textes
- V1.9
+ Vd
  ajouter choix couleur pinceaux
  faire passer la vue en edition sous la barre d'outil et le titre (translucide)
-V1.9.1
+Ve
  ajouter contact editeur
  Ajouter message explicatif tri automatique dans gmail
 */
